@@ -1,0 +1,3 @@
+.github
+.yamato
+com.unity.ml-agents
