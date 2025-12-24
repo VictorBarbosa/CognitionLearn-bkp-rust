@@ -121,7 +121,7 @@ public CompressionSpec GetCompressionSpec()
 - The abstract method `SensorComponent.CreateSensor()` was replaced with `CreateSensors()`, which returns an `ISensor[]`.
 
 ### Match3 integration changes
-The Match-3 integration utilities were moved from `com.unity.ml-agents.extensions` to `com.unity.ml-agents`.
+The Match-3 integration utilities were moved from `com.unity.cognition-learn.extensions` to `com.unity.cognition-learn`.
 
 The `AbstractBoard` interface was changed:
 * `AbstractBoard` no longer contains `Rows`, `Columns`, `NumCellTypes`, and `NumSpecialTypes` fields.
@@ -427,7 +427,7 @@ vector observations to be used simultaneously.
 ### Important changes
 
 - The `UnitySDK` folder has been split into a Unity Package
-  (`com.unity.ml-agents`) and an examples project (`Project`). Please follow the
+  (`com.unity.cognition-learn`) and an examples project (`Project`). Please follow the
   [Installation Guide](Installation.md) to get up and running with this new repo
   structure.
 - Several changes were made to how agents are reset and marked as done:
@@ -472,7 +472,7 @@ vector observations to be used simultaneously.
 
 ### Steps to Migrate
 
-- Follow the instructions on how to install the `com.unity.ml-agents` package
+- Follow the instructions on how to install the `com.unity.cognition-learn` package
   into your project in the [Installation Guide](Installation.md).
 - If your Agent implemented `AgentOnDone` and did not have the checkbox
   `Reset On Done` checked in the inspector, you must call the code that was in

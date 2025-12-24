@@ -7,7 +7,7 @@
 # COMPILER=[DIRECTORY]
 
 SRC_DIR=proto/mlagents_envs/communicator_objects
-DST_DIR_C=../com.unity.ml-agents/Runtime/Grpc/CommunicatorObjects
+DST_DIR_C=../com.unity.cognition-learn/Runtime/Grpc/CommunicatorObjects
 DST_DIR_P=../ml-agents-envs
 PROTO_PATH=proto
 PYTHON_PACKAGE=mlagents_envs/communicator_objects

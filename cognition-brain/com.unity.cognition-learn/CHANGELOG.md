@@ -8,7 +8,7 @@ and this project adheres to
 
 ## [Unreleased]
 ### Minor Changes
-#### com.unity.ml-agents (C#)
+#### com.unity.cognition-learn (C#)
 - Upgraded to Inference Engine 2.4.1 (#6269)
 - Fixed tensor indexing to use correct CHW layout (#6239)
 - Updated the installation doc (#6242)
@@ -20,13 +20,13 @@ and this project adheres to
 
 ## [4.0.0] - 2025-08-28
 ### Major Changes
-#### com.unity.ml-agents (C#)
+#### com.unity.cognition-learn (C#)
 - Upgraded to Inference Engine 2.2.1 (#6212)
 - The minimum supported Unity version was updated to 6000.0. (#6207)
-- Merged the extension package com.unity.ml-agents.extensions to the main package com.unity.ml-agents. (#6227)
+- Merged the extension package com.unity.cognition-learn.extensions to the main package com.unity.cognition-learn. (#6227)
 
 ### Minor Changes
-#### com.unity.ml-agents (C#)
+#### com.unity.cognition-learn (C#)
 - Removed broken sample from the package (#6230)
 - Moved to Unity Package documentation as the primary developer documentation. (#6232)
 
@@ -35,7 +35,7 @@ and this project adheres to
 
 ## [3.0.0] - 2024-09-02
 ### Major Changes
-#### com.unity.ml-agents / com.unity.ml-agents.extensions (C#)
+#### com.unity.cognition-learn / com.unity.cognition-learn.extensions (C#)
 - Upgraded to Sentis 2.1.0 (#6153)
 - Upgraded to Sentis 2.0.0 (#6137)
 - Upgraded to Sentis 1.3.0-pre.3 (#6070)
@@ -46,7 +46,7 @@ and this project adheres to
 - Upgraded to PyTorch 2.1.1. (#6013)
 
 ### Minor Changes
-#### com.unity.ml-agents / com.unity.ml-agents.extensions (C#)
+#### com.unity.cognition-learn / com.unity.cognition-learn.extensions (C#)
 - Added no-graphics-monitor. (#6014)
 
 #### ml-agents / ml-agents-envs
@@ -54,7 +54,7 @@ and this project adheres to
 - Updated Using-Virtual-Environment.md (#6033)
 
 ### Bug Fixes
-#### com.unity.ml-agents / com.unity.ml-agents.extensions (C#)
+#### com.unity.cognition-learn / com.unity.cognition-learn.extensions (C#)
 - Fix failing ci post upgrade (#6141)
 - Fixed missing assembly reference for google protobuf. (#6099)
 - Fixed missing tensor Dispose in ModelRunner. (#6028)
@@ -70,7 +70,7 @@ and this project adheres to
 
 ## [3.0.0-exp.1] - 2023-10-09
 ### Major Changes
-#### com.unity.ml-agents / com.unity.ml-agents.extensions (C#)
+#### com.unity.cognition-learn / com.unity.cognition-learn.extensions (C#)
 - Upgraded ML-Agents to Sentis 1.2.0-exp.2 and deprecated Barracuda. (#5979)
 - The minimum supported Unity version was updated to 2022.3. (#5950)
 - Added batched raycast sensor option. (#5950)
@@ -80,7 +80,7 @@ and this project adheres to
 - Deprecated support for Python 3.8.x and 3.9.x (#5981)
 
 ### Minor Changes
-#### com.unity.ml-agents / com.unity.ml-agents.extensions (C#)
+#### com.unity.cognition-learn / com.unity.cognition-learn.extensions (C#)
 - Added DecisionStep parameter to DecisionRequester (#5940)
   - This will allow the staggering of execution timing when using multi-agents, leading to more stable performance.
 
@@ -90,14 +90,14 @@ and this project adheres to
 - Updated training area replicator to add a condition to only replicate training areas when running a build. (#5842)
 
 ### Bug Fixes
-#### com.unity.ml-agents / com.unity.ml-agents.extensions (C#)
+#### com.unity.cognition-learn / com.unity.cognition-learn.extensions (C#)
 - Compiler errors when using IAsyncEnumerable<T> with .NET Standard 2.1 enabled (#5951)
 #### ml-agents / ml-agents-envs
 
 
 ## [2.3.0-exp.3] - 2022-11-21
 ### Major Changes
-#### com.unity.ml-agents / com.unity.ml-agents.extensions (C#)
+#### com.unity.cognition-learn / com.unity.cognition-learn.extensions (C#)
 - The minimum supported Unity version was updated to 2021.3. (#)
 
 #### ml-agents / ml-agents-envs
@@ -112,7 +112,7 @@ and this project adheres to
 versioned under `ml-agents-envs` package in the future (#)
 
 ### Minor Changes
-#### com.unity.ml-agents / com.unity.ml-agents.extensions (C#)
+#### com.unity.cognition-learn / com.unity.cognition-learn.extensions (C#)
 - Added switch to RayPerceptionSensor to allow rays to be ordered left to right. (#26)
     - Current alternating order is still the default but will be deprecated.
 - Added support for enabling/disabling camera object attached to camera sensor in order to improve performance. (#31)
@@ -122,13 +122,13 @@ versioned under `ml-agents-envs` package in the future (#)
 
 
 ### Bug Fixes
-#### com.unity.ml-agents / com.unity.ml-agents.extensions (C#)
+#### com.unity.cognition-learn / com.unity.cognition-learn.extensions (C#)
 #### ml-agents / ml-agents-envs
 
 
 ## [2.3.0-exp.2] - 2022-03-28
 ### Major Changes
-#### com.unity.ml-agents / com.unity.ml-agents.extensions (C#)
+#### com.unity.cognition-learn / com.unity.cognition-learn.extensions (C#)
 #### ml-agents / ml-agents-envs
 - Refactored to support the new ML-Agents Pro package.
 - The minimum supported Python version for ML-Agents-envs is changed to 3.7.2 (#)
@@ -136,20 +136,20 @@ versioned under `ml-agents-envs` package in the future (#)
 - Refactored `gym-unity` into the `ml-agents-envs` package (#)
 
 ### Minor Changes
-#### com.unity.ml-agents / com.unity.ml-agents.extensions (C#)
+#### com.unity.cognition-learn / com.unity.cognition-learn.extensions (C#)
 - Upgrade barracuda dependency to 3.0.0 (#)
 #### ml-agents / ml-agents-envs
 - Added the new unity_vec_env file to the ml-agents-envs module
 - Extended support to python 3.9.10
 
 ### Bug Fixes
-#### com.unity.ml-agents / com.unity.ml-agents.extensions (C#)
+#### com.unity.cognition-learn / com.unity.cognition-learn.extensions (C#)
 #### ml-agents / ml-agents-envs
 
 ## [2.2.1-exp.1] - 2022-01-14
 ### Major Changes
 
-#### com.unity.ml-agents / com.unity.ml-agents.extensions (C#)
+#### com.unity.cognition-learn / com.unity.cognition-learn.extensions (C#)
 - The minimum supported Unity version was updated to 2020.3. (#5673)
 - Added a new feature to replicate training areas dynamically during runtime. (#5568)
 - Update Barracuda to 2.3.1-preview (#5591)
@@ -159,7 +159,7 @@ versioned under `ml-agents-envs` package in the future (#)
 
 ### Minor Changes
 
-#### com.unity.ml-agents / com.unity.ml-agents.extensions (C#)
+#### com.unity.cognition-learn / com.unity.cognition-learn.extensions (C#)
 - Added the capacity to initialize behaviors from any checkpoint and not just the latest one (#5525)
 - Added the ability to get a read-only view of the stacked observations (#5523)
 
@@ -180,7 +180,7 @@ versioned under `ml-agents-envs` package in the future (#)
 - Update Colab notebooks for GridWorld example with DQN illustrating the use of the Python API and how to export to ONNX (#5643)
 
 ### Bug Fixes
-#### com.unity.ml-agents / com.unity.ml-agents.extensions (C#)
+#### com.unity.cognition-learn / com.unity.cognition-learn.extensions (C#)
 - Update gRPC native lib to universal for arm64 and x86_64. This change should enable ml-agents usage on mac M1 (#5283, #5519)
 - Fixed a bug where ml-agents code wouldn't compile on platforms that didn't support analytics (PS4/5, XBoxOne) (#5628)
 
@@ -197,7 +197,7 @@ terminated teammates. (#5441)
 
 ## [2.1.0-exp.1] - 2021-06-09
 ### Minor Changes
-#### com.unity.ml-agents / com.unity.ml-agents.extensions (C#)
+#### com.unity.cognition-learn / com.unity.cognition-learn.extensions (C#)
 - update Barracuda to 2.0.0-pre.3. (#5385)
 - Fixed NullReferenceException when adding Behavior Parameters with no Agent. (#5382)
 - Add stacking option in Editor for `VectorSensorComponent`. (#5376)
@@ -208,7 +208,7 @@ terminated teammates. (#5441)
 - Colab notebooks illustrating the use of the Python API are now part of the repository. (#5399)
 
 ### Bug Fixes
-#### com.unity.ml-agents / com.unity.ml-agents.extensions (C#)
+#### com.unity.cognition-learn / com.unity.cognition-learn.extensions (C#)
 - RigidBodySensorComponent now displays a warning if it's used in a way that won't generate useful observations. (#5387)
 - Update the documentation with a note saying that `GridSensor` does not work in 2D environments. (#5396)
 - Fixed an error where sensors would not reset properly before collecting the last observation at the end of an
@@ -222,7 +222,7 @@ episode. (#5375)
 
 ## [2.0.0-exp.1] - 2021-04-22
 ### Major Changes
-#### com.unity.ml-agents / com.unity.ml-agents.extensions (C#)
+#### com.unity.cognition-learn / com.unity.cognition-learn.extensions (C#)
 - The minimum supported Unity version was updated to 2019.4. (#5166)
 - Several breaking interface changes were made. See the
 [Migration Guide](https://github.com/Unity-Technologies/ml-agents/blob/release_17_docs/docs/Migrating.md) for more
@@ -250,7 +250,7 @@ need to be retrained. Please see the Migration Guide for more details. (#5256)
 - Models trained with 1.x versions of ML-Agents will no longer work at inference if they were trained using recurrent neural networks (#5254)
 
 ### Minor Changes
-#### com.unity.ml-agents / com.unity.ml-agents.extensions (C#)
+#### com.unity.cognition-learn / com.unity.cognition-learn.extensions (C#)
 - The `.onnx` models input names have changed. All input placeholders will now use the prefix `obs_` removing the distinction between visual and vector observations. In addition, the inputs and outputs of LSTM changed. Models created with this version will not be usable with previous versions of the package (#5080, #5236)
 - The `.onnx` models discrete action output now contains the discrete actions values and not the logits. Models created with this version will not be usable with previous versions of the package (#5080)
 - Added ML-Agents package settings. (#5027)
@@ -270,7 +270,7 @@ determine whether `Agent.RequestDecision()` and `Agent.RequestAction()` are call
 amount of memory that needs to be allocated during runtime. (#5233)
 - Optimzed `ObservationWriter.WriteTexture()` so that it doesn't call `Texture2D.GetPixels32()` for `RGB24` textures.
 This results in much less memory being allocated during inference with `CameraSensor` and `RenderTextureSensor`. (#5233)
-- The Match-3 integration utilities were moved from `com.unity.ml-agents.extensions` to `com.unity.ml-agents`. (#5259)
+- The Match-3 integration utilities were moved from `com.unity.cognition-learn.extensions` to `com.unity.cognition-learn`. (#5259)
 
 #### ml-agents / ml-agents-envs / gym-unity (Python)
 - Some console output have been moved from `info` to `debug` and will not be printed by default. If you want all messages to be printed, you can run `mlagents-learn` with the `--debug` option or add the line `debug: true` at the top of the yaml config file. (#5211)
@@ -279,7 +279,7 @@ executable in the trainer configuration YAML, or specify `default_settings`. (#5
 - The embedding size of attention layers used when a BufferSensor is in the scene has been changed. It is now fixed to 128 units. It might be impossible to resume training from a checkpoint of a previous version. (#5272)
 
 ### Bug Fixes
-#### com.unity.ml-agents / com.unity.ml-agents.extensions (C#)
+#### com.unity.cognition-learn / com.unity.cognition-learn.extensions (C#)
 - Fixed a bug where sensors and actuators could get sorted inconsistently on different systems to different Culture
 settings. Unfortunately, this may require retraining models if it changes the resulting order of the sensors
 or actuators on your system. (#5194)
@@ -303,7 +303,7 @@ be used to set the random seed on the resulting action space. (#5303)
  for more details. (#5213)
 
 ### Bug Fixes
-#### com.unity.ml-agents (C#)
+#### com.unity.cognition-learn (C#)
 - Fixed erroneous warnings when using the Demonstration Recorder. (#5216)
 
 #### ml-agents / ml-agents-envs / gym-unity (Python)
@@ -315,7 +315,7 @@ be used to set the random seed on the resulting action space. (#5303)
 - Fixed an issue where using one of the `gym` wrappers would override user-set log levels. (#5201)
 ## [1.9.0-preview] - 2021-03-17
 ### Major Changes
-#### com.unity.ml-agents (C#)
+#### com.unity.cognition-learn (C#)
 - The `BufferSensor` and `BufferSensorComponent` have been added. They allow the Agent to observe variable number of entities. For an example, see the [Sorter environment](https://github.com/Unity-Technologies/ml-agents/blob/release_15_docs/docs/Learning-Environment-Examples.md#sorter). (#4909)
 - The `SimpleMultiAgentGroup` class and `IMultiAgentGroup` interface have been added. These allow Agents to be given rewards and
   end episodes in groups. For examples, see the [Cooperative Push Block](https://github.com/Unity-Technologies/ml-agents/blob/release_15_docs/docs/Learning-Environment-Examples.md#cooperative-push-block), [Dungeon Escape](https://github.com/Unity-Technologies/ml-agents/blob/release_15_docs/docs/Learning-Environment-Examples.md#dungeon-escape) and [Soccer](https://github.com/Unity-Technologies/ml-agents/blob/release_15_docs/docs/Learning-Environment-Examples.md#soccer-twos) environments. (#4923)
@@ -324,9 +324,9 @@ be used to set the random seed on the resulting action space. (#5303)
   `poca` as the trainer in the configuration YAML after instantiating a `SimpleMultiAgentGroup` to use this feature. (#5005)
 
 ### Minor Changes
-#### com.unity.ml-agents / com.unity.ml-agents.extensions (C#)
+#### com.unity.cognition-learn / com.unity.cognition-learn.extensions (C#)
 - Updated com.unity.barracuda to 1.3.2-preview. (#5084)
-- Added 3D Ball to the `com.unity.ml-agents` samples. (#5077)
+- Added 3D Ball to the `com.unity.cognition-learn` samples. (#5077)
 - Make com.unity.modules.unityanalytics an optional dependency. (#5109)
 
 #### ml-agents / ml-agents-envs / gym-unity (Python)
@@ -334,7 +334,7 @@ be used to set the random seed on the resulting action space. (#5303)
 - Sensor names are now passed through to `ObservationSpec.name`. (#5036)
 
 ### Bug Fixes
-#### com.unity.ml-agents / com.unity.ml-agents.extensions (C#)
+#### com.unity.cognition-learn / com.unity.cognition-learn.extensions (C#)
 #### ml-agents / ml-agents-envs / gym-unity (Python)
 - An issue that caused `GAIL` to fail for environments where agents can terminate episodes by self-sacrifice has been fixed. (#4971)
 - Made the error message when observations of different shapes are sent to the trainer clearer. (#5030)
@@ -346,12 +346,12 @@ be used to set the random seed on the resulting action space. (#5303)
 - The `cattrs` version dependency was updated to allow `>=1.1.0` on Python 3.8 or higher. (#4821)
 
 ### Bug Fixes
-#### com.unity.ml-agents / com.unity.ml-agents.extensions (C#)
+#### com.unity.cognition-learn / com.unity.cognition-learn.extensions (C#)
 - Fix an issue where queuing InputEvents overwrote data from previous events in the same frame. (#5034)
 
 ## [1.8.0-preview] - 2021-02-17
 ### Major Changes
-#### com.unity.ml-agents (C#)
+#### com.unity.cognition-learn (C#)
 #### ml-agents / ml-agents-envs / gym-unity (Python)
 - TensorFlow trainers have been removed, please use the Torch trainers instead. (#4707)
 - A plugin system for `mlagents-learn` has been added. You can now define custom
@@ -359,7 +359,7 @@ be used to set the random seed on the resulting action space. (#5303)
   More types of plugins will be added in the future. (#4788)
 
 ### Minor Changes
-#### com.unity.ml-agents / com.unity.ml-agents.extensions (C#)
+#### com.unity.cognition-learn / com.unity.cognition-learn.extensions (C#)
 - The `ActionSpec` constructor is now public. Previously, it was not possible to create an
   ActionSpec with both continuous and discrete actions from code. (#4896)
 - `StatAggregationMethod.Sum` can now be passed to `StatsRecorder.Add()`. This
@@ -369,7 +369,7 @@ be used to set the random seed on the resulting action space. (#5303)
   removed when training with a player. The Editor still requires it to be clamped to 100. (#4867)
 - Added the IHeuristicProvider interface to allow IActuators as well as Agent implement the Heuristic function to generate actions.
   Updated the Basic example and the Match3 Example to use Actuators.
-  Changed the namespace and file names of classes in com.unity.ml-agents.extensions. (#4849)
+  Changed the namespace and file names of classes in com.unity.cognition-learn.extensions. (#4849)
 - Added `VectorSensor.AddObservation(IList<float>)`. `VectorSensor.AddObservation(IEnumerable<float>)`
   is deprecated. The `IList` version is recommended, as it does not generate any
   additional memory allocations. (#4887)
@@ -394,7 +394,7 @@ be used to set the random seed on the resulting action space. (#5303)
 - The `mlagents_env` API has changed, `BehaviorSpec` now has a `observation_specs` property containing a list of `ObservationSpec`. For more information on `ObservationSpec` see [here](https://github.com/Unity-Technologies/ml-agents/blob/release_13_docs/docs/Python-API.md#behaviorspec). (#4763, #4825)
 
 ### Bug Fixes
-#### com.unity.ml-agents (C#)
+#### com.unity.cognition-learn (C#)
 - Fix a compile warning about using an obsolete enum in `GrpcExtensions.cs`. (#4812)
 - CameraSensor now logs an error if the GraphicsDevice is null. (#4880)
 - Removed unnecessary memory allocations in `ActuatorManager.UpdateActionArray()` (#4877)
@@ -422,7 +422,7 @@ be used to set the random seed on the resulting action space. (#5303)
 
 ## [1.7.2-preview] - 2020-12-22
 ### Bug Fixes
-#### com.unity.ml-agents (C#)
+#### com.unity.cognition-learn (C#)
 - Add analytics package dependency to the package manifest. (#4794)
 #### ml-agents / ml-agents-envs / gym-unity (Python)
 - Fixed the docker build process. (#4791)
@@ -430,12 +430,12 @@ be used to set the random seed on the resulting action space. (#5303)
 
 ## [1.7.0-preview] - 2020-12-21
 ### Major Changes
-#### com.unity.ml-agents (C#)
+#### com.unity.cognition-learn (C#)
 #### ml-agents / ml-agents-envs / gym-unity (Python)
 - PyTorch trainers now support training agents with both continuous and discrete action spaces. (#4702)
-The `.onnx` models generated by the trainers of this release are incompatible with versions of Barracuda before `1.2.1-preview`. If you upgrade the trainers, you must upgrade the version of the Barracuda package as well (which can be done by upgrading the `com.unity.ml-agents` package).
+The `.onnx` models generated by the trainers of this release are incompatible with versions of Barracuda before `1.2.1-preview`. If you upgrade the trainers, you must upgrade the version of the Barracuda package as well (which can be done by upgrading the `com.unity.cognition-learn` package).
 ### Minor Changes
-#### com.unity.ml-agents / com.unity.ml-agents.extensions (C#)
+#### com.unity.cognition-learn / com.unity.cognition-learn.extensions (C#)
 - Agents with both continuous and discrete actions are now supported. You can specify
 both continuous and discrete action sizes in Behavior Parameters. (#4702, #4718)
 - In order to improve the developer experience for Unity ML-Agents Toolkit, we have added in-editor analytics.
@@ -447,14 +447,14 @@ discrete actions for shooting. (#4746)
 - `ActionSpec.validate_action()` now enforces that `UnityEnvironment.set_action_for_agent()` receives a 1D `np.array`. (#4691)
 
 ### Bug Fixes
-#### com.unity.ml-agents (C#)
+#### com.unity.cognition-learn (C#)
 - Removed noisy warnings about API minor version mismatches in both the C# and python code. (#4688)
 #### ml-agents / ml-agents-envs / gym-unity (Python)
 
 
 ## [1.6.0-preview] - 2020-11-18
 ### Major Changes
-#### com.unity.ml-agents (C#)
+#### com.unity.cognition-learn (C#)
 #### ml-agents / ml-agents-envs / gym-unity (Python)
  - PyTorch trainers are now the default. See the
  [installation docs](https://github.com/Unity-Technologies/ml-agents/blob/release_10_docs/docs/Installation.md) for
@@ -463,16 +463,16 @@ discrete actions for shooting. (#4746)
  adding `framework: tensorflow` in the configuration YAML. (#4517)
 
 ### Minor Changes
-#### com.unity.ml-agents / com.unity.ml-agents.extensions (C#)
+#### com.unity.cognition-learn / com.unity.cognition-learn.extensions (C#)
 - The Barracuda dependency was upgraded to 1.1.2 (#4571)
-- Utilities were added to `com.unity.ml-agents.extensions` to make it easier to
-integrate with match-3 games. See the [readme](https://github.com/Unity-Technologies/ml-agents/blob/release_10_docs/com.unity.ml-agents.extensions/Documentation~/Match3.md)
+- Utilities were added to `com.unity.cognition-learn.extensions` to make it easier to
+integrate with match-3 games. See the [readme](https://github.com/Unity-Technologies/ml-agents/blob/release_10_docs/com.unity.cognition-learn.extensions/Documentation~/Match3.md)
 for more details. (#4515)
 #### ml-agents / ml-agents-envs / gym-unity (Python)
 - The `action_probs` node is no longer listed as an output in TensorFlow models (#4613).
 
 ### Bug Fixes
-#### com.unity.ml-agents (C#)
+#### com.unity.cognition-learn (C#)
 - `Agent.CollectObservations()` and `Agent.EndEpisode()` will now throw an exception
 if they are called recursively (for example, if they call `Agent.EndEpisode()`).
 Previously, this would result in an infinite loop and cause the editor to hang. (#4573)
@@ -485,13 +485,13 @@ goes larger than 2^31. Previous Tensorflow checkpoints will become incompatible 
 
 ## [1.5.0-preview] - 2020-10-14
 ### Major Changes
-#### com.unity.ml-agents (C#)
+#### com.unity.cognition-learn (C#)
 #### ml-agents / ml-agents-envs / gym-unity (Python)
  - Added the Random Network Distillation (RND) intrinsic reward signal to the Pytorch
  trainers. To use RND, add a `rnd` section to the `reward_signals` section of your
  yaml configuration file. [More information here](https://github.com/Unity-Technologies/ml-agents/blob/release_9_docs/docs/Training-Configuration-File.md#rnd-intrinsic-reward) (#4473)
 ### Minor Changes
-#### com.unity.ml-agents (C#)
+#### com.unity.cognition-learn (C#)
  - Stacking for compressed observations is now supported. An additional setting
  option `Observation Stacks` is added in editor to sensor components that support
  compressed observations. A new class `ISparseChannelSensor` with an
@@ -513,7 +513,7 @@ goes larger than 2^31. Previous Tensorflow checkpoints will become incompatible 
  - Localized documentation in Russian is added. Thanks to @SergeyMatrosov for
  the contribution. (#4529)
 ### Bug Fixes
-#### com.unity.ml-agents (C#)
+#### com.unity.cognition-learn (C#)
  - Fixed a bug where accessing the Academy outside of play mode would cause the
  Academy to get stepped multiple times when in play mode. (#4532)
 #### ml-agents / ml-agents-envs / gym-unity (Python)
@@ -521,11 +521,11 @@ goes larger than 2^31. Previous Tensorflow checkpoints will become incompatible 
 
 ## [1.4.0-preview] - 2020-09-16
 ### Major Changes
-#### com.unity.ml-agents (C#)
+#### com.unity.cognition-learn (C#)
 #### ml-agents / ml-agents-envs / gym-unity (Python)
 
 ### Minor Changes
-#### com.unity.ml-agents (C#)
+#### com.unity.cognition-learn (C#)
 - The `IActuator` interface and `ActuatorComponent` abstract class were added.
 These are analogous to `ISensor` and `SensorComponent`, but for applying actions
 for an Agent. They allow you to control the action space more programmatically
@@ -534,7 +534,7 @@ than defining the actions in the Agent's Behavior Parameters. See
  for an example of how to use them. (#4297, #4315)
 - Update Barracuda to 1.1.1-preview (#4482)
 - Enabled C# formatting using `dotnet-format`. (#4362)
-- GridSensor was added to the `com.unity.ml-agents.extensions` package. Thank you
+- GridSensor was added to the `com.unity.cognition-learn.extensions` package. Thank you
 to Jaden Travnik from Eidos Montreal for the contribution! (#4399)
 - Added `Agent.EpisodeInterrupted()`, which can be used to reset the agent when
 it has reached a user-determined maximum number of steps. This behaves similarly
@@ -559,8 +559,8 @@ your trainer configuration to do so. (#4448)
 - Improved the executable detection logic for environments on Windows. (#4485)
 
 ### Bug Fixes
-#### com.unity.ml-agents (C#)
-- Previously, `com.unity.ml-agents` was not declaring built-in packages as
+#### com.unity.cognition-learn (C#)
+- Previously, `com.unity.cognition-learn` was not declaring built-in packages as
 dependencies in its package.json. The relevant dependencies are now listed. (#4384)
 - Agents no longer try to send observations when they become disabled if the
 Academy has been shut down. (#4489)
@@ -573,7 +573,7 @@ when using `--resume` was fixed. (#4463)
 ## [1.3.0-preview] - 2020-08-12
 
 ### Major Changes
-#### com.unity.ml-agents (C#)
+#### com.unity.cognition-learn (C#)
 #### ml-agents / ml-agents-envs / gym-unity (Python)
 - The minimum supported Python version for ml-agents-envs was changed to 3.6.1. (#4244)
 - The interaction between EnvManager and TrainerController was changed; EnvManager.advance() was split into to stages,
@@ -581,7 +581,7 @@ and TrainerController now uses the results from the first stage to handle new be
 Python training by approximately 5-10%. (#4259)
 
 ### Minor Changes
-#### com.unity.ml-agents (C#)
+#### com.unity.cognition-learn (C#)
 - StatsSideChannel now stores multiple values per key. This means that multiple
 calls to `StatsRecorder.Add()` with the same key in the same step will no
 longer overwrite each other. (#4236)
@@ -593,7 +593,7 @@ a similar change in TensorFlow's requirements. (#4274)
 - CSV statistics writer was removed (#4300).
 
 ### Bug Fixes
-#### com.unity.ml-agents (C#)
+#### com.unity.cognition-learn (C#)
 - Academy.EnvironmentStep() will now throw an exception if it is called
 recursively (for example, by an Agent's CollectObservations method).
 Previously, this would result in an infinite loop and cause the editor to hang.
@@ -615,7 +615,7 @@ behavior. More information
 [here](https://github.com/Unity-Technologies/ml-agents/blob/release_5_docs/docs/Training-ML-Agents.md).(#4160)
 
 ### Minor Changes
-#### com.unity.ml-agents (C#)
+#### com.unity.cognition-learn (C#)
 - `SideChannelsManager` was renamed to `SideChannelManager`. The old name is still supported, but deprecated. (#4137)
 - `RayPerceptionSensor.Perceive()` now additionally store the GameObject that was hit by the ray. (#4111)
 - The Barracuda dependency was upgraded to 1.0.1 (#4188)
@@ -623,7 +623,7 @@ behavior. More information
 - Added new Google Colab notebooks to show how to use `UnityEnvironment'. (#4117)
 
 ### Bug Fixes
-#### com.unity.ml-agents (C#)
+#### com.unity.cognition-learn (C#)
 - Fixed an issue where RayPerceptionSensor would raise an exception when the
 list of tags was empty, or a tag in the list was invalid (unknown, null, or
 empty string). (#4155)
@@ -639,7 +639,7 @@ argument. (#4203)
 
 ## [1.1.0-preview] - 2020-06-10
 ### Major Changes
-#### com.unity.ml-agents (C#)
+#### com.unity.cognition-learn (C#)
 #### ml-agents / ml-agents-envs / gym-unity (Python)
 - Added new Walker environments. Improved ragdoll stability/performance. (#4037)
 - `max_step` in the `TerminalStep` and `TerminalSteps` objects was renamed `interrupted`.
@@ -659,7 +659,7 @@ vector observations to be used simultaneously. (#3981) Thank you @shakenes !
 - When using Curriculum, the current lesson will resume if training is quit and resumed. As such,
   the `--lesson` CLI option has been removed. (#4025)
 ### Minor Changes
-#### com.unity.ml-agents (C#)
+#### com.unity.cognition-learn (C#)
 - `ObservableAttribute` was added. Adding the attribute to fields or properties on an Agent will allow it to generate
   observations via reflection. (#3925, #4006)
 #### ml-agents / ml-agents-envs / gym-unity (Python)
@@ -673,19 +673,19 @@ vector observations to be used simultaneously. (#3981) Thank you @shakenes !
   checkpoint, and too few when using `buffer_init_steps`. (#4038)
 - Fixed a bug in the onnx export that would cause constants needed for inference to not be visible to some versions of
   the Barracuda importer. (#4073)
-#### com.unity.ml-agents (C#)
+#### com.unity.cognition-learn (C#)
 #### ml-agents / ml-agents-envs / gym-unity (Python)
 
 
 ## [1.0.2-preview] - 2020-05-20
 ### Bug Fixes
-#### com.unity.ml-agents (C#)
+#### com.unity.cognition-learn (C#)
 - Fix missing .meta file
 
 
 ## [1.0.1-preview] - 2020-05-19
 ### Bug Fixes
-#### com.unity.ml-agents (C#)
+#### com.unity.cognition-learn (C#)
 - A bug that would cause the editor to go into a loop when a prefab was selected was fixed. (#3949)
 - BrainParameters.ToProto() no longer throws an exception if none of the fields have been set. (#3930)
 - The Barracuda dependency was upgraded to 0.7.1-preview. (#3977)
@@ -697,7 +697,7 @@ vector observations to be used simultaneously. (#3981) Thank you @shakenes !
 
 ## [1.0.0-preview] - 2020-04-30
 ### Major Changes
-#### com.unity.ml-agents (C#)
+#### com.unity.cognition-learn (C#)
 
 - The `MLAgents` C# namespace was renamed to `Unity.MLAgents`, and other nested
   namespaces were similarly renamed. (#3843)
@@ -759,7 +759,7 @@ vector observations to be used simultaneously. (#3981) Thank you @shakenes !
 
 ### Minor Changes
 
-#### com.unity.ml-agents (C#)
+#### com.unity.cognition-learn (C#)
 
 - Added new 3-joint Worm ragdoll environment. (#3798)
 - `StackingSensor` was changed from `internal` visibility to `public`. (#3701)
@@ -799,7 +799,7 @@ vector observations to be used simultaneously. (#3981) Thank you @shakenes !
 
 ### Bug Fixes
 
-#### com.unity.ml-agents (C#)
+#### com.unity.cognition-learn (C#)
 
 - Fixed a display bug when viewing Demonstration files in the inspector. The
   shapes of the observations in the file now display correctly. (#3771)
@@ -935,7 +935,7 @@ vector observations to be used simultaneously. (#3981) Thank you @shakenes !
   added (#3194)
 - Tennis and Soccer environments were refactored to enable training with
   self-play (#3194, #3331)
-- UnitySDK folder was split into a Unity Package (com.unity.ml-agents) and our
+- UnitySDK folder was split into a Unity Package (com.unity.cognition-learn) and our
   examples were moved to the Project folder (#3267)
 - Academy is now a singleton and is no longer abstract (#3210, #3184)
 - In order to reduce the size of the API, several classes and methods were

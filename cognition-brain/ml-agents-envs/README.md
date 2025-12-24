@@ -23,15 +23,15 @@ python -m pip install mlagents_envs==1.1.0
 ## Usage & More Information
 
 See
-- [Gym API Guide](../com.unity.ml-agents/Documentation~/Python-Gym-API.md)
-- [PettingZoo API Guide](../com.unity.ml-agents/Documentation~/Python-PettingZoo-API.md)
-- [Python API Guide](../com.unity.ml-agents/Documentation~/Python-LLAPI.md)
+- [Gym API Guide](../com.unity.cognition-learn/Documentation~/Python-Gym-API.md)
+- [PettingZoo API Guide](../com.unity.cognition-learn/Documentation~/Python-PettingZoo-API.md)
+- [Python API Guide](../com.unity.cognition-learn/Documentation~/Python-LLAPI.md)
 
 for more information on how to use the API to interact with a Unity environment.
 
 For more information on the ML-Agents Toolkit and how to instrument a Unity
 scene with the ML-Agents SDK, check out the main
-[ML-Agents Toolkit documentation](https://docs.unity3d.com/Packages/com.unity.ml-agents@latest).
+[ML-Agents Toolkit documentation](https://docs.unity3d.com/Packages/com.unity.cognition-learn@latest).
 
 ## Limitations
 

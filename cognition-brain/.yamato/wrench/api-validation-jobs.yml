@@ -21,10 +21,10 @@ api_validation_-_ml-agents_-_6000_0_-_windows:
   - command: python PythonScripts/PackageJsonCondersor.py
     timeout: 1
     retries: 0
-  - command: upm-ci package test -u .Editor --package-path com.unity.ml-agents --type vetting-tests || exit 0
+  - command: upm-ci package test -u .Editor --package-path com.unity.cognition-learn --type vetting-tests || exit 0
     timeout: 30
     retries: 0
-  - command: python PythonScripts/parse_upm_ci_results.py --package-path=com.unity.ml-agents
+  - command: python PythonScripts/parse_upm_ci_results.py --package-path=com.unity.cognition-learn
     timeout: 2
     retries: 0
   artifacts:

@@ -133,7 +133,7 @@ unstable.
 If you don't want to use Git, you can find download links on the
 [releases page](https://github.com/Unity-Technologies/ml-agents/releases).
 
-The `com.unity.ml-agents` subdirectory contains the core code to add to your
+The `com.unity.cognition-learn` subdirectory contains the core code to add to your
 projects. The `Project` subdirectory contains many
 [example environments](Learning-Environment-Examples.md) to help you get
 started.

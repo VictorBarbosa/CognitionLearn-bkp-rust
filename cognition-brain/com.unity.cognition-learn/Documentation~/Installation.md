@@ -52,7 +52,7 @@ To install the package, follow these steps:
 
 1. In Unity, open **Window** > **Package Manager**.
 2. Select **+** > **Add package by name**.
-3. Enter `com.unity.ml-agents`.
+3. Enter `com.unity.cognition-learn`.
 4. Enable **Preview Packages** under the **Advanced** drop-down list if the package doesn’t appear.
 
 If the package isn’t listed, follow the [Advanced Installation](#install-ml-agents-advanced-installation) method instead.
@@ -111,14 +111,14 @@ If you plan to contribute your changes, clone the develop branch (omit the `--br
 
 #### Add the ML-Agents Unity package
 
-After cloning the repository, add the `com.unity.ml-agents` Unity package to your project.
+After cloning the repository, add the `com.unity.cognition-learn` Unity package to your project.
 
 To add the local package, follow these steps:
 
 1. In the Unity Editor, go to **Window** > **Package Manager**.
 2. In the **Package Manager** window, select **+**.
 3. Select **Add package from disk**.
-4. Navigate to the cloned repository and open the `com.unity.ml-agents` folder.
+4. Navigate to the cloned repository and open the `com.unity.cognition-learn` folder.
 5. Select the `package.json` file.
 
 Unity adds the ML-Agents package to your project.

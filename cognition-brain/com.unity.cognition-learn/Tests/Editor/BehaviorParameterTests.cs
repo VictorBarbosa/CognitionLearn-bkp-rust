@@ -11,7 +11,7 @@ namespace Unity.CognitionLearn.Tests
     [TestFixture]
     public class BehaviorParameterTests : IHeuristicProvider
     {
-        const string k_continuousONNXPath = "Packages/com.unity.ml-agents/Tests/Editor/TestModels/continuous2vis8vec2action_v1_0.onnx";
+        const string k_continuousONNXPath = "Packages/com.unity.cognition-learn/Tests/Editor/TestModels/continuous2vis8vec2action_v1_0.onnx";
         public void Heuristic(in ActionBuffers actionsOut)
         {
             // No-op

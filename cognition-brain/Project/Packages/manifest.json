@@ -4,7 +4,7 @@
     "com.unity.formats.fbx": "5.1.1",
     "com.unity.ide.rider": "3.0.31",
     "com.unity.inputsystem": "1.13.0",
-    "com.unity.ml-agents": "file:../../com.unity.ml-agents",
+    "com.unity.cognition-learn": "file:../../com.unity.cognition-learn",
     "com.unity.multiplayer.center": "1.0.0",
     "com.unity.nuget.newtonsoft-json": "3.2.1",
     "com.unity.recorder": "5.1.2",
@@ -19,7 +19,7 @@
     "com.unity.modules.unityanalytics": "1.0.0"
   },
   "testables": [
-    "com.unity.ml-agents",
+    "com.unity.cognition-learn",
     "com.unity.inputsystem"
   ]
 }

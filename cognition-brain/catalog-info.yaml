@@ -3,8 +3,8 @@ apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
   annotations:
-    github.com/project-slug: unity/com.unity.ml-agents
-  name: com.unity.ml-agents
+    github.com/project-slug: unity/com.unity.cognition-learn
+  name: com.unity.cognition-learn
   description: "Unity ML-Agents Package"
   labels:
     costcenter: "5160"

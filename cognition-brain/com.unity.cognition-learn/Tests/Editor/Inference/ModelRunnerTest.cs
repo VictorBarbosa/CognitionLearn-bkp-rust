@@ -33,16 +33,16 @@ namespace Unity.CognitionLearn.Tests
     [TestFixture]
     public class ModelRunnerTest
     {
-        const string k_hybrid_ONNX_recurr_v2 = "Packages/com.unity.ml-agents/Tests/Editor/TestModels/hybrid0vis8vec_2c_2_3d_v2_0.onnx";
+        const string k_hybrid_ONNX_recurr_v2 = "Packages/com.unity.cognition-learn/Tests/Editor/TestModels/hybrid0vis8vec_2c_2_3d_v2_0.onnx";
 
-        const string k_continuousONNXPath = "Packages/com.unity.ml-agents/Tests/Editor/TestModels/continuous2vis8vec2action_v1_0.onnx";
-        const string k_discreteONNXPath = "Packages/com.unity.ml-agents/Tests/Editor/TestModels/discrete1vis0vec_2_3action_obsolete_recurr_v1_0.onnx";
-        const string k_hybridONNXPath = "Packages/com.unity.ml-agents/Tests/Editor/TestModels/hybrid0vis53vec_3c_2daction_v1_0.onnx";
-        // const string k_continuousNNPath = "Packages/com.unity.ml-agents/Tests/Editor/TestModels/continuous2vis8vec2action_deprecated_v1_0.nn";
-        // const string k_discreteNNPath = "Packages/com.unity.ml-agents/Tests/Editor/TestModels/discrete1vis0vec_2_3action_recurr_deprecated_v1_0.nn";
+        const string k_continuousONNXPath = "Packages/com.unity.cognition-learn/Tests/Editor/TestModels/continuous2vis8vec2action_v1_0.onnx";
+        const string k_discreteONNXPath = "Packages/com.unity.cognition-learn/Tests/Editor/TestModels/discrete1vis0vec_2_3action_obsolete_recurr_v1_0.onnx";
+        const string k_hybridONNXPath = "Packages/com.unity.cognition-learn/Tests/Editor/TestModels/hybrid0vis53vec_3c_2daction_v1_0.onnx";
+        // const string k_continuousNNPath = "Packages/com.unity.cognition-learn/Tests/Editor/TestModels/continuous2vis8vec2action_deprecated_v1_0.nn";
+        // const string k_discreteNNPath = "Packages/com.unity.cognition-learn/Tests/Editor/TestModels/discrete1vis0vec_2_3action_recurr_deprecated_v1_0.nn";
         // models with deterministic action tensors
-        private const string k_deterministic_discreteNNPath = "Packages/com.unity.ml-agents/Tests/Editor/TestModels/deterDiscrete1obs3action_v2_0.onnx";
-        private const string k_deterministic_continuousNNPath = "Packages/com.unity.ml-agents/Tests/Editor/TestModels/deterContinuous2vis8vec2action_v2_0.onnx";
+        private const string k_deterministic_discreteNNPath = "Packages/com.unity.cognition-learn/Tests/Editor/TestModels/deterDiscrete1obs3action_v2_0.onnx";
+        private const string k_deterministic_continuousNNPath = "Packages/com.unity.cognition-learn/Tests/Editor/TestModels/deterContinuous2vis8vec2action_v2_0.onnx";
 
         ModelAsset hybridONNXModelV2;
         ModelAsset continuousONNXModel;

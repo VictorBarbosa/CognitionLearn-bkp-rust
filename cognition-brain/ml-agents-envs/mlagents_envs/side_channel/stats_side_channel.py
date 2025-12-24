@@ -32,7 +32,7 @@ class StatsSideChannel(SideChannel):
     """
 
     def __init__(self) -> None:
-        # >>> uuid.uuid5(uuid.NAMESPACE_URL, "com.unity.ml-agents/StatsSideChannel")
+        # >>> uuid.uuid5(uuid.NAMESPACE_URL, "com.unity.cognition-learn/StatsSideChannel")
         # UUID('a1d8f7b7-cec8-50f9-b78b-d3e165a78520')
         super().__init__(uuid.UUID("a1d8f7b7-cec8-50f9-b78b-d3e165a78520"))
 

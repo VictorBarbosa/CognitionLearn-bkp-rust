@@ -88,8 +88,8 @@
       "dependencies": {},
       "url": "https://artifactory.prd.cds.internal.unity3d.com/artifactory/api/npm/upm-candidates"
     },
-    "com.unity.ml-agents": {
-      "version": "file:../../com.unity.ml-agents",
+    "com.unity.cognition-learn": {
+      "version": "file:../../com.unity.cognition-learn",
       "depth": 0,
       "source": "local",
       "dependencies": {

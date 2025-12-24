@@ -29,7 +29,7 @@ test_linux_ll_api_{{ editor.version }}_{{ editor.extra_test }}:
       pull_request.target eq "develop" OR
       pull_request.target match "release.+") AND
       NOT pull_request.draft AND
-      (pull_request.changes.any match "com.unity.ml-agents/**" OR
+      (pull_request.changes.any match "com.unity.cognition-learn/**" OR
       pull_request.changes.any match "Project/**" OR
       pull_request.changes.any match "ml-agents/tests/yamato/**" OR
       pull_request.changes.any match "ml-agents-envs/**" OR

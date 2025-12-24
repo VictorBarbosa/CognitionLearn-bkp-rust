@@ -15,14 +15,14 @@ package_pack_-_ml-agents:
   - command: curl $WRENCH_LOCAL_APV_DOWNLOAD_URL -o wrench-localapv.zip
   - command: 7z x wrench-localapv.zip
   - command: python PythonScripts/print_machine_info.py
-  - command: upm-ci package pack --package-path com.unity.ml-agents
-  - command: cp upm-ci~/packages/packages.json upm-ci~/packages/com.unity.ml-agents_packages.json
+  - command: upm-ci package pack --package-path com.unity.cognition-learn
+  - command: cp upm-ci~/packages/packages.json upm-ci~/packages/com.unity.cognition-learn_packages.json
   artifacts:
     packages:
       paths:
       - upm-ci~/packages/**/*
   dependencies:
-    - path: .yamato/com.unity.ml-agents-pack.yml#sign_macOS
+    - path: .yamato/com.unity.cognition-learn-pack.yml#sign_macOS
   variables:
     UPMCI_ACK_LARGE_PACKAGE: 1
     UPMPVP_CONTEXT_WRENCH: 0.10.5.0

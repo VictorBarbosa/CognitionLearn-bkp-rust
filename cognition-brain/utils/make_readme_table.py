@@ -79,14 +79,14 @@ class ReleaseInfo(NamedTuple):
     @property
     def source_link(self):
         if self.is_verified:
-            return f"https://github.com/Unity-Technologies/ml-agents/tree/com.unity.ml-agents_{self.csharp_version}"
+            return f"https://github.com/Unity-Technologies/ml-agents/tree/com.unity.cognition-learn_{self.csharp_version}"
         else:
             return f"https://github.com/Unity-Technologies/ml-agents/tree/{self.release_tag}"
 
     @property
     def download_link(self):
         if self.is_verified:
-            tag = f"com.unity.ml-agents_{self.csharp_version}"
+            tag = f"com.unity.cognition-learn_{self.csharp_version}"
         else:
             tag = self.release_tag
         return f"https://github.com/Unity-Technologies/ml-agents/archive/{tag}.zip"
@@ -99,13 +99,13 @@ class ReleaseInfo(NamedTuple):
         if self.csharp_version == "develop":
             return (
                 "https://github.com/Unity-Technologies/ml-agents/tree/"
-                "develop/com.unity.ml-agents/Documentation~/index.md"
+                "develop/com.unity.cognition-learn/Documentation~/index.md"
             )
 
         # Prioritize Unity Package documentation over web docs
         try:
             StrictVersion(self.csharp_version).version
-            return "https://docs.unity3d.com/Packages/com.unity.ml-agents@latest"
+            return "https://docs.unity3d.com/Packages/com.unity.cognition-learn@latest"
         except ValueError:
             return "https://unity-technologies.github.io/ml-agents/  (DEPRECATED)"
 
@@ -113,7 +113,7 @@ class ReleaseInfo(NamedTuple):
     def package_link(self):
         try:
             v = StrictVersion(self.csharp_version).version
-            return f"https://docs.unity3d.com/Packages/com.unity.ml-agents@{v[0]}.{v[1]}/manual/index.html"
+            return f"https://docs.unity3d.com/Packages/com.unity.cognition-learn@{v[0]}.{v[1]}/manual/index.html"
         except ValueError:
             return "--"
 

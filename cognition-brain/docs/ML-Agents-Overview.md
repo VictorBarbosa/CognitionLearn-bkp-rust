@@ -157,7 +157,7 @@ The ML-Agents Toolkit contains five high-level components:
   training agents to operate in a complex game or simulation. In this case, it
   might be more efficient and practical to create a purpose-built training
   scene. The ML-Agents Toolkit includes an ML-Agents Unity SDK
-  (`com.unity.ml-agents` package) that enables you to transform any Unity scene
+  (`com.unity.cognition-learn` package) that enables you to transform any Unity scene
   into a learning environment by defining the agents and their behaviors.
 - **Python Low-Level API** - which contains a low-level Python interface for
   interacting and manipulating a learning environment. Note that, unlike the

@@ -19,7 +19,7 @@ namespace Unity.CognitionLearn.Editor
     [ScriptedImporter(1, new[] { "demo" })]
     internal class DemonstrationImporter : ScriptedImporter
     {
-        const string k_IconPath = "Packages/com.unity.ml-agents/Editor/Icons/DemoIcon.png";
+        const string k_IconPath = "Packages/com.unity.cognition-learn/Editor/Icons/DemoIcon.png";
 
         public override void OnImportAsset(AssetImportContext ctx)
         {

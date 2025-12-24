@@ -3,7 +3,7 @@
   "dependencies": {
     "com.unity.collab-proxy": "2.7.1",
     "com.unity.feature.development": "1.0.2",
-    "com.unity.ml-agents": "file:../../com.unity.ml-agents",
+    "com.unity.cognition-learn": "file:../../com.unity.cognition-learn",
     "com.unity.multiplayer.center": "1.0.0",
     "com.unity.test-framework.build": "0.0.1-preview.15",
     "com.unity.test-framework.performance": "3.0.3",

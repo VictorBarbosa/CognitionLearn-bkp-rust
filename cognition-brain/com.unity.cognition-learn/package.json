@@ -1,9 +1,9 @@
 {
-  "name": "com.unity.ml-agents",
-  "displayName": "ML Agents",
-  "version": "4.0.0",
+  "name": "com.unity.cognition-learn",
+  "displayName": "Cognition Learn",
+  "version": "0.0.1-preview",
   "unity": "6000.0",
-  "description": "Use state-of-the-art machine learning to create intelligent character behaviors in any Unity environment (games, robotics, film, etc.).",
+  "description": "A wrapper package around Unity ML-Agents using Rust and Shared Memory for high performance training.",
   "dependencies": {
     "com.unity.ai.inference": "2.4.1",
     "com.unity.modules.imageconversion": "1.0.0",

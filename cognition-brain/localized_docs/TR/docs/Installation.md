@@ -2,7 +2,7 @@
 
 ML-Agents Araç Seti birkaç bileşen içermektedir:
 
-- Unity paketi ([`com.unity.ml-agents`](../com.unity.ml-agents/)) Unity sahnenize entegre edilecek Unity C# SDK içerir.
+- Unity paketi ([`com.unity.cognition-learn`](../com.unity.cognition-learn/)) Unity sahnenize entegre edilecek Unity C# SDK içerir.
 - Python paketleri:
   - [`mlagents`](https://github.com/Unity-Technologies/ml-agents/tree/release_7_docs/ml-agents) Unity sahnenizdeki davranışları eğitmenizi sağlayan makine öğrenimi algoritmalarını içerir. Bu nedenle `mlagents` paketini kurmanız gerekecek.
   - [`mlagents_envs`](https://github.com/Unity-Technologies/ml-agents/tree/release_7_docs/ml-agents-envs) Unity sahnesiyle etkileşime girmek için Python API içermektedir. Unity sahnesi ile Python makine öğrenimi algoritmaları arasında veri mesajlaşmasını kolaylaştıran temel bir katmandır.
@@ -18,7 +18,7 @@ ML-Agents Toolkit 'i kurmanız için gerekenler:
 - Python yükleyin (3.10.12 veya daha yüksek bir sürüm)
 - Bu depoyu klonlayın (İsteğe bağlı)
   - __Not:__ Depoyu klonlamazsanız, örnek ortamlara ve eğitim yapılandırmalarına erişemezsiniz. Ek olarak, [Başlangıç Rehberi](Getting-Started.md) depoyu klonladığınızı varsayar.
-- `com.unity.ml-agents` ML-Agents Unity paketini yükleyin.
+- `com.unity.cognition-learn` ML-Agents Unity paketini yükleyin.
 - `mlagents` Python paketini yüklemek.
 
 ### **Unity 2022.3** veya Sonraki Bir Sürüm Yükleyin
@@ -44,7 +44,7 @@ git clone --branch release_8 https://github.com/Unity-Technologies/ml-agents.git
 
 #### Gelişmiş: Geliştirme için Yerel Kurulum
 
-Eğer, ML-Agent Toolkit'i amaçlarınız için değiştirmeyi veya genişletmeyi planlıyorsanız, depoyu klonlamanız gerekecektir. Bu değişikliklere tekrar katkıda bulunmayı planlıyorsanız, `master` dalını klonladığınızdan emin olun (yukarıdaki komuttan `--branch release_8` 'i çıkarın). ML-Agent Toolkit'e katkıda bulunma hakkında daha fazla bilgi için [Katkı Yönergelerimize](../com.unity.ml-agents/CONTRIBUTING.md) bakın.
+Eğer, ML-Agent Toolkit'i amaçlarınız için değiştirmeyi veya genişletmeyi planlıyorsanız, depoyu klonlamanız gerekecektir. Bu değişikliklere tekrar katkıda bulunmayı planlıyorsanız, `master` dalını klonladığınızdan emin olun (yukarıdaki komuttan `--branch release_8` 'i çıkarın). ML-Agent Toolkit'e katkıda bulunma hakkında daha fazla bilgi için [Katkı Yönergelerimize](../com.unity.cognition-learn/CONTRIBUTING.md) bakın.
 
 ### `com.unity.ml-agent` Unity paketini kurun
 
@@ -60,7 +60,7 @@ Lütfen bulmak için 'Advanced' açılır menüsünde 'Preview Packages' seçene
 1. Menüye gidin ve `Window` -> `Package Manager` seçeneğini seçin.
 1. Paket yöneticisi penceresinde `+` düğmesine tıklayın.
 1. `Add package from disk...` 'i seçin.
-1. `com.unity.ml-agents` klasörüne gidin.
+1. `com.unity.cognition-learn` klasörüne gidin.
 1. `package.json` dosyasını seçin.
 
 **NOT:** Unity 2018.4'te `+` düğmesi paket listesinin sağ altındadır ve Unity 2019.3'te paket listesinin sol üst tarafındadır.

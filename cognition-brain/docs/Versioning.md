@@ -15,7 +15,7 @@ release will call out specific version upgrades of each package. For instance, w
 [the April 30th release](https://github.com/Unity-Technologies/ml-agents/releases/tag/release_1),
 we will have:
 - GitHub Release 1 (branch name: *release_1_branch*)
-  - com.unity.ml-agents release 1.0.0
+  - com.unity.cognition-learn release 1.0.0
   - ml-agents release 0.16.0
   - ml-agents-envs release 0.16.0
   - gym-unity release 0.16.0
@@ -28,24 +28,24 @@ All of the software packages, and their generated artifacts will be versioned.  
 tools will not be versioned.
 
 ### Unity package
-Package name: com.unity.ml-agents
+Package name: com.unity.cognition-learn
 - Versioned following [Semantic Versioning Guidelines](https://www.semver.org)
 - This package consumes an artifact of the training process: the `.nn` file.  These files
-    are integer versioned and currently at version 2. The com.unity.ml-agents package
+    are integer versioned and currently at version 2. The com.unity.cognition-learn package
     will need to support the version of `.nn` files which existed at its 1.0.0 release.
-    For example, consider that com.unity.ml-agents is at version 1.0.0 and the NN files
+    For example, consider that com.unity.cognition-learn is at version 1.0.0 and the NN files
     are at version 2.  If the NN files change to version 3, the next release of
-    com.unity.ml-agents at version 1.1.0 guarantees it will be able to read both of these
-    formats.  If the NN files were to change to version 4 and com.unity.ml-agents to
-    version 2.0.0, support for NN versions 2 and 3 could be dropped for com.unity.ml-agents
+    com.unity.cognition-learn at version 1.1.0 guarantees it will be able to read both of these
+    formats.  If the NN files were to change to version 4 and com.unity.cognition-learn to
+    version 2.0.0, support for NN versions 2 and 3 could be dropped for com.unity.cognition-learn
     version 2.0.0.
 - This package produces one artifact, the `.demo` files.  These files will have integer
     versioning. This means their version will increment by 1 at each change.  The
-    com.unity.ml-agents package must be backward compatible with version changes
+    com.unity.cognition-learn package must be backward compatible with version changes
     that occur between minor versions.
-- To summarize, the artifacts produced and consumed by com.unity.ml-agents are guaranteed
-    to be supported for 1.x.x versions of com.unity.ml-agents.  We intend to provide stability
-    for our users by moving to a 1.0.0 release of com.unity.ml-agents.
+- To summarize, the artifacts produced and consumed by com.unity.cognition-learn are guaranteed
+    to be supported for 1.x.x versions of com.unity.cognition-learn.  We intend to provide stability
+    for our users by moving to a 1.0.0 release of com.unity.cognition-learn.
 
 
 ### Python Packages
@@ -63,7 +63,7 @@ Package names: ml-agents / ml-agents-envs / gym-unity
 
 ## Communicator
 
-Packages which communicate: com.unity.ml-agents / ml-agents-envs
+Packages which communicate: com.unity.cognition-learn / ml-agents-envs
 
 Another entity of the ML-Agents Toolkit that requires versioning is the communication layer
 between C# and Python, which will follow also semantic versioning.  This guarantees a level of

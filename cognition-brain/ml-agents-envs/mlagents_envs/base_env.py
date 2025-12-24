@@ -515,7 +515,7 @@ class ObservationSpec(NamedTuple):
     dimension_property: Tuple[DimensionProperty, ...]
     observation_type: ObservationType
 
-    # Optional name. For observations coming from com.unity.ml-agents, this
+    # Optional name. For observations coming from com.unity.cognition-learn, this
     # will be the ISensor name.
     name: str
 

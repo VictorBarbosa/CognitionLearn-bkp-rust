@@ -16,7 +16,7 @@ namespace Unity.CognitionLearn.Actuators
         ///
         /// See [Agents - Actions] for more information on masking actions.
         ///
-        /// [Agents - Actions]: https://docs.unity3d.com/Packages/com.unity.ml-agents@latest/index.html?subfolder=/manual/Learning-Environment-Design-Agents.html#masking-discrete-actions
+        /// [Agents - Actions]: https://docs.unity3d.com/Packages/com.unity.cognition-learn@latest/index.html?subfolder=/manual/Learning-Environment-Design-Agents.html#masking-discrete-actions
         /// </remarks>
         /// <param name="branch">The branch for which the actions will be masked.</param>
         /// <param name="actionIndex">Index of the action.</param>

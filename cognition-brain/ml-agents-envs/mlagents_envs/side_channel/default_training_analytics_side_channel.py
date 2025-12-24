@@ -18,7 +18,7 @@ class DefaultTrainingAnalyticsSideChannel(SideChannel):
     CHANNEL_ID = uuid.UUID("b664a4a9-d86f-5a5f-95cb-e8353a7e8356")
 
     def __init__(self) -> None:
-        # >>> uuid.uuid5(uuid.NAMESPACE_URL, "com.unity.ml-agents/TrainingAnalyticsSideChannel")
+        # >>> uuid.uuid5(uuid.NAMESPACE_URL, "com.unity.cognition-learn/TrainingAnalyticsSideChannel")
         # UUID('b664a4a9-d86f-5a5f-95cb-e8353a7e8356')
         # We purposefully use the SAME side channel as the TrainingAnalyticsSideChannel
 

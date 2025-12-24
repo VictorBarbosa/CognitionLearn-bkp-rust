@@ -6,7 +6,7 @@ test_linux_protobuf_generation:
     flavor: b1.large
   variables:
     GRPC_VERSION: "1.14.1"
-    CS_PROTO_PATH: "com.unity.ml-agents/Runtime/Grpc/CommunicatorObjects"
+    CS_PROTO_PATH: "com.unity.cognition-learn/Runtime/Grpc/CommunicatorObjects"
   commands:
     - |
       sudo apt-get update && sudo apt-get install -y nuget
@@ -34,7 +34,7 @@ test_linux_protobuf_generation:
       pull_request.target match "release.+") AND
       NOT pull_request.draft AND
       (pull_request.changes.any match "protobuf-definitions/**" OR
-      pull_request.changes.any match "com.unity.ml-agents/Runtime/Grpc/CommunicatorObjects/**" OR
+      pull_request.changes.any match "com.unity.cognition-learn/Runtime/Grpc/CommunicatorObjects/**" OR
       pull_request.changes.any match "ml-agents-envs/mlagents_envs/communicator_objects/**" OR
       pull_request.changes.any match ".yamato/protobuf-generation-test.yml") AND
       NOT pull_request.changes.all match "protobuf-definitions/**/*.md"

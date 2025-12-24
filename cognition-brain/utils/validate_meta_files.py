@@ -5,20 +5,20 @@ def main():
     asset_paths = [
         "Project/Assets",
         "DevProject/Assets",
-        "com.unity.ml-agents",
+        "com.unity.cognition-learn",
     ]
     meta_suffix = ".meta"
     python_suffix = ".py"
     allow_list = frozenset(
         [
-            "com.unity.ml-agents/.editorconfig",
-            "com.unity.ml-agents/.gitignore",
-            "com.unity.ml-agents/.npmignore",
-            "com.unity.ml-agents/.git",
-            "com.unity.ml-agents/Tests/.tests.json",
-            "com.unity.ml-agents/.pre-commit-config.yaml",
-            "com.unity.ml-agents/.pre-commit-search-and-replace.yaml",
-            "com.unity.ml-agents/Samples/3DBall/.sample.json",
+            "com.unity.cognition-learn/.editorconfig",
+            "com.unity.cognition-learn/.gitignore",
+            "com.unity.cognition-learn/.npmignore",
+            "com.unity.cognition-learn/.git",
+            "com.unity.cognition-learn/Tests/.tests.json",
+            "com.unity.cognition-learn/.pre-commit-config.yaml",
+            "com.unity.cognition-learn/.pre-commit-search-and-replace.yaml",
+            "com.unity.cognition-learn/Samples/3DBall/.sample.json",
         ]
     )
     ignored_dirs = {

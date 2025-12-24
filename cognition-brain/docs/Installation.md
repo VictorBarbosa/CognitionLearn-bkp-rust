@@ -2,7 +2,7 @@
 
 The ML-Agents Toolkit contains several components:
 
-- Unity package ([`com.unity.ml-agents`](../com.unity.ml-agents/)) contains the
+- Unity package ([`com.unity.cognition-learn`](../com.unity.cognition-learn/)) contains the
   Unity C# SDK that will be integrated into your Unity project. This package contains
   a sample to help you get started with ML-Agents, including advanced features like
   custom sensors, input system integration, and physics-based components.
@@ -27,7 +27,7 @@ Consequently, to install and use the ML-Agents Toolkit you will need to:
   able to access the example environments and training configurations.
   Additionally, the [Getting Started Guide](Getting-Started.md) assumes that you have cloned the
   repository.
-- Install the `com.unity.ml-agents` Unity package
+- Install the `com.unity.cognition-learn` Unity package
 - Install the `mlagents-envs`
 - Install the `mlagents` Python package
 
@@ -86,13 +86,13 @@ You will need to clone the repository if you plan to modify or extend the
 ML-Agents Toolkit for your purposes. If you plan to contribute those changes
 back, make sure to clone the `develop` branch (by omitting `--branch release_22`
 from the command above). See our
-[Contributions Guidelines](../com.unity.ml-agents/CONTRIBUTING.md) for more
+[Contributions Guidelines](../com.unity.cognition-learn/CONTRIBUTING.md) for more
 information on contributing to the ML-Agents Toolkit.
 
-### Install the `com.unity.ml-agents` Unity package
+### Install the `com.unity.cognition-learn` Unity package
 
 The Unity ML-Agents C# SDK is a Unity Package. You can install the
-`com.unity.ml-agents` package
+`com.unity.cognition-learn` package
 [directly from the Package Manager registry](https://docs.unity3d.com/Manual/upm-ui-install.html).
 Please make sure you enable 'Preview Packages' in the 'Advanced' dropdown in
 order to find the latest Preview release of the package.
@@ -103,13 +103,13 @@ please follow the [advanced installation instructions](#advanced-local-installat
 #### Advanced: Local Installation for Development
 
 You can [add the local](https://docs.unity3d.com/Manual/upm-ui-local.html)
-`com.unity.ml-agents` package (from the repository that you just cloned) to your
+`com.unity.cognition-learn` package (from the repository that you just cloned) to your
 project by:
 
 1. navigating to the menu `Window` -> `Package Manager`.
 1. In the package manager window click on the `+` button on the top left of the packages list).
 1. Select `Add package from disk...`
-1. Navigate into the `com.unity.ml-agents` folder.
+1. Navigate into the `com.unity.cognition-learn` folder.
 1. Select the `package.json` file.
 
 <p align="center">

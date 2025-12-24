@@ -10,9 +10,9 @@ VERSION_LINE_START = "__version__ = "
 
 DIRECTORIES = ["ml-agents/mlagents/trainers", "ml-agents-envs/mlagents_envs"]
 
-MLAGENTS_PACKAGE_JSON_PATH = "com.unity.ml-agents/package.json"
+MLAGENTS_PACKAGE_JSON_PATH = "com.unity.cognition-learn/package.json"
 
-ACADEMY_PATH = "com.unity.ml-agents/Runtime/Academy.cs"
+ACADEMY_PATH = "com.unity.cognition-learn/Runtime/Academy.cs"
 
 PYTHON_VERSION_FILE_TEMPLATE = """# Version of the library that will be used to upload to pypi
 __version__ = {version}
@@ -124,7 +124,7 @@ def print_release_tag_commands(
     python_version: str, csharp_version: str, release_tag: str
 ):
     python_tag = f"python-packages_{python_version}"
-    csharp_tag = f"com.unity.ml-agents_{csharp_version}"
+    csharp_tag = f"com.unity.cognition-learn_{csharp_version}"
     docs_tag = f"{release_tag}_docs"
     print(
         f"""

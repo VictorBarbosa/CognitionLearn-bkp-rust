@@ -9,6 +9,6 @@ coverage_test_platforms:
       flavor: b1.medium
 
 coverage_test_packages:
-    - name: com.unity.ml-agents
+    - name: com.unity.cognition-learn
       assembly: Unity.ML-Agents
       minCoveragePct: 72

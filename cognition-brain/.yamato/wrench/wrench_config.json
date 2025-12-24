@@ -2,8 +2,8 @@
   "project_path": "Tools/CI",
   "schema_version": 0.5,
   "packages": {
-    "com.unity.ml-agents": {
-      "directory": "com.unity.ml-agents/",
+    "com.unity.cognition-learn": {
+      "directory": "com.unity.cognition-learn/",
       "prePackCommands": [],
       "preTestCommands": {},
       "InternalOnly": false,
@@ -11,10 +11,10 @@
     }
   },
   "releasing_packages": [
-    "com.unity.ml-agents"
+    "com.unity.cognition-learn"
   ],
   "jobs_to_monitor": {
-    "com.unity.ml-agents": [
+    "com.unity.cognition-learn": [
       ".yamato/wrench/api-validation-jobs.yml#api_validation_-_ml-agents_-_6000_0_-_windows",
       ".yamato/wrench/preview-a-p-v.yml#all_preview_apv_jobs",
       ".yamato/wrench/promotion-jobs.yml#publish_dry_run_ml-agents"

@@ -19,7 +19,7 @@ namespace Unity.CognitionLearn.Demonstrations
     /// See [Imitation Learning - Recording Demonstrations] for more information.
     ///
     /// [GameObject]: https://docs.unity3d.com/Manual/GameObjects.html
-    /// [Imitation Learning - Recording Demonstrations]: https://docs.unity3d.com/Packages/com.unity.ml-agents@latest/index.html?subfolder=/manual/Learning-Environment-Design-Agents.html#recording-demonstrations
+    /// [Imitation Learning - Recording Demonstrations]: https://docs.unity3d.com/Packages/com.unity.cognition-learn@latest/index.html?subfolder=/manual/Learning-Environment-Design-Agents.html#recording-demonstrations
     /// </remarks>
     [RequireComponent(typeof(Agent))]
     [AddComponentMenu("Cognition Learn/Demonstration Recorder", (int)MenuGroup.Default)]

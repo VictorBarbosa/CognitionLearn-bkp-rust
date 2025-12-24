@@ -11,7 +11,7 @@ namespace Unity.CognitionLearn.Tests
         public void TestPackageVersion()
         {
             var packageInfo = UnityEditor.PackageManager.PackageInfo.FindForAssembly(typeof(Agent).Assembly);
-            Assert.AreEqual("com.unity.ml-agents", packageInfo.name);
+            Assert.AreEqual("com.unity.cognition-learn", packageInfo.name);
             Assert.AreEqual(Academy.k_PackageVersion, packageInfo.version);
         }
 

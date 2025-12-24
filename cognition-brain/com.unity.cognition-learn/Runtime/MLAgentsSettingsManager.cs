@@ -14,7 +14,7 @@ namespace Unity.CognitionLearn
     internal static class MLAgentsSettingsManager
     {
         internal static event Action OnSettingsChange;
-        internal const string EditorBuildSettingsConfigKey = "com.unity.ml-agents.settings";
+        internal const string EditorBuildSettingsConfigKey = "com.unity.cognition-learn.settings";
         private static MLAgentsSettings s_Settings;
 
 

@@ -192,13 +192,13 @@ namespace Unity.CognitionLearn
     /// [OnDisable()]: https://docs.unity3d.com/ScriptReference/MonoBehaviour.OnDisable.html]
     /// [OnBeforeSerialize()]: https://docs.unity3d.com/ScriptReference/MonoBehaviour.OnBeforeSerialize.html
     /// [OnAfterSerialize()]: https://docs.unity3d.com/ScriptReference/MonoBehaviour.OnAfterSerialize.html
-    /// [Agents]: https://docs.unity3d.com/Packages/com.unity.ml-agents@latest/index.html?subfolder=/manual/Learning-Environment-Design-Agents.html
-    /// [Reinforcement Learning in Unity]: https://docs.unity3d.com/Packages/com.unity.ml-agents@latest/index.html?subfolder=/manual/Learning-Environment-Design.html
+    /// [Agents]: https://docs.unity3d.com/Packages/com.unity.cognition-learn@latest/index.html?subfolder=/manual/Learning-Environment-Design-Agents.html
+    /// [Reinforcement Learning in Unity]: https://docs.unity3d.com/Packages/com.unity.cognition-learn@latest/index.html?subfolder=/manual/Learning-Environment-Design.html
     /// [Unity ML-Agents Toolkit]: https://github.com/Unity-Technologies/ml-agents
-    /// [Unity ML-Agents Toolkit manual]: https://docs.unity3d.com/Packages/com.unity.ml-agents@latest
+    /// [Unity ML-Agents Toolkit manual]: https://docs.unity3d.com/Packages/com.unity.cognition-learn@latest
     ///
     /// </remarks>
-    [HelpURL("https://docs.unity3d.com/Packages/com.unity.ml-agents@latest/index.html?subfolder=/manual/" +
+    [HelpURL("https://docs.unity3d.com/Packages/com.unity.cognition-learn@latest/index.html?subfolder=/manual/" +
         "Learning-Environment-Design-Agents.html")]
     [Serializable]
     [RequireComponent(typeof(BehaviorParameters))]
@@ -728,8 +728,8 @@ namespace Unity.CognitionLearn
         /// for information about mixing reward signals from curiosity and Generative Adversarial
         /// Imitation Learning (GAIL) with rewards supplied through this method.
         ///
-        /// [Agents - Rewards]: https://docs.unity3d.com/Packages/com.unity.ml-agents@latest/index.html?subfolder=/manual/Learning-Environment-Design-Agents.html#rewards
-        /// [Reward Signals]: https://docs.unity3d.com/Packages/com.unity.ml-agents@latest/index.html?subfolder=/manual/ML-Agents-Overview.html#a-quick-note-on-reward-signals
+        /// [Agents - Rewards]: https://docs.unity3d.com/Packages/com.unity.cognition-learn@latest/index.html?subfolder=/manual/Learning-Environment-Design-Agents.html#rewards
+        /// [Reward Signals]: https://docs.unity3d.com/Packages/com.unity.cognition-learn@latest/index.html?subfolder=/manual/ML-Agents-Overview.html#a-quick-note-on-reward-signals
         /// </remarks>
         /// <param name="reward">The new value of the reward.</param>
         public void SetReward(float reward)
@@ -756,8 +756,8 @@ namespace Unity.CognitionLearn
         /// for information about mixing reward signals from curiosity and Generative Adversarial
         /// Imitation Learning (GAIL) with rewards supplied through this method.
         ///
-        /// [Agents - Rewards]: https://docs.unity3d.com/Packages/com.unity.ml-agents@latest/index.html?subfolder=/manual/Learning-Environment-Design-Agents.html#rewards
-        /// [Reward Signals]: https://docs.unity3d.com/Packages/com.unity.ml-agents@latest/index.html?subfolder=/manual/ML-Agents-Overview.html#a-quick-note-on-reward-signals
+        /// [Agents - Rewards]: https://docs.unity3d.com/Packages/com.unity.cognition-learn@latest/index.html?subfolder=/manual/Learning-Environment-Design-Agents.html#rewards
+        /// [Reward Signals]: https://docs.unity3d.com/Packages/com.unity.cognition-learn@latest/index.html?subfolder=/manual/ML-Agents-Overview.html#a-quick-note-on-reward-signals
         ///</remarks>
         /// <param name="increment">Incremental reward value.</param>
         public void AddReward(float increment)
@@ -945,8 +945,8 @@ namespace Unity.CognitionLearn
         /// implementing a simple heuristic function can aid in debugging agent actions and interactions
         /// with its environment.
         ///
-        /// [Demonstration Recorder]: https://docs.unity3d.com/Packages/com.unity.ml-agents@latest/index.html?subfolder=/manual/Learning-Environment-Design-Agents.html#recording-demonstrations
-        /// [Actions]: https://docs.unity3d.com/Packages/com.unity.ml-agents@latest/index.html?subfolder=/manual/Learning-Environment-Design-Agents.html#actions
+        /// [Demonstration Recorder]: https://docs.unity3d.com/Packages/com.unity.cognition-learn@latest/index.html?subfolder=/manual/Learning-Environment-Design-Agents.html#recording-demonstrations
+        /// [Actions]: https://docs.unity3d.com/Packages/com.unity.cognition-learn@latest/index.html?subfolder=/manual/Learning-Environment-Design-Agents.html#actions
         /// [GameObject]: https://docs.unity3d.com/Manual/GameObjects.html
         /// </remarks>
         /// <example>
@@ -1203,7 +1203,7 @@ namespace Unity.CognitionLearn
         /// For more information about observations, see [Observations and Sensors].
         ///
         /// [GameObject]: https://docs.unity3d.com/Manual/GameObjects.html
-        /// [Observations and Sensors]: https://docs.unity3d.com/Packages/com.unity.ml-agents@latest/index.html?subfolder=/manual/Learning-Environment-Design-Agents.html#observations-and-sensors
+        /// [Observations and Sensors]: https://docs.unity3d.com/Packages/com.unity.cognition-learn@latest/index.html?subfolder=/manual/Learning-Environment-Design-Agents.html#observations-and-sensors
         /// </remarks>
         public virtual void CollectObservations(VectorSensor sensor)
         {
@@ -1245,7 +1245,7 @@ namespace Unity.CognitionLearn
         ///
         /// See [Agents - Actions] for more information on masking actions.
         ///
-        /// [Agents - Actions]: https://docs.unity3d.com/Packages/com.unity.ml-agents@latest/index.html?subfolder=/manual/Learning-Environment-Design-Agents.html
+        /// [Agents - Actions]: https://docs.unity3d.com/Packages/com.unity.cognition-learn@latest/index.html?subfolder=/manual/Learning-Environment-Design-Agents.html
         /// </remarks>
         /// <seealso cref="IActionReceiver.OnActionReceived"/>
         public virtual void WriteDiscreteActionMask(IDiscreteActionMask actionMask) { }
@@ -1312,7 +1312,7 @@ namespace Unity.CognitionLearn
         ///
         /// For more information about implementing agent actions see [Agents - Actions].
         ///
-        /// [Agents - Actions]: https://docs.unity3d.com/Packages/com.unity.ml-agents@latest/index.html?subfolder=/manual/Learning-Environment-Design-Agents.html#actions
+        /// [Agents - Actions]: https://docs.unity3d.com/Packages/com.unity.cognition-learn@latest/index.html?subfolder=/manual/Learning-Environment-Design-Agents.html#actions
         /// </para>
         /// </remarks>
         /// <param name="actions">

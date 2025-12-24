@@ -20,7 +20,7 @@ using Unity.InferenceEngine;
  * API. For more information on each of these entities, in addition to how to
  * set-up a learning environment and train the behavior of characters in a
  * Unity scene, please browse our documentation pages:
- * https://docs.unity3d.com/Packages/com.unity.ml-agents@latest
+ * https://docs.unity3d.com/Packages/com.unity.cognition-learn@latest
  */
 
 namespace Unity.CognitionLearn
@@ -61,7 +61,7 @@ namespace Unity.CognitionLearn
     /// fall back to inference or heuristic decisions. (You can also set agents to always use
     /// inference or heuristics.)
     /// </remarks>
-    [HelpURL("https://docs.unity3d.com/Packages/com.unity.ml-agents@latest/index.html?subfolder=/manual/" +
+    [HelpURL("https://docs.unity3d.com/Packages/com.unity.cognition-learn@latest/index.html?subfolder=/manual/" +
         "Learning-Environment-Design.html")]
     public class Academy : IDisposable
     {
@@ -104,7 +104,7 @@ namespace Unity.CognitionLearn
         const string k_ApiVersion = "1.5.0";
 
         /// <summary>
-        /// Unity package version of com.unity.ml-agents.
+        /// Unity package version of com.unity.cognition-learn.
         /// This must match the version string in package.json and is checked in a unit test.
         /// </summary>
         internal const string k_PackageVersion = "4.0.0";
@@ -421,7 +421,7 @@ namespace Unity.CognitionLearn
         void InitializeEnvironment()
         {
             TimerStack.Instance.AddMetadata("communication_protocol_version", k_ApiVersion);
-            TimerStack.Instance.AddMetadata("com.unity.ml-agents_version", k_PackageVersion);
+            TimerStack.Instance.AddMetadata("com.unity.cognition-learn_version", k_PackageVersion);
 
             EnableAutomaticStepping();
 

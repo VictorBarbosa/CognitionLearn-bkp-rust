@@ -361,7 +361,7 @@ Below is a list of the `sampler_type` values supported by the toolkit.
   - First, samples an interval from a set of intervals in proportion to relative length of the intervals. Then, uniformly samples a single float value from the sampled interval (inclusive). This sampler can take an arbitrary number of intervals in a list in the following format: [[`interval_1_min`, `interval_1_max`], [`interval_2_min`, `interval_2_max`], ...]
   - **parameters** - `intervals`
 
-The implementation of the samplers can be found [here](https://github.com/Unity-Technologies/ml-agents/blob/main/com.unity.ml-agents/Runtime/Sampler.cs).
+The implementation of the samplers can be found [here](https://github.com/Unity-Technologies/ml-agents/blob/main/com.unity.cognition-learn/Runtime/Sampler.cs).
 
 **Training with Environment Parameter Randomization**
 

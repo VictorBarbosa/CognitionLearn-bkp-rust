@@ -3,7 +3,7 @@
 <img src="images/match3.png" align="center" width="3000"/>
 
 ## Getting started
-The C# code for Match-3 exists inside of the Unity package (`com.unity.ml-agents`).
+The C# code for Match-3 exists inside of the Unity package (`com.unity.cognition-learn`).
 The good first step would be to take a look at how we have implemented the C# code in the example Match-3 scene (located
 under /Project/Assets/ML-Agents/Examples/match3). Once you have some familiarity, then the next step would be to
 implement the C# code for Match-3 from the extensions package.

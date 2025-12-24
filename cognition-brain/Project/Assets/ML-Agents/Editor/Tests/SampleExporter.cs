@@ -13,7 +13,7 @@ namespace Unity.CognitionLearn
         const string k_PackageSampleFile = ".sample.json";
         const string k_MLAgentsDir = "ML-Agents";
         const string k_MLAgentsExamplesDir = "Examples";
-        const string k_MLAgentsPackageName = "com.unity.ml-agents";
+        const string k_MLAgentsPackageName = "com.unity.cognition-learn";
         const string k_MLAgentsSamplesDirName = "Samples";
         const string k_MLAgentsScriptsDirName = "Scripts";
 

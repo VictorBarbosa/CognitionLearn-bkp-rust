@@ -78,14 +78,14 @@ namespace Unity.CognitionLearn.Tests
     [TestFixture]
     public class ParameterLoaderTest
     {
-        const string k_discrete_ONNX_v2 = "Packages/com.unity.ml-agents/Tests/Editor/TestModels/discrete_rank2_vector_v2_0.onnx";
-        const string k_hybrid_ONNX_recurr_v2 = "Packages/com.unity.ml-agents/Tests/Editor/TestModels/hybrid0vis8vec_2c_2_3d_v2_0.onnx";
+        const string k_discrete_ONNX_v2 = "Packages/com.unity.cognition-learn/Tests/Editor/TestModels/discrete_rank2_vector_v2_0.onnx";
+        const string k_hybrid_ONNX_recurr_v2 = "Packages/com.unity.cognition-learn/Tests/Editor/TestModels/hybrid0vis8vec_2c_2_3d_v2_0.onnx";
 
 
         // ONNX model with continuous/discrete action output (support hybrid action)
-        const string k_continuousONNXPath = "Packages/com.unity.ml-agents/Tests/Editor/TestModels/continuous2vis8vec2action_v1_0.onnx";
-        const string k_discreteONNXPath = "Packages/com.unity.ml-agents/Tests/Editor/TestModels/discrete1vis0vec_2_3action_obsolete_recurr_v1_0.onnx";
-        const string k_hybridONNXPath = "Packages/com.unity.ml-agents/Tests/Editor/TestModels/hybrid0vis53vec_3c_2daction_v1_0.onnx";
+        const string k_continuousONNXPath = "Packages/com.unity.cognition-learn/Tests/Editor/TestModels/continuous2vis8vec2action_v1_0.onnx";
+        const string k_discreteONNXPath = "Packages/com.unity.cognition-learn/Tests/Editor/TestModels/discrete1vis0vec_2_3action_obsolete_recurr_v1_0.onnx";
+        const string k_hybridONNXPath = "Packages/com.unity.cognition-learn/Tests/Editor/TestModels/hybrid0vis53vec_3c_2daction_v1_0.onnx";
         // NN model with single action output (deprecated, does not support hybrid action).
         // Same BrainParameters settings as the corresponding ONNX model.
 

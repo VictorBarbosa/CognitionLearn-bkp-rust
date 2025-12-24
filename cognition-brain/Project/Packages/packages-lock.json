@@ -48,6 +48,17 @@
       },
       "url": "https://packages.unity.com"
     },
+    "com.unity.cognition-learn": {
+      "version": "file:../../com.unity.cognition-learn",
+      "depth": 0,
+      "source": "local",
+      "dependencies": {
+        "com.unity.ai.inference": "2.4.1",
+        "com.unity.modules.imageconversion": "1.0.0",
+        "com.unity.modules.jsonserialize": "1.0.0",
+        "com.unity.modules.physics": "1.0.0"
+      }
+    },
     "com.unity.collections": {
       "version": "2.5.1",
       "depth": 1,
@@ -113,17 +124,6 @@
       "source": "registry",
       "dependencies": {},
       "url": "https://packages.unity.com"
-    },
-    "com.unity.ml-agents": {
-      "version": "file:../../com.unity.ml-agents",
-      "depth": 0,
-      "source": "local",
-      "dependencies": {
-        "com.unity.ai.inference": "2.4.1",
-        "com.unity.modules.imageconversion": "1.0.0",
-        "com.unity.modules.jsonserialize": "1.0.0",
-        "com.unity.modules.physics": "1.0.0"
-      }
     },
     "com.unity.multiplayer.center": {
       "version": "1.0.0",
