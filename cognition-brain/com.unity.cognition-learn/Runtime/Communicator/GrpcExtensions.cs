@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Google.Protobuf;
-using Unity.CognitionLearn.CommunicatorObjects;
 using UnityEngine;
 using System.Runtime.CompilerServices;
 using Unity.CognitionLearn.Actuators;
@@ -11,6 +10,7 @@ using Unity.CognitionLearn.Demonstrations;
 using Unity.CognitionLearn.Policies;
 
 using Unity.CognitionLearn.Analytics;
+using Unity.CognitionLearn.CommunicatorObjects;
 
 [assembly: InternalsVisibleTo("Unity.CognitionLearn.Editor")]
 [assembly: InternalsVisibleTo("Unity.CognitionLearn.Editor.Tests")]

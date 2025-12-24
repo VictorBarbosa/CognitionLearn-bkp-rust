@@ -2,7 +2,7 @@ using System;
 using System.Diagnostics;
 using UnityEngine;
 
-namespace Unity.CognitionLearn
+namespace  Unity.CognitionLearn
 {
     internal static class Utilities
     {

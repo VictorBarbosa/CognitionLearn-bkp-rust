@@ -75,12 +75,15 @@ namespace Unity.CognitionLearn
         public void CopyActions(ActionBuffers actionBuffers)
         {
             var continuousActions = storedActions.ContinuousActions;
-            for (var i = 0; i < actionBuffers.ContinuousActions.Length; i++)
+            var continuousCount = Math.Min(actionBuffers.ContinuousActions.Length, continuousActions.Length);
+            for (var i = 0; i < continuousCount; i++)
             {
                 continuousActions[i] = actionBuffers.ContinuousActions[i];
             }
+
             var discreteActions = storedActions.DiscreteActions;
-            for (var i = 0; i < actionBuffers.DiscreteActions.Length; i++)
+            var discreteCount = Math.Min(actionBuffers.DiscreteActions.Length, discreteActions.Length);
+            for (var i = 0; i < discreteCount; i++)
             {
                 discreteActions[i] = actionBuffers.DiscreteActions[i];
             }
@@ -106,100 +109,6 @@ namespace Unity.CognitionLearn
         }
     }
 
-    /// <summary>
-    /// An agent is an actor that can observe its environment, decide on the
-    /// best course of action using those observations, and execute those actions
-    /// within the environment.
-    /// </summary>
-    /// <remarks>
-    /// Use the Agent class as the subclass for implementing your own agents. Add
-    /// your Agent implementation to a [GameObject] in the [Unity scene] that serves
-    /// as the agent's environment.
-    ///
-    /// Agents in an environment operate in *steps*. At each step, an agent collects observations,
-    /// passes them to its decision-making policy, and receives an action vector in response.
-    ///
-    /// Agents make observations using <see cref="ISensor"/> implementations. The ML-Agents
-    /// API provides implementations for visual observations (<see cref="CameraSensor"/>)
-    /// raycast observations (<see cref="RayPerceptionSensor"/>), and arbitrary
-    /// data observations (<see cref="VectorSensor"/>). You can add the
-    /// <see cref="CameraSensorComponent"/> and <see cref="RayPerceptionSensorComponent2D"/> or
-    /// <see cref="RayPerceptionSensorComponent3D"/> components to an agent's [GameObject] to use
-    /// those sensor types. You can implement the <see cref="CollectObservations(VectorSensor)"/>
-    /// function in your Agent subclass to use a vector observation. The Agent class calls this
-    /// function before it uses the observation vector to make a decision. (If you only use
-    /// visual or raycast observations, you do not need to implement
-    /// <see cref="CollectObservations"/>.)
-    ///
-    /// Assign a decision making policy to an agent using a <see cref="BehaviorParameters"/>
-    /// component attached to the agent's [GameObject]. The <see cref="BehaviorType"/> setting
-    /// determines how decisions are made:
-    ///
-    /// <see cref="BehaviorType.Default"/>: decisions are made by the external process,
-    /// when connected. Otherwise, decisions are made using inference. If no inference model
-    /// is specified in the BehaviorParameters component, then heuristic decision
-    /// making is used.
-    /// <see cref="BehaviorType.InferenceOnly"/>: decisions are always made using the trained
-    /// model specified in the <see cref="BehaviorParameters"/> component.
-    /// <see cref="BehaviorType.HeuristicOnly"/>: when a decision is needed, the agent's
-    /// <see cref="Heuristic(in ActionBuffers)"/> function is called. Your implementation is responsible for
-    /// providing the appropriate action.
-    ///
-    /// To trigger an agent decision automatically, you can attach a <see cref="DecisionRequester"/>
-    /// component to the Agent game object. You can also call the agent's <see cref="RequestDecision"/>
-    /// function manually. You only need to call <see cref="RequestDecision"/> when the agent is
-    /// in a position to act upon the decision. In many cases, this will be every [FixedUpdate]
-    /// callback, but could be less frequent. For example, an agent that hops around its environment
-    /// can only take an action when it touches the ground, so several frames might elapse between
-    /// one decision and the need for the next.
-    ///
-    /// Use the <see cref="OnActionReceived(ActionBuffers)"/> function to implement the actions your agent can take,
-    /// such as moving to reach a goal or interacting with its environment.
-    ///
-    /// When you call <see cref="EndEpisode"/> on an agent or the agent reaches its <see cref="MaxStep"/> count,
-    /// its current episode ends. You can reset the agent -- or remove it from the
-    /// environment -- by implementing the <see cref="OnEpisodeBegin"/> function. An agent also
-    /// becomes done when the <see cref="Academy"/> resets the environment, which only happens when
-    /// the <see cref="Academy"/> receives a reset signal from an external process via the
-    /// <see cref="Academy.Communicator"/>.
-    ///
-    /// The Agent class extends the Unity [MonoBehaviour] class. You can implement the
-    /// standard [MonoBehaviour] functions as needed for your agent. Since an agent's
-    /// observations and actions typically take place during the [FixedUpdate] phase, you should
-    /// only use the [MonoBehaviour.Update] function for cosmetic purposes. If you override the [MonoBehaviour]
-    /// methods, [OnEnable()] or [OnDisable()], always call the base Agent class implementations.
-    ///
-    /// You can implement the <see cref="Heuristic(in ActionBuffers)"/> function to specify agent actions using
-    /// your own heuristic algorithm. Implementing a heuristic function can be useful
-    /// for debugging. For example, you can use keyboard input to select agent actions in
-    /// order to manually control an agent's behavior.
-    ///
-    /// Note that you can change the inference model assigned to an agent at any step
-    /// by calling <see cref="SetModel"/>.
-    ///
-    /// See [Agents] and [Reinforcement Learning in Unity] in the [Unity ML-Agents Toolkit manual] for
-    /// more information on creating and training agents.
-    ///
-    /// For sample implementations of agent behavior, see the examples available in the
-    /// [Unity ML-Agents Toolkit] on Github.
-    ///
-    /// [MonoBehaviour]: https://docs.unity3d.com/ScriptReference/MonoBehaviour.html
-    /// [GameObject]: https://docs.unity3d.com/Manual/GameObjects.html
-    /// [Unity scene]: https://docs.unity3d.com/Manual/CreatingScenes.html
-    /// [FixedUpdate]: https://docs.unity3d.com/ScriptReference/MonoBehaviour.FixedUpdate.html
-    /// [MonoBehaviour.Update]: https://docs.unity3d.com/ScriptReference/MonoBehaviour.Update.html
-    /// [OnEnable()]: https://docs.unity3d.com/ScriptReference/MonoBehaviour.OnEnable.html
-    /// [OnDisable()]: https://docs.unity3d.com/ScriptReference/MonoBehaviour.OnDisable.html]
-    /// [OnBeforeSerialize()]: https://docs.unity3d.com/ScriptReference/MonoBehaviour.OnBeforeSerialize.html
-    /// [OnAfterSerialize()]: https://docs.unity3d.com/ScriptReference/MonoBehaviour.OnAfterSerialize.html
-    /// [Agents]: https://docs.unity3d.com/Packages/com.unity.cognition-learn@latest/index.html?subfolder=/manual/Learning-Environment-Design-Agents.html
-    /// [Reinforcement Learning in Unity]: https://docs.unity3d.com/Packages/com.unity.cognition-learn@latest/index.html?subfolder=/manual/Learning-Environment-Design.html
-    /// [Unity ML-Agents Toolkit]: https://github.com/Unity-Technologies/ml-agents
-    /// [Unity ML-Agents Toolkit manual]: https://docs.unity3d.com/Packages/com.unity.cognition-learn@latest
-    ///
-    /// </remarks>
-    [HelpURL("https://docs.unity3d.com/Packages/com.unity.cognition-learn@latest/index.html?subfolder=/manual/" +
-        "Learning-Environment-Design-Agents.html")]
     [Serializable]
     [RequireComponent(typeof(BehaviorParameters))]
     [DefaultExecutionOrder(-50)]
@@ -208,9 +117,6 @@ namespace Unity.CognitionLearn
         IPolicy m_Brain;
         BehaviorParameters m_PolicyFactory;
 
-        /// This code is here to make the upgrade path for users using MaxStep
-        /// easier. We will hook into the Serialization code and make sure that
-        /// agentParameters.maxStep and this.maxStep are in sync.
         [Serializable]
         internal struct AgentParameters
         {
@@ -224,63 +130,13 @@ namespace Unity.CognitionLearn
         [HideInInspector]
         internal bool hasUpgradedFromAgentParameters;
 
-        /// <summary>
-        /// The maximum number of steps the agent takes before being done.
-        /// </summary>
-        /// <value>The maximum steps for an agent to take before it resets; or 0 for
-        /// unlimited steps.</value>
-        /// <remarks>
-        /// The max step value determines the maximum length of an agent's episodes.
-        /// Set to a positive integer to limit the episode length to that many steps.
-        /// Set to 0 for unlimited episode length.
-        ///
-        /// When an episode ends and a new one begins, the Agent object's
-        /// <see cref="OnEpisodeBegin"/> function is called. You can implement
-        /// <see cref="OnEpisodeBegin"/> to reset the agent or remove it from the
-        /// environment. An agent's episode can also end if you call its <see cref="EndEpisode"/>
-        /// method or an external process resets the environment through the <see cref="Academy"/>.
-        ///
-        /// Consider limiting the number of steps in an episode to avoid wasting time during
-        /// training. If you set the max step value to a reasonable estimate of the time it should
-        /// take to complete a task, then agents that haven’t succeeded in that time frame will
-        /// reset and start a new training episode rather than continue to fail.
-        ///
-        /// **Note:** in general, you should limit the differences between the code you execute
-        /// during training and the code you run during inference.
-        /// </remarks>
-        /// <example>
-        /// <para>
-        /// To use a step limit when training while allowing agents to run without resetting
-        /// outside of training, you can set the max step to 0 in <see cref="Initialize"/>
-        /// if the <see cref="Academy"/> is not connected to an external process.
-        /// </para>
-        /// <code>
-        /// using Unity.CognitionLearn;
-        ///
-        /// public class MyAgent : Agent
-        /// {
-        ///     public override void Initialize()
-        ///     {
-        ///         if (!Academy.Instance.IsCommunicatorOn)
-        ///         {
-        ///             this.MaxStep = 0;
-        ///         }
-        ///     }
-        /// }
-        /// </code>
-        /// </example>
+
         [FormerlySerializedAs("maxStep")]
         [HideInInspector] public int MaxStep;
 
         /// Current Agent information (message sent to Brain).
         AgentInfo m_Info;
 
-        /// Represents the reward the agent accumulated during the current step.
-        /// It is reset to 0 at the beginning of every step.
-        /// Should be set to a positive value when the agent performs a "good"
-        /// action that we wish to reinforce/reward, and set to a negative value
-        /// when the agent performs a "bad" action that we wish to punish/deter.
-        /// Additionally, the magnitude of the reward should not exceed 1.0
         float m_Reward;
 
         /// Represents the group reward the agent accumulated during the current step.
@@ -380,10 +236,31 @@ namespace Unity.CognitionLearn
 #if UNITY_EDITOR || UNITY_STANDALONE
             if (!CommunicatorFactory.CommunicatorRegistered)
             {
-                Debug.Log("Registered Communicator in Agent.");
-                CommunicatorFactory.Register<ICommunicator>(RpcCommunicator.Create);
+                SetTimeArgs();
+                Debug.Log("Registered SharedMemoryCommunicator in Agent.");
+                CommunicatorFactory.Register<ICommunicator>(SharedMemoryCommunicator.Create);
             }
 #endif
+        }
+
+
+        public void SetTimeArgs()
+        {
+            var args = System.Environment.GetCommandLineArgs();
+
+            int speed = 1;
+
+            foreach (var arg in args)
+            {
+                if (arg.StartsWith("-speed="))
+                    speed = int.Parse(arg.Split('=')[1]);
+            }
+
+            Time.timeScale = speed;
+            Time.fixedDeltaTime = 0.02f; // Fixed physics step regardless of time scale
+
+            Debug.Log($"[SPEED] TimeScale={speed}, FixedDeltaTime={Time.fixedDeltaTime}");
+
         }
 
         /// <summary>
@@ -519,10 +396,6 @@ namespace Unity.CognitionLearn
 
             m_Info.groupId = m_GroupId;
 
-            // The first time the Academy resets, all Agents in the scene will be
-            // forced to reset through the <see cref="AgentForceReset"/> event.
-            // To avoid the Agent resetting twice, the Agents will not begin their
-            // episode when initializing until after the Academy had its first reset.
             if (Academy.Instance.TotalStepCount != 0)
             {
                 using (m_OnEpisodeBeginChecker.Start())
@@ -728,8 +601,8 @@ namespace Unity.CognitionLearn
         /// for information about mixing reward signals from curiosity and Generative Adversarial
         /// Imitation Learning (GAIL) with rewards supplied through this method.
         ///
-        /// [Agents - Rewards]: https://docs.unity3d.com/Packages/com.unity.cognition-learn@latest/index.html?subfolder=/manual/Learning-Environment-Design-Agents.html#rewards
-        /// [Reward Signals]: https://docs.unity3d.com/Packages/com.unity.cognition-learn@latest/index.html?subfolder=/manual/ML-Agents-Overview.html#a-quick-note-on-reward-signals
+        /// [Agents - Rewards]: https://docs.unity3d.com/Packages/com.Unity.CognitionLearn@latest/index.html?subfolder=/manual/Learning-Environment-Design-Agents.html#rewards
+        /// [Reward Signals]: https://docs.unity3d.com/Packages/com.Unity.CognitionLearn@latest/index.html?subfolder=/manual/ML-Agents-Overview.html#a-quick-note-on-reward-signals
         /// </remarks>
         /// <param name="reward">The new value of the reward.</param>
         public void SetReward(float reward)
@@ -756,8 +629,8 @@ namespace Unity.CognitionLearn
         /// for information about mixing reward signals from curiosity and Generative Adversarial
         /// Imitation Learning (GAIL) with rewards supplied through this method.
         ///
-        /// [Agents - Rewards]: https://docs.unity3d.com/Packages/com.unity.cognition-learn@latest/index.html?subfolder=/manual/Learning-Environment-Design-Agents.html#rewards
-        /// [Reward Signals]: https://docs.unity3d.com/Packages/com.unity.cognition-learn@latest/index.html?subfolder=/manual/ML-Agents-Overview.html#a-quick-note-on-reward-signals
+        /// [Agents - Rewards]: https://docs.unity3d.com/Packages/com.Unity.CognitionLearn@latest/index.html?subfolder=/manual/Learning-Environment-Design-Agents.html#rewards
+        /// [Reward Signals]: https://docs.unity3d.com/Packages/com.Unity.CognitionLearn@latest/index.html?subfolder=/manual/ML-Agents-Overview.html#a-quick-note-on-reward-signals
         ///</remarks>
         /// <param name="increment">Incremental reward value.</param>
         public void AddReward(float increment)
@@ -945,8 +818,8 @@ namespace Unity.CognitionLearn
         /// implementing a simple heuristic function can aid in debugging agent actions and interactions
         /// with its environment.
         ///
-        /// [Demonstration Recorder]: https://docs.unity3d.com/Packages/com.unity.cognition-learn@latest/index.html?subfolder=/manual/Learning-Environment-Design-Agents.html#recording-demonstrations
-        /// [Actions]: https://docs.unity3d.com/Packages/com.unity.cognition-learn@latest/index.html?subfolder=/manual/Learning-Environment-Design-Agents.html#actions
+        /// [Demonstration Recorder]: https://docs.unity3d.com/Packages/com.Unity.CognitionLearn@latest/index.html?subfolder=/manual/Learning-Environment-Design-Agents.html#recording-demonstrations
+        /// [Actions]: https://docs.unity3d.com/Packages/com.Unity.CognitionLearn@latest/index.html?subfolder=/manual/Learning-Environment-Design-Agents.html#actions
         /// [GameObject]: https://docs.unity3d.com/Manual/GameObjects.html
         /// </remarks>
         /// <example>
@@ -1145,6 +1018,8 @@ namespace Unity.CognitionLearn
                     demoWriter.Record(m_Info, sensors);
                 }
             }
+
+
         }
 
         void UpdateSensors()
@@ -1203,7 +1078,7 @@ namespace Unity.CognitionLearn
         /// For more information about observations, see [Observations and Sensors].
         ///
         /// [GameObject]: https://docs.unity3d.com/Manual/GameObjects.html
-        /// [Observations and Sensors]: https://docs.unity3d.com/Packages/com.unity.cognition-learn@latest/index.html?subfolder=/manual/Learning-Environment-Design-Agents.html#observations-and-sensors
+        /// [Observations and Sensors]: https://docs.unity3d.com/Packages/com.Unity.CognitionLearn@latest/index.html?subfolder=/manual/Learning-Environment-Design-Agents.html#observations-and-sensors
         /// </remarks>
         public virtual void CollectObservations(VectorSensor sensor)
         {
@@ -1245,7 +1120,7 @@ namespace Unity.CognitionLearn
         ///
         /// See [Agents - Actions] for more information on masking actions.
         ///
-        /// [Agents - Actions]: https://docs.unity3d.com/Packages/com.unity.cognition-learn@latest/index.html?subfolder=/manual/Learning-Environment-Design-Agents.html
+        /// [Agents - Actions]: https://docs.unity3d.com/Packages/com.Unity.CognitionLearn@latest/index.html?subfolder=/manual/Learning-Environment-Design-Agents.html
         /// </remarks>
         /// <seealso cref="IActionReceiver.OnActionReceived"/>
         public virtual void WriteDiscreteActionMask(IDiscreteActionMask actionMask) { }
@@ -1312,7 +1187,7 @@ namespace Unity.CognitionLearn
         ///
         /// For more information about implementing agent actions see [Agents - Actions].
         ///
-        /// [Agents - Actions]: https://docs.unity3d.com/Packages/com.unity.cognition-learn@latest/index.html?subfolder=/manual/Learning-Environment-Design-Agents.html#actions
+        /// [Agents - Actions]: https://docs.unity3d.com/Packages/com.Unity.CognitionLearn@latest/index.html?subfolder=/manual/Learning-Environment-Design-Agents.html#actions
         /// </para>
         /// </remarks>
         /// <param name="actions">

@@ -81,6 +81,8 @@ namespace Unity.CognitionLearn.Actuators
         /// greater than or equal to <see cref="Length"/></exception>
         public T this[int index]
         {
+
+            
             get
             {
                 if (index < 0 || index > Length)
@@ -91,6 +93,9 @@ namespace Unity.CognitionLearn.Actuators
             }
             set
             {
+
+
+
                 if (index < 0 || index > Length)
                 {
                     throw new IndexOutOfRangeException($"Index out of bounds, expected a number between 0 and {Length}");

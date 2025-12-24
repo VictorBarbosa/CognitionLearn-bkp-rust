@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using Unity.CognitionLearn;
 using UnityEngine;
 
 namespace Unity.CognitionLearn.Sensors

@@ -1,6 +1,6 @@
 using System;
 
-namespace Unity.CognitionLearn
+namespace  Unity.CognitionLearn
 {
     /// <summary>
     /// Contains exceptions specific to ML-Agents.

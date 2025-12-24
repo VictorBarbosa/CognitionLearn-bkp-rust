@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Unity.CognitionLearn
+namespace  Unity.CognitionLearn
 {
     /// <summary>
     /// An array-like object that stores up to four elements.

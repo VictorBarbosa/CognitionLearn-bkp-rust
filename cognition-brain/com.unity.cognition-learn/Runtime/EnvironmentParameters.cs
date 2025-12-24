@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using Unity.CognitionLearn.SideChannels;
 
-namespace Unity.CognitionLearn
+namespace  Unity.CognitionLearn
 {
     /// <summary>
     /// A container for the Environment Parameters that may be modified during training.

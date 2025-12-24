@@ -76,7 +76,7 @@ namespace Unity.CognitionLearn.Inference
             {
                 return FailedCheck.Error(
                     "Model was trained with a older version of the trainer than is supported. " +
-                    "Either retrain with an newer trainer, or use an older version of com.unity.cognition-learn.\n" +
+                    "Either retrain with an newer trainer, or use an older version of com.Unity.CognitionLearn.\n" +
                     $"Model version: {modelApiVersion} Minimum supported version: {(int)ModelApiVersion.MinSupportedVersion}"
                 );
             }
@@ -85,7 +85,7 @@ namespace Unity.CognitionLearn.Inference
             {
                 return FailedCheck.Error(
                     "Model was trained with a newer version of the trainer than is supported. " +
-                    "Either retrain with an older trainer, or update to a newer version of com.unity.cognition-learn.\n" +
+                    "Either retrain with an older trainer, or update to a newer version of com.Unity.CognitionLearn.\n" +
                     $"Model version: {modelApiVersion}  Maximum supported version: {(int)ModelApiVersion.MaxSupportedVersion}"
                 );
             }
@@ -99,8 +99,8 @@ namespace Unity.CognitionLearn.Inference
                 // 2.x. This is because Sentis version 2.x will eventually drop support for the _c and _h inputs
                 // and only ML-Agents 2.x models will be compatible.
                 return FailedCheck.Error(
-                    "Models from com.unity.cognition-learn 1.x that use recurrent neural networks are not supported in newer versions. " +
-                    "Either retrain with an newer trainer, or use an older version of com.unity.cognition-learn.\n"
+                    "Models from com.Unity.CognitionLearn 1.x that use recurrent neural networks are not supported in newer versions. " +
+                    "Either retrain with an newer trainer, or use an older version of com.Unity.CognitionLearn.\n"
                 );
             }
             return null;

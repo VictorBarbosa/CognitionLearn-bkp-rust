@@ -53,10 +53,10 @@ namespace Unity.CognitionLearn.Sensors
             else if (m_Observations.Count < expectedObservations)
             {
                 // Not enough observations; pad with zeros.
-                Debug.LogWarningFormat(
-                    "Fewer observations ({0}) made than vector observation size ({1}). The observations will be padded.",
-                    m_Observations.Count, expectedObservations
-                );
+                // Debug.LogWarningFormat(
+                //     "Fewer observations ({0}) made than vector observation size ({1}). The observations will be padded.",
+                //     m_Observations.Count, expectedObservations
+                // );
                 for (int i = m_Observations.Count; i < expectedObservations; i++)
                 {
                     m_Observations.Add(0);

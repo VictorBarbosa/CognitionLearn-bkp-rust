@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-namespace Unity.CognitionLearn
+namespace  Unity.CognitionLearn
 {
     /// <summary>
     /// The DecisionRequester component automatically request decisions for an

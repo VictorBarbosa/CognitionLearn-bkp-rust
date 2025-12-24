@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Unity.CognitionLearn.Inference.Utils;
 using Random = System.Random;
 
-namespace Unity.CognitionLearn
+namespace  Unity.CognitionLearn
 {
     /// <summary>
     /// Takes a list of floats that encode a sampling distribution and returns the sampling function.

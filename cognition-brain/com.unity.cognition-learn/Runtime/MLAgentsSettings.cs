@@ -3,7 +3,7 @@ using System.Runtime.CompilerServices;
 
 
 [assembly: InternalsVisibleTo("Unity.CognitionLearn.DevTests.Editor")]
-namespace Unity.CognitionLearn
+namespace  Unity.CognitionLearn
 {
     internal class MLAgentsSettings : ScriptableObject
     {

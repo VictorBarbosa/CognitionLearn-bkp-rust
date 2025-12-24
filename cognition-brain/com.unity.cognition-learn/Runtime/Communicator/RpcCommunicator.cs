@@ -19,7 +19,7 @@ using Google.Protobuf;
 
 using Unity.CognitionLearn.Analytics;
 
-namespace Unity.CognitionLearn
+namespace  Unity.CognitionLearn
 {
     /// Responsible for communication with External using gRPC.
     public class RpcCommunicator : ICommunicator

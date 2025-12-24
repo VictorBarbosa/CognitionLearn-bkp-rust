@@ -29,7 +29,7 @@ namespace Unity.CognitionLearn.Sensors.Reflection
     /// for the HealthPercent property.
     /// </para>
     /// <code>
-    /// using Unity.CognitionLearn;
+    /// using Unity.MLAgents;
     /// using Unity.CognitionLearn.Sensors.Reflection;
     ///
     /// public class MyAgent : Agent

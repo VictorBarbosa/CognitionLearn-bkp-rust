@@ -1,4 +1,4 @@
-namespace Unity.CognitionLearn
+namespace  Unity.CognitionLearn
 {
     /// <summary>
     /// MultiAgentGroup interface for grouping agents to support multi-agent training.

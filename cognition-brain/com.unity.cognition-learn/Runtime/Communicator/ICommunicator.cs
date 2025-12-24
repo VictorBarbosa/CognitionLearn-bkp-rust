@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Unity.CognitionLearn.Actuators;
 using Unity.CognitionLearn.Sensors;
 
-namespace Unity.CognitionLearn
+namespace  Unity.CognitionLearn
 {
     /// <summary>
     /// Communicator initialization parameters.

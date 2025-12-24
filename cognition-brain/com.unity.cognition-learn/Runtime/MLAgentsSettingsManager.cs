@@ -6,7 +6,7 @@ using UnityEditor;
 using System.Linq;
 #endif
 
-namespace Unity.CognitionLearn
+namespace  Unity.CognitionLearn
 {
 #if UNITY_EDITOR
     [InitializeOnLoad]
@@ -14,7 +14,7 @@ namespace Unity.CognitionLearn
     internal static class MLAgentsSettingsManager
     {
         internal static event Action OnSettingsChange;
-        internal const string EditorBuildSettingsConfigKey = "com.unity.cognition-learn.settings";
+        internal const string EditorBuildSettingsConfigKey = "com.Unity.CognitionLearn.settings";
         private static MLAgentsSettings s_Settings;
 
 
