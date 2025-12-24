@@ -1,0 +1,6 @@
+{
+  "total_train_steps": 940,
+  "total_transitions": 940,
+  "total_steps": 1000,
+  "last_avg_reward": 0.0
+}
