@@ -1,10 +1,10 @@
 {
-    "name": "Unity.ML-Agents.Runtime.Sensor.Tests",
+    "name": "Unity.CognitionLearn.Runtime.Sensor.Tests",
     "rootNamespace": "",
     "references": [
-        "Unity.ML-Agents",
-        "Unity.ML-Agents.CommunicatorObjects",
-        "Unity.ML-Agents.Runtime.Utils.Tests",
+        "Unity.CognitionLearn",
+        "Unity.CognitionLearn.CommunicatorObjects",
+        "Unity.CognitionLearn.Runtime.Utils.Tests",
         "UnityEngine.TestRunner",
         "UnityEditor.TestRunner",
         "Unity.InferenceEngine"

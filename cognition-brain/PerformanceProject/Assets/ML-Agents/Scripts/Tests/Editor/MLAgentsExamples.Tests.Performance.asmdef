@@ -6,7 +6,7 @@
         "UnityEditor.TestRunner",
         "Unity.PerformanceTesting",
         "Unity.PerformanceTesting.Editor",
-        "Unity.ML-Agents"
+        "Unity.CognitionLearn"
     ],
     "includePlatforms": [
         "Editor"

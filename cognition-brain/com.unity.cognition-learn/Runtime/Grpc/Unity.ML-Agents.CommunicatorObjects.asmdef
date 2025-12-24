@@ -1,5 +1,5 @@
 {
-    "name": "Unity.ML-Agents.CommunicatorObjects",
+    "name": "Unity.CognitionLearn.CommunicatorObjects",
     "rootNamespace": "",
     "references": [],
     "includePlatforms": [],

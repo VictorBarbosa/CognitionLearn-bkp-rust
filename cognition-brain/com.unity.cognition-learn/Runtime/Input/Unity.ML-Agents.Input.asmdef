@@ -1,8 +1,8 @@
 {
-    "name": "Unity.ML-Agents.Input",
+    "name": "Unity.CognitionLearn.Input",
     "rootNamespace": "",
     "references": [
-        "Unity.ML-Agents",
+        "Unity.CognitionLearn",
         "Unity.InferenceEngine",
         "Unity.InputSystem"
     ],

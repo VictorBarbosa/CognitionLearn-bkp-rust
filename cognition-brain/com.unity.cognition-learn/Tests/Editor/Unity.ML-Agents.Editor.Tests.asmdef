@@ -1,13 +1,13 @@
 {
-    "name": "Unity.ML-Agents.Editor.Tests",
+    "name": "Unity.CognitionLearn.Editor.Tests",
     "rootNamespace": "",
     "references": [
-        "Unity.ML-Agents.Editor",
-        "Unity.ML-Agents",
+        "Unity.CognitionLearn.Editor",
+        "Unity.CognitionLearn",
         "Unity.Mathematics",
-        "Unity.ML-Agents.CommunicatorObjects",
-        "Unity.ML-Agents.Runtime.Utils.Tests",
-        "Unity.ML-Agents.Runtime.Sensor.Tests",
+        "Unity.CognitionLearn.CommunicatorObjects",
+        "Unity.CognitionLearn.Runtime.Utils.Tests",
+        "Unity.CognitionLearn.Runtime.Sensor.Tests",
         "UnityEngine.TestRunner",
         "UnityEditor.TestRunner",
         "Unity.InferenceEngine"

@@ -1,9 +1,9 @@
 {
-    "name": "Unity.ML-Agents.Runtime.Input.Tests",
+    "name": "Unity.CognitionLearn.Runtime.Input.Tests",
     "rootNamespace": "",
     "references": [
-        "Unity.ML-Agents",
-        "Unity.ML-Agents.Input",
+        "Unity.CognitionLearn",
+        "Unity.CognitionLearn.Input",
         "Unity.InputSystem.TestFramework",
         "UnityEngine.TestRunner",
         "UnityEditor.TestRunner",

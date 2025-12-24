@@ -1,9 +1,9 @@
 {
-    "name": "Unity.ML-Agents.Editor.Input",
+    "name": "Unity.CognitionLearn.Editor.Input",
     "references": [
-        "Unity.ML-Agents",
-        "Unity.ML-Agents.Input",
-        "Unity.ML-Agents.Editor",
+        "Unity.CognitionLearn",
+        "Unity.CognitionLearn.Input",
+        "Unity.CognitionLearn.Editor",
         "Unity.InputSystem"
     ],
     "includePlatforms": [

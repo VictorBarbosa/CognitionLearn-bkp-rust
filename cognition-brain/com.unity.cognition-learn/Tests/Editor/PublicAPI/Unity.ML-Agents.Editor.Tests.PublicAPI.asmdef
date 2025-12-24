@@ -1,10 +1,10 @@
 {
-    "name": "Unity.ML-Agents.Editor.Tests.PublicAPI",
+    "name": "Unity.CognitionLearn.Editor.Tests.PublicAPI",
     "rootNamespace": "",
     "references": [
-        "Unity.ML-Agents.Editor",
-        "Unity.ML-Agents",
-        "Unity.ML-Agents.CommunicatorObjects",
+        "Unity.CognitionLearn.Editor",
+        "Unity.CognitionLearn",
+        "Unity.CognitionLearn.CommunicatorObjects",
         "UnityEngine.TestRunner",
         "UnityEditor.TestRunner",
         "Unity.InferenceEngine"

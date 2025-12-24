@@ -1,9 +1,9 @@
 {
-    "name": "Unity.ML-Agents.Editor",
+    "name": "Unity.CognitionLearn.Editor",
     "rootNamespace": "",
     "references": [
-        "Unity.ML-Agents",
-        "Unity.ML-Agents.CommunicatorObjects",
+        "Unity.CognitionLearn",
+        "Unity.CognitionLearn.CommunicatorObjects",
         "Unity.InferenceEngine"
     ],
     "includePlatforms": [

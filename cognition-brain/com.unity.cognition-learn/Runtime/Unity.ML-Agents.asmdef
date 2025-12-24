@@ -1,8 +1,8 @@
 {
-    "name": "Unity.ML-Agents",
+    "name": "Unity.CognitionLearn",
     "rootNamespace": "",
     "references": [
-        "Unity.ML-Agents.CommunicatorObjects",
+        "Unity.CognitionLearn.CommunicatorObjects",
         "Unity.Mathematics",
         "Unity.InferenceEngine"
     ],

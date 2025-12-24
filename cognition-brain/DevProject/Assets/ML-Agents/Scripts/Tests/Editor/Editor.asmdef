@@ -1,10 +1,10 @@
 {
-    "name": "Unity.ML-Agents.DevTests.Editor",
+    "name": "Unity.CognitionLearn.DevTests.Editor",
     "references": [
-        "Unity.ML-Agents.Editor",
-        "Unity.ML-Agents",
+        "Unity.CognitionLearn.Editor",
+        "Unity.CognitionLearn",
         "Unity.InferenceEngine",
-        "Unity.ML-Agents.CommunicatorObjects",
+        "Unity.CognitionLearn.CommunicatorObjects",
         "Unity.PerformanceTesting"
     ],
     "optionalUnityReferences": [
