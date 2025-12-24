@@ -1,0 +1,9 @@
+[env]
+LIBTORCH_USE_PYTORCH = "1"
+LIBTORCH_BYPASS_VERSION_CHECK = "1"
+
+[target.aarch64-apple-darwin]
+rustflags = ["-C", "link-arg=-Wl,-rpath,/opt/homebrew/lib/python3.14/site-packages/torch/lib"]
+
+[target.x86_64-apple-darwin]
+rustflags = ["-C", "link-arg=-Wl,-rpath,/opt/homebrew/lib/python3.14/site-packages/torch/lib"]

@@ -1,0 +1,43 @@
+[workspace]
+members = [".", "core"]
+
+[package]
+name = "orchestrator"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+tokio = { version = "1.0", features = ["full"] }
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+memmap2 = "0.7"
+rand = "0.9.2"
+tensorboard-rs = "0.5.9"
+tokio-test = "0.4"
+clap = { version = "4.0", features = ["derive"] }
+serde_yaml = "0.9"
+prost = "0.13"
+
+# tonic removed as per user instruction (Shared Memory / No gRPC)
+lazy_static = "1.5.0"
+dashmap = "5.5.3"
+parking_lot = "0.12"
+eframe = { version = "0.30", features = ["persistence"] } # 0.33 not generic, using 0.30 or latest stable compatible
+egui = "0.30"
+egui_extras = "0.30"
+egui_plot = "0.30"
+image = "0.25"
+rfd = "0.15" # File dialog
+orchestrator_core = { path = "core" }
+
+# Note: candle is omitted as we use tch (LibTorch)
+# libc = "0.2.155" # Optional, usually implied
+
+# Deep Learning Framework: Tch-rs (LibTorch)
+tch = "0.19.0" # Mac
+#tch = "0.17.0" # linux
+
+[build-dependencies]
+prost-build = "0.13"
+
+

@@ -1,0 +1,7 @@
+[package]
+name = "orchestrator_core"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+# Add any dependencies specific to the core logic here
