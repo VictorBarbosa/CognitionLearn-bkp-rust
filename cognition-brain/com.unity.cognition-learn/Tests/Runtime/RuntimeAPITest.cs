@@ -1,11 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.MLAgents;
-using Unity.MLAgents.Policies;
-using Unity.MLAgents.Sensors;
-using Unity.MLAgents.Sensors.Reflection;
+using Unity.CognitionLearn;
+using Unity.CognitionLearn.Policies;
+using Unity.CognitionLearn.Sensors;
+using Unity.CognitionLearn.Sensors.Reflection;
 using NUnit.Framework;
-using Unity.MLAgents.Actuators;
+using Unity.CognitionLearn.Actuators;
 using UnityEngine;
 using UnityEngine.TestTools;
 

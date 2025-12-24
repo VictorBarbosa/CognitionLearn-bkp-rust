@@ -3,12 +3,12 @@ using NUnit.Framework;
 using UnityEngine;
 using UnityEditor;
 using Unity.InferenceEngine;
-using Unity.MLAgents.Actuators;
-using Unity.MLAgents.Inference;
-using Unity.MLAgents.Sensors;
-using Unity.MLAgents.Policies;
+using Unity.CognitionLearn.Actuators;
+using Unity.CognitionLearn.Inference;
+using Unity.CognitionLearn.Sensors;
+using Unity.CognitionLearn.Policies;
 
-namespace Unity.MLAgents.Tests
+namespace Unity.CognitionLearn.Tests
 {
     public class Test3DSensorComponent : SensorComponent
     {

@@ -11,15 +11,15 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using Unity.MLAgents.Actuators;
-using Unity.MLAgents.CommunicatorObjects;
-using Unity.MLAgents.Sensors;
-using Unity.MLAgents.SideChannels;
+using Unity.CognitionLearn.Actuators;
+using Unity.CognitionLearn.CommunicatorObjects;
+using Unity.CognitionLearn.Sensors;
+using Unity.CognitionLearn.SideChannels;
 using Google.Protobuf;
 
-using Unity.MLAgents.Analytics;
+using Unity.CognitionLearn.Analytics;
 
-namespace Unity.MLAgents
+namespace Unity.CognitionLearn
 {
     /// Responsible for communication with External using gRPC.
     public class RpcCommunicator : ICommunicator

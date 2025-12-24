@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Unity.MLAgents.Sensors
+namespace Unity.CognitionLearn.Sensors
 {
     /// <summary>
     /// Check that List Sensors are the same shape as the previous ones.

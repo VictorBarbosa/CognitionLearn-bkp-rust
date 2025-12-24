@@ -1,9 +1,9 @@
 using NUnit.Framework;
-using Unity.MLAgents;
-using Unity.MLAgents.Actuators;
-using Unity.MLAgents.Policies;
-using Unity.MLAgents.Sensors;
-using Unity.MLAgents.Sensors.Reflection;
+using Unity.CognitionLearn;
+using Unity.CognitionLearn.Actuators;
+using Unity.CognitionLearn.Policies;
+using Unity.CognitionLearn.Sensors;
+using Unity.CognitionLearn.Sensors.Reflection;
 using Unity.PerformanceTesting;
 using UnityEngine;
 

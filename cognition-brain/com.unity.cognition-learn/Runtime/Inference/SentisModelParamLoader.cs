@@ -2,11 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Unity.InferenceEngine;
-using Unity.MLAgents.Actuators;
-using Unity.MLAgents.Sensors;
-using Unity.MLAgents.Policies;
+using Unity.CognitionLearn.Actuators;
+using Unity.CognitionLearn.Sensors;
+using Unity.CognitionLearn.Policies;
 
-namespace Unity.MLAgents.Inference
+namespace Unity.CognitionLearn.Inference
 {
     /// <summary>
     /// Prepares the Tensors for the Learning Brain and exposes a list of failed checks if Model

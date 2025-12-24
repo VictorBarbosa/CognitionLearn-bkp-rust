@@ -1,6 +1,6 @@
 using System;
 
-namespace Unity.MLAgents
+namespace Unity.CognitionLearn
 {
     internal class RecursionChecker : IDisposable
     {

@@ -2,9 +2,9 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using NUnit.Framework;
-using Unity.MLAgents.Integrations.Match3;
+using Unity.CognitionLearn.Integrations.Match3;
 
-namespace Unity.MLAgents.Tests.Integrations.Match3
+namespace Unity.CognitionLearn.Tests.Integrations.Match3
 {
     internal class StringBoard : AbstractBoard
     {

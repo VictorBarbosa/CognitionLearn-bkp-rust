@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 using UnityEngine;
-using Unity.MLAgents.Sensors;
+using Unity.CognitionLearn.Sensors;
 
-namespace Unity.MLAgents.Tests
+namespace Unity.CognitionLearn.Tests
 {
     public static class TestGridSensorConfig
     {

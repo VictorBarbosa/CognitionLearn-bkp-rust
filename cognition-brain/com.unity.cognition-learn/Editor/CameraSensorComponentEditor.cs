@@ -1,7 +1,7 @@
 using UnityEditor;
-using Unity.MLAgents.Sensors;
+using Unity.CognitionLearn.Sensors;
 
-namespace Unity.MLAgents.Editor
+namespace Unity.CognitionLearn.Editor
 {
     [CustomEditor(typeof(CameraSensorComponent), editorForChildClasses: true)]
     [CanEditMultipleObjects]

@@ -1,13 +1,13 @@
 using System.Collections.Generic;
 using UnityEditor;
 using Unity.InferenceEngine;
-using Unity.MLAgents.Actuators;
-using Unity.MLAgents.Policies;
-using Unity.MLAgents.Sensors;
-using Unity.MLAgents.Sensors.Reflection;
-using CheckTypeEnum = Unity.MLAgents.Inference.SentisModelParamLoader.FailedCheck.CheckTypeEnum;
+using Unity.CognitionLearn.Actuators;
+using Unity.CognitionLearn.Policies;
+using Unity.CognitionLearn.Sensors;
+using Unity.CognitionLearn.Sensors.Reflection;
+using CheckTypeEnum = Unity.CognitionLearn.Inference.SentisModelParamLoader.FailedCheck.CheckTypeEnum;
 
-namespace Unity.MLAgents.Editor
+namespace Unity.CognitionLearn.Editor
 {
     /*
      This code is meant to modify the behavior of the inspector on Agent Components.

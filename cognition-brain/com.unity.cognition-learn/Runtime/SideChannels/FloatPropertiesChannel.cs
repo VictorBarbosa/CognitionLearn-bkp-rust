@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System;
 
-namespace Unity.MLAgents.SideChannels
+namespace Unity.CognitionLearn.SideChannels
 {
     /// <summary>
     /// Side channel that is comprised of a collection of float variables.

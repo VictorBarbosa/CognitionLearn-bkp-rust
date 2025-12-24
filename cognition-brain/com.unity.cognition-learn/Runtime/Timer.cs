@@ -12,7 +12,7 @@ using System.Runtime.Serialization;
 using System.Runtime.Serialization.Json;
 using UnityEngine.SceneManagement;
 
-namespace Unity.MLAgents
+namespace Unity.CognitionLearn
 {
     [DataContract]
     internal class TimerNode

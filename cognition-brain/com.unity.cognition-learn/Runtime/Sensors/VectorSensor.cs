@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using UnityEngine;
 
-namespace Unity.MLAgents.Sensors
+namespace Unity.CognitionLearn.Sensors
 {
     /// <summary>
     /// A sensor implementation for vector observations.

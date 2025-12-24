@@ -1,9 +1,9 @@
-using Unity.MLAgents.Sensors;
+using Unity.CognitionLearn.Sensors;
 using NUnit.Framework;
-using Unity.MLAgents;
+using Unity.CognitionLearn;
 using UnityEngine;
 
-namespace Unity.MLAgentsExamples
+namespace Unity.CognitionLearnExamples
 {
     /// <summary>
     /// The purpose of these tests is to make sure that we can do basic operations like creating

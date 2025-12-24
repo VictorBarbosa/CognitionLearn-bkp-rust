@@ -1,16 +1,16 @@
 #if MLA_INPUT_SYSTEM
-using Unity.MLAgents.Actuators;
+using Unity.CognitionLearn.Actuators;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Controls;
 using UnityEngine.InputSystem.LowLevel;
 
-namespace Unity.MLAgents.Input
+namespace Unity.CognitionLearn.Input
 {
     /// <summary>
     /// Class that translates data between the a <see cref="UnityEngine.InputSystem.Controls.ButtonControl"/> and
     /// the ML-Agents <see cref="ActionBuffers"/> object.
     /// </summary>
-    [UnityEngine.Scripting.APIUpdating.MovedFrom("Unity.MLAgents.Extensions.Input")]
+    [UnityEngine.Scripting.APIUpdating.MovedFrom("Unity.CognitionLearn.Extensions.Input")]
     public class ButtonInputActionAdaptor : IRLActionInputAdaptor
     {
         /// <summary>

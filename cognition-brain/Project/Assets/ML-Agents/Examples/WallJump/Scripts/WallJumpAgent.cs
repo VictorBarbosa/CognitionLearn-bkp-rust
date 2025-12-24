@@ -2,11 +2,11 @@
 
 using System.Collections;
 using UnityEngine;
-using Unity.MLAgents;
+using Unity.CognitionLearn;
 using Unity.InferenceEngine;
-using Unity.MLAgents.Actuators;
-using Unity.MLAgents.Sensors;
-using Unity.MLAgentsExamples;
+using Unity.CognitionLearn.Actuators;
+using Unity.CognitionLearn.Sensors;
+using Unity.CognitionLearnExamples;
 using Random = UnityEngine.Random;
 
 public class WallJumpAgent : Agent

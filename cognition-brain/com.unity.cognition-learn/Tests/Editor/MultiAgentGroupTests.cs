@@ -3,7 +3,7 @@ using System.Reflection;
 using NUnit.Framework;
 using UnityEngine;
 
-namespace Unity.MLAgents.Tests
+namespace Unity.CognitionLearn.Tests
 {
     public class MultiAgentGroupTests
     {

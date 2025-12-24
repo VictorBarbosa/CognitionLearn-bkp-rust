@@ -1,11 +1,11 @@
 using UnityEngine;
 
-namespace Unity.MLAgents.Sensors
+namespace Unity.CognitionLearn.Sensors
 {
     /// <summary>
     /// Grid-based sensor that counts the number of detctable objects.
     /// </summary>
-    [UnityEngine.Scripting.APIUpdating.MovedFrom("Unity.MLAgents.Extensions.Sensors")]
+    [UnityEngine.Scripting.APIUpdating.MovedFrom("Unity.CognitionLearn.Extensions.Sensors")]
     public class CountingGridSensor : GridSensorBase
     {
         /// <summary>

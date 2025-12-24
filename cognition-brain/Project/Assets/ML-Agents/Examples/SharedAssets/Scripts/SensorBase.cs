@@ -1,6 +1,6 @@
-using Unity.MLAgents.Sensors;
+using Unity.CognitionLearn.Sensors;
 
-namespace Unity.MLAgentsExamples
+namespace Unity.CognitionLearnExamples
 {
     /// <summary>
     /// A simple sensor that provides a number default implementations.

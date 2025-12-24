@@ -1,6 +1,6 @@
 using System.Threading;
 
-namespace Unity.MLAgents
+namespace Unity.CognitionLearn
 {
     internal static class MultiAgentGroupIdCounter
     {

@@ -1,9 +1,9 @@
 using NUnit.Framework;
 using UnityEngine;
 using UnityEditor;
-using Unity.MLAgents.Policies;
+using Unity.CognitionLearn.Policies;
 
-namespace Unity.MLAgents.Tests
+namespace Unity.CognitionLearn.Tests
 {
     [TestFixture]
     public class TestSerialization

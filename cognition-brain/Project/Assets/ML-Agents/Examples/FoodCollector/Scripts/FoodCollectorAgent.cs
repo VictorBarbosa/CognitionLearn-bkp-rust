@@ -1,7 +1,7 @@
 using UnityEngine;
-using Unity.MLAgents;
-using Unity.MLAgents.Actuators;
-using Unity.MLAgents.Sensors;
+using Unity.CognitionLearn;
+using Unity.CognitionLearn.Actuators;
+using Unity.CognitionLearn.Sensors;
 using Random = UnityEngine.Random;
 
 public class FoodCollectorAgent : Agent

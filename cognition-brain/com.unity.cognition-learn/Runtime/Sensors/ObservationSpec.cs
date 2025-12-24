@@ -1,4 +1,4 @@
-namespace Unity.MLAgents.Sensors
+namespace Unity.CognitionLearn.Sensors
 {
     /// <summary>
     /// A description of the observations that an ISensor produces.

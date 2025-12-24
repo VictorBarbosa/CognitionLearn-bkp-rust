@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 using Unity.InferenceEngine;
-using Unity.MLAgents.Sensors;
+using Unity.CognitionLearn.Sensors;
 
-namespace Unity.MLAgents.Inference
+namespace Unity.CognitionLearn.Inference
 {
     /// <summary>
     /// Mapping between Tensor names and generators.

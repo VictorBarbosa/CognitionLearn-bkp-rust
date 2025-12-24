@@ -1,10 +1,10 @@
 using System.IO;
 using Google.Protobuf;
 using System.Collections.Generic;
-using Unity.MLAgents.Sensors;
-using Unity.MLAgents.Policies;
+using Unity.CognitionLearn.Sensors;
+using Unity.CognitionLearn.Policies;
 
-namespace Unity.MLAgents.Demonstrations
+namespace Unity.CognitionLearn.Demonstrations
 {
     /// <summary>
     /// Responsible for writing demonstration data to stream (typically a file stream).

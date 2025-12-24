@@ -1,8 +1,8 @@
 using UnityEngine;
-using Unity.MLAgents;
-using Unity.MLAgents.Actuators;
-using Unity.MLAgentsExamples;
-using Unity.MLAgents.Sensors;
+using Unity.CognitionLearn;
+using Unity.CognitionLearn.Actuators;
+using Unity.CognitionLearnExamples;
+using Unity.CognitionLearn.Sensors;
 using Random = UnityEngine.Random;
 
 [RequireComponent(typeof(JointDriveController))] // Required to set joint forces

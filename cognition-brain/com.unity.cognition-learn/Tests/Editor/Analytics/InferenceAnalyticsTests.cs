@@ -1,16 +1,16 @@
 using System;
 using System.Collections.Generic;
 using NUnit.Framework;
-using Unity.MLAgents.Sensors;
+using Unity.CognitionLearn.Sensors;
 using UnityEngine;
 using Unity.InferenceEngine;
-using Unity.MLAgents.Actuators;
-using Unity.MLAgents.Policies;
-using Unity.MLAgents.Analytics;
+using Unity.CognitionLearn.Actuators;
+using Unity.CognitionLearn.Policies;
+using Unity.CognitionLearn.Analytics;
 using UnityEditor;
 
 
-namespace Unity.MLAgents.Tests.Analytics
+namespace Unity.CognitionLearn.Tests.Analytics
 {
     [TestFixture]
     public class InferenceAnalyticsTests

@@ -2,12 +2,12 @@ using System;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-namespace Unity.MLAgents.Sensors
+namespace Unity.CognitionLearn.Sensors
 {
     /// <summary>
     /// A SensorComponent that creates a <see cref="CameraSensor"/>.
     /// </summary>
-    [AddComponentMenu("ML Agents/Camera Sensor", (int)MenuGroup.Sensors)]
+    [AddComponentMenu("Cognition Learn/Camera Sensor", (int)MenuGroup.Sensors)]
     public class CameraSensorComponent : SensorComponent, IDisposable
     {
         [HideInInspector, SerializeField, FormerlySerializedAs("camera")]

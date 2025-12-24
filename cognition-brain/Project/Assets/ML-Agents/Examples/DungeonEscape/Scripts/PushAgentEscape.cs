@@ -1,7 +1,7 @@
 using UnityEngine;
-using Unity.MLAgents;
-using Unity.MLAgents.Sensors;
-using Unity.MLAgents.Actuators;
+using Unity.CognitionLearn;
+using Unity.CognitionLearn.Sensors;
+using Unity.CognitionLearn.Actuators;
 
 public class PushAgentEscape : Agent
 {

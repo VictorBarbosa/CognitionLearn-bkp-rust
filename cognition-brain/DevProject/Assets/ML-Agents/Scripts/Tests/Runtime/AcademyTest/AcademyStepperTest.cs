@@ -3,7 +3,7 @@ using NUnit.Framework;
 using UnityEngine.TestTools;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using Unity.MLAgents;
+using Unity.CognitionLearn;
 #if UNITY_EDITOR
 using UnityEditor.SceneManagement;
 #endif

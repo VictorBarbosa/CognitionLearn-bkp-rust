@@ -1,11 +1,11 @@
 using Unity.InferenceEngine;
 using System.Collections.Generic;
 using System.Diagnostics;
-using Unity.MLAgents.Actuators;
-using Unity.MLAgents.Inference;
-using Unity.MLAgents.Sensors;
+using Unity.CognitionLearn.Actuators;
+using Unity.CognitionLearn.Inference;
+using Unity.CognitionLearn.Sensors;
 
-namespace Unity.MLAgents.Policies
+namespace Unity.CognitionLearn.Policies
 {
     /// <summary>
     /// Where to perform inference.

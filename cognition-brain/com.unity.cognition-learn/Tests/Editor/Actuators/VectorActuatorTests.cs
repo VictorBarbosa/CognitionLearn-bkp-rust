@@ -2,10 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using NUnit.Framework;
-using Unity.MLAgents.Actuators;
+using Unity.CognitionLearn.Actuators;
 using Assert = UnityEngine.Assertions.Assert;
 
-namespace Unity.MLAgents.Tests.Actuators
+namespace Unity.CognitionLearn.Tests.Actuators
 {
     [TestFixture]
     public class VectorActuatorTests

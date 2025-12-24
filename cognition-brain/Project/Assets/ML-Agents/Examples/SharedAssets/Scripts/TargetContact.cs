@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Unity.MLAgentsExamples
+namespace Unity.CognitionLearnExamples
 {
     /// <summary>
     /// This class contains logic for locomotion agents with joints which might make contact with a target.

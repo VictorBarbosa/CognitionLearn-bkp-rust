@@ -1,13 +1,13 @@
 using NUnit.Framework;
 using System;
 using System.Linq;
-using Unity.MLAgents.Actuators;
-using Unity.MLAgents.Policies;
+using Unity.CognitionLearn.Actuators;
+using Unity.CognitionLearn.Policies;
 using UnityEngine;
-using Unity.MLAgents.Sensors;
-using Unity.MLAgents.Utils.Tests;
+using Unity.CognitionLearn.Sensors;
+using Unity.CognitionLearn.Utils.Tests;
 
-namespace Unity.MLAgents.Tests
+namespace Unity.CognitionLearn.Tests
 {
     public class StackingSensorTests
     {

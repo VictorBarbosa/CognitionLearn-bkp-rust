@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Reflection;
 using NUnit.Framework;
 using UnityEngine;
-using Unity.MLAgents.Sensors;
+using Unity.CognitionLearn.Sensors;
 
-namespace Unity.MLAgents.Tests
+namespace Unity.CognitionLearn.Tests
 {
     internal class TestBoxOverlapChecker : BoxOverlapChecker
     {

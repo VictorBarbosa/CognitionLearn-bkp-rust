@@ -2,7 +2,7 @@ using System;
 using System.Linq;
 using UnityEngine;
 
-namespace Unity.MLAgents.Actuators
+namespace Unity.CognitionLearn.Actuators
 {
     /// <summary>
     /// A structure that wraps the <see cref="ActionSegment{T}"/>s for a particular <see cref="IActionReceiver"/> and is

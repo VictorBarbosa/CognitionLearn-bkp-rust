@@ -1,8 +1,8 @@
 using NUnit.Framework;
 using System.IO;
-using Unity.MLAgents.SideChannels;
+using Unity.CognitionLearn.SideChannels;
 
-namespace Unity.MLAgents.Tests
+namespace Unity.CognitionLearn.Tests
 {
     public class SamplerTests
     {

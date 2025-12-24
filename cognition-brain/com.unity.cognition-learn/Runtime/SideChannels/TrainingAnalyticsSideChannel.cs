@@ -1,8 +1,8 @@
 using System;
-using Unity.MLAgents.Analytics;
-using Unity.MLAgents.CommunicatorObjects;
+using Unity.CognitionLearn.Analytics;
+using Unity.CognitionLearn.CommunicatorObjects;
 
-namespace Unity.MLAgents.SideChannels
+namespace Unity.CognitionLearn.SideChannels
 {
     /// <summary>
     /// Side Channel implementation for recording which training features are being used.

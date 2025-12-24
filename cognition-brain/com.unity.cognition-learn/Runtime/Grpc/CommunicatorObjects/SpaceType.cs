@@ -9,7 +9,7 @@ using pb = global::Google.Protobuf;
 using pbc = global::Google.Protobuf.Collections;
 using pbr = global::Google.Protobuf.Reflection;
 using scg = global::System.Collections.Generic;
-namespace Unity.MLAgents.CommunicatorObjects {
+namespace Unity.CognitionLearn.CommunicatorObjects {
 
   /// <summary>Holder for reflection information generated from mlagents_envs/communicator_objects/space_type.proto</summary>
   internal static partial class SpaceTypeReflection {
@@ -30,7 +30,7 @@ namespace Unity.MLAgents.CommunicatorObjects {
             "TEFnZW50cy5Db21tdW5pY2F0b3JPYmplY3RzYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
-          new pbr::GeneratedClrTypeInfo(new[] {typeof(global::Unity.MLAgents.CommunicatorObjects.SpaceTypeProto), }, null));
+          new pbr::GeneratedClrTypeInfo(new[] {typeof(global::Unity.CognitionLearn.CommunicatorObjects.SpaceTypeProto), }, null));
     }
     #endregion
 

@@ -1,8 +1,8 @@
 using UnityEngine;
 using UnityEditor;
-using Unity.MLAgents.Sensors;
+using Unity.CognitionLearn.Sensors;
 
-namespace Unity.MLAgents.Editor
+namespace Unity.CognitionLearn.Editor
 {
     internal class RayPerceptionSensorComponentBaseEditor : UnityEditor.Editor
     {

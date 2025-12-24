@@ -5,8 +5,8 @@ using System.Reflection;
 using NUnit.Framework;
 using UnityEditor;
 using UnityEngine;
-using Unity.MLAgents;
-using Unity.MLAgents.Editor;
+using Unity.CognitionLearn;
+using Unity.CognitionLearn.Editor;
 
 
 namespace MLAgentsExamples.Tests.Settings

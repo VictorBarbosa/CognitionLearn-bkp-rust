@@ -1,7 +1,7 @@
 using System;
 using UnityEngine.Serialization;
 
-namespace Unity.MLAgents.Demonstrations
+namespace Unity.CognitionLearn.Demonstrations
 {
     /// <summary>
     /// Demonstration meta-data.

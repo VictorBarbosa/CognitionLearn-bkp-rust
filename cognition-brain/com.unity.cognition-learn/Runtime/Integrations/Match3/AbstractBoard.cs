@@ -4,7 +4,7 @@ using System.Diagnostics;
 using UnityEngine;
 using Debug = UnityEngine.Debug;
 
-namespace Unity.MLAgents.Integrations.Match3
+namespace Unity.CognitionLearn.Integrations.Match3
 {
     /// <summary>
     /// Representation of the AbstractBoard dimensions, and number of cell and special types.

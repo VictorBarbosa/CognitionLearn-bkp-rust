@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 #endif
 
-namespace Unity.MLAgents.Sensors
+namespace Unity.CognitionLearn.Sensors
 {
     /// <summary>
     /// ISensor implementation that generates observations for a group of Rigidbodies or ArticulationBodies.
     /// </summary>
-    [UnityEngine.Scripting.APIUpdating.MovedFrom("Unity.MLAgents.Extensions.Sensors")]
+    [UnityEngine.Scripting.APIUpdating.MovedFrom("Unity.CognitionLearn.Extensions.Sensors")]
     public class PhysicsBodySensor : ISensor, IBuiltInSensor
     {
         ObservationSpec m_ObservationSpec;

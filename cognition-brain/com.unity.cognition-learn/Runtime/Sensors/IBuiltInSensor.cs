@@ -1,4 +1,4 @@
-namespace Unity.MLAgents.Sensors
+namespace Unity.CognitionLearn.Sensors
 {
     /// <summary>
     /// Identifiers for "built in" sensor types.

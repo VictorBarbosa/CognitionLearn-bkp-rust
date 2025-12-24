@@ -2,8 +2,8 @@ using UnityEngine;
 using System.Runtime.CompilerServices;
 
 
-[assembly: InternalsVisibleTo("Unity.ML-Agents.DevTests.Editor")]
-namespace Unity.MLAgents
+[assembly: InternalsVisibleTo("Unity.CognitionLearn.DevTests.Editor")]
+namespace Unity.CognitionLearn
 {
     internal class MLAgentsSettings : ScriptableObject
     {

@@ -1,7 +1,7 @@
 using Unity.InferenceEngine;
 using UnityEngine.Assertions;
 
-namespace Unity.MLAgents.Inference
+namespace Unity.CognitionLearn.Inference
 {
     static class DynamicTensorShapeExtensions
     {

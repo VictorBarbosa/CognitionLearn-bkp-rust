@@ -1,6 +1,6 @@
 using System;
 
-namespace Unity.MLAgents.Sensors
+namespace Unity.CognitionLearn.Sensors
 {
     /// <summary>
     /// A Sensor that allows to observe a variable number of entities.

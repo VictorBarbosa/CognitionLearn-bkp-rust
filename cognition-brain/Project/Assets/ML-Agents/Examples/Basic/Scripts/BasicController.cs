@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using Unity.MLAgents;
+using Unity.CognitionLearn;
 using UnityEngine.Serialization;
 
 /// <summary>

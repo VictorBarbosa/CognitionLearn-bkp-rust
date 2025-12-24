@@ -1,8 +1,8 @@
 using UnityEditor;
 using UnityEngine;
-using Unity.MLAgents.Sensors;
+using Unity.CognitionLearn.Sensors;
 
-namespace Unity.MLAgents.Editor
+namespace Unity.CognitionLearn.Editor
 {
     [CustomEditor(typeof(GridSensorComponent), editorForChildClasses: true)]
     [CanEditMultipleObjects]

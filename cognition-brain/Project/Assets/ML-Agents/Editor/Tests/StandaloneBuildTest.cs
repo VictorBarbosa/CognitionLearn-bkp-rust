@@ -3,7 +3,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEditor.Build.Reporting;
 
-namespace Unity.MLAgents
+namespace Unity.CognitionLearn
 {
     public class StandaloneBuildTest
     {

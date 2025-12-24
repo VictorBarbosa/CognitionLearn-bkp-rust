@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Unity.MLAgents.Sensors
+namespace Unity.CognitionLearn.Sensors
 {
     /// <summary>
     /// Grid-based sensor with one-hot observations.

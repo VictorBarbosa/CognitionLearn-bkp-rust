@@ -1,12 +1,12 @@
 using NUnit.Framework;
 using Unity.InferenceEngine;
-using Unity.MLAgents.Actuators;
+using Unity.CognitionLearn.Actuators;
 using UnityEngine;
-using Unity.MLAgents.Policies;
+using Unity.CognitionLearn.Policies;
 using UnityEditor;
 using UnityEngine.TestTools;
 
-namespace Unity.MLAgents.Tests
+namespace Unity.CognitionLearn.Tests
 {
     [TestFixture]
     public class BehaviorParameterTests : IHeuristicProvider

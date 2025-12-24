@@ -1,6 +1,6 @@
 using UnityEngine.Profiling;
 
-namespace Unity.MLAgents.Actuators
+namespace Unity.CognitionLearn.Actuators
 {
     /// <summary>
     /// IActuator implementation that forwards calls to an <see cref="IActionReceiver"/> and an <see cref="IHeuristicProvider"/>.

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Unity.MLAgentsExamples
+namespace Unity.CognitionLearnExamples
 {
     /// <summary>
     /// Utility class to allow a stable observation platform.

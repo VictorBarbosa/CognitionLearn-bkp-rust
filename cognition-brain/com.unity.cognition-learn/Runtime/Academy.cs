@@ -4,10 +4,10 @@ using System.Collections.Generic;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
-using Unity.MLAgents.Actuators;
-using Unity.MLAgents.Inference;
-using Unity.MLAgents.Policies;
-using Unity.MLAgents.SideChannels;
+using Unity.CognitionLearn.Actuators;
+using Unity.CognitionLearn.Inference;
+using Unity.CognitionLearn.Policies;
+using Unity.CognitionLearn.SideChannels;
 using Unity.InferenceEngine;
 
 /**
@@ -23,7 +23,7 @@ using Unity.InferenceEngine;
  * https://docs.unity3d.com/Packages/com.unity.ml-agents@latest
  */
 
-namespace Unity.MLAgents
+namespace Unity.CognitionLearn
 {
     /// <summary>
     /// Helper class to step the Academy during FixedUpdate phase.

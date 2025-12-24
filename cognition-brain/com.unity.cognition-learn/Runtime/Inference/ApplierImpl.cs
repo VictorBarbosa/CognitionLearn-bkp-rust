@@ -1,11 +1,11 @@
 using System.Collections.Generic;
 using System.Linq;
-using Unity.MLAgents.Inference.Utils;
-using Unity.MLAgents.Actuators;
+using Unity.CognitionLearn.Inference.Utils;
+using Unity.CognitionLearn.Actuators;
 using Unity.InferenceEngine;
 using UnityEngine;
 
-namespace Unity.MLAgents.Inference
+namespace Unity.CognitionLearn.Inference
 {
     /// <summary>
     /// The Applier for the Continuous Action output tensor. Tensor is assumed to contain the

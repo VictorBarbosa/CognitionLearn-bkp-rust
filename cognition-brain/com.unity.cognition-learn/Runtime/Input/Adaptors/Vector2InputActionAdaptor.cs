@@ -1,15 +1,15 @@
 #if MLA_INPUT_SYSTEM
-using Unity.MLAgents.Actuators;
+using Unity.CognitionLearn.Actuators;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.LowLevel;
 
-namespace Unity.MLAgents.Input
+namespace Unity.CognitionLearn.Input
 {
     /// <summary>
     /// Translates data from any control that extends from <see cref="InputControl{Vector2}"/>.
     /// </summary>
-    [UnityEngine.Scripting.APIUpdating.MovedFrom("Unity.MLAgents.Extensions.Input")]
+    [UnityEngine.Scripting.APIUpdating.MovedFrom("Unity.CognitionLearn.Extensions.Input")]
     public class Vector2InputActionAdaptor : IRLActionInputAdaptor
     {
         /// <inheritdoc cref="IRLActionInputAdaptor.GetActionSpecForInputAction"/>

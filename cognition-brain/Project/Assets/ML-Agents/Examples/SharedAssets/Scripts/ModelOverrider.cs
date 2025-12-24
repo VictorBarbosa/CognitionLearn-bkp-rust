@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using Unity.InferenceEngine;
 using System.IO;
-using Unity.MLAgents;
-using Unity.MLAgents.Policies;
+using Unity.CognitionLearn;
+using Unity.CognitionLearn.Policies;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
 
-namespace Unity.MLAgentsExamples
+namespace Unity.CognitionLearnExamples
 {
     /// <summary>
     /// Utility class to allow the ModelAsset file for an agent to be overriden during inference.

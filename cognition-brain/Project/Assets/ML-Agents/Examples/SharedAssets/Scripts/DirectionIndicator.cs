@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Unity.MLAgentsExamples
+namespace Unity.CognitionLearnExamples
 {
     public class DirectionIndicator : MonoBehaviour
     {

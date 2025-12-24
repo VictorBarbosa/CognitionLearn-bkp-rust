@@ -2,10 +2,10 @@ using Unity.InferenceEngine;
 using System;
 using UnityEngine;
 using UnityEngine.Serialization;
-using Unity.MLAgents.Actuators;
-using Unity.MLAgents.Sensors.Reflection;
+using Unity.CognitionLearn.Actuators;
+using Unity.CognitionLearn.Sensors.Reflection;
 
-namespace Unity.MLAgents.Policies
+namespace Unity.CognitionLearn.Policies
 {
     /// <summary>
     /// Defines what type of behavior the Agent will be using
@@ -68,7 +68,7 @@ namespace Unity.MLAgents.Policies
     /// </summary>
     /// <remarks>At runtime, this component generates the agent's policy objects
     /// according to the settings you specified in the Editor.</remarks>
-    [AddComponentMenu("ML Agents/Behavior Parameters", (int)MenuGroup.Default)]
+    [AddComponentMenu("Cognition Learn/Behavior Parameters", (int)MenuGroup.Default)]
     public class BehaviorParameters : MonoBehaviour
     {
         [HideInInspector, SerializeField]

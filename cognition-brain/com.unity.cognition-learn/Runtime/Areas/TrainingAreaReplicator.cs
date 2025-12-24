@@ -2,7 +2,7 @@ using System;
 using Unity.Mathematics;
 using UnityEngine;
 
-namespace Unity.MLAgents.Areas
+namespace Unity.CognitionLearn.Areas
 {
     /// <summary>
     /// The Training Ares Replicator allows for a training area object group to be replicated dynamically during runtime.

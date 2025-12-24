@@ -9,7 +9,7 @@ using pb = global::Google.Protobuf;
 using pbc = global::Google.Protobuf.Collections;
 using pbr = global::Google.Protobuf.Reflection;
 using scg = global::System.Collections.Generic;
-namespace Unity.MLAgents.CommunicatorObjects {
+namespace Unity.CognitionLearn.CommunicatorObjects {
 
   /// <summary>Holder for reflection information generated from mlagents_envs/communicator_objects/unity_to_external.proto</summary>
   public static partial class UnityToExternalReflection {
@@ -32,7 +32,7 @@ namespace Unity.MLAgents.CommunicatorObjects {
             "Y2F0b3Jfb2JqZWN0cy5Vbml0eU1lc3NhZ2VQcm90byIAQiWqAiJVbml0eS5N",
             "TEFnZW50cy5Db21tdW5pY2F0b3JPYmplY3RzYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
-          new pbr::FileDescriptor[] { global::Unity.MLAgents.CommunicatorObjects.UnityMessageReflection.Descriptor, },
+          new pbr::FileDescriptor[] { global::Unity.CognitionLearn.CommunicatorObjects.UnityMessageReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, null));
     }
     #endregion

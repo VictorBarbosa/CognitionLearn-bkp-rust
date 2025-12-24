@@ -4,14 +4,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using NUnit.Framework;
 using System.Reflection;
-using Unity.MLAgents.Actuators;
-using Unity.MLAgents.Sensors;
-using Unity.MLAgents.Sensors.Reflection;
-using Unity.MLAgents.Policies;
-using Unity.MLAgents.SideChannels;
-using Unity.MLAgents.Utils.Tests;
+using Unity.CognitionLearn.Actuators;
+using Unity.CognitionLearn.Sensors;
+using Unity.CognitionLearn.Sensors.Reflection;
+using Unity.CognitionLearn.Policies;
+using Unity.CognitionLearn.SideChannels;
+using Unity.CognitionLearn.Utils.Tests;
 
-namespace Unity.MLAgents.Tests
+namespace Unity.CognitionLearn.Tests
 {
     [TestFixture]
     public class EditModeTestGeneration

@@ -9,7 +9,7 @@ using pb = global::Google.Protobuf;
 using pbc = global::Google.Protobuf.Collections;
 using pbr = global::Google.Protobuf.Reflection;
 using scg = global::System.Collections.Generic;
-namespace Unity.MLAgents.CommunicatorObjects {
+namespace Unity.CognitionLearn.CommunicatorObjects {
 
   /// <summary>Holder for reflection information generated from mlagents_envs/communicator_objects/engine_configuration.proto</summary>
   internal static partial class EngineConfigurationReflection {
@@ -34,7 +34,7 @@ namespace Unity.MLAgents.CommunicatorObjects {
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::Unity.MLAgents.CommunicatorObjects.EngineConfigurationProto), global::Unity.MLAgents.CommunicatorObjects.EngineConfigurationProto.Parser, new[]{ "Width", "Height", "QualityLevel", "TimeScale", "TargetFrameRate", "ShowMonitor" }, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::Unity.CognitionLearn.CommunicatorObjects.EngineConfigurationProto), global::Unity.CognitionLearn.CommunicatorObjects.EngineConfigurationProto.Parser, new[]{ "Width", "Height", "QualityLevel", "TimeScale", "TargetFrameRate", "ShowMonitor" }, null, null, null)
           }));
     }
     #endregion
@@ -49,7 +49,7 @@ namespace Unity.MLAgents.CommunicatorObjects {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Unity.MLAgents.CommunicatorObjects.EngineConfigurationReflection.Descriptor.MessageTypes[0]; }
+      get { return global::Unity.CognitionLearn.CommunicatorObjects.EngineConfigurationReflection.Descriptor.MessageTypes[0]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]

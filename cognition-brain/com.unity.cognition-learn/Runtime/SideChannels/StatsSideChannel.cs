@@ -1,5 +1,5 @@
 using System;
-namespace Unity.MLAgents.SideChannels
+namespace Unity.CognitionLearn.SideChannels
 {
     /// <summary>
     /// A Side Channel for sending <see cref="StatsRecorder"/> data.

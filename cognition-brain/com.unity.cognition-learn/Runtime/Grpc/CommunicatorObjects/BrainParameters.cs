@@ -9,7 +9,7 @@ using pb = global::Google.Protobuf;
 using pbc = global::Google.Protobuf.Collections;
 using pbr = global::Google.Protobuf.Reflection;
 using scg = global::System.Collections.Generic;
-namespace Unity.MLAgents.CommunicatorObjects {
+namespace Unity.CognitionLearn.CommunicatorObjects {
 
   /// <summary>Holder for reflection information generated from mlagents_envs/communicator_objects/brain_parameters.proto</summary>
   internal static partial class BrainParametersReflection {
@@ -40,10 +40,10 @@ namespace Unity.MLAgents.CommunicatorObjects {
             "CAQQBUIlqgIiVW5pdHkuTUxBZ2VudHMuQ29tbXVuaWNhdG9yT2JqZWN0c2IG",
             "cHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
-          new pbr::FileDescriptor[] { global::Unity.MLAgents.CommunicatorObjects.SpaceTypeReflection.Descriptor, },
+          new pbr::FileDescriptor[] { global::Unity.CognitionLearn.CommunicatorObjects.SpaceTypeReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::Unity.MLAgents.CommunicatorObjects.ActionSpecProto), global::Unity.MLAgents.CommunicatorObjects.ActionSpecProto.Parser, new[]{ "NumContinuousActions", "NumDiscreteActions", "DiscreteBranchSizes", "ActionDescriptions" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Unity.MLAgents.CommunicatorObjects.BrainParametersProto), global::Unity.MLAgents.CommunicatorObjects.BrainParametersProto.Parser, new[]{ "VectorActionSizeDeprecated", "VectorActionDescriptionsDeprecated", "VectorActionSpaceTypeDeprecated", "BrainName", "IsTraining", "ActionSpec" }, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::Unity.CognitionLearn.CommunicatorObjects.ActionSpecProto), global::Unity.CognitionLearn.CommunicatorObjects.ActionSpecProto.Parser, new[]{ "NumContinuousActions", "NumDiscreteActions", "DiscreteBranchSizes", "ActionDescriptions" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Unity.CognitionLearn.CommunicatorObjects.BrainParametersProto), global::Unity.CognitionLearn.CommunicatorObjects.BrainParametersProto.Parser, new[]{ "VectorActionSizeDeprecated", "VectorActionDescriptionsDeprecated", "VectorActionSpaceTypeDeprecated", "BrainName", "IsTraining", "ActionSpec" }, null, null, null)
           }));
     }
     #endregion
@@ -58,7 +58,7 @@ namespace Unity.MLAgents.CommunicatorObjects {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Unity.MLAgents.CommunicatorObjects.BrainParametersReflection.Descriptor.MessageTypes[0]; }
+      get { return global::Unity.CognitionLearn.CommunicatorObjects.BrainParametersReflection.Descriptor.MessageTypes[0]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -256,7 +256,7 @@ namespace Unity.MLAgents.CommunicatorObjects {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Unity.MLAgents.CommunicatorObjects.BrainParametersReflection.Descriptor.MessageTypes[1]; }
+      get { return global::Unity.CognitionLearn.CommunicatorObjects.BrainParametersReflection.Descriptor.MessageTypes[1]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -315,12 +315,12 @@ namespace Unity.MLAgents.CommunicatorObjects {
 
     /// <summary>Field number for the "vector_action_space_type_deprecated" field.</summary>
     public const int VectorActionSpaceTypeDeprecatedFieldNumber = 6;
-    private global::Unity.MLAgents.CommunicatorObjects.SpaceTypeProto vectorActionSpaceTypeDeprecated_ = 0;
+    private global::Unity.CognitionLearn.CommunicatorObjects.SpaceTypeProto vectorActionSpaceTypeDeprecated_ = 0;
     /// <summary>
     /// mark as deprecated in communicator v1.3.0
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public global::Unity.MLAgents.CommunicatorObjects.SpaceTypeProto VectorActionSpaceTypeDeprecated {
+    public global::Unity.CognitionLearn.CommunicatorObjects.SpaceTypeProto VectorActionSpaceTypeDeprecated {
       get { return vectorActionSpaceTypeDeprecated_; }
       set {
         vectorActionSpaceTypeDeprecated_ = value;
@@ -351,9 +351,9 @@ namespace Unity.MLAgents.CommunicatorObjects {
 
     /// <summary>Field number for the "action_spec" field.</summary>
     public const int ActionSpecFieldNumber = 9;
-    private global::Unity.MLAgents.CommunicatorObjects.ActionSpecProto actionSpec_;
+    private global::Unity.CognitionLearn.CommunicatorObjects.ActionSpecProto actionSpec_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public global::Unity.MLAgents.CommunicatorObjects.ActionSpecProto ActionSpec {
+    public global::Unity.CognitionLearn.CommunicatorObjects.ActionSpecProto ActionSpec {
       get { return actionSpec_; }
       set {
         actionSpec_ = value;
@@ -468,7 +468,7 @@ namespace Unity.MLAgents.CommunicatorObjects {
       }
       if (other.actionSpec_ != null) {
         if (actionSpec_ == null) {
-          actionSpec_ = new global::Unity.MLAgents.CommunicatorObjects.ActionSpecProto();
+          actionSpec_ = new global::Unity.CognitionLearn.CommunicatorObjects.ActionSpecProto();
         }
         ActionSpec.MergeFrom(other.ActionSpec);
       }
@@ -493,7 +493,7 @@ namespace Unity.MLAgents.CommunicatorObjects {
             break;
           }
           case 48: {
-            vectorActionSpaceTypeDeprecated_ = (global::Unity.MLAgents.CommunicatorObjects.SpaceTypeProto) input.ReadEnum();
+            vectorActionSpaceTypeDeprecated_ = (global::Unity.CognitionLearn.CommunicatorObjects.SpaceTypeProto) input.ReadEnum();
             break;
           }
           case 58: {
@@ -506,7 +506,7 @@ namespace Unity.MLAgents.CommunicatorObjects {
           }
           case 74: {
             if (actionSpec_ == null) {
-              actionSpec_ = new global::Unity.MLAgents.CommunicatorObjects.ActionSpecProto();
+              actionSpec_ = new global::Unity.CognitionLearn.CommunicatorObjects.ActionSpecProto();
             }
             input.ReadMessage(actionSpec_);
             break;

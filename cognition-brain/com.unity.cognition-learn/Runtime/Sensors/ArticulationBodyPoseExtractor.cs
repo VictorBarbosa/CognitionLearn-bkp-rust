@@ -3,12 +3,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Unity.MLAgents.Sensors
+namespace Unity.CognitionLearn.Sensors
 {
     /// <summary>
     /// Utility class to track a hierarchy of ArticulationBodies.
     /// </summary>
-    [UnityEngine.Scripting.APIUpdating.MovedFrom("Unity.MLAgents.Extensions.Sensors")]
+    [UnityEngine.Scripting.APIUpdating.MovedFrom("Unity.CognitionLearn.Extensions.Sensors")]
     public class ArticulationBodyPoseExtractor : PoseExtractor
     {
         ArticulationBody[] m_Bodies;

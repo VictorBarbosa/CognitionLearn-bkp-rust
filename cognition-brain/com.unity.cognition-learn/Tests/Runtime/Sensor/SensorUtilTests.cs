@@ -2,10 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using NUnit.Framework;
-using Unity.MLAgents.Sensors;
-using Unity.MLAgents.Utils.Tests;
+using Unity.CognitionLearn.Sensors;
+using Unity.CognitionLearn.Utils.Tests;
 
-namespace Unity.MLAgents.Tests
+namespace Unity.CognitionLearn.Tests
 {
     [TestFixture]
     public class SensorUtilTests

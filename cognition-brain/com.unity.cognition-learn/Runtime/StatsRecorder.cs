@@ -1,6 +1,6 @@
-using Unity.MLAgents.SideChannels;
+using Unity.CognitionLearn.SideChannels;
 
-namespace Unity.MLAgents
+namespace Unity.CognitionLearn
 {
     /// <summary>
     /// Determines the behavior of how multiple stats within the same summary period are combined.

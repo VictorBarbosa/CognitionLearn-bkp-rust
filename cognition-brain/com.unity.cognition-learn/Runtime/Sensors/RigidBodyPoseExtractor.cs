@@ -1,13 +1,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Unity.MLAgents.Sensors
+namespace Unity.CognitionLearn.Sensors
 {
     /// <summary>
     /// Utility class to track a hierarchy of RigidBodies. These are assumed to have a root node,
     /// and child nodes are connect to their parents via Joints.
     /// </summary>
-    [UnityEngine.Scripting.APIUpdating.MovedFrom("Unity.MLAgents.Extensions.Sensors")]
+    [UnityEngine.Scripting.APIUpdating.MovedFrom("Unity.CognitionLearn.Extensions.Sensors")]
     public class RigidBodyPoseExtractor : PoseExtractor
     {
         Rigidbody[] m_Bodies;

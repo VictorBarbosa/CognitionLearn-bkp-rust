@@ -2,10 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Unity.InferenceEngine;
-using Unity.MLAgents.Inference.Utils;
-using Unity.MLAgents.Policies;
+using Unity.CognitionLearn.Inference.Utils;
+using Unity.CognitionLearn.Policies;
 
-namespace Unity.MLAgents.Inference
+namespace Unity.CognitionLearn.Inference
 {
     /// <summary>
     /// Tensor - A class to encapsulate a Tensor used for inference.

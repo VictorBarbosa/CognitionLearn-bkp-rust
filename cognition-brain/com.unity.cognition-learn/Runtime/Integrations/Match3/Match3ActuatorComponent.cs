@@ -1,14 +1,14 @@
 using System;
-using Unity.MLAgents.Actuators;
+using Unity.CognitionLearn.Actuators;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-namespace Unity.MLAgents.Integrations.Match3
+namespace Unity.CognitionLearn.Integrations.Match3
 {
     /// <summary>
     /// Actuator component for a Match3 game. Generates a Match3Actuator at runtime.
     /// </summary>
-    [AddComponentMenu("ML Agents/Match 3 Actuator", (int)MenuGroup.Actuators)]
+    [AddComponentMenu("Cognition Learn/Match 3 Actuator", (int)MenuGroup.Actuators)]
     public class Match3ActuatorComponent : ActuatorComponent
     {
         [HideInInspector, SerializeField, FormerlySerializedAs("ActuatorName")]

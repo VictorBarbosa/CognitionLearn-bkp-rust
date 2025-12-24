@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using UnityEngine;
 using Unity.InferenceEngine;
-using Unity.MLAgents.Actuators;
-using Unity.MLAgents.Sensors;
-using Unity.MLAgents.Sensors.Reflection;
-using Unity.MLAgents.Demonstrations;
-using Unity.MLAgents.Policies;
+using Unity.CognitionLearn.Actuators;
+using Unity.CognitionLearn.Sensors;
+using Unity.CognitionLearn.Sensors.Reflection;
+using Unity.CognitionLearn.Demonstrations;
+using Unity.CognitionLearn.Policies;
 using UnityEngine.Serialization;
 
-namespace Unity.MLAgents
+namespace Unity.CognitionLearn
 {
     /// <summary>
     /// Struct that contains all the information for an Agent, including its
@@ -255,7 +255,7 @@ namespace Unity.MLAgents
         /// if the <see cref="Academy"/> is not connected to an external process.
         /// </para>
         /// <code>
-        /// using Unity.MLAgents;
+        /// using Unity.CognitionLearn;
         ///
         /// public class MyAgent : Agent
         /// {

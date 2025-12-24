@@ -1,6 +1,6 @@
 using Unity.InferenceEngine;
 
-namespace Unity.MLAgents.Inference
+namespace Unity.CognitionLearn.Inference
 {
     internal static class TensorExtensions
     {

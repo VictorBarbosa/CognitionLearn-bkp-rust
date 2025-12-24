@@ -2,8 +2,8 @@
 using System;
 using System.Collections.Generic;
 using Unity.Collections;
-using Unity.MLAgents.Actuators;
-using Unity.MLAgents.Policies;
+using Unity.CognitionLearn.Actuators;
+using Unity.CognitionLearn.Policies;
 using UnityEngine;
 using UnityEngine.Assertions;
 using UnityEngine.InputSystem;
@@ -15,15 +15,15 @@ using UnityEngine.InputSystem.Utilities;
 using UnityEditor;
 #endif
 
-namespace Unity.MLAgents.Input
+namespace Unity.CognitionLearn.Input
 {
     /// <summary>
     /// Component class that handles the parsing of the <see cref="InputActionAsset"/> and translates that into
     /// <see cref="InputActionActuator"/>s.
     /// </summary>
     [RequireComponent(typeof(PlayerInput), typeof(IInputActionAssetProvider))]
-    [AddComponentMenu("ML Agents/Input Actuator", (int)MenuGroup.Actuators)]
-    [UnityEngine.Scripting.APIUpdating.MovedFrom("Unity.MLAgents.Extensions.Input")]
+    [AddComponentMenu("Cognition Learn/Input Actuator", (int)MenuGroup.Actuators)]
+    [UnityEngine.Scripting.APIUpdating.MovedFrom("Unity.CognitionLearn.Extensions.Input")]
     public class InputActuatorComponent : ActuatorComponent
     {
         InputActionAsset m_InputAsset;

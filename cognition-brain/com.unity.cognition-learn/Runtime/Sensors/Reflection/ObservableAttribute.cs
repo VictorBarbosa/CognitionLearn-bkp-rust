@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Reflection;
 using UnityEngine;
 
-namespace Unity.MLAgents.Sensors.Reflection
+namespace Unity.CognitionLearn.Sensors.Reflection
 {
     /// <summary>
     /// Specify that a field or property should be used to generate observations for an Agent.
@@ -20,7 +20,7 @@ namespace Unity.MLAgents.Sensors.Reflection
     /// <see cref="ISensor"/> implementation to read the values without reflection.
     ///
     /// Note that you do not need to adjust the VectorObservationSize in
-    /// <see cref="Unity.MLAgents.Policies.BrainParameters"/> when adding ObservableAttribute
+    /// <see cref="Unity.CognitionLearn.Policies.BrainParameters"/> when adding ObservableAttribute
     /// to fields or properties.
     /// </remarks>
     /// <example>
@@ -29,8 +29,8 @@ namespace Unity.MLAgents.Sensors.Reflection
     /// for the HealthPercent property.
     /// </para>
     /// <code>
-    /// using Unity.MLAgents;
-    /// using Unity.MLAgents.Sensors.Reflection;
+    /// using Unity.CognitionLearn;
+    /// using Unity.CognitionLearn.Sensors.Reflection;
     ///
     /// public class MyAgent : Agent
     /// {

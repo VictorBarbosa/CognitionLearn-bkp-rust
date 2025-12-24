@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace Unity.MLAgents.Sensors
+namespace Unity.CognitionLearn.Sensors
 {
     /// <summary>
     /// The grid perception strategy that uses box overlap to detect objects.

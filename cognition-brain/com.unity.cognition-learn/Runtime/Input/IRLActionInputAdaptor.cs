@@ -1,15 +1,15 @@
 #if MLA_INPUT_SYSTEM
-using Unity.MLAgents.Actuators;
+using Unity.CognitionLearn.Actuators;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.LowLevel;
 
-namespace Unity.MLAgents.Input
+namespace Unity.CognitionLearn.Input
 {
     /// <summary>
     /// Implement this interface in order to customize how information is translated <see cref="InputControl"/>s
     /// and <see cref="ActionBuffers"/>.
     /// </summary>
-    [UnityEngine.Scripting.APIUpdating.MovedFrom("Unity.MLAgents.Extensions.Input")]
+    [UnityEngine.Scripting.APIUpdating.MovedFrom("Unity.CognitionLearn.Extensions.Input")]
     public interface IRLActionInputAdaptor
     {
         /// <summary>

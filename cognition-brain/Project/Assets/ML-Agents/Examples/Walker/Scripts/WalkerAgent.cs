@@ -1,10 +1,10 @@
 using System;
 using UnityEngine;
-using Unity.MLAgents;
-using Unity.MLAgents.Actuators;
-using Unity.MLAgentsExamples;
-using Unity.MLAgents.Sensors;
-using BodyPart = Unity.MLAgentsExamples.BodyPart;
+using Unity.CognitionLearn;
+using Unity.CognitionLearn.Actuators;
+using Unity.CognitionLearnExamples;
+using Unity.CognitionLearn.Sensors;
+using BodyPart = Unity.CognitionLearnExamples.BodyPart;
 using Random = UnityEngine.Random;
 
 public class WalkerAgent : Agent

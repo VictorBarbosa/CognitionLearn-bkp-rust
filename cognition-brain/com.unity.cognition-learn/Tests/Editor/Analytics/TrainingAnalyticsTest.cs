@@ -1,13 +1,13 @@
 using System;
 using System.Collections.Generic;
 using NUnit.Framework;
-using Unity.MLAgents.Sensors;
-using Unity.MLAgents.Actuators;
-using Unity.MLAgents.Analytics;
-using Unity.MLAgents.Policies;
+using Unity.CognitionLearn.Sensors;
+using Unity.CognitionLearn.Actuators;
+using Unity.CognitionLearn.Analytics;
+using Unity.CognitionLearn.Policies;
 using UnityEditor;
 
-namespace Unity.MLAgents.Tests.Analytics
+namespace Unity.CognitionLearn.Tests.Analytics
 {
     [TestFixture]
     public class TrainingAnalyticsTests

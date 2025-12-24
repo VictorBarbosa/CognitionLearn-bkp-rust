@@ -1,11 +1,11 @@
 using System.Collections.Generic;
 using Unity.InferenceEngine;
 using UnityEngine.Profiling;
-using Unity.MLAgents.Actuators;
-using Unity.MLAgents.Policies;
-using Unity.MLAgents.Sensors;
+using Unity.CognitionLearn.Actuators;
+using Unity.CognitionLearn.Policies;
+using Unity.CognitionLearn.Sensors;
 
-namespace Unity.MLAgents.Inference
+namespace Unity.CognitionLearn.Inference
 {
     internal struct AgentInfoSensorsPair
     {

@@ -1,5 +1,5 @@
 using UnityEngine;
-using Unity.MLAgents;
+using Unity.CognitionLearn;
 
 public class GridSettings : MonoBehaviour
 {

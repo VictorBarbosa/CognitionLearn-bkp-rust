@@ -1,4 +1,4 @@
-namespace Unity.MLAgents.Actuators
+namespace Unity.CognitionLearn.Actuators
 {
     /// <summary>
     /// Interface that allows objects to fill out an <see cref="ActionBuffers"/> data structure for controlling

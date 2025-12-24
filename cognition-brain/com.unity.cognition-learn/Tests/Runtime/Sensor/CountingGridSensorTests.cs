@@ -4,10 +4,10 @@ using System.Linq;
 using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.TestTools;
-using Unity.MLAgents.Sensors;
+using Unity.CognitionLearn.Sensors;
 using Object = UnityEngine.Object;
 
-namespace Unity.MLAgents.Tests
+namespace Unity.CognitionLearn.Tests
 {
     public class CountingGridSensorTests
     {

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Unity.MLAgents.Editor
+namespace Unity.CognitionLearn.Editor
 {
     /// <summary>
     /// A static helper class for the Editor components of the ML-Agents SDK.

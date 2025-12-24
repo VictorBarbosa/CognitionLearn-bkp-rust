@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
-using Unity.MLAgents;
+using Unity.CognitionLearn;
 
-namespace Unity.MLAgentsExamples
+namespace Unity.CognitionLearnExamples
 {
     /// <summary>
     /// Used to store relevant information for acting and learning for each body part in agent.

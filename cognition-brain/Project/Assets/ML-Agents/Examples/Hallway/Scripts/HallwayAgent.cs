@@ -1,8 +1,8 @@
 using System.Collections;
 using UnityEngine;
-using Unity.MLAgents;
-using Unity.MLAgents.Actuators;
-using Unity.MLAgents.Sensors;
+using Unity.CognitionLearn;
+using Unity.CognitionLearn.Actuators;
+using Unity.CognitionLearn.Sensors;
 
 public class HallwayAgent : Agent
 {

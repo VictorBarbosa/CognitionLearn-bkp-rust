@@ -1,9 +1,9 @@
 #if UNITY_2020_1_OR_NEWER
 using UnityEngine;
 
-namespace Unity.MLAgents.Sensors
+namespace Unity.CognitionLearn.Sensors
 {
-    [UnityEngine.Scripting.APIUpdating.MovedFrom("Unity.MLAgents.Extensions.Sensors")]
+    [UnityEngine.Scripting.APIUpdating.MovedFrom("Unity.CognitionLearn.Extensions.Sensors")]
     public class ArticulationBodySensorComponent : SensorComponent
     {
         public ArticulationBody RootBody;

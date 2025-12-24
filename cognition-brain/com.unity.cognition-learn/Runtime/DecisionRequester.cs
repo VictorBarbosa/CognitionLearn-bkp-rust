@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-namespace Unity.MLAgents
+namespace Unity.CognitionLearn
 {
     /// <summary>
     /// The DecisionRequester component automatically request decisions for an
@@ -17,7 +17,7 @@ namespace Unity.MLAgents
     /// your <see cref="Agent"/> implementation must manually call its
     /// <see cref="Agent.RequestDecision"/> function.
     /// </remarks>
-    [AddComponentMenu("ML Agents/Decision Requester", (int)MenuGroup.Default)]
+    [AddComponentMenu("Cognition Learn/Decision Requester", (int)MenuGroup.Default)]
     [RequireComponent(typeof(Agent))]
     [DefaultExecutionOrder(-10)]
     public class DecisionRequester : MonoBehaviour

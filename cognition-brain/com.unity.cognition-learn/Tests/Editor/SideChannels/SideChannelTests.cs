@@ -2,9 +2,9 @@ using System;
 using NUnit.Framework;
 using System.Collections.Generic;
 using System.Text;
-using Unity.MLAgents.SideChannels;
+using Unity.CognitionLearn.SideChannels;
 
-namespace Unity.MLAgents.Tests
+namespace Unity.CognitionLearn.Tests
 {
     public class SideChannelTests
     {

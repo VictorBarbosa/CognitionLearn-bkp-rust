@@ -1,6 +1,6 @@
 using NUnit.Framework;
 
-namespace Unity.MLAgents.Tests
+namespace Unity.CognitionLearn.Tests
 {
     public class TimerTests
     {

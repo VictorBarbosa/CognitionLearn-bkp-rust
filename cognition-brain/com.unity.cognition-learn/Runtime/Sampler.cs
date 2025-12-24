@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
-using Unity.MLAgents.Inference.Utils;
+using Unity.CognitionLearn.Inference.Utils;
 using Random = System.Random;
 
-namespace Unity.MLAgents
+namespace Unity.CognitionLearn
 {
     /// <summary>
     /// Takes a list of floats that encode a sampling distribution and returns the sampling function.

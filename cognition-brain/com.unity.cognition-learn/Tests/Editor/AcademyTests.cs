@@ -1,8 +1,8 @@
 using NUnit.Framework;
-using Unity.MLAgents.Sensors;
+using Unity.CognitionLearn.Sensors;
 using UnityEngine;
 
-namespace Unity.MLAgents.Tests
+namespace Unity.CognitionLearn.Tests
 {
     [TestFixture]
     public class AcademyTests

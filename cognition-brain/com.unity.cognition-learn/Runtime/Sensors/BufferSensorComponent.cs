@@ -1,11 +1,11 @@
 using UnityEngine;
 
-namespace Unity.MLAgents.Sensors
+namespace Unity.CognitionLearn.Sensors
 {
     /// <summary>
     /// A SensorComponent that creates a <see cref="BufferSensor"/>.
     /// </summary>
-    [AddComponentMenu("ML Agents/Buffer Sensor", (int)MenuGroup.Sensors)]
+    [AddComponentMenu("Cognition Learn/Buffer Sensor", (int)MenuGroup.Sensors)]
     public class BufferSensorComponent : SensorComponent
     {
         /// <summary>

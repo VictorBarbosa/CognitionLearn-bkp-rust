@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Profiling;
 
-namespace Unity.MLAgents.Actuators
+namespace Unity.CognitionLearn.Actuators
 {
     /// <summary>
     /// A class that manages the delegation of events, action buffers, and action mask for a list of IActuators.

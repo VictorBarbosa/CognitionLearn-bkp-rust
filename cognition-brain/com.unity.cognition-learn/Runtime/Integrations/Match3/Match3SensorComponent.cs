@@ -1,14 +1,14 @@
 using System;
-using Unity.MLAgents.Sensors;
+using Unity.CognitionLearn.Sensors;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-namespace Unity.MLAgents.Integrations.Match3
+namespace Unity.CognitionLearn.Integrations.Match3
 {
     /// <summary>
     /// Sensor component for a Match3 game.
     /// </summary>
-    [AddComponentMenu("ML Agents/Match 3 Sensor", (int)MenuGroup.Sensors)]
+    [AddComponentMenu("Cognition Learn/Match 3 Sensor", (int)MenuGroup.Sensors)]
     public class Match3SensorComponent : SensorComponent, IDisposable
     {
         [HideInInspector, SerializeField, FormerlySerializedAs("SensorName")]

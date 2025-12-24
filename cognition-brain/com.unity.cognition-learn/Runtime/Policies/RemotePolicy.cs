@@ -1,11 +1,11 @@
 using System.Collections.Generic;
 using System.Diagnostics;
-using Unity.MLAgents.Actuators;
-using Unity.MLAgents.Sensors;
-using Unity.MLAgents.Analytics;
+using Unity.CognitionLearn.Actuators;
+using Unity.CognitionLearn.Sensors;
+using Unity.CognitionLearn.Analytics;
 
 
-namespace Unity.MLAgents.Policies
+namespace Unity.CognitionLearn.Policies
 {
     /// <summary>
     /// The Remote Policy only works when training.

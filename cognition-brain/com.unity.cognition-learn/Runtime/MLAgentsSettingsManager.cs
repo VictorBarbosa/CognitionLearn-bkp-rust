@@ -6,7 +6,7 @@ using UnityEditor;
 using System.Linq;
 #endif
 
-namespace Unity.MLAgents
+namespace Unity.CognitionLearn
 {
 #if UNITY_EDITOR
     [InitializeOnLoad]

@@ -2,7 +2,7 @@ using NUnit.Framework;
 using System;
 using System.Linq;
 
-namespace Unity.MLAgents.Tests
+namespace Unity.CognitionLearn.Tests
 {
     public static class GridObsTestUtils
     {

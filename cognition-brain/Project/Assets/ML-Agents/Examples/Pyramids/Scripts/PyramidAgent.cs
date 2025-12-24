@@ -2,9 +2,9 @@ using System;
 using System.Linq;
 using UnityEngine;
 using Random = UnityEngine.Random;
-using Unity.MLAgents;
-using Unity.MLAgents.Actuators;
-using Unity.MLAgents.Sensors;
+using Unity.CognitionLearn;
+using Unity.CognitionLearn.Actuators;
+using Unity.CognitionLearn.Sensors;
 
 public class PyramidAgent : Agent
 {

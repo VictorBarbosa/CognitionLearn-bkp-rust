@@ -1,10 +1,10 @@
 using NUnit.Framework;
 using Unity.InferenceEngine;
-using Unity.MLAgents.Sensors;
-using Unity.MLAgents.Inference;
+using Unity.CognitionLearn.Sensors;
+using Unity.CognitionLearn.Inference;
 
 
-namespace Unity.MLAgents.Tests
+namespace Unity.CognitionLearn.Tests
 {
     public class ObservationWriterTests
     {

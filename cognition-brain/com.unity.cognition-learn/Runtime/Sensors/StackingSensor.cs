@@ -4,9 +4,9 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using UnityEngine;
 using Unity.InferenceEngine;
-using Unity.MLAgents.Inference;
+using Unity.CognitionLearn.Inference;
 
-namespace Unity.MLAgents.Sensors
+namespace Unity.CognitionLearn.Sensors
 {
     /// <summary>
     /// Sensor that wraps around another Sensor to provide temporal stacking.

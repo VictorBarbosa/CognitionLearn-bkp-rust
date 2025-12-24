@@ -1,12 +1,12 @@
 using UnityEngine;
 using UnityEngine.Serialization;
 
-namespace Unity.MLAgents.Sensors
+namespace Unity.CognitionLearn.Sensors
 {
     /// <summary>
     /// A component for 3D Ray Perception.
     /// </summary>
-    [AddComponentMenu("ML Agents/Ray Perception Sensor 3D", (int)MenuGroup.Sensors)]
+    [AddComponentMenu("Cognition Learn/Ray Perception Sensor 3D", (int)MenuGroup.Sensors)]
     public class RayPerceptionSensorComponent3D : RayPerceptionSensorComponentBase
     {
         [HideInInspector, SerializeField, FormerlySerializedAs("startVerticalOffset")]

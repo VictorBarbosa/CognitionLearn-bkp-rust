@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace Unity.MLAgents.Sensors
+namespace Unity.CognitionLearn.Sensors
 {
     /// <summary>
     /// An interface for GridSensor perception that defines the grid cells and collider detecting strategies.

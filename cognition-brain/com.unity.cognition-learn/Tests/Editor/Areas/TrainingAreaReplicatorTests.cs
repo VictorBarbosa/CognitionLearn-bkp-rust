@@ -1,10 +1,10 @@
 using System.Linq;
 using NUnit.Framework;
 using Unity.Mathematics;
-using Unity.MLAgents.Areas;
+using Unity.CognitionLearn.Areas;
 using UnityEngine;
 
-namespace Unity.MLAgents.Tests.Areas
+namespace Unity.CognitionLearn.Tests.Areas
 {
     [TestFixture]
     public class TrainingAreaReplicatorTests

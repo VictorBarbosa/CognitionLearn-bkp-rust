@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-using Unity.MLAgents.Policies;
+using Unity.CognitionLearn.Policies;
 
-namespace Unity.MLAgents.Demonstrations
+namespace Unity.CognitionLearn.Demonstrations
 {
     /// <summary>
     /// Summary of a loaded Demonstration file. Only used for display in the Inspector.

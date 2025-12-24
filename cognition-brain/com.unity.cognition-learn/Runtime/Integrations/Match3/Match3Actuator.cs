@@ -1,8 +1,8 @@
-using Unity.MLAgents.Actuators;
+using Unity.CognitionLearn.Actuators;
 using Debug = UnityEngine.Debug;
 
 
-namespace Unity.MLAgents.Integrations.Match3
+namespace Unity.CognitionLearn.Integrations.Match3
 {
     /// <summary>
     /// Actuator for a Match3 game. It translates valid moves (defined by AbstractBoard.IsMoveValid())

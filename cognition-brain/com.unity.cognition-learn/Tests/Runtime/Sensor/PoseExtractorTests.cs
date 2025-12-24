@@ -1,9 +1,9 @@
 using System;
 using UnityEngine;
 using NUnit.Framework;
-using Unity.MLAgents.Sensors;
+using Unity.CognitionLearn.Sensors;
 
-namespace Unity.MLAgents.Tests
+namespace Unity.CognitionLearn.Tests
 {
     public class PoseExtractorTests
     {

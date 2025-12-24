@@ -1,9 +1,9 @@
 using System;
-using Unity.MLAgents.Integrations.Match3;
+using Unity.CognitionLearn.Integrations.Match3;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-namespace Unity.MLAgentsExamples
+namespace Unity.CognitionLearnExamples
 {
 
 

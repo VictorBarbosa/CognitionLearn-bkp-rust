@@ -1,4 +1,4 @@
-namespace Unity.MLAgents
+namespace Unity.CognitionLearn
 {
     internal static class EpisodeIdCounter
     {

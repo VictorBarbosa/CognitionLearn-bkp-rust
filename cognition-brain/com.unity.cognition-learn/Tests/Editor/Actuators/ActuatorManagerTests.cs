@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using NUnit.Framework;
-using Unity.MLAgents.Actuators;
+using Unity.CognitionLearn.Actuators;
 using UnityEngine;
 using UnityEngine.TestTools;
 using Assert = UnityEngine.Assertions.Assert;
 
-namespace Unity.MLAgents.Tests.Actuators
+namespace Unity.CognitionLearn.Tests.Actuators
 {
     [TestFixture]
     public class ActuatorManagerTests

@@ -2,7 +2,7 @@ using System;
 using System.Linq;
 using UnityEngine;
 
-namespace Unity.MLAgents.Actuators
+namespace Unity.CognitionLearn.Actuators
 {
     /// <summary>
     /// Defines the structure of the actions to be used by the Actuator system.

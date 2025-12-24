@@ -2,21 +2,21 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Google.Protobuf;
-using Unity.MLAgents.CommunicatorObjects;
+using Unity.CognitionLearn.CommunicatorObjects;
 using UnityEngine;
 using System.Runtime.CompilerServices;
-using Unity.MLAgents.Actuators;
-using Unity.MLAgents.Sensors;
-using Unity.MLAgents.Demonstrations;
-using Unity.MLAgents.Policies;
+using Unity.CognitionLearn.Actuators;
+using Unity.CognitionLearn.Sensors;
+using Unity.CognitionLearn.Demonstrations;
+using Unity.CognitionLearn.Policies;
 
-using Unity.MLAgents.Analytics;
+using Unity.CognitionLearn.Analytics;
 
-[assembly: InternalsVisibleTo("Unity.ML-Agents.Editor")]
-[assembly: InternalsVisibleTo("Unity.ML-Agents.Editor.Tests")]
-[assembly: InternalsVisibleTo("Unity.ML-Agents.Runtime.Utils.Tests")]
+[assembly: InternalsVisibleTo("Unity.CognitionLearn.Editor")]
+[assembly: InternalsVisibleTo("Unity.CognitionLearn.Editor.Tests")]
+[assembly: InternalsVisibleTo("Unity.CognitionLearn.Runtime.Utils.Tests")]
 
-namespace Unity.MLAgents
+namespace Unity.CognitionLearn
 {
     internal static class GrpcExtensions
     {

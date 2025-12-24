@@ -1,11 +1,11 @@
 #if MLA_INPUT_SYSTEM
 
-using Unity.MLAgents.Actuators;
-using Unity.MLAgents.Policies;
+using Unity.CognitionLearn.Actuators;
+using Unity.CognitionLearn.Policies;
 using UnityEngine.InputSystem;
 using UnityEngine.Profiling;
 
-namespace Unity.MLAgents.Input
+namespace Unity.CognitionLearn.Input
 {
     /// <summary>
     /// This implementation of <see cref="IActuator"/> will send events from the ML-Agents training process, or from
@@ -13,7 +13,7 @@ namespace Unity.MLAgents.Input
     /// <see cref="Agent"/>'s <see cref="BehaviorParameters"/> indicate that the Agent is running in Heuristic Mode,
     /// this Actuator will write actions from the <see cref="InputSystem"/> to the <see cref="ActionBuffers"/> object.
     /// </summary>
-    [UnityEngine.Scripting.APIUpdating.MovedFrom("Unity.MLAgents.Extensions.Input")]
+    [UnityEngine.Scripting.APIUpdating.MovedFrom("Unity.CognitionLearn.Extensions.Input")]
     public class InputActionActuator : IActuator, IBuiltInActuator
     {
         readonly BehaviorParameters m_BehaviorParameters;

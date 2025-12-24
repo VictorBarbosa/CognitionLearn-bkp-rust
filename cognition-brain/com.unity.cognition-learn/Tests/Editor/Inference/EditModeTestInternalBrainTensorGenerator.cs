@@ -2,12 +2,12 @@ using System.Collections.Generic;
 using Unity.InferenceEngine;
 using NUnit.Framework;
 using UnityEngine;
-using Unity.MLAgents.Actuators;
-using Unity.MLAgents.Inference;
-using Unity.MLAgents.Policies;
-using Unity.MLAgents.Utils.Tests;
+using Unity.CognitionLearn.Actuators;
+using Unity.CognitionLearn.Inference;
+using Unity.CognitionLearn.Policies;
+using Unity.CognitionLearn.Utils.Tests;
 
-namespace Unity.MLAgents.Tests
+namespace Unity.CognitionLearn.Tests
 {
     [TestFixture]
     public class EditModeTestInternalBrainTensorGenerator

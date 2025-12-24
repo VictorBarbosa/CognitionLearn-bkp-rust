@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 using UnityEditor;
 using UnityEngine;
 
-namespace Unity.MLAgents
+namespace Unity.CognitionLearn
 {
     public class SampleExporter
     {

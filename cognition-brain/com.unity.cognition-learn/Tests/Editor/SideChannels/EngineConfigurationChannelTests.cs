@@ -1,8 +1,8 @@
 using NUnit.Framework;
-using Unity.MLAgents.SideChannels;
+using Unity.CognitionLearn.SideChannels;
 using UnityEngine;
 
-namespace Unity.MLAgents.Tests
+namespace Unity.CognitionLearn.Tests
 {
     public class EngineConfigurationChannelTests
     {

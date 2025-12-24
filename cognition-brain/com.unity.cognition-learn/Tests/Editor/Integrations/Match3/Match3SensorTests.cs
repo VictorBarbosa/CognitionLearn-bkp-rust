@@ -3,10 +3,10 @@ using System.IO;
 using System.Reflection;
 using NUnit.Framework;
 using UnityEngine;
-using Unity.MLAgents.Integrations.Match3;
-using Unity.MLAgents.Sensors;
+using Unity.CognitionLearn.Integrations.Match3;
+using Unity.CognitionLearn.Sensors;
 
-namespace Unity.MLAgents.Tests.Integrations.Match3
+namespace Unity.CognitionLearn.Tests.Integrations.Match3
 {
     public class Match3SensorTests
     {

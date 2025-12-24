@@ -2,14 +2,14 @@ using NUnit.Framework;
 using UnityEngine;
 using System.IO.Abstractions.TestingHelpers;
 using System.Reflection;
-using Unity.MLAgents.Actuators;
-using Unity.MLAgents.CommunicatorObjects;
-using Unity.MLAgents.Sensors;
-using Unity.MLAgents.Demonstrations;
-using Unity.MLAgents.Policies;
-using Unity.MLAgents.Utils.Tests;
+using Unity.CognitionLearn.Actuators;
+using Unity.CognitionLearn.CommunicatorObjects;
+using Unity.CognitionLearn.Sensors;
+using Unity.CognitionLearn.Demonstrations;
+using Unity.CognitionLearn.Policies;
+using Unity.CognitionLearn.Utils.Tests;
 
-namespace Unity.MLAgents.Tests
+namespace Unity.CognitionLearn.Tests
 {
     [TestFixture]
     public class DemonstrationTests

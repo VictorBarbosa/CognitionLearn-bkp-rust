@@ -1,9 +1,9 @@
 using System;
 using NUnit.Framework;
 using UnityEngine;
-using Unity.MLAgents.Sensors;
+using Unity.CognitionLearn.Sensors;
 
-namespace Unity.MLAgents.Tests
+namespace Unity.CognitionLearn.Tests
 {
     [TestFixture]
     public class RenderTextureSensorTests

@@ -9,7 +9,7 @@ using pb = global::Google.Protobuf;
 using pbc = global::Google.Protobuf.Collections;
 using pbr = global::Google.Protobuf.Reflection;
 using scg = global::System.Collections.Generic;
-namespace Unity.MLAgents.CommunicatorObjects {
+namespace Unity.CognitionLearn.CommunicatorObjects {
 
   /// <summary>Holder for reflection information generated from mlagents_envs/communicator_objects/unity_input.proto</summary>
   internal static partial class UnityInputReflection {
@@ -35,9 +35,9 @@ namespace Unity.MLAgents.CommunicatorObjects {
             "b25JbnB1dFByb3RvQiWqAiJVbml0eS5NTEFnZW50cy5Db21tdW5pY2F0b3JP",
             "YmplY3RzYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
-          new pbr::FileDescriptor[] { global::Unity.MLAgents.CommunicatorObjects.UnityRlInputReflection.Descriptor, global::Unity.MLAgents.CommunicatorObjects.UnityRlInitializationInputReflection.Descriptor, },
+          new pbr::FileDescriptor[] { global::Unity.CognitionLearn.CommunicatorObjects.UnityRlInputReflection.Descriptor, global::Unity.CognitionLearn.CommunicatorObjects.UnityRlInitializationInputReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::Unity.MLAgents.CommunicatorObjects.UnityInputProto), global::Unity.MLAgents.CommunicatorObjects.UnityInputProto.Parser, new[]{ "RlInput", "RlInitializationInput" }, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::Unity.CognitionLearn.CommunicatorObjects.UnityInputProto), global::Unity.CognitionLearn.CommunicatorObjects.UnityInputProto.Parser, new[]{ "RlInput", "RlInitializationInput" }, null, null, null)
           }));
     }
     #endregion
@@ -52,7 +52,7 @@ namespace Unity.MLAgents.CommunicatorObjects {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Unity.MLAgents.CommunicatorObjects.UnityInputReflection.Descriptor.MessageTypes[0]; }
+      get { return global::Unity.CognitionLearn.CommunicatorObjects.UnityInputReflection.Descriptor.MessageTypes[0]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -81,9 +81,9 @@ namespace Unity.MLAgents.CommunicatorObjects {
 
     /// <summary>Field number for the "rl_input" field.</summary>
     public const int RlInputFieldNumber = 1;
-    private global::Unity.MLAgents.CommunicatorObjects.UnityRLInputProto rlInput_;
+    private global::Unity.CognitionLearn.CommunicatorObjects.UnityRLInputProto rlInput_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public global::Unity.MLAgents.CommunicatorObjects.UnityRLInputProto RlInput {
+    public global::Unity.CognitionLearn.CommunicatorObjects.UnityRLInputProto RlInput {
       get { return rlInput_; }
       set {
         rlInput_ = value;
@@ -92,9 +92,9 @@ namespace Unity.MLAgents.CommunicatorObjects {
 
     /// <summary>Field number for the "rl_initialization_input" field.</summary>
     public const int RlInitializationInputFieldNumber = 2;
-    private global::Unity.MLAgents.CommunicatorObjects.UnityRLInitializationInputProto rlInitializationInput_;
+    private global::Unity.CognitionLearn.CommunicatorObjects.UnityRLInitializationInputProto rlInitializationInput_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public global::Unity.MLAgents.CommunicatorObjects.UnityRLInitializationInputProto RlInitializationInput {
+    public global::Unity.CognitionLearn.CommunicatorObjects.UnityRLInitializationInputProto RlInitializationInput {
       get { return rlInitializationInput_; }
       set {
         rlInitializationInput_ = value;
@@ -172,13 +172,13 @@ namespace Unity.MLAgents.CommunicatorObjects {
       }
       if (other.rlInput_ != null) {
         if (rlInput_ == null) {
-          rlInput_ = new global::Unity.MLAgents.CommunicatorObjects.UnityRLInputProto();
+          rlInput_ = new global::Unity.CognitionLearn.CommunicatorObjects.UnityRLInputProto();
         }
         RlInput.MergeFrom(other.RlInput);
       }
       if (other.rlInitializationInput_ != null) {
         if (rlInitializationInput_ == null) {
-          rlInitializationInput_ = new global::Unity.MLAgents.CommunicatorObjects.UnityRLInitializationInputProto();
+          rlInitializationInput_ = new global::Unity.CognitionLearn.CommunicatorObjects.UnityRLInitializationInputProto();
         }
         RlInitializationInput.MergeFrom(other.RlInitializationInput);
       }
@@ -195,14 +195,14 @@ namespace Unity.MLAgents.CommunicatorObjects {
             break;
           case 10: {
             if (rlInput_ == null) {
-              rlInput_ = new global::Unity.MLAgents.CommunicatorObjects.UnityRLInputProto();
+              rlInput_ = new global::Unity.CognitionLearn.CommunicatorObjects.UnityRLInputProto();
             }
             input.ReadMessage(rlInput_);
             break;
           }
           case 18: {
             if (rlInitializationInput_ == null) {
-              rlInitializationInput_ = new global::Unity.MLAgents.CommunicatorObjects.UnityRLInitializationInputProto();
+              rlInitializationInput_ = new global::Unity.CognitionLearn.CommunicatorObjects.UnityRLInitializationInputProto();
             }
             input.ReadMessage(rlInitializationInput_);
             break;

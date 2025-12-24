@@ -1,11 +1,11 @@
 using System;
 using System.Collections.Generic;
 using Unity.InferenceEngine;
-using Unity.MLAgents.Inference;
+using Unity.CognitionLearn.Inference;
 using UnityEngine;
 using DeviceType = Unity.InferenceEngine.DeviceType;
 
-namespace Unity.MLAgents.Sensors
+namespace Unity.CognitionLearn.Sensors
 {
     /// <summary>
     /// Allows sensors to write to both TensorProxy and float arrays/lists.

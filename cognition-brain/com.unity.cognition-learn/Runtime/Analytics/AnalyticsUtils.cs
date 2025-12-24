@@ -3,7 +3,7 @@ using System.Text;
 using System.Security.Cryptography;
 using UnityEngine;
 
-namespace Unity.MLAgents.Analytics
+namespace Unity.CognitionLearn.Analytics
 {
     internal static class AnalyticsUtils
     {

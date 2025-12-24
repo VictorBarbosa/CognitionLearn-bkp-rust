@@ -1,10 +1,10 @@
 using System.Collections.Generic;
 using System;
 using System.Collections;
-using Unity.MLAgents.Actuators;
-using Unity.MLAgents.Sensors;
+using Unity.CognitionLearn.Actuators;
+using Unity.CognitionLearn.Sensors;
 
-namespace Unity.MLAgents.Policies
+namespace Unity.CognitionLearn.Policies
 {
     /// <summary>
     /// The Heuristic Policy uses a hard-coded Heuristic method

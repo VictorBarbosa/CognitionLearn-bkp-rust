@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System;
 using UnityEngine;
 
-namespace Unity.MLAgents.SideChannels
+namespace Unity.CognitionLearn.SideChannels
 {
     /// <summary>
     /// Lists the different data types supported.

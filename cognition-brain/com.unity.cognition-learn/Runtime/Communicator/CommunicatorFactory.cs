@@ -1,6 +1,6 @@
 using System;
 
-namespace Unity.MLAgents
+namespace Unity.CognitionLearn
 {
     /// <summary>
     /// Factory class for an ICommunicator instance. This is used to the <see cref="Academy"/> at startup.

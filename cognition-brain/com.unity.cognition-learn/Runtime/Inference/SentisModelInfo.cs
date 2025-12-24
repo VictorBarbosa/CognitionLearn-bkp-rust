@@ -2,9 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Unity.InferenceEngine;
-using FailedCheck = Unity.MLAgents.Inference.SentisModelParamLoader.FailedCheck;
+using FailedCheck = Unity.CognitionLearn.Inference.SentisModelParamLoader.FailedCheck;
 
-namespace Unity.MLAgents.Inference
+namespace Unity.CognitionLearn.Inference
 {
     /// <summary>
     /// Sentis Model utility methods.

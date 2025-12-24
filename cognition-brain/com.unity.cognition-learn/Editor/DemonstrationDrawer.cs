@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using System.Text;
 using UnityEditor;
-using Unity.MLAgents.Demonstrations;
+using Unity.CognitionLearn.Demonstrations;
 
-namespace Unity.MLAgents.Editor
+namespace Unity.CognitionLearn.Editor
 {
     /// <summary>
     /// Renders a custom UI for DemonstrationSummary ScriptableObject.

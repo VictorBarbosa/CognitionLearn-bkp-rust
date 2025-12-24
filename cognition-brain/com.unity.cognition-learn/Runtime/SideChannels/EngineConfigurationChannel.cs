@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace Unity.MLAgents.SideChannels
+namespace Unity.CognitionLearn.SideChannels
 {
     /// <summary>
     /// Side channel that supports modifying attributes specific to the Unity Engine.

@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
-using Unity.MLAgents.Sensors;
+using Unity.CognitionLearn.Sensors;
 using UnityEngine;
 
-namespace Unity.MLAgents.Integrations.Match3
+namespace Unity.CognitionLearn.Integrations.Match3
 {
     /// <summary>
     /// Delegate that provides integer values at a given (x,y) coordinate.

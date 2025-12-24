@@ -2,12 +2,12 @@ using System;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-namespace Unity.MLAgents.Sensors
+namespace Unity.CognitionLearn.Sensors
 {
     /// <summary>
     /// Component that wraps a <see cref="RenderTextureSensor"/>.
     /// </summary>
-    [AddComponentMenu("ML Agents/Render Texture Sensor", (int)MenuGroup.Sensors)]
+    [AddComponentMenu("Cognition Learn/Render Texture Sensor", (int)MenuGroup.Sensors)]
     public class RenderTextureSensorComponent : SensorComponent, IDisposable
     {
         RenderTextureSensor m_Sensor;

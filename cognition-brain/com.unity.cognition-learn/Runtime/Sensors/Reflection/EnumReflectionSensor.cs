@@ -1,6 +1,6 @@
 using System;
 
-namespace Unity.MLAgents.Sensors.Reflection
+namespace Unity.CognitionLearn.Sensors.Reflection
 {
     internal class EnumReflectionSensor : ReflectionSensorBase
     {

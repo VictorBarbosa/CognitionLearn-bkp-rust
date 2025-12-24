@@ -1,5 +1,5 @@
 using UnityEngine;
-using Unity.MLAgentsExamples;
+using Unity.CognitionLearnExamples;
 
 public class PyramidArea : Area
 {

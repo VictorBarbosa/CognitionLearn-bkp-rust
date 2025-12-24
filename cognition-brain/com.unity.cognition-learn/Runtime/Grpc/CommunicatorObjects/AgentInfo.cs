@@ -9,7 +9,7 @@ using pb = global::Google.Protobuf;
 using pbc = global::Google.Protobuf.Collections;
 using pbr = global::Google.Protobuf.Reflection;
 using scg = global::System.Collections.Generic;
-namespace Unity.MLAgents.CommunicatorObjects {
+namespace Unity.CognitionLearn.CommunicatorObjects {
 
   /// <summary>Holder for reflection information generated from mlagents_envs/communicator_objects/agent_info.proto</summary>
   internal static partial class AgentInfoReflection {
@@ -35,9 +35,9 @@ namespace Unity.MLAgents.CommunicatorObjects {
             "BBAFSgQIBRAGSgQIBhAHSgQIDBANQiWqAiJVbml0eS5NTEFnZW50cy5Db21t",
             "dW5pY2F0b3JPYmplY3RzYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
-          new pbr::FileDescriptor[] { global::Unity.MLAgents.CommunicatorObjects.ObservationReflection.Descriptor, },
+          new pbr::FileDescriptor[] { global::Unity.CognitionLearn.CommunicatorObjects.ObservationReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::Unity.MLAgents.CommunicatorObjects.AgentInfoProto), global::Unity.MLAgents.CommunicatorObjects.AgentInfoProto.Parser, new[]{ "Reward", "Done", "MaxStepReached", "Id", "ActionMask", "Observations", "GroupId", "GroupReward" }, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::Unity.CognitionLearn.CommunicatorObjects.AgentInfoProto), global::Unity.CognitionLearn.CommunicatorObjects.AgentInfoProto.Parser, new[]{ "Reward", "Done", "MaxStepReached", "Id", "ActionMask", "Observations", "GroupId", "GroupReward" }, null, null, null)
           }));
     }
     #endregion
@@ -52,7 +52,7 @@ namespace Unity.MLAgents.CommunicatorObjects {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Unity.MLAgents.CommunicatorObjects.AgentInfoReflection.Descriptor.MessageTypes[0]; }
+      get { return global::Unity.CognitionLearn.CommunicatorObjects.AgentInfoReflection.Descriptor.MessageTypes[0]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -141,11 +141,11 @@ namespace Unity.MLAgents.CommunicatorObjects {
 
     /// <summary>Field number for the "observations" field.</summary>
     public const int ObservationsFieldNumber = 13;
-    private static readonly pb::FieldCodec<global::Unity.MLAgents.CommunicatorObjects.ObservationProto> _repeated_observations_codec
-        = pb::FieldCodec.ForMessage(106, global::Unity.MLAgents.CommunicatorObjects.ObservationProto.Parser);
-    private readonly pbc::RepeatedField<global::Unity.MLAgents.CommunicatorObjects.ObservationProto> observations_ = new pbc::RepeatedField<global::Unity.MLAgents.CommunicatorObjects.ObservationProto>();
+    private static readonly pb::FieldCodec<global::Unity.CognitionLearn.CommunicatorObjects.ObservationProto> _repeated_observations_codec
+        = pb::FieldCodec.ForMessage(106, global::Unity.CognitionLearn.CommunicatorObjects.ObservationProto.Parser);
+    private readonly pbc::RepeatedField<global::Unity.CognitionLearn.CommunicatorObjects.ObservationProto> observations_ = new pbc::RepeatedField<global::Unity.CognitionLearn.CommunicatorObjects.ObservationProto>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public pbc::RepeatedField<global::Unity.MLAgents.CommunicatorObjects.ObservationProto> Observations {
+    public pbc::RepeatedField<global::Unity.CognitionLearn.CommunicatorObjects.ObservationProto> Observations {
       get { return observations_; }
     }
 

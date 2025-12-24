@@ -1,6 +1,6 @@
-using Unity.MLAgents.Integrations.Match3;
+using Unity.CognitionLearn.Integrations.Match3;
 
-namespace Unity.MLAgentsExamples
+namespace Unity.CognitionLearnExamples
 {
     public class Match3ExampleActuator : Match3Actuator
     {

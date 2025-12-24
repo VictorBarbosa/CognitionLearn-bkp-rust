@@ -1,7 +1,7 @@
 #if MLA_INPUT_SYSTEM
 using UnityEngine.InputSystem;
 
-namespace Unity.MLAgents.Input
+namespace Unity.CognitionLearn.Input
 {
     /// <summary>
     /// Implement this interface if you are listening to C# events from the generated C# class from the
@@ -14,7 +14,7 @@ namespace Unity.MLAgents.Input
     /// they will need to share the same instance of the <see cref="InputActionAsset"/> in order to get the simulated
     /// input.
     /// </summary>
-    [UnityEngine.Scripting.APIUpdating.MovedFrom("Unity.MLAgents.Extensions.Input")]
+    [UnityEngine.Scripting.APIUpdating.MovedFrom("Unity.CognitionLearn.Extensions.Input")]
     public interface IInputActionAssetProvider
     {
         /// <summary>

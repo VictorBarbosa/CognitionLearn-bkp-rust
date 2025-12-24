@@ -1,12 +1,12 @@
 using UnityEditor;
-using Unity.MLAgents.Editor;
-using Unity.MLAgents.Sensors;
+using Unity.CognitionLearn.Editor;
+using Unity.CognitionLearn.Sensors;
 
-namespace Unity.MLAgents.Editor
+namespace Unity.CognitionLearn.Editor
 {
     [CustomEditor(typeof(RigidBodySensorComponent))]
     [CanEditMultipleObjects]
-    [UnityEngine.Scripting.APIUpdating.MovedFrom("Unity.MLAgents.Extensions.Editor")]
+    [UnityEngine.Scripting.APIUpdating.MovedFrom("Unity.CognitionLearn.Extensions.Editor")]
     internal class RigidBodySensorComponentEditor : UnityEditor.Editor
     {
         bool ShowHierarchy = true;

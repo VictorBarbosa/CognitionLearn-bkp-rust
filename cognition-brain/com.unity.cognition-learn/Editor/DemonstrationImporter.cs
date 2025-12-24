@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using Unity.MLAgents.CommunicatorObjects;
+using Unity.CognitionLearn.CommunicatorObjects;
 using UnityEditor;
 using UnityEngine;
 #if UNITY_2020_2_OR_NEWER
@@ -9,9 +9,9 @@ using UnityEditor.AssetImporters;
 #else
 using UnityEditor.Experimental.AssetImporters;
 #endif
-using Unity.MLAgents.Demonstrations;
+using Unity.CognitionLearn.Demonstrations;
 
-namespace Unity.MLAgents.Editor
+namespace Unity.CognitionLearn.Editor
 {
     /// <summary>
     /// Asset Importer used to parse demonstration files.

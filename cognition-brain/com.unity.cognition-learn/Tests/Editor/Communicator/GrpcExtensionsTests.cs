@@ -2,17 +2,17 @@ using System;
 using System.Text.RegularExpressions;
 using Google.Protobuf;
 using NUnit.Framework;
-using Unity.MLAgents.Actuators;
-using Unity.MLAgents.Demonstrations;
-using Unity.MLAgents.Policies;
-using Unity.MLAgents.Sensors;
+using Unity.CognitionLearn.Actuators;
+using Unity.CognitionLearn.Demonstrations;
+using Unity.CognitionLearn.Policies;
+using Unity.CognitionLearn.Sensors;
 
-using Unity.MLAgents.Analytics;
-using Unity.MLAgents.CommunicatorObjects;
+using Unity.CognitionLearn.Analytics;
+using Unity.CognitionLearn.CommunicatorObjects;
 using UnityEngine;
 using UnityEngine.TestTools;
 
-namespace Unity.MLAgents.Tests
+namespace Unity.CognitionLearn.Tests
 {
     [TestFixture]
     public class GrpcExtensionsTests

@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 using NUnit.Framework;
-using Unity.MLAgents.Actuators;
+using Unity.CognitionLearn.Actuators;
 
-namespace Unity.MLAgents.Tests.Actuators
+namespace Unity.CognitionLearn.Tests.Actuators
 {
     [TestFixture]
     public class ActuatorDiscreteActionMaskTests

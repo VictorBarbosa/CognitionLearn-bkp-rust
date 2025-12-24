@@ -2,10 +2,10 @@ using System.IO.Abstractions;
 using System.Text.RegularExpressions;
 using UnityEngine;
 using System.IO;
-using Unity.MLAgents.Policies;
+using Unity.CognitionLearn.Policies;
 using UnityEngine.Serialization;
 
-namespace Unity.MLAgents.Demonstrations
+namespace Unity.CognitionLearn.Demonstrations
 {
     /// <summary>
     /// The Demonstration Recorder component facilitates the recording of demonstrations
@@ -22,7 +22,7 @@ namespace Unity.MLAgents.Demonstrations
     /// [Imitation Learning - Recording Demonstrations]: https://docs.unity3d.com/Packages/com.unity.ml-agents@latest/index.html?subfolder=/manual/Learning-Environment-Design-Agents.html#recording-demonstrations
     /// </remarks>
     [RequireComponent(typeof(Agent))]
-    [AddComponentMenu("ML Agents/Demonstration Recorder", (int)MenuGroup.Default)]
+    [AddComponentMenu("Cognition Learn/Demonstration Recorder", (int)MenuGroup.Default)]
     public class DemonstrationRecorder : MonoBehaviour
     {
         /// <summary>

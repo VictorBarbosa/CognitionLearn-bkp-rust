@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Unity.MLAgents.Actuators
+namespace Unity.CognitionLearn.Actuators
 {
     /// <summary>
     /// Implementation of IDiscreteActionMask that allows writing to the action mask from an <see cref="IActuator"/>.

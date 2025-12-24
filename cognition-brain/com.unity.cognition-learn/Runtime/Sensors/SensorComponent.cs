@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Unity.MLAgents.Sensors
+namespace Unity.CognitionLearn.Sensors
 {
     /// <summary>
     /// Editor components for creating Sensors. Generally an ISensor implementation should have a

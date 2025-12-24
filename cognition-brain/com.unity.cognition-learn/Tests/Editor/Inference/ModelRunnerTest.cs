@@ -4,12 +4,12 @@ using NUnit.Framework;
 using UnityEngine;
 using UnityEditor;
 using Unity.InferenceEngine;
-using Unity.MLAgents.Actuators;
-using Unity.MLAgents.Inference;
-using Unity.MLAgents.Policies;
+using Unity.CognitionLearn.Actuators;
+using Unity.CognitionLearn.Inference;
+using Unity.CognitionLearn.Policies;
 using System.Collections.Generic;
 
-namespace Unity.MLAgents.Tests
+namespace Unity.CognitionLearn.Tests
 {
     public class FloatThresholdComparer : IEqualityComparer<float>
     {

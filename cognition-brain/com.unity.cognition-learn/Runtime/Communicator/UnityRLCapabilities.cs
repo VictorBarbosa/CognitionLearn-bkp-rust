@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Unity.MLAgents
+namespace Unity.CognitionLearn
 {
     /// <summary>
     /// A class holding the capabilities flags for Reinforcement Learning across C# and the Trainer codebase.

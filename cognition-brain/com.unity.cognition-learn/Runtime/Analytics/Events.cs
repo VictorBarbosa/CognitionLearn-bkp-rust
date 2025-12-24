@@ -1,14 +1,14 @@
 using System;
 using System.Collections.Generic;
-using Unity.MLAgents.Actuators;
-using Unity.MLAgents.Sensors;
+using Unity.CognitionLearn.Actuators;
+using Unity.CognitionLearn.Sensors;
 using UnityEngine.Analytics;
 
-namespace Unity.MLAgents.Analytics
+namespace Unity.CognitionLearn.Analytics
 {
     internal static class AnalyticsConstants
     {
-        public const string k_VendorKey = "unity.ml-agents";
+        public const string k_VendorKey = "Unity.CognitionLearn";
 
         /// <summary>
         /// Maximum number of events sent per hour.

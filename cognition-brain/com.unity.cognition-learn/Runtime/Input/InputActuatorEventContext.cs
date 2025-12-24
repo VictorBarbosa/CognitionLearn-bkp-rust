@@ -7,14 +7,14 @@ using UnityEngine.InputSystem.LowLevel;
 using UnityEditor;
 #endif
 
-namespace Unity.MLAgents.Input
+namespace Unity.CognitionLearn.Input
 {
     /// <summary>
     /// This interface is passed to InputActionActuators to allow them to write to InputEvents.
     /// The way this interface should be used is to request the <see cref="InputEventPtr"/> by calling
     /// <see cref="GetEventForFrame"/> then call <see cref="EventProcessedInFrame"/> before returning from
     /// </summary>
-    [UnityEngine.Scripting.APIUpdating.MovedFrom("Unity.MLAgents.Extensions.Input")]
+    [UnityEngine.Scripting.APIUpdating.MovedFrom("Unity.CognitionLearn.Extensions.Input")]
     public class InputActuatorEventContext : IDisposable
     {
         /// <summary>

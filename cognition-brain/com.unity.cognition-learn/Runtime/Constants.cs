@@ -1,4 +1,4 @@
-namespace Unity.MLAgents
+namespace Unity.CognitionLearn
 {
     /// <summary>
     /// Grouping for use in AddComponentMenu (instead of nesting the menus).

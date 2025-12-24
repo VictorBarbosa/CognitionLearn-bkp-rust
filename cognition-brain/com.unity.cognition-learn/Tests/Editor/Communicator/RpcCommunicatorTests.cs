@@ -1,7 +1,7 @@
 using NUnit.Framework;
 using UnityEngine.TestTools;
 
-namespace Unity.MLAgents.Tests.Communicator
+namespace Unity.CognitionLearn.Tests.Communicator
 {
     [TestFixture]
     public class RpcCommunicatorTests

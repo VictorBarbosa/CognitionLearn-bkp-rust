@@ -3,12 +3,12 @@ using System.Linq;
 using System.Text;
 using NUnit.Framework;
 using Google.Protobuf;
-using Unity.MLAgents.Analytics;
-using Unity.MLAgents.SideChannels;
-using Unity.MLAgents.CommunicatorObjects;
+using Unity.CognitionLearn.Analytics;
+using Unity.CognitionLearn.SideChannels;
+using Unity.CognitionLearn.CommunicatorObjects;
 
 
-namespace Unity.MLAgents.Tests
+namespace Unity.CognitionLearn.Tests
 {
     /// <summary>
     /// These tests send messages through the event handling code.

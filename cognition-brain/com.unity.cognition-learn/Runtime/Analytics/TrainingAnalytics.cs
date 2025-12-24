@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using Unity.MLAgents.Actuators;
-using Unity.MLAgents.Sensors;
+using Unity.CognitionLearn.Actuators;
+using Unity.CognitionLearn.Sensors;
 using UnityEngine;
 #if MLA_UNITY_ANALYTICS_MODULE
 
@@ -19,7 +19,7 @@ using UnityEditor.Analytics;
 using UnityEditor;
 #endif
 
-namespace Unity.MLAgents.Analytics
+namespace Unity.CognitionLearn.Analytics
 {
     internal static class TrainingAnalytics
     {

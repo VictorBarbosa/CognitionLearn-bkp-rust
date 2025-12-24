@@ -1,11 +1,11 @@
 using UnityEngine;
 
-namespace Unity.MLAgents.Sensors
+namespace Unity.CognitionLearn.Sensors
 {
     /// <summary>
     /// A SensorComponent that creates a <see cref="VectorSensor"/>.
     /// </summary>
-    [AddComponentMenu("ML Agents/Vector Sensor", (int)MenuGroup.Sensors)]
+    [AddComponentMenu("Cognition Learn/Vector Sensor", (int)MenuGroup.Sensors)]
     public class VectorSensorComponent : SensorComponent
     {
         /// <summary>

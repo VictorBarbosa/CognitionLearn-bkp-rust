@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System;
 
-namespace Unity.MLAgents.SideChannels
+namespace Unity.CognitionLearn.SideChannels
 {
     /// <summary>
     /// Side channel for managing raw bytes of data. It is up to the clients of this side channel

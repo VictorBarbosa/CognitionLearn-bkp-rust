@@ -1,7 +1,7 @@
 using System;
 using System.Reflection;
 
-namespace Unity.MLAgents.Sensors.Reflection
+namespace Unity.CognitionLearn.Sensors.Reflection
 {
     /// <summary>
     /// Construction info for a ReflectionSensorBase.

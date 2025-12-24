@@ -2,15 +2,15 @@ using System;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Runtime.CompilerServices;
-using Unity.MLAgents.Actuators;
-using Unity.MLAgents.Policies;
-using Unity.MLAgents.Sensors;
-using Unity.MLAgents.Sensors.Reflection;
+using Unity.CognitionLearn.Actuators;
+using Unity.CognitionLearn.Policies;
+using Unity.CognitionLearn.Sensors;
+using Unity.CognitionLearn.Sensors.Reflection;
 
-[assembly: InternalsVisibleTo("Unity.ML-Agents.Editor.Tests")]
-[assembly: InternalsVisibleTo("Unity.ML-Agents.Runtime.Sensor.Tests")]
+[assembly: InternalsVisibleTo("Unity.CognitionLearn.Editor.Tests")]
+[assembly: InternalsVisibleTo("Unity.CognitionLearn.Runtime.Sensor.Tests")]
 
-namespace Unity.MLAgents.Utils.Tests
+namespace Unity.CognitionLearn.Utils.Tests
 {
     internal class TestPolicy : IPolicy
     {

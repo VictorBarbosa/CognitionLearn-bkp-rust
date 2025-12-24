@@ -6,8 +6,8 @@ using UnityEngine;
 using UnityEditor;
 using UnityEngine.UIElements;
 
-[assembly: InternalsVisibleTo("Unity.ML-Agents.DevTests.Editor")]
-namespace Unity.MLAgents.Editor
+[assembly: InternalsVisibleTo("Unity.CognitionLearn.DevTests.Editor")]
+namespace Unity.CognitionLearn.Editor
 {
     internal class MLAgentsSettingsProvider : SettingsProvider, IDisposable
     {

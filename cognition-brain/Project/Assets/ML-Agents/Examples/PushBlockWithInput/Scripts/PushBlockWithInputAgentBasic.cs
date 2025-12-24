@@ -1,8 +1,8 @@
 //Put this script on your blue cube.
 using System.Collections;
 using UnityEngine;
-using Unity.MLAgents;
-using Unity.MLAgents.Actuators;
+using Unity.CognitionLearn;
+using Unity.CognitionLearn.Actuators;
 using Random = UnityEngine.Random;
 
 public class PushBlockWithInputAgentBasic : Agent

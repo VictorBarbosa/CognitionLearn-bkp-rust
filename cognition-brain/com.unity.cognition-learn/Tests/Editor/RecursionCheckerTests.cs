@@ -1,7 +1,7 @@
 using System;
 using NUnit.Framework;
 
-namespace Unity.MLAgents.Tests
+namespace Unity.CognitionLearn.Tests
 {
     [TestFixture]
     public class RecursionCheckerTests

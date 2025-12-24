@@ -1,6 +1,6 @@
 using UnityEditor;
-using Unity.MLAgents.Sensors;
-namespace Unity.MLAgents.Editor
+using Unity.CognitionLearn.Sensors;
+namespace Unity.CognitionLearn.Editor
 {
     [CustomEditor(typeof(RenderTextureSensorComponent), editorForChildClasses: true)]
     [CanEditMultipleObjects]

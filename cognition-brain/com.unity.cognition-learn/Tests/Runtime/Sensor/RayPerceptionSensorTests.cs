@@ -1,10 +1,10 @@
 using System.Collections.Generic;
 using NUnit.Framework;
 using UnityEngine;
-using Unity.MLAgents.Sensors;
+using Unity.CognitionLearn.Sensors;
 using UnityEngine.TestTools;
 
-namespace Unity.MLAgents.Tests
+namespace Unity.CognitionLearn.Tests
 {
     public class RayPerceptionSensorTests
     {

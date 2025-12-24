@@ -1,14 +1,14 @@
 #if MLA_INPUT_TESTS
 using NUnit.Framework;
-using Unity.MLAgents.Actuators;
-using Unity.MLAgents.Input;
-using Unity.MLAgents.Policies;
+using Unity.CognitionLearn.Actuators;
+using Unity.CognitionLearn.Input;
+using Unity.CognitionLearn.Policies;
 using Unity.InferenceEngine;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.LowLevel;
 
-namespace Unity.MLAgents.Tests.Input
+namespace Unity.CognitionLearn.Tests.Input
 {
     class TestAdaptor : IRLActionInputAdaptor
     {

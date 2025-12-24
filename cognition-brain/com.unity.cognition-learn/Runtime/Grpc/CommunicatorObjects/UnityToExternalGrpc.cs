@@ -11,14 +11,14 @@
 
 using grpc = global::Grpc.Core;
 
-namespace Unity.MLAgents.CommunicatorObjects {
+namespace Unity.CognitionLearn.CommunicatorObjects {
   internal static partial class UnityToExternalProto
   {
     static readonly string __ServiceName = "communicator_objects.UnityToExternalProto";
 
-    static readonly grpc::Marshaller<global::Unity.MLAgents.CommunicatorObjects.UnityMessageProto> __Marshaller_communicator_objects_UnityMessageProto = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Unity.MLAgents.CommunicatorObjects.UnityMessageProto.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::Unity.CognitionLearn.CommunicatorObjects.UnityMessageProto> __Marshaller_communicator_objects_UnityMessageProto = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Unity.CognitionLearn.CommunicatorObjects.UnityMessageProto.Parser.ParseFrom);
 
-    static readonly grpc::Method<global::Unity.MLAgents.CommunicatorObjects.UnityMessageProto, global::Unity.MLAgents.CommunicatorObjects.UnityMessageProto> __Method_Exchange = new grpc::Method<global::Unity.MLAgents.CommunicatorObjects.UnityMessageProto, global::Unity.MLAgents.CommunicatorObjects.UnityMessageProto>(
+    static readonly grpc::Method<global::Unity.CognitionLearn.CommunicatorObjects.UnityMessageProto, global::Unity.CognitionLearn.CommunicatorObjects.UnityMessageProto> __Method_Exchange = new grpc::Method<global::Unity.CognitionLearn.CommunicatorObjects.UnityMessageProto, global::Unity.CognitionLearn.CommunicatorObjects.UnityMessageProto>(
         grpc::MethodType.Unary,
         __ServiceName,
         "Exchange",
@@ -28,7 +28,7 @@ namespace Unity.MLAgents.CommunicatorObjects {
     /// <summary>Service descriptor</summary>
     public static global::Google.Protobuf.Reflection.ServiceDescriptor Descriptor
     {
-      get { return global::Unity.MLAgents.CommunicatorObjects.UnityToExternalReflection.Descriptor.Services[0]; }
+      get { return global::Unity.CognitionLearn.CommunicatorObjects.UnityToExternalReflection.Descriptor.Services[0]; }
     }
 
     /// <summary>Base class for server-side implementations of UnityToExternalProto</summary>
@@ -40,7 +40,7 @@ namespace Unity.MLAgents.CommunicatorObjects {
       /// <param name="request">The request received from the client.</param>
       /// <param name="context">The context of the server-side call handler being invoked.</param>
       /// <returns>The response to send back to the client (wrapped by a task).</returns>
-      public virtual global::System.Threading.Tasks.Task<global::Unity.MLAgents.CommunicatorObjects.UnityMessageProto> Exchange(global::Unity.MLAgents.CommunicatorObjects.UnityMessageProto request, grpc::ServerCallContext context)
+      public virtual global::System.Threading.Tasks.Task<global::Unity.CognitionLearn.CommunicatorObjects.UnityMessageProto> Exchange(global::Unity.CognitionLearn.CommunicatorObjects.UnityMessageProto request, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
@@ -78,7 +78,7 @@ namespace Unity.MLAgents.CommunicatorObjects {
       /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
       /// <param name="cancellationToken">An optional token for canceling the call.</param>
       /// <returns>The response received from the server.</returns>
-      public virtual global::Unity.MLAgents.CommunicatorObjects.UnityMessageProto Exchange(global::Unity.MLAgents.CommunicatorObjects.UnityMessageProto request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      public virtual global::Unity.CognitionLearn.CommunicatorObjects.UnityMessageProto Exchange(global::Unity.CognitionLearn.CommunicatorObjects.UnityMessageProto request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
         return Exchange(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
@@ -88,7 +88,7 @@ namespace Unity.MLAgents.CommunicatorObjects {
       /// <param name="request">The request to send to the server.</param>
       /// <param name="options">The options for the call.</param>
       /// <returns>The response received from the server.</returns>
-      public virtual global::Unity.MLAgents.CommunicatorObjects.UnityMessageProto Exchange(global::Unity.MLAgents.CommunicatorObjects.UnityMessageProto request, grpc::CallOptions options)
+      public virtual global::Unity.CognitionLearn.CommunicatorObjects.UnityMessageProto Exchange(global::Unity.CognitionLearn.CommunicatorObjects.UnityMessageProto request, grpc::CallOptions options)
       {
         return CallInvoker.BlockingUnaryCall(__Method_Exchange, null, options, request);
       }
@@ -100,7 +100,7 @@ namespace Unity.MLAgents.CommunicatorObjects {
       /// <param name="deadline">An optional deadline for the call. The call will be cancelled if deadline is hit.</param>
       /// <param name="cancellationToken">An optional token for canceling the call.</param>
       /// <returns>The call object.</returns>
-      public virtual grpc::AsyncUnaryCall<global::Unity.MLAgents.CommunicatorObjects.UnityMessageProto> ExchangeAsync(global::Unity.MLAgents.CommunicatorObjects.UnityMessageProto request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      public virtual grpc::AsyncUnaryCall<global::Unity.CognitionLearn.CommunicatorObjects.UnityMessageProto> ExchangeAsync(global::Unity.CognitionLearn.CommunicatorObjects.UnityMessageProto request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
         return ExchangeAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
@@ -110,7 +110,7 @@ namespace Unity.MLAgents.CommunicatorObjects {
       /// <param name="request">The request to send to the server.</param>
       /// <param name="options">The options for the call.</param>
       /// <returns>The call object.</returns>
-      public virtual grpc::AsyncUnaryCall<global::Unity.MLAgents.CommunicatorObjects.UnityMessageProto> ExchangeAsync(global::Unity.MLAgents.CommunicatorObjects.UnityMessageProto request, grpc::CallOptions options)
+      public virtual grpc::AsyncUnaryCall<global::Unity.CognitionLearn.CommunicatorObjects.UnityMessageProto> ExchangeAsync(global::Unity.CognitionLearn.CommunicatorObjects.UnityMessageProto request, grpc::CallOptions options)
       {
         return CallInvoker.AsyncUnaryCall(__Method_Exchange, null, options, request);
       }

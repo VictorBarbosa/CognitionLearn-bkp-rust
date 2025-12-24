@@ -1,4 +1,4 @@
-namespace Unity.MLAgents.Actuators
+namespace Unity.CognitionLearn.Actuators
 {
     /// <summary>
     /// Abstraction that facilitates the execution of actions.

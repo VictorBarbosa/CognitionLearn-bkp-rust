@@ -1,7 +1,7 @@
 using Unity.InferenceEngine;
-using Unity.MLAgents.Inference;
+using Unity.CognitionLearn.Inference;
 
-namespace Unity.MLAgents.Sensors
+namespace Unity.CognitionLearn.Sensors
 {
     /// <summary>
     /// Utility methods related to <see cref="ISensor"/> implementations.

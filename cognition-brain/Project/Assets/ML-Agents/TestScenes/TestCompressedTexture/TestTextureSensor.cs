@@ -1,5 +1,5 @@
 using UnityEngine;
-using Unity.MLAgents.Sensors;
+using Unity.CognitionLearn.Sensors;
 
 public class TestTextureSensor : ISensor
 {

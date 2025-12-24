@@ -1,10 +1,10 @@
 #if MLA_INPUT_TESTS
 using NUnit.Framework;
-using Unity.MLAgents.Actuators;
-using Unity.MLAgents.Input;
+using Unity.CognitionLearn.Actuators;
+using Unity.CognitionLearn.Input;
 using UnityEngine.InputSystem;
 
-namespace Unity.MLAgents.Tests.Input
+namespace Unity.CognitionLearn.Tests.Input
 {
     public class IntegerInputActionAdaptorTests : InputTestFixture
     {

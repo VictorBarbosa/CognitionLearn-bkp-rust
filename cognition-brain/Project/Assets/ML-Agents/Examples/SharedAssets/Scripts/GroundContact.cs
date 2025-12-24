@@ -1,7 +1,7 @@
 using UnityEngine;
-using Unity.MLAgents;
+using Unity.CognitionLearn;
 
-namespace Unity.MLAgentsExamples
+namespace Unity.CognitionLearnExamples
 {
     /// <summary>
     /// This class contains logic for locomotion agents with joints which might make contact with the ground.

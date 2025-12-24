@@ -1,9 +1,9 @@
 using System;
 using UnityEngine;
 using UnityEngine.Serialization;
-using Unity.MLAgents.Actuators;
+using Unity.CognitionLearn.Actuators;
 
-namespace Unity.MLAgents.Policies
+namespace Unity.CognitionLearn.Policies
 {
     /// <summary>
     /// This is deprecated. Agents can now use both continuous and discrete actions together.

@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using Unity.InferenceEngine;
-using Unity.MLAgents.Actuators;
+using Unity.CognitionLearn.Actuators;
 
 
-namespace Unity.MLAgents.Inference
+namespace Unity.CognitionLearn.Inference
 {
     /// <summary>
     /// Mapping between the output tensor names and the method that will use the

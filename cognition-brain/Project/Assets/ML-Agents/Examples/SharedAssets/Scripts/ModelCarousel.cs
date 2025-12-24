@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using TMPro;
 using Unity.InferenceEngine;
-using Unity.MLAgents;
-using Unity.MLAgents.Policies;
+using Unity.CognitionLearn;
+using Unity.CognitionLearn.Policies;
 using UnityEditor;
 #if UNITY_EDITOR
 using UnityEditor.Recorder;

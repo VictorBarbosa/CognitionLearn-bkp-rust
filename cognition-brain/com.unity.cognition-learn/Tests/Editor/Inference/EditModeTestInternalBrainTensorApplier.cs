@@ -1,10 +1,10 @@
 using System.Collections.Generic;
 using NUnit.Framework;
 using Unity.InferenceEngine;
-using Unity.MLAgents.Actuators;
-using Unity.MLAgents.Inference;
+using Unity.CognitionLearn.Actuators;
+using Unity.CognitionLearn.Inference;
 
-namespace Unity.MLAgents.Tests
+namespace Unity.CognitionLearn.Tests
 {
     public class EditModeTestInternalBrainTensorApplier
     {

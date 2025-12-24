@@ -1,9 +1,9 @@
 using NUnit.Framework;
-using Unity.MLAgents.Actuators;
-using Unity.MLAgents.Policies;
+using Unity.CognitionLearn.Actuators;
+using Unity.CognitionLearn.Policies;
 using UnityEngine;
 
-namespace Unity.MLAgents.Tests.Policies
+namespace Unity.CognitionLearn.Tests.Policies
 {
     [TestFixture]
     public class HeuristicPolicyTest

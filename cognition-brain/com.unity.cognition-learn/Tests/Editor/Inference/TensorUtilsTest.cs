@@ -1,10 +1,10 @@
 using System;
 using NUnit.Framework;
 using Unity.InferenceEngine;
-using Unity.MLAgents.Inference;
-using Unity.MLAgents.Inference.Utils;
+using Unity.CognitionLearn.Inference;
+using Unity.CognitionLearn.Inference.Utils;
 
-namespace Unity.MLAgents.Tests
+namespace Unity.CognitionLearn.Tests
 {
     public class TensorUtilsTest
     {

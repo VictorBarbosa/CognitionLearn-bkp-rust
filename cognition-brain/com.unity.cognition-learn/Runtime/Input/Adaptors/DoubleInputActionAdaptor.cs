@@ -1,15 +1,15 @@
 #if MLA_INPUT_SYSTEM
-using Unity.MLAgents.Actuators;
+using Unity.CognitionLearn.Actuators;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Controls;
 using UnityEngine.InputSystem.LowLevel;
 
-namespace Unity.MLAgents.Input
+namespace Unity.CognitionLearn.Input
 {
     /// <summary>
     /// Translates data from a <see cref="UnityEngine.InputSystem.Controls.DoubleControl"/>.
     /// </summary>
-    [UnityEngine.Scripting.APIUpdating.MovedFrom("Unity.MLAgents.Extensions.Input")]
+    [UnityEngine.Scripting.APIUpdating.MovedFrom("Unity.CognitionLearn.Extensions.Input")]
     public class DoubleInputActionAdaptor : IRLActionInputAdaptor
     {
         /// <inheritdoc cref="IRLActionInputAdaptor.GetActionSpecForInputAction"/>

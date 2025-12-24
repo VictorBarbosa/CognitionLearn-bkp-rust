@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
-using Unity.MLAgents.SideChannels;
+using Unity.CognitionLearn.SideChannels;
 
-namespace Unity.MLAgents
+namespace Unity.CognitionLearn
 {
     /// <summary>
     /// A container for the Environment Parameters that may be modified during training.

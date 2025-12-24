@@ -3,7 +3,7 @@ using System.Collections;
 using NUnit.Framework;
 
 
-namespace Unity.MLAgents.Tests
+namespace Unity.CognitionLearn.Tests
 {
     [TestFixture]
     public class InplaceArrayTests

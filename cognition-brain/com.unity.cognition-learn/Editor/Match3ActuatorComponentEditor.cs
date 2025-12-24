@@ -1,6 +1,6 @@
 using UnityEditor;
-using Unity.MLAgents.Integrations.Match3;
-namespace Unity.MLAgents.Editor
+using Unity.CognitionLearn.Integrations.Match3;
+namespace Unity.CognitionLearn.Editor
 {
     [CustomEditor(typeof(Match3ActuatorComponent), editorForChildClasses: true)]
     [CanEditMultipleObjects]

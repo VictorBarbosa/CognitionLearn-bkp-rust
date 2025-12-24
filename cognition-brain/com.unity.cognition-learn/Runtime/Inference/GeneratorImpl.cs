@@ -1,11 +1,11 @@
 using System.Collections.Generic;
 using System;
 using Unity.InferenceEngine;
-using Unity.MLAgents.Inference.Utils;
-using Unity.MLAgents.Sensors;
-using static Unity.MLAgents.Inference.TensorProxy;
+using Unity.CognitionLearn.Inference.Utils;
+using Unity.CognitionLearn.Sensors;
+using static Unity.CognitionLearn.Inference.TensorProxy;
 
-namespace Unity.MLAgents.Inference
+namespace Unity.CognitionLearn.Inference
 {
     /// <summary>
     /// Reshapes a Tensor so that its first dimension becomes equal to the current batch size

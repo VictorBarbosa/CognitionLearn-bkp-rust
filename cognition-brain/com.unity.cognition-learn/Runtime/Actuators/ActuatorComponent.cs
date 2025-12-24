@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Unity.MLAgents.Actuators
+namespace Unity.CognitionLearn.Actuators
 {
     /// <summary>
     /// Editor components for creating Actuators. Generally an IActuator component should

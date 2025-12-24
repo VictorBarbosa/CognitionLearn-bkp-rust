@@ -2,12 +2,12 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-namespace Unity.MLAgents.Sensors
+namespace Unity.CognitionLearn.Sensors
 {
     /// <summary>
     /// A SensorComponent that creates a <see cref="GridSensorBase"/>.
     /// </summary>
-    [AddComponentMenu("ML Agents/Grid Sensor", (int)MenuGroup.Sensors)]
+    [AddComponentMenu("Cognition Learn/Grid Sensor", (int)MenuGroup.Sensors)]
     public class GridSensorComponent : SensorComponent
     {
         // dummy sensor only used for debug gizmo

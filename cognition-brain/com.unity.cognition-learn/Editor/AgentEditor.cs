@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEditor;
 
-namespace Unity.MLAgents.Editor
+namespace Unity.CognitionLearn.Editor
 {
     /*
      This code is meant to modify the behavior of the inspector on Agent Components.

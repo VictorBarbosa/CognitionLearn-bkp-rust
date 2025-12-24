@@ -1,5 +1,5 @@
-using Unity.MLAgents.Actuators;
-namespace Unity.MLAgents.Tests.Actuators
+using Unity.CognitionLearn.Actuators;
+namespace Unity.CognitionLearn.Tests.Actuators
 {
     internal class TestActuator : IActuator
     {

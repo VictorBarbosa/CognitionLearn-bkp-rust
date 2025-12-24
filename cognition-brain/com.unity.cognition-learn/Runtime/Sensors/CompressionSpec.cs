@@ -1,5 +1,5 @@
 using System.Linq;
-namespace Unity.MLAgents.Sensors
+namespace Unity.CognitionLearn.Sensors
 {
     /// <summary>
     /// The compression setting for visual/camera observations.

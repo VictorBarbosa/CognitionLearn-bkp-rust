@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
-namespace Unity.MLAgents.Sensors
+namespace Unity.CognitionLearn.Sensors
 {
     /// <summary>
     /// Abstract class for managing the transforms of a hierarchy of objects.
@@ -14,7 +14,7 @@ namespace Unity.MLAgents.Sensors
     /// Poses are either considered in model space, which is relative to a root body,
     /// or in local space, which is relative to their parent.
     /// </summary>
-    [UnityEngine.Scripting.APIUpdating.MovedFrom("Unity.MLAgents.Extensions.Sensors")]
+    [UnityEngine.Scripting.APIUpdating.MovedFrom("Unity.CognitionLearn.Extensions.Sensors")]
     public abstract class PoseExtractor
     {
         int[] m_ParentIndices;

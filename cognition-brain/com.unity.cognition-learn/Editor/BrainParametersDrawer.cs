@@ -1,8 +1,8 @@
 using UnityEngine;
 using UnityEditor;
-using Unity.MLAgents.Policies;
+using Unity.CognitionLearn.Policies;
 
-namespace Unity.MLAgents.Editor
+namespace Unity.CognitionLearn.Editor
 {
     /// <summary>
     /// PropertyDrawer for BrainParameters. Defines how BrainParameters are displayed in the

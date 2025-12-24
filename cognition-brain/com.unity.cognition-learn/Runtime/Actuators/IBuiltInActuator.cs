@@ -1,4 +1,4 @@
-namespace Unity.MLAgents.Actuators
+namespace Unity.CognitionLearn.Actuators
 {
     /// <summary>
     /// Identifiers for "built in" actuator types.

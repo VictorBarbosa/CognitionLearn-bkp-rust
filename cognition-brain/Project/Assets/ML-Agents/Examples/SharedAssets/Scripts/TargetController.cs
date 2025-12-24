@@ -1,9 +1,9 @@
 using UnityEngine;
 using Random = UnityEngine.Random;
-using Unity.MLAgents;
+using Unity.CognitionLearn;
 using UnityEngine.Events;
 
-namespace Unity.MLAgentsExamples
+namespace Unity.CognitionLearnExamples
 {
     /// <summary>
     /// Utility class to allow target placement and collision detection with an agent
