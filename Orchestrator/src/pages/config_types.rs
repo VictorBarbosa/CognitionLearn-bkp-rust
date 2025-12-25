@@ -47,6 +47,7 @@ pub struct CheckpointSettings {
     pub run_id: String,
     pub mode: CheckpointMode, // Substituído os booleanos por um enum
     pub results_dir: String,
+    pub enable_race_mode: bool,
 }
 
 impl Default for CheckpointSettings {
@@ -55,6 +56,7 @@ impl Default for CheckpointSettings {
             run_id: String::from(""),
             mode: CheckpointMode::None,
             results_dir: String::from("results"),
+            enable_race_mode: false,
         }
     }
 }

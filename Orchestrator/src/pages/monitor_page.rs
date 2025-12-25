@@ -1,5 +1,5 @@
 use eframe::egui;
-use egui_plot::{Line, Plot, PlotPoints, Legend, Corner};
+use egui_plot::{Line, Plot, PlotPoints, Legend, Corner, VLine, Text};
 use std::sync::mpsc::Receiver;
 use crate::trainer::GuiUpdate;
 use std::collections::{VecDeque, HashMap, BTreeMap};
@@ -15,6 +15,9 @@ pub struct MonitorPage {
     
     // UI State
     selected_tab: String,
+    
+    // Race Info
+    race_config: Option<(usize, Vec<f32>)>,
 }
 
 impl MonitorPage {
@@ -24,6 +27,7 @@ impl MonitorPage {
             logs: VecDeque::new(),
             max_log_lines: 1000,
             selected_tab: "Overview".to_string(),
+            race_config: None,
         }
     }
 
@@ -83,6 +87,10 @@ impl MonitorPage {
                              .push([step_f64, value as f64]);
                      }
                 }
+                GuiUpdate::RaceConfig { total_steps, checkpoints } => {
+                    self.race_config = Some((total_steps, checkpoints.clone()));
+                    self.add_log(format!("🏁 Race Configured: {} steps, Checkpoints: {:?}", total_steps, checkpoints));
+                }
             }
         }
 
@@ -99,7 +107,7 @@ impl MonitorPage {
                 ui.heading("Logs");
                 ui.separator();
                 egui::ScrollArea::vertical()
-                    .id_source("monitor_logs_scroll") // Explicit ID
+                    .id_salt("monitor_logs_scroll") // Explicit ID
                     .stick_to_bottom(true)
                     .show(ui, |ui| {
                     for log in &self.logs {
@@ -124,10 +132,12 @@ impl MonitorPage {
                 categories.retain(|c| c != "Overview");
                 categories.insert(0, "Overview".to_string());
             }
+            // Add Race tab explicitly
+            categories.insert(1, "Race".to_string());
 
             // Tabs
             egui::ScrollArea::horizontal()
-                .id_source("monitor_tabs_scroll") // Explicit ID
+                .id_salt("monitor_tabs_scroll") // Explicit ID
                 .show(ui, |ui| {
                 ui.horizontal(|ui| {
                     for cat in &categories {
@@ -141,9 +151,74 @@ impl MonitorPage {
 
             // Content for selected tab
             egui::ScrollArea::vertical()
-                .id_source("monitor_content_scroll") // Explicit ID
+                .id_salt("monitor_content_scroll") // Explicit ID
                 .show(ui, |ui| {
-                if let Some(metrics_map) = self.metrics_history.get(&self.selected_tab) {
+                
+                if self.selected_tab == "Race" {
+                     // Custom Race View
+                     
+                     // 1. Progress Bar (if race config available)
+                     if let Some((total_steps, _)) = &self.race_config {
+                         // Calculate max current step from data
+                         let mut max_current_step = 0.0;
+                         if let Some(overview_map) = self.metrics_history.get("Overview") {
+                             if let Some(reward_data) = overview_map.get("Average Reward") {
+                                 for points in reward_data.values() {
+                                     if let Some(last) = points.last() {
+                                         if last[0] > max_current_step { max_current_step = last[0]; }
+                                     }
+                                 }
+                             }
+                         }
+                         
+                         let progress = (max_current_step / *total_steps as f64).clamp(0.0, 1.0);
+                         ui.add(egui::ProgressBar::new(progress as f32)
+                            .text(format!("Race Progress: {:.1}% (Step {:.0}/{})", progress * 100.0, max_current_step, total_steps))
+                            .animate(true)
+                         );
+                         ui.add_space(10.0);
+                     }
+
+                     // 2. Race Chart with Milestones
+                     if let Some(overview_map) = self.metrics_history.get("Overview") {
+                         if let Some(reward_data) = overview_map.get("Average Reward") {
+                             ui.label(egui::RichText::new("🏆 Race Progress (Average Reward)").strong().size(20.0));
+                             
+                             Plot::new("plot_race_reward")
+                                .height(500.0)
+                                .legend(Legend::default().position(Corner::LeftTop))
+                                .show(ui, |plot_ui| {
+                                    // Plot Agent Lines
+                                    for (behavior, points) in reward_data {
+                                        plot_ui.line(Line::new(PlotPoints::new(points.clone())).name(behavior).width(2.0));
+                                    }
+                                    
+                                    // Plot Milestones
+                                    if let Some((total_steps, checkpoints)) = &self.race_config {
+                                        for (i, &pct) in checkpoints.iter().enumerate() {
+                                            let step_x = *total_steps as f64 * pct as f64;
+                                            plot_ui.vline(VLine::new(step_x).color(egui::Color32::YELLOW).style(egui_plot::LineStyle::Dashed { length: 10.0 }));
+                                            
+                                            // Add label slightly offset
+                                            plot_ui.text(Text::new(
+                                                egui_plot::PlotPoint::new(step_x, 0.0), // Y=0 anchor
+                                                format!("Phase {} ({:.0}%)", i + 1, pct * 100.0)
+                                            ).color(egui::Color32::YELLOW).anchor(egui::Align2::LEFT_BOTTOM));
+                                        }
+                                        
+                                        // Finish Line
+                                        plot_ui.vline(VLine::new(*total_steps as f64).color(egui::Color32::GREEN).width(2.0));
+                                        plot_ui.text(Text::new(
+                                            egui_plot::PlotPoint::new(*total_steps as f64, 0.0),
+                                            "FINISH"
+                                        ).color(egui::Color32::GREEN).anchor(egui::Align2::RIGHT_BOTTOM));
+                                    }
+                                });
+                         } else {
+                             ui.label("Waiting for reward data to start the race visualization...");
+                         }
+                     }
+                } else if let Some(metrics_map) = self.metrics_history.get(&self.selected_tab) {
                     for (metric_name, behaviors) in metrics_map {
                         ui.label(egui::RichText::new(metric_name).strong().size(16.0));
                         

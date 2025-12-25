@@ -27,5 +27,15 @@ Example/CognitionLearn/runs/
 Example/CognitionLearn/Assets/Trainning/checkpoint/*.json
 Example/CognitionLearn/Assets/Trainning/
 
+Logs/checkpoint/ppo/metadata.json
+*.log
+
+*.out.tfevents.
+
+Logs/checkpoint/ppo/metadata.json
+*.log
+
+*.out.tfevents.
+
 Logs/*.log
 *.pdb.meta
