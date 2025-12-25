@@ -41,7 +41,16 @@ namespace Unity.CognitionLearn
         public SharedMemoryCommunicator()
         {
             // Start the connection process asynchronously to avoid blocking the Main Thread
+            // CRITICAL: Only attempt to connect if we are NOT in the Editor or if we are in Play Mode.
+            // This prevents TimeoutExceptions during Unity Build processes.
+#if UNITY_EDITOR
+            if (UnityEditor.EditorApplication.isPlaying)
+            {
+                _connectTask = Task.Run(ConnectAsync);
+            }
+#else
             _connectTask = Task.Run(ConnectAsync);
+#endif
         }
 
         private async Task ConnectAsync()

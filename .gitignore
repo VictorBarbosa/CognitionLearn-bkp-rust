@@ -39,3 +39,4 @@ Logs/checkpoint/ppo/metadata.json
 
 Logs/*.log
 *.pdb.meta
+Logs/logs/run_1766679897_PPO_\["5005", "5006", "5007"]/events.out.tfevents.1766679897.MacbookPro.49606.0

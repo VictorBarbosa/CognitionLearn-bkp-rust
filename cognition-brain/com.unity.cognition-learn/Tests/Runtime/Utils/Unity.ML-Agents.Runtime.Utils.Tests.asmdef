@@ -16,7 +16,7 @@
         "System.IO.Abstractions.dll",
         "System.IO.Abstractions.TestingHelpers.dll",
         "nunit.framework.dll",
-        "Google.Protobuf_Packed.dll"
+        "Google.Protobuf.dll"
     ],
     "autoReferenced": false,
     "defineConstraints": [

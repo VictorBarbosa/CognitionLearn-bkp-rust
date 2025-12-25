@@ -13,7 +13,7 @@
     "allowUnsafeCode": false,
     "overrideReferences": true,
     "precompiledReferences": [
-        "Google.Protobuf_Packed.dll"
+        "Google.Protobuf.dll"
     ],
     "autoReferenced": true,
     "defineConstraints": [],

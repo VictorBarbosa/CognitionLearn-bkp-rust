@@ -66,7 +66,7 @@ public class CrawlerAgent : Agent
     public MeshRenderer foot3;
     public Material groundedMaterial;
     public Material unGroundedMaterial;
-
+ 
     public override void Initialize()
     {
         SpawnTarget(TargetPrefab, transform.position); //spawn target
@@ -114,6 +114,7 @@ public class CrawlerAgent : Agent
 
         //Set our goal walking speed
         TargetWalkingSpeed = Random.Range(0.1f, m_maxWalkingSpeed);
+      
     }
 
     /// <summary>
@@ -135,6 +136,7 @@ public class CrawlerAgent : Agent
     /// </summary>
     public override void CollectObservations(VectorSensor sensor)
     {
+
         var cubeForward = m_OrientationCube.transform.forward;
 
         //velocity we want to match
@@ -195,6 +197,8 @@ public class CrawlerAgent : Agent
         bpDict[leg1Lower].SetJointStrength(continuousActions[++i]);
         bpDict[leg2Lower].SetJointStrength(continuousActions[++i]);
         bpDict[leg3Lower].SetJointStrength(continuousActions[++i]);
+
+     
     }
 
     void FixedUpdate()

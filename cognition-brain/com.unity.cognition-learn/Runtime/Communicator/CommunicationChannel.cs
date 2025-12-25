@@ -221,13 +221,13 @@ namespace Unity.CognitionLearn.Communicator
             _backwardPipe = new CommunicationPipe(bwdBasePath, size);
         }
         
-        public byte[] Request(byte[] data, int timeoutMs = 30000)
+        public byte[] Request(byte[] data, int timeoutMs = 60000)
         {
             _forwardPipe.Send(data);
             return _backwardPipe.Receive(timeoutMs);
         }
 
-        public async Task<byte[]> RequestAsync(byte[] data, int timeoutMs = 30000)
+        public async Task<byte[]> RequestAsync(byte[] data, int timeoutMs = 60000)
         {
             _forwardPipe.Send(data);
             return await _backwardPipe.ReceiveAsync(timeoutMs);

@@ -9,7 +9,7 @@
     "precompiledReferences": [
         "System.IO.Abstractions.dll",
         "Grpc.Core.dll",
-        "Google.Protobuf_Packed.dll"
+        "Google.Protobuf.dll"
     ],
     "autoReferenced": true,
     "defineConstraints": [],
