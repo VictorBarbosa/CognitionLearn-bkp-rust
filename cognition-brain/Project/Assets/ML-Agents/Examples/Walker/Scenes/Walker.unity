@@ -1382,6 +1382,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7950685075463698248, guid: 84359146bf7af47e58c229d877e801d7,
         type: 3}
+      propertyPath: m_Model
+      value: 
+      objectReference: {fileID: 5022602860645237092, guid: b000e8fcd1edc454d9e6deb84abefbf9,
+        type: 3}
+    - target: {fileID: 7950685075463698248, guid: 84359146bf7af47e58c229d877e801d7,
+        type: 3}
       propertyPath: m_BehaviorName
       value: Walker
       objectReference: {fileID: 0}

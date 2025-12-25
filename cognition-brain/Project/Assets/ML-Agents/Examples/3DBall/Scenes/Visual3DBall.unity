@@ -38,12 +38,12 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
-  serializedVersion: 12
+  serializedVersion: 13
+  m_BakeOnSceneLoad: 0
   m_GISettings:
     serializedVersion: 2
     m_BounceScale: 1
@@ -287,11 +287,74 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 8195578393255815865, guid: ec49a7b8b70a24ab48d7ca0bf5a063a6,
+        type: 3}
+      propertyPath: m_BehaviorName
+      value: Visual3DBall
+      objectReference: {fileID: 0}
+    - target: {fileID: 8195578393255815865, guid: ec49a7b8b70a24ab48d7ca0bf5a063a6,
+        type: 3}
+      propertyPath: m_BrainParameters.VectorActionSpaceType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8195578393255815865, guid: ec49a7b8b70a24ab48d7ca0bf5a063a6,
+        type: 3}
+      propertyPath: m_BrainParameters.VectorObservationSize
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8195578393255815865, guid: ec49a7b8b70a24ab48d7ca0bf5a063a6,
+        type: 3}
+      propertyPath: m_BrainParameters.VectorActionSize.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8195578393255815865, guid: ec49a7b8b70a24ab48d7ca0bf5a063a6,
+        type: 3}
+      propertyPath: 'm_BrainParameters.VectorActionSize.Array.data[0]'
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8195578393255815865, guid: ec49a7b8b70a24ab48d7ca0bf5a063a6,
+        type: 3}
+      propertyPath: m_BrainParameters.m_ActionSpec.BranchSizes.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8195578393255815865, guid: ec49a7b8b70a24ab48d7ca0bf5a063a6,
+        type: 3}
+      propertyPath: m_BrainParameters.m_ActionSpec.m_NumContinuousActions
+      value: 2
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 289308178, guid: ec49a7b8b70a24ab48d7ca0bf5a063a6, type: 3}
+    - {fileID: 1306725529891448089, guid: ec49a7b8b70a24ab48d7ca0bf5a063a6, type: 3}
+    - {fileID: 114368073295828880, guid: ec49a7b8b70a24ab48d7ca0bf5a063a6, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1424713891854676, guid: ec49a7b8b70a24ab48d7ca0bf5a063a6,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 306910674}
   m_SourcePrefab: {fileID: 100100000, guid: ec49a7b8b70a24ab48d7ca0bf5a063a6, type: 3}
+--- !u!1 &306910673 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1424713891854676, guid: ec49a7b8b70a24ab48d7ca0bf5a063a6,
+    type: 3}
+  m_PrefabInstance: {fileID: 306910672}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &306910674
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 306910673}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 864985241046f4137bafe05a3043d67c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DecisionPeriod: 5
+  DecisionStep: 0
+  TakeActionsBetweenDecisions: 1
 --- !u!1001 &556696704
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -352,11 +415,74 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 8195578393255815865, guid: ec49a7b8b70a24ab48d7ca0bf5a063a6,
+        type: 3}
+      propertyPath: m_BehaviorName
+      value: Visual3DBall
+      objectReference: {fileID: 0}
+    - target: {fileID: 8195578393255815865, guid: ec49a7b8b70a24ab48d7ca0bf5a063a6,
+        type: 3}
+      propertyPath: m_BrainParameters.VectorActionSpaceType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8195578393255815865, guid: ec49a7b8b70a24ab48d7ca0bf5a063a6,
+        type: 3}
+      propertyPath: m_BrainParameters.VectorObservationSize
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8195578393255815865, guid: ec49a7b8b70a24ab48d7ca0bf5a063a6,
+        type: 3}
+      propertyPath: m_BrainParameters.VectorActionSize.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8195578393255815865, guid: ec49a7b8b70a24ab48d7ca0bf5a063a6,
+        type: 3}
+      propertyPath: 'm_BrainParameters.VectorActionSize.Array.data[0]'
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8195578393255815865, guid: ec49a7b8b70a24ab48d7ca0bf5a063a6,
+        type: 3}
+      propertyPath: m_BrainParameters.m_ActionSpec.BranchSizes.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8195578393255815865, guid: ec49a7b8b70a24ab48d7ca0bf5a063a6,
+        type: 3}
+      propertyPath: m_BrainParameters.m_ActionSpec.m_NumContinuousActions
+      value: 2
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 289308178, guid: ec49a7b8b70a24ab48d7ca0bf5a063a6, type: 3}
+    - {fileID: 1306725529891448089, guid: ec49a7b8b70a24ab48d7ca0bf5a063a6, type: 3}
+    - {fileID: 114368073295828880, guid: ec49a7b8b70a24ab48d7ca0bf5a063a6, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1424713891854676, guid: ec49a7b8b70a24ab48d7ca0bf5a063a6,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 556696706}
   m_SourcePrefab: {fileID: 100100000, guid: ec49a7b8b70a24ab48d7ca0bf5a063a6, type: 3}
+--- !u!1 &556696705 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1424713891854676, guid: ec49a7b8b70a24ab48d7ca0bf5a063a6,
+    type: 3}
+  m_PrefabInstance: {fileID: 556696704}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &556696706
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 556696705}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 864985241046f4137bafe05a3043d67c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DecisionPeriod: 5
+  DecisionStep: 0
+  TakeActionsBetweenDecisions: 1
 --- !u!1001 &996691359
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -417,11 +543,74 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 8195578393255815865, guid: ec49a7b8b70a24ab48d7ca0bf5a063a6,
+        type: 3}
+      propertyPath: m_BehaviorName
+      value: Visual3DBall
+      objectReference: {fileID: 0}
+    - target: {fileID: 8195578393255815865, guid: ec49a7b8b70a24ab48d7ca0bf5a063a6,
+        type: 3}
+      propertyPath: m_BrainParameters.VectorActionSpaceType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8195578393255815865, guid: ec49a7b8b70a24ab48d7ca0bf5a063a6,
+        type: 3}
+      propertyPath: m_BrainParameters.VectorObservationSize
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8195578393255815865, guid: ec49a7b8b70a24ab48d7ca0bf5a063a6,
+        type: 3}
+      propertyPath: m_BrainParameters.VectorActionSize.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8195578393255815865, guid: ec49a7b8b70a24ab48d7ca0bf5a063a6,
+        type: 3}
+      propertyPath: 'm_BrainParameters.VectorActionSize.Array.data[0]'
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8195578393255815865, guid: ec49a7b8b70a24ab48d7ca0bf5a063a6,
+        type: 3}
+      propertyPath: m_BrainParameters.m_ActionSpec.BranchSizes.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8195578393255815865, guid: ec49a7b8b70a24ab48d7ca0bf5a063a6,
+        type: 3}
+      propertyPath: m_BrainParameters.m_ActionSpec.m_NumContinuousActions
+      value: 2
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 289308178, guid: ec49a7b8b70a24ab48d7ca0bf5a063a6, type: 3}
+    - {fileID: 1306725529891448089, guid: ec49a7b8b70a24ab48d7ca0bf5a063a6, type: 3}
+    - {fileID: 114368073295828880, guid: ec49a7b8b70a24ab48d7ca0bf5a063a6, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1424713891854676, guid: ec49a7b8b70a24ab48d7ca0bf5a063a6,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 996691361}
   m_SourcePrefab: {fileID: 100100000, guid: ec49a7b8b70a24ab48d7ca0bf5a063a6, type: 3}
+--- !u!1 &996691360 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1424713891854676, guid: ec49a7b8b70a24ab48d7ca0bf5a063a6,
+    type: 3}
+  m_PrefabInstance: {fileID: 996691359}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &996691361
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 996691360}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 864985241046f4137bafe05a3043d67c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DecisionPeriod: 5
+  DecisionStep: 0
+  TakeActionsBetweenDecisions: 1
 --- !u!1001 &1119003996
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -482,11 +671,74 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 8195578393255815865, guid: ec49a7b8b70a24ab48d7ca0bf5a063a6,
+        type: 3}
+      propertyPath: m_BehaviorName
+      value: Visual3DBall
+      objectReference: {fileID: 0}
+    - target: {fileID: 8195578393255815865, guid: ec49a7b8b70a24ab48d7ca0bf5a063a6,
+        type: 3}
+      propertyPath: m_BrainParameters.VectorActionSpaceType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8195578393255815865, guid: ec49a7b8b70a24ab48d7ca0bf5a063a6,
+        type: 3}
+      propertyPath: m_BrainParameters.VectorObservationSize
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8195578393255815865, guid: ec49a7b8b70a24ab48d7ca0bf5a063a6,
+        type: 3}
+      propertyPath: m_BrainParameters.VectorActionSize.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8195578393255815865, guid: ec49a7b8b70a24ab48d7ca0bf5a063a6,
+        type: 3}
+      propertyPath: 'm_BrainParameters.VectorActionSize.Array.data[0]'
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8195578393255815865, guid: ec49a7b8b70a24ab48d7ca0bf5a063a6,
+        type: 3}
+      propertyPath: m_BrainParameters.m_ActionSpec.BranchSizes.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8195578393255815865, guid: ec49a7b8b70a24ab48d7ca0bf5a063a6,
+        type: 3}
+      propertyPath: m_BrainParameters.m_ActionSpec.m_NumContinuousActions
+      value: 2
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 289308178, guid: ec49a7b8b70a24ab48d7ca0bf5a063a6, type: 3}
+    - {fileID: 1306725529891448089, guid: ec49a7b8b70a24ab48d7ca0bf5a063a6, type: 3}
+    - {fileID: 114368073295828880, guid: ec49a7b8b70a24ab48d7ca0bf5a063a6, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1424713891854676, guid: ec49a7b8b70a24ab48d7ca0bf5a063a6,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1119003998}
   m_SourcePrefab: {fileID: 100100000, guid: ec49a7b8b70a24ab48d7ca0bf5a063a6, type: 3}
+--- !u!1 &1119003997 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1424713891854676, guid: ec49a7b8b70a24ab48d7ca0bf5a063a6,
+    type: 3}
+  m_PrefabInstance: {fileID: 1119003996}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1119003998
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1119003997}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 864985241046f4137bafe05a3043d67c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DecisionPeriod: 5
+  DecisionStep: 0
+  TakeActionsBetweenDecisions: 1
 --- !u!1001 &1393635142
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -547,11 +799,74 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 8195578393255815865, guid: ec49a7b8b70a24ab48d7ca0bf5a063a6,
+        type: 3}
+      propertyPath: m_BehaviorName
+      value: Visual3DBall
+      objectReference: {fileID: 0}
+    - target: {fileID: 8195578393255815865, guid: ec49a7b8b70a24ab48d7ca0bf5a063a6,
+        type: 3}
+      propertyPath: m_BrainParameters.VectorActionSpaceType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8195578393255815865, guid: ec49a7b8b70a24ab48d7ca0bf5a063a6,
+        type: 3}
+      propertyPath: m_BrainParameters.VectorObservationSize
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8195578393255815865, guid: ec49a7b8b70a24ab48d7ca0bf5a063a6,
+        type: 3}
+      propertyPath: m_BrainParameters.VectorActionSize.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8195578393255815865, guid: ec49a7b8b70a24ab48d7ca0bf5a063a6,
+        type: 3}
+      propertyPath: 'm_BrainParameters.VectorActionSize.Array.data[0]'
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8195578393255815865, guid: ec49a7b8b70a24ab48d7ca0bf5a063a6,
+        type: 3}
+      propertyPath: m_BrainParameters.m_ActionSpec.BranchSizes.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8195578393255815865, guid: ec49a7b8b70a24ab48d7ca0bf5a063a6,
+        type: 3}
+      propertyPath: m_BrainParameters.m_ActionSpec.m_NumContinuousActions
+      value: 2
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 289308178, guid: ec49a7b8b70a24ab48d7ca0bf5a063a6, type: 3}
+    - {fileID: 1306725529891448089, guid: ec49a7b8b70a24ab48d7ca0bf5a063a6, type: 3}
+    - {fileID: 114368073295828880, guid: ec49a7b8b70a24ab48d7ca0bf5a063a6, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1424713891854676, guid: ec49a7b8b70a24ab48d7ca0bf5a063a6,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1393635144}
   m_SourcePrefab: {fileID: 100100000, guid: ec49a7b8b70a24ab48d7ca0bf5a063a6, type: 3}
+--- !u!1 &1393635143 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1424713891854676, guid: ec49a7b8b70a24ab48d7ca0bf5a063a6,
+    type: 3}
+  m_PrefabInstance: {fileID: 1393635142}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1393635144
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1393635143}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 864985241046f4137bafe05a3043d67c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DecisionPeriod: 5
+  DecisionStep: 0
+  TakeActionsBetweenDecisions: 1
 --- !u!1 &1583402087
 GameObject:
   m_ObjectHideFlags: 0
@@ -730,11 +1045,74 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 8195578393255815865, guid: ec49a7b8b70a24ab48d7ca0bf5a063a6,
+        type: 3}
+      propertyPath: m_BehaviorName
+      value: Visual3DBall
+      objectReference: {fileID: 0}
+    - target: {fileID: 8195578393255815865, guid: ec49a7b8b70a24ab48d7ca0bf5a063a6,
+        type: 3}
+      propertyPath: m_BrainParameters.VectorActionSpaceType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8195578393255815865, guid: ec49a7b8b70a24ab48d7ca0bf5a063a6,
+        type: 3}
+      propertyPath: m_BrainParameters.VectorObservationSize
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8195578393255815865, guid: ec49a7b8b70a24ab48d7ca0bf5a063a6,
+        type: 3}
+      propertyPath: m_BrainParameters.VectorActionSize.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8195578393255815865, guid: ec49a7b8b70a24ab48d7ca0bf5a063a6,
+        type: 3}
+      propertyPath: 'm_BrainParameters.VectorActionSize.Array.data[0]'
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8195578393255815865, guid: ec49a7b8b70a24ab48d7ca0bf5a063a6,
+        type: 3}
+      propertyPath: m_BrainParameters.m_ActionSpec.BranchSizes.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8195578393255815865, guid: ec49a7b8b70a24ab48d7ca0bf5a063a6,
+        type: 3}
+      propertyPath: m_BrainParameters.m_ActionSpec.m_NumContinuousActions
+      value: 2
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 289308178, guid: ec49a7b8b70a24ab48d7ca0bf5a063a6, type: 3}
+    - {fileID: 1306725529891448089, guid: ec49a7b8b70a24ab48d7ca0bf5a063a6, type: 3}
+    - {fileID: 114368073295828880, guid: ec49a7b8b70a24ab48d7ca0bf5a063a6, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1424713891854676, guid: ec49a7b8b70a24ab48d7ca0bf5a063a6,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1797623015}
   m_SourcePrefab: {fileID: 100100000, guid: ec49a7b8b70a24ab48d7ca0bf5a063a6, type: 3}
+--- !u!1 &1797623014 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1424713891854676, guid: ec49a7b8b70a24ab48d7ca0bf5a063a6,
+    type: 3}
+  m_PrefabInstance: {fileID: 1797623013}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1797623015
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1797623014}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 864985241046f4137bafe05a3043d67c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DecisionPeriod: 5
+  DecisionStep: 0
+  TakeActionsBetweenDecisions: 1
 --- !u!1001 &1916479629
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -856,11 +1234,74 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 8195578393255815865, guid: ec49a7b8b70a24ab48d7ca0bf5a063a6,
+        type: 3}
+      propertyPath: m_BehaviorName
+      value: Visual3DBall
+      objectReference: {fileID: 0}
+    - target: {fileID: 8195578393255815865, guid: ec49a7b8b70a24ab48d7ca0bf5a063a6,
+        type: 3}
+      propertyPath: m_BrainParameters.VectorActionSpaceType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8195578393255815865, guid: ec49a7b8b70a24ab48d7ca0bf5a063a6,
+        type: 3}
+      propertyPath: m_BrainParameters.VectorObservationSize
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8195578393255815865, guid: ec49a7b8b70a24ab48d7ca0bf5a063a6,
+        type: 3}
+      propertyPath: m_BrainParameters.VectorActionSize.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8195578393255815865, guid: ec49a7b8b70a24ab48d7ca0bf5a063a6,
+        type: 3}
+      propertyPath: 'm_BrainParameters.VectorActionSize.Array.data[0]'
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8195578393255815865, guid: ec49a7b8b70a24ab48d7ca0bf5a063a6,
+        type: 3}
+      propertyPath: m_BrainParameters.m_ActionSpec.BranchSizes.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8195578393255815865, guid: ec49a7b8b70a24ab48d7ca0bf5a063a6,
+        type: 3}
+      propertyPath: m_BrainParameters.m_ActionSpec.m_NumContinuousActions
+      value: 2
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 289308178, guid: ec49a7b8b70a24ab48d7ca0bf5a063a6, type: 3}
+    - {fileID: 1306725529891448089, guid: ec49a7b8b70a24ab48d7ca0bf5a063a6, type: 3}
+    - {fileID: 114368073295828880, guid: ec49a7b8b70a24ab48d7ca0bf5a063a6, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1424713891854676, guid: ec49a7b8b70a24ab48d7ca0bf5a063a6,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2055232546}
   m_SourcePrefab: {fileID: 100100000, guid: ec49a7b8b70a24ab48d7ca0bf5a063a6, type: 3}
+--- !u!1 &2055232545 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1424713891854676, guid: ec49a7b8b70a24ab48d7ca0bf5a063a6,
+    type: 3}
+  m_PrefabInstance: {fileID: 2055232544}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2055232546
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2055232545}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 864985241046f4137bafe05a3043d67c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DecisionPeriod: 5
+  DecisionStep: 0
+  TakeActionsBetweenDecisions: 1
 --- !u!1 &2060751695
 GameObject:
   m_ObjectHideFlags: 0
@@ -1000,11 +1441,74 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 8195578393255815865, guid: ec49a7b8b70a24ab48d7ca0bf5a063a6,
+        type: 3}
+      propertyPath: m_BehaviorName
+      value: Visual3DBall
+      objectReference: {fileID: 0}
+    - target: {fileID: 8195578393255815865, guid: ec49a7b8b70a24ab48d7ca0bf5a063a6,
+        type: 3}
+      propertyPath: m_BrainParameters.VectorActionSpaceType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8195578393255815865, guid: ec49a7b8b70a24ab48d7ca0bf5a063a6,
+        type: 3}
+      propertyPath: m_BrainParameters.VectorObservationSize
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8195578393255815865, guid: ec49a7b8b70a24ab48d7ca0bf5a063a6,
+        type: 3}
+      propertyPath: m_BrainParameters.VectorActionSize.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8195578393255815865, guid: ec49a7b8b70a24ab48d7ca0bf5a063a6,
+        type: 3}
+      propertyPath: 'm_BrainParameters.VectorActionSize.Array.data[0]'
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8195578393255815865, guid: ec49a7b8b70a24ab48d7ca0bf5a063a6,
+        type: 3}
+      propertyPath: m_BrainParameters.m_ActionSpec.BranchSizes.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8195578393255815865, guid: ec49a7b8b70a24ab48d7ca0bf5a063a6,
+        type: 3}
+      propertyPath: m_BrainParameters.m_ActionSpec.m_NumContinuousActions
+      value: 2
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 289308178, guid: ec49a7b8b70a24ab48d7ca0bf5a063a6, type: 3}
+    - {fileID: 1306725529891448089, guid: ec49a7b8b70a24ab48d7ca0bf5a063a6, type: 3}
+    - {fileID: 114368073295828880, guid: ec49a7b8b70a24ab48d7ca0bf5a063a6, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1424713891854676, guid: ec49a7b8b70a24ab48d7ca0bf5a063a6,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2133304612}
   m_SourcePrefab: {fileID: 100100000, guid: ec49a7b8b70a24ab48d7ca0bf5a063a6, type: 3}
+--- !u!1 &2133304611 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1424713891854676, guid: ec49a7b8b70a24ab48d7ca0bf5a063a6,
+    type: 3}
+  m_PrefabInstance: {fileID: 2133304610}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2133304612
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2133304611}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 864985241046f4137bafe05a3043d67c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DecisionPeriod: 5
+  DecisionStep: 0
+  TakeActionsBetweenDecisions: 1
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

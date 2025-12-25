@@ -13,7 +13,7 @@ OcclusionCullingSettings:
 --- !u!104 &2
 RenderSettings:
   m_ObjectHideFlags: 0
-  serializedVersion: 9
+  serializedVersion: 10
   m_Fog: 0
   m_FogColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   m_FogMode: 3
@@ -38,13 +38,12 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
-  serializedVersion: 12
-  m_GIWorkflowMode: 1
+  serializedVersion: 13
+  m_BakeOnSceneLoad: 0
   m_GISettings:
     serializedVersion: 2
     m_BounceScale: 1
@@ -67,9 +66,6 @@ LightmapSettings:
     m_LightmapParameters: {fileID: 0}
     m_LightmapsBakeMode: 1
     m_TextureCompression: 1
-    m_FinalGather: 0
-    m_FinalGatherFiltering: 1
-    m_FinalGatherRayCount: 256
     m_ReflectionCompression: 2
     m_MixedBakeMode: 2
     m_BakeBackend: 0
@@ -105,7 +101,7 @@ NavMeshSettings:
   serializedVersion: 2
   m_ObjectHideFlags: 0
   m_BuildSettings:
-    serializedVersion: 2
+    serializedVersion: 3
     agentTypeID: 0
     agentRadius: 0.5
     agentHeight: 2
@@ -118,7 +114,7 @@ NavMeshSettings:
     cellSize: 0.16666667
     manualTileSize: 0
     tileSize: 256
-    accuratePlacement: 0
+    buildHeightMesh: 0
     maxJobWorkers: 0
     preserveTilesOutsideBounds: 0
     debug:
@@ -129,6 +125,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1464170487903594, guid: bd804431e808a492bb5658bcd296e58e, type: 3}
@@ -167,13 +164,186 @@ PrefabInstance:
       propertyPath: m_LocalRotation.z
       value: -0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 8093056763217003681, guid: bd804431e808a492bb5658bcd296e58e,
+        type: 3}
+      propertyPath: m_BehaviorName
+      value: Pyramids
+      objectReference: {fileID: 0}
+    - target: {fileID: 8093056763217003681, guid: bd804431e808a492bb5658bcd296e58e,
+        type: 3}
+      propertyPath: m_InferenceDevice
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8093056763217003681, guid: bd804431e808a492bb5658bcd296e58e,
+        type: 3}
+      propertyPath: m_BrainParameters.VectorObservationSize
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8093056763217003681, guid: bd804431e808a492bb5658bcd296e58e,
+        type: 3}
+      propertyPath: 'm_BrainParameters.VectorActionSize.Array.data[0]'
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8093056763217003681, guid: bd804431e808a492bb5658bcd296e58e,
+        type: 3}
+      propertyPath: 'm_BrainParameters.m_ActionSpec.BranchSizes.Array.data[0]'
+      value: 5
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 114399412043818042, guid: bd804431e808a492bb5658bcd296e58e, type: 3}
+    - {fileID: 5820012306424387886, guid: bd804431e808a492bb5658bcd296e58e, type: 3}
+    - {fileID: 5767481171805996936, guid: bd804431e808a492bb5658bcd296e58e, type: 3}
+    - {fileID: 5712624269609438939, guid: bd804431e808a492bb5658bcd296e58e, type: 3}
+    - {fileID: 4725417187860315718, guid: bd804431e808a492bb5658bcd296e58e, type: 3}
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1131043459059966, guid: bd804431e808a492bb5658bcd296e58e,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 14183658}
+    - targetCorrespondingSourceObject: {fileID: 1131043459059966, guid: bd804431e808a492bb5658bcd296e58e,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 14183657}
+    - targetCorrespondingSourceObject: {fileID: 1131043459059966, guid: bd804431e808a492bb5658bcd296e58e,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 14183656}
+    - targetCorrespondingSourceObject: {fileID: 1131043459059966, guid: bd804431e808a492bb5658bcd296e58e,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 14183655}
   m_SourcePrefab: {fileID: 100100000, guid: bd804431e808a492bb5658bcd296e58e, type: 3}
+--- !u!1 &14183654 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1131043459059966, guid: bd804431e808a492bb5658bcd296e58e,
+    type: 3}
+  m_PrefabInstance: {fileID: 14183653}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &14183655
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 14183654}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0714697abfc554385907d6524fa93632, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SensorName: RayPerceptionSensor3
+  m_DetectableTags:
+  - block
+  - wall
+  - goal
+  - switchOff
+  - switchOn
+  - stone
+  m_RaysPerDirection: 3
+  m_MaxRayDegrees: 75
+  m_SphereCastRadius: 0.5
+  m_RayLength: 35
+  m_RayLayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967291
+  m_ObservationStacks: 1
+  m_AlternatingRayOrder: 1
+  m_UseBatchedRaycasts: 0
+  rayHitColor: {r: 1, g: 0, b: 0, a: 1}
+  rayMissColor: {r: 1, g: 1, b: 1, a: 1}
+  m_StartVerticalOffset: 0
+  m_EndVerticalOffset: 10
+--- !u!114 &14183656
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 14183654}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0714697abfc554385907d6524fa93632, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SensorName: RayPerceptionSensor2
+  m_DetectableTags:
+  - block
+  - wall
+  - goal
+  - switchOff
+  - switchOn
+  - stone
+  m_RaysPerDirection: 3
+  m_MaxRayDegrees: 65
+  m_SphereCastRadius: 0.5
+  m_RayLength: 35
+  m_RayLayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967291
+  m_ObservationStacks: 1
+  m_AlternatingRayOrder: 1
+  m_UseBatchedRaycasts: 0
+  rayHitColor: {r: 1, g: 0, b: 0, a: 1}
+  rayMissColor: {r: 1, g: 1, b: 1, a: 1}
+  m_StartVerticalOffset: 0
+  m_EndVerticalOffset: 5
+--- !u!114 &14183657
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 14183654}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0714697abfc554385907d6524fa93632, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SensorName: RayPerceptionSensor
+  m_DetectableTags:
+  - block
+  - wall
+  - goal
+  - switchOff
+  - switchOn
+  - stone
+  m_RaysPerDirection: 3
+  m_MaxRayDegrees: 70
+  m_SphereCastRadius: 0.5
+  m_RayLength: 35
+  m_RayLayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967291
+  m_ObservationStacks: 1
+  m_AlternatingRayOrder: 1
+  m_UseBatchedRaycasts: 0
+  rayHitColor: {r: 1, g: 0, b: 0, a: 1}
+  rayMissColor: {r: 1, g: 1, b: 1, a: 1}
+  m_StartVerticalOffset: 0
+  m_EndVerticalOffset: 0
+--- !u!114 &14183658
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 14183654}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 864985241046f4137bafe05a3043d67c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DecisionPeriod: 5
+  DecisionStep: 0
+  TakeActionsBetweenDecisions: 1
 --- !u!1001 &105536951
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1464170487903594, guid: bd804431e808a492bb5658bcd296e58e, type: 3}
@@ -212,8 +382,180 @@ PrefabInstance:
       propertyPath: m_LocalRotation.z
       value: -0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 8093056763217003681, guid: bd804431e808a492bb5658bcd296e58e,
+        type: 3}
+      propertyPath: m_BehaviorName
+      value: Pyramids
+      objectReference: {fileID: 0}
+    - target: {fileID: 8093056763217003681, guid: bd804431e808a492bb5658bcd296e58e,
+        type: 3}
+      propertyPath: m_InferenceDevice
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8093056763217003681, guid: bd804431e808a492bb5658bcd296e58e,
+        type: 3}
+      propertyPath: m_BrainParameters.VectorObservationSize
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8093056763217003681, guid: bd804431e808a492bb5658bcd296e58e,
+        type: 3}
+      propertyPath: 'm_BrainParameters.VectorActionSize.Array.data[0]'
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8093056763217003681, guid: bd804431e808a492bb5658bcd296e58e,
+        type: 3}
+      propertyPath: 'm_BrainParameters.m_ActionSpec.BranchSizes.Array.data[0]'
+      value: 5
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 114399412043818042, guid: bd804431e808a492bb5658bcd296e58e, type: 3}
+    - {fileID: 5820012306424387886, guid: bd804431e808a492bb5658bcd296e58e, type: 3}
+    - {fileID: 5767481171805996936, guid: bd804431e808a492bb5658bcd296e58e, type: 3}
+    - {fileID: 5712624269609438939, guid: bd804431e808a492bb5658bcd296e58e, type: 3}
+    - {fileID: 4725417187860315718, guid: bd804431e808a492bb5658bcd296e58e, type: 3}
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1131043459059966, guid: bd804431e808a492bb5658bcd296e58e,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 105536956}
+    - targetCorrespondingSourceObject: {fileID: 1131043459059966, guid: bd804431e808a492bb5658bcd296e58e,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 105536955}
+    - targetCorrespondingSourceObject: {fileID: 1131043459059966, guid: bd804431e808a492bb5658bcd296e58e,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 105536954}
+    - targetCorrespondingSourceObject: {fileID: 1131043459059966, guid: bd804431e808a492bb5658bcd296e58e,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 105536953}
   m_SourcePrefab: {fileID: 100100000, guid: bd804431e808a492bb5658bcd296e58e, type: 3}
+--- !u!1 &105536952 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1131043459059966, guid: bd804431e808a492bb5658bcd296e58e,
+    type: 3}
+  m_PrefabInstance: {fileID: 105536951}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &105536953
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 105536952}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0714697abfc554385907d6524fa93632, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SensorName: RayPerceptionSensor3
+  m_DetectableTags:
+  - block
+  - wall
+  - goal
+  - switchOff
+  - switchOn
+  - stone
+  m_RaysPerDirection: 3
+  m_MaxRayDegrees: 75
+  m_SphereCastRadius: 0.5
+  m_RayLength: 35
+  m_RayLayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967291
+  m_ObservationStacks: 1
+  m_AlternatingRayOrder: 1
+  m_UseBatchedRaycasts: 0
+  rayHitColor: {r: 1, g: 0, b: 0, a: 1}
+  rayMissColor: {r: 1, g: 1, b: 1, a: 1}
+  m_StartVerticalOffset: 0
+  m_EndVerticalOffset: 10
+--- !u!114 &105536954
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 105536952}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0714697abfc554385907d6524fa93632, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SensorName: RayPerceptionSensor2
+  m_DetectableTags:
+  - block
+  - wall
+  - goal
+  - switchOff
+  - switchOn
+  - stone
+  m_RaysPerDirection: 3
+  m_MaxRayDegrees: 65
+  m_SphereCastRadius: 0.5
+  m_RayLength: 35
+  m_RayLayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967291
+  m_ObservationStacks: 1
+  m_AlternatingRayOrder: 1
+  m_UseBatchedRaycasts: 0
+  rayHitColor: {r: 1, g: 0, b: 0, a: 1}
+  rayMissColor: {r: 1, g: 1, b: 1, a: 1}
+  m_StartVerticalOffset: 0
+  m_EndVerticalOffset: 5
+--- !u!114 &105536955
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 105536952}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0714697abfc554385907d6524fa93632, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SensorName: RayPerceptionSensor
+  m_DetectableTags:
+  - block
+  - wall
+  - goal
+  - switchOff
+  - switchOn
+  - stone
+  m_RaysPerDirection: 3
+  m_MaxRayDegrees: 70
+  m_SphereCastRadius: 0.5
+  m_RayLength: 35
+  m_RayLayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967291
+  m_ObservationStacks: 1
+  m_AlternatingRayOrder: 1
+  m_UseBatchedRaycasts: 0
+  rayHitColor: {r: 1, g: 0, b: 0, a: 1}
+  rayMissColor: {r: 1, g: 1, b: 1, a: 1}
+  m_StartVerticalOffset: 0
+  m_EndVerticalOffset: 0
+--- !u!114 &105536956
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 105536952}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 864985241046f4137bafe05a3043d67c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DecisionPeriod: 5
+  DecisionStep: 0
+  TakeActionsBetweenDecisions: 1
 --- !u!850595691 &172211982
 LightingSettings:
   m_ObjectHideFlags: 0
@@ -221,8 +563,7 @@ LightingSettings:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Settings.lighting
-  serializedVersion: 4
-  m_GIWorkflowMode: 1
+  serializedVersion: 9
   m_EnableBakedLightmaps: 1
   m_EnableRealtimeLightmaps: 1
   m_RealtimeEnvironmentLighting: 1
@@ -230,8 +571,10 @@ LightingSettings:
   m_AlbedoBoost: 1
   m_IndirectOutputScale: 1
   m_UsingShadowmask: 1
-  m_BakeBackend: 0
+  m_BakeBackend: 2
   m_LightmapMaxSize: 1024
+  m_LightmapSizeFixed: 0
+  m_UseMipmapLimits: 1
   m_BakeResolution: 40
   m_Padding: 2
   m_LightmapCompression: 3
@@ -245,23 +588,21 @@ LightingSettings:
   m_FilterMode: 1
   m_LightmapParameters: {fileID: 15204, guid: 0000000000000000f000000000000000, type: 0}
   m_ExportTrainingData: 0
+  m_EnableWorkerProcessBaking: 1
   m_TrainingDataDestination: TrainingData
   m_RealtimeResolution: 2
   m_ForceWhiteAlbedo: 0
   m_ForceUpdates: 0
-  m_FinalGather: 0
-  m_FinalGatherRayCount: 256
-  m_FinalGatherFiltering: 1
   m_PVRCulling: 1
   m_PVRSampling: 1
   m_PVRDirectSampleCount: 32
-  m_PVRSampleCount: 500
-  m_PVREnvironmentSampleCount: 500
+  m_PVRSampleCount: 512
+  m_PVREnvironmentSampleCount: 512
   m_PVREnvironmentReferencePointCount: 2048
   m_LightProbeSampleCountMultiplier: 4
   m_PVRBounces: 2
   m_PVRMinBounces: 2
-  m_PVREnvironmentMIS: 0
+  m_PVREnvironmentImportanceSampling: 0
   m_PVRFilteringMode: 2
   m_PVRDenoiserTypeDirect: 0
   m_PVRDenoiserTypeIndirect: 0
@@ -275,12 +616,13 @@ LightingSettings:
   m_PVRFilteringAtrousPositionSigmaDirect: 0.5
   m_PVRFilteringAtrousPositionSigmaIndirect: 2
   m_PVRFilteringAtrousPositionSigmaAO: 1
-  m_PVRTiledBaking: 0
+  m_RespectSceneVisibilityWhenBakingGI: 0
 --- !u!1001 &264688056
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 224194346362733190, guid: 3ce107b4a79bc4eef83afde434932a68,
@@ -374,12 +716,16 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3ce107b4a79bc4eef83afde434932a68, type: 3}
 --- !u!1001 &304577311
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1464170487903594, guid: bd804431e808a492bb5658bcd296e58e, type: 3}
@@ -418,13 +764,186 @@ PrefabInstance:
       propertyPath: m_LocalRotation.z
       value: -0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 8093056763217003681, guid: bd804431e808a492bb5658bcd296e58e,
+        type: 3}
+      propertyPath: m_BehaviorName
+      value: Pyramids
+      objectReference: {fileID: 0}
+    - target: {fileID: 8093056763217003681, guid: bd804431e808a492bb5658bcd296e58e,
+        type: 3}
+      propertyPath: m_InferenceDevice
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8093056763217003681, guid: bd804431e808a492bb5658bcd296e58e,
+        type: 3}
+      propertyPath: m_BrainParameters.VectorObservationSize
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8093056763217003681, guid: bd804431e808a492bb5658bcd296e58e,
+        type: 3}
+      propertyPath: 'm_BrainParameters.VectorActionSize.Array.data[0]'
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8093056763217003681, guid: bd804431e808a492bb5658bcd296e58e,
+        type: 3}
+      propertyPath: 'm_BrainParameters.m_ActionSpec.BranchSizes.Array.data[0]'
+      value: 5
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 114399412043818042, guid: bd804431e808a492bb5658bcd296e58e, type: 3}
+    - {fileID: 5820012306424387886, guid: bd804431e808a492bb5658bcd296e58e, type: 3}
+    - {fileID: 5767481171805996936, guid: bd804431e808a492bb5658bcd296e58e, type: 3}
+    - {fileID: 5712624269609438939, guid: bd804431e808a492bb5658bcd296e58e, type: 3}
+    - {fileID: 4725417187860315718, guid: bd804431e808a492bb5658bcd296e58e, type: 3}
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1131043459059966, guid: bd804431e808a492bb5658bcd296e58e,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 304577316}
+    - targetCorrespondingSourceObject: {fileID: 1131043459059966, guid: bd804431e808a492bb5658bcd296e58e,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 304577315}
+    - targetCorrespondingSourceObject: {fileID: 1131043459059966, guid: bd804431e808a492bb5658bcd296e58e,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 304577314}
+    - targetCorrespondingSourceObject: {fileID: 1131043459059966, guid: bd804431e808a492bb5658bcd296e58e,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 304577313}
   m_SourcePrefab: {fileID: 100100000, guid: bd804431e808a492bb5658bcd296e58e, type: 3}
+--- !u!1 &304577312 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1131043459059966, guid: bd804431e808a492bb5658bcd296e58e,
+    type: 3}
+  m_PrefabInstance: {fileID: 304577311}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &304577313
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 304577312}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0714697abfc554385907d6524fa93632, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SensorName: RayPerceptionSensor3
+  m_DetectableTags:
+  - block
+  - wall
+  - goal
+  - switchOff
+  - switchOn
+  - stone
+  m_RaysPerDirection: 3
+  m_MaxRayDegrees: 75
+  m_SphereCastRadius: 0.5
+  m_RayLength: 35
+  m_RayLayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967291
+  m_ObservationStacks: 1
+  m_AlternatingRayOrder: 1
+  m_UseBatchedRaycasts: 0
+  rayHitColor: {r: 1, g: 0, b: 0, a: 1}
+  rayMissColor: {r: 1, g: 1, b: 1, a: 1}
+  m_StartVerticalOffset: 0
+  m_EndVerticalOffset: 10
+--- !u!114 &304577314
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 304577312}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0714697abfc554385907d6524fa93632, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SensorName: RayPerceptionSensor2
+  m_DetectableTags:
+  - block
+  - wall
+  - goal
+  - switchOff
+  - switchOn
+  - stone
+  m_RaysPerDirection: 3
+  m_MaxRayDegrees: 65
+  m_SphereCastRadius: 0.5
+  m_RayLength: 35
+  m_RayLayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967291
+  m_ObservationStacks: 1
+  m_AlternatingRayOrder: 1
+  m_UseBatchedRaycasts: 0
+  rayHitColor: {r: 1, g: 0, b: 0, a: 1}
+  rayMissColor: {r: 1, g: 1, b: 1, a: 1}
+  m_StartVerticalOffset: 0
+  m_EndVerticalOffset: 5
+--- !u!114 &304577315
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 304577312}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0714697abfc554385907d6524fa93632, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SensorName: RayPerceptionSensor
+  m_DetectableTags:
+  - block
+  - wall
+  - goal
+  - switchOff
+  - switchOn
+  - stone
+  m_RaysPerDirection: 3
+  m_MaxRayDegrees: 70
+  m_SphereCastRadius: 0.5
+  m_RayLength: 35
+  m_RayLayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967291
+  m_ObservationStacks: 1
+  m_AlternatingRayOrder: 1
+  m_UseBatchedRaycasts: 0
+  rayHitColor: {r: 1, g: 0, b: 0, a: 1}
+  rayMissColor: {r: 1, g: 1, b: 1, a: 1}
+  m_StartVerticalOffset: 0
+  m_EndVerticalOffset: 0
+--- !u!114 &304577316
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 304577312}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 864985241046f4137bafe05a3043d67c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DecisionPeriod: 5
+  DecisionStep: 0
+  TakeActionsBetweenDecisions: 1
 --- !u!1001 &323110102
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1464170487903594, guid: bd804431e808a492bb5658bcd296e58e, type: 3}
@@ -463,13 +982,186 @@ PrefabInstance:
       propertyPath: m_LocalRotation.z
       value: -0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 8093056763217003681, guid: bd804431e808a492bb5658bcd296e58e,
+        type: 3}
+      propertyPath: m_BehaviorName
+      value: Pyramids
+      objectReference: {fileID: 0}
+    - target: {fileID: 8093056763217003681, guid: bd804431e808a492bb5658bcd296e58e,
+        type: 3}
+      propertyPath: m_InferenceDevice
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8093056763217003681, guid: bd804431e808a492bb5658bcd296e58e,
+        type: 3}
+      propertyPath: m_BrainParameters.VectorObservationSize
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8093056763217003681, guid: bd804431e808a492bb5658bcd296e58e,
+        type: 3}
+      propertyPath: 'm_BrainParameters.VectorActionSize.Array.data[0]'
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8093056763217003681, guid: bd804431e808a492bb5658bcd296e58e,
+        type: 3}
+      propertyPath: 'm_BrainParameters.m_ActionSpec.BranchSizes.Array.data[0]'
+      value: 5
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 114399412043818042, guid: bd804431e808a492bb5658bcd296e58e, type: 3}
+    - {fileID: 5820012306424387886, guid: bd804431e808a492bb5658bcd296e58e, type: 3}
+    - {fileID: 5767481171805996936, guid: bd804431e808a492bb5658bcd296e58e, type: 3}
+    - {fileID: 5712624269609438939, guid: bd804431e808a492bb5658bcd296e58e, type: 3}
+    - {fileID: 4725417187860315718, guid: bd804431e808a492bb5658bcd296e58e, type: 3}
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1131043459059966, guid: bd804431e808a492bb5658bcd296e58e,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 323110107}
+    - targetCorrespondingSourceObject: {fileID: 1131043459059966, guid: bd804431e808a492bb5658bcd296e58e,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 323110106}
+    - targetCorrespondingSourceObject: {fileID: 1131043459059966, guid: bd804431e808a492bb5658bcd296e58e,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 323110105}
+    - targetCorrespondingSourceObject: {fileID: 1131043459059966, guid: bd804431e808a492bb5658bcd296e58e,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 323110104}
   m_SourcePrefab: {fileID: 100100000, guid: bd804431e808a492bb5658bcd296e58e, type: 3}
+--- !u!1 &323110103 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1131043459059966, guid: bd804431e808a492bb5658bcd296e58e,
+    type: 3}
+  m_PrefabInstance: {fileID: 323110102}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &323110104
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 323110103}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0714697abfc554385907d6524fa93632, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SensorName: RayPerceptionSensor3
+  m_DetectableTags:
+  - block
+  - wall
+  - goal
+  - switchOff
+  - switchOn
+  - stone
+  m_RaysPerDirection: 3
+  m_MaxRayDegrees: 75
+  m_SphereCastRadius: 0.5
+  m_RayLength: 35
+  m_RayLayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967291
+  m_ObservationStacks: 1
+  m_AlternatingRayOrder: 1
+  m_UseBatchedRaycasts: 0
+  rayHitColor: {r: 1, g: 0, b: 0, a: 1}
+  rayMissColor: {r: 1, g: 1, b: 1, a: 1}
+  m_StartVerticalOffset: 0
+  m_EndVerticalOffset: 10
+--- !u!114 &323110105
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 323110103}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0714697abfc554385907d6524fa93632, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SensorName: RayPerceptionSensor2
+  m_DetectableTags:
+  - block
+  - wall
+  - goal
+  - switchOff
+  - switchOn
+  - stone
+  m_RaysPerDirection: 3
+  m_MaxRayDegrees: 65
+  m_SphereCastRadius: 0.5
+  m_RayLength: 35
+  m_RayLayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967291
+  m_ObservationStacks: 1
+  m_AlternatingRayOrder: 1
+  m_UseBatchedRaycasts: 0
+  rayHitColor: {r: 1, g: 0, b: 0, a: 1}
+  rayMissColor: {r: 1, g: 1, b: 1, a: 1}
+  m_StartVerticalOffset: 0
+  m_EndVerticalOffset: 5
+--- !u!114 &323110106
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 323110103}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0714697abfc554385907d6524fa93632, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SensorName: RayPerceptionSensor
+  m_DetectableTags:
+  - block
+  - wall
+  - goal
+  - switchOff
+  - switchOn
+  - stone
+  m_RaysPerDirection: 3
+  m_MaxRayDegrees: 70
+  m_SphereCastRadius: 0.5
+  m_RayLength: 35
+  m_RayLayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967291
+  m_ObservationStacks: 1
+  m_AlternatingRayOrder: 1
+  m_UseBatchedRaycasts: 0
+  rayHitColor: {r: 1, g: 0, b: 0, a: 1}
+  rayMissColor: {r: 1, g: 1, b: 1, a: 1}
+  m_StartVerticalOffset: 0
+  m_EndVerticalOffset: 0
+--- !u!114 &323110107
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 323110103}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 864985241046f4137bafe05a3043d67c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DecisionPeriod: 5
+  DecisionStep: 0
+  TakeActionsBetweenDecisions: 1
 --- !u!1001 &418198956
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1464170487903594, guid: bd804431e808a492bb5658bcd296e58e, type: 3}
@@ -508,13 +1200,186 @@ PrefabInstance:
       propertyPath: m_LocalRotation.z
       value: -0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 8093056763217003681, guid: bd804431e808a492bb5658bcd296e58e,
+        type: 3}
+      propertyPath: m_BehaviorName
+      value: Pyramids
+      objectReference: {fileID: 0}
+    - target: {fileID: 8093056763217003681, guid: bd804431e808a492bb5658bcd296e58e,
+        type: 3}
+      propertyPath: m_InferenceDevice
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8093056763217003681, guid: bd804431e808a492bb5658bcd296e58e,
+        type: 3}
+      propertyPath: m_BrainParameters.VectorObservationSize
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8093056763217003681, guid: bd804431e808a492bb5658bcd296e58e,
+        type: 3}
+      propertyPath: 'm_BrainParameters.VectorActionSize.Array.data[0]'
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8093056763217003681, guid: bd804431e808a492bb5658bcd296e58e,
+        type: 3}
+      propertyPath: 'm_BrainParameters.m_ActionSpec.BranchSizes.Array.data[0]'
+      value: 5
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 114399412043818042, guid: bd804431e808a492bb5658bcd296e58e, type: 3}
+    - {fileID: 5820012306424387886, guid: bd804431e808a492bb5658bcd296e58e, type: 3}
+    - {fileID: 5767481171805996936, guid: bd804431e808a492bb5658bcd296e58e, type: 3}
+    - {fileID: 5712624269609438939, guid: bd804431e808a492bb5658bcd296e58e, type: 3}
+    - {fileID: 4725417187860315718, guid: bd804431e808a492bb5658bcd296e58e, type: 3}
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1131043459059966, guid: bd804431e808a492bb5658bcd296e58e,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 418198961}
+    - targetCorrespondingSourceObject: {fileID: 1131043459059966, guid: bd804431e808a492bb5658bcd296e58e,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 418198960}
+    - targetCorrespondingSourceObject: {fileID: 1131043459059966, guid: bd804431e808a492bb5658bcd296e58e,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 418198959}
+    - targetCorrespondingSourceObject: {fileID: 1131043459059966, guid: bd804431e808a492bb5658bcd296e58e,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 418198958}
   m_SourcePrefab: {fileID: 100100000, guid: bd804431e808a492bb5658bcd296e58e, type: 3}
+--- !u!1 &418198957 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1131043459059966, guid: bd804431e808a492bb5658bcd296e58e,
+    type: 3}
+  m_PrefabInstance: {fileID: 418198956}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &418198958
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 418198957}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0714697abfc554385907d6524fa93632, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SensorName: RayPerceptionSensor3
+  m_DetectableTags:
+  - block
+  - wall
+  - goal
+  - switchOff
+  - switchOn
+  - stone
+  m_RaysPerDirection: 3
+  m_MaxRayDegrees: 75
+  m_SphereCastRadius: 0.5
+  m_RayLength: 35
+  m_RayLayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967291
+  m_ObservationStacks: 1
+  m_AlternatingRayOrder: 1
+  m_UseBatchedRaycasts: 0
+  rayHitColor: {r: 1, g: 0, b: 0, a: 1}
+  rayMissColor: {r: 1, g: 1, b: 1, a: 1}
+  m_StartVerticalOffset: 0
+  m_EndVerticalOffset: 10
+--- !u!114 &418198959
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 418198957}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0714697abfc554385907d6524fa93632, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SensorName: RayPerceptionSensor2
+  m_DetectableTags:
+  - block
+  - wall
+  - goal
+  - switchOff
+  - switchOn
+  - stone
+  m_RaysPerDirection: 3
+  m_MaxRayDegrees: 65
+  m_SphereCastRadius: 0.5
+  m_RayLength: 35
+  m_RayLayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967291
+  m_ObservationStacks: 1
+  m_AlternatingRayOrder: 1
+  m_UseBatchedRaycasts: 0
+  rayHitColor: {r: 1, g: 0, b: 0, a: 1}
+  rayMissColor: {r: 1, g: 1, b: 1, a: 1}
+  m_StartVerticalOffset: 0
+  m_EndVerticalOffset: 5
+--- !u!114 &418198960
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 418198957}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0714697abfc554385907d6524fa93632, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SensorName: RayPerceptionSensor
+  m_DetectableTags:
+  - block
+  - wall
+  - goal
+  - switchOff
+  - switchOn
+  - stone
+  m_RaysPerDirection: 3
+  m_MaxRayDegrees: 70
+  m_SphereCastRadius: 0.5
+  m_RayLength: 35
+  m_RayLayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967291
+  m_ObservationStacks: 1
+  m_AlternatingRayOrder: 1
+  m_UseBatchedRaycasts: 0
+  rayHitColor: {r: 1, g: 0, b: 0, a: 1}
+  rayMissColor: {r: 1, g: 1, b: 1, a: 1}
+  m_StartVerticalOffset: 0
+  m_EndVerticalOffset: 0
+--- !u!114 &418198961
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 418198957}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 864985241046f4137bafe05a3043d67c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DecisionPeriod: 5
+  DecisionStep: 0
+  TakeActionsBetweenDecisions: 1
 --- !u!1001 &418397397
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1464170487903594, guid: bd804431e808a492bb5658bcd296e58e, type: 3}
@@ -553,8 +1418,180 @@ PrefabInstance:
       propertyPath: m_LocalRotation.z
       value: -0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 8093056763217003681, guid: bd804431e808a492bb5658bcd296e58e,
+        type: 3}
+      propertyPath: m_BehaviorName
+      value: Pyramids
+      objectReference: {fileID: 0}
+    - target: {fileID: 8093056763217003681, guid: bd804431e808a492bb5658bcd296e58e,
+        type: 3}
+      propertyPath: m_InferenceDevice
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8093056763217003681, guid: bd804431e808a492bb5658bcd296e58e,
+        type: 3}
+      propertyPath: m_BrainParameters.VectorObservationSize
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8093056763217003681, guid: bd804431e808a492bb5658bcd296e58e,
+        type: 3}
+      propertyPath: 'm_BrainParameters.VectorActionSize.Array.data[0]'
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8093056763217003681, guid: bd804431e808a492bb5658bcd296e58e,
+        type: 3}
+      propertyPath: 'm_BrainParameters.m_ActionSpec.BranchSizes.Array.data[0]'
+      value: 5
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 114399412043818042, guid: bd804431e808a492bb5658bcd296e58e, type: 3}
+    - {fileID: 5820012306424387886, guid: bd804431e808a492bb5658bcd296e58e, type: 3}
+    - {fileID: 5767481171805996936, guid: bd804431e808a492bb5658bcd296e58e, type: 3}
+    - {fileID: 5712624269609438939, guid: bd804431e808a492bb5658bcd296e58e, type: 3}
+    - {fileID: 4725417187860315718, guid: bd804431e808a492bb5658bcd296e58e, type: 3}
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1131043459059966, guid: bd804431e808a492bb5658bcd296e58e,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 418397402}
+    - targetCorrespondingSourceObject: {fileID: 1131043459059966, guid: bd804431e808a492bb5658bcd296e58e,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 418397401}
+    - targetCorrespondingSourceObject: {fileID: 1131043459059966, guid: bd804431e808a492bb5658bcd296e58e,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 418397400}
+    - targetCorrespondingSourceObject: {fileID: 1131043459059966, guid: bd804431e808a492bb5658bcd296e58e,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 418397399}
   m_SourcePrefab: {fileID: 100100000, guid: bd804431e808a492bb5658bcd296e58e, type: 3}
+--- !u!1 &418397398 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1131043459059966, guid: bd804431e808a492bb5658bcd296e58e,
+    type: 3}
+  m_PrefabInstance: {fileID: 418397397}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &418397399
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 418397398}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0714697abfc554385907d6524fa93632, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SensorName: RayPerceptionSensor3
+  m_DetectableTags:
+  - block
+  - wall
+  - goal
+  - switchOff
+  - switchOn
+  - stone
+  m_RaysPerDirection: 3
+  m_MaxRayDegrees: 75
+  m_SphereCastRadius: 0.5
+  m_RayLength: 35
+  m_RayLayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967291
+  m_ObservationStacks: 1
+  m_AlternatingRayOrder: 1
+  m_UseBatchedRaycasts: 0
+  rayHitColor: {r: 1, g: 0, b: 0, a: 1}
+  rayMissColor: {r: 1, g: 1, b: 1, a: 1}
+  m_StartVerticalOffset: 0
+  m_EndVerticalOffset: 10
+--- !u!114 &418397400
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 418397398}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0714697abfc554385907d6524fa93632, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SensorName: RayPerceptionSensor2
+  m_DetectableTags:
+  - block
+  - wall
+  - goal
+  - switchOff
+  - switchOn
+  - stone
+  m_RaysPerDirection: 3
+  m_MaxRayDegrees: 65
+  m_SphereCastRadius: 0.5
+  m_RayLength: 35
+  m_RayLayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967291
+  m_ObservationStacks: 1
+  m_AlternatingRayOrder: 1
+  m_UseBatchedRaycasts: 0
+  rayHitColor: {r: 1, g: 0, b: 0, a: 1}
+  rayMissColor: {r: 1, g: 1, b: 1, a: 1}
+  m_StartVerticalOffset: 0
+  m_EndVerticalOffset: 5
+--- !u!114 &418397401
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 418397398}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0714697abfc554385907d6524fa93632, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SensorName: RayPerceptionSensor
+  m_DetectableTags:
+  - block
+  - wall
+  - goal
+  - switchOff
+  - switchOn
+  - stone
+  m_RaysPerDirection: 3
+  m_MaxRayDegrees: 70
+  m_SphereCastRadius: 0.5
+  m_RayLength: 35
+  m_RayLayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967291
+  m_ObservationStacks: 1
+  m_AlternatingRayOrder: 1
+  m_UseBatchedRaycasts: 0
+  rayHitColor: {r: 1, g: 0, b: 0, a: 1}
+  rayMissColor: {r: 1, g: 1, b: 1, a: 1}
+  m_StartVerticalOffset: 0
+  m_EndVerticalOffset: 0
+--- !u!114 &418397402
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 418397398}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 864985241046f4137bafe05a3043d67c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DecisionPeriod: 5
+  DecisionStep: 0
+  TakeActionsBetweenDecisions: 1
 --- !u!1 &499540684
 GameObject:
   m_ObjectHideFlags: 0
@@ -615,19 +1652,20 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 499540684}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &520016803
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1464170487903594, guid: bd804431e808a492bb5658bcd296e58e, type: 3}
@@ -666,13 +1704,186 @@ PrefabInstance:
       propertyPath: m_LocalRotation.z
       value: -0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 8093056763217003681, guid: bd804431e808a492bb5658bcd296e58e,
+        type: 3}
+      propertyPath: m_BehaviorName
+      value: Pyramids
+      objectReference: {fileID: 0}
+    - target: {fileID: 8093056763217003681, guid: bd804431e808a492bb5658bcd296e58e,
+        type: 3}
+      propertyPath: m_InferenceDevice
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8093056763217003681, guid: bd804431e808a492bb5658bcd296e58e,
+        type: 3}
+      propertyPath: m_BrainParameters.VectorObservationSize
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8093056763217003681, guid: bd804431e808a492bb5658bcd296e58e,
+        type: 3}
+      propertyPath: 'm_BrainParameters.VectorActionSize.Array.data[0]'
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8093056763217003681, guid: bd804431e808a492bb5658bcd296e58e,
+        type: 3}
+      propertyPath: 'm_BrainParameters.m_ActionSpec.BranchSizes.Array.data[0]'
+      value: 5
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 114399412043818042, guid: bd804431e808a492bb5658bcd296e58e, type: 3}
+    - {fileID: 5820012306424387886, guid: bd804431e808a492bb5658bcd296e58e, type: 3}
+    - {fileID: 5767481171805996936, guid: bd804431e808a492bb5658bcd296e58e, type: 3}
+    - {fileID: 5712624269609438939, guid: bd804431e808a492bb5658bcd296e58e, type: 3}
+    - {fileID: 4725417187860315718, guid: bd804431e808a492bb5658bcd296e58e, type: 3}
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1131043459059966, guid: bd804431e808a492bb5658bcd296e58e,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 520016808}
+    - targetCorrespondingSourceObject: {fileID: 1131043459059966, guid: bd804431e808a492bb5658bcd296e58e,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 520016807}
+    - targetCorrespondingSourceObject: {fileID: 1131043459059966, guid: bd804431e808a492bb5658bcd296e58e,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 520016806}
+    - targetCorrespondingSourceObject: {fileID: 1131043459059966, guid: bd804431e808a492bb5658bcd296e58e,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 520016805}
   m_SourcePrefab: {fileID: 100100000, guid: bd804431e808a492bb5658bcd296e58e, type: 3}
+--- !u!1 &520016804 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1131043459059966, guid: bd804431e808a492bb5658bcd296e58e,
+    type: 3}
+  m_PrefabInstance: {fileID: 520016803}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &520016805
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 520016804}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0714697abfc554385907d6524fa93632, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SensorName: RayPerceptionSensor3
+  m_DetectableTags:
+  - block
+  - wall
+  - goal
+  - switchOff
+  - switchOn
+  - stone
+  m_RaysPerDirection: 3
+  m_MaxRayDegrees: 75
+  m_SphereCastRadius: 0.5
+  m_RayLength: 35
+  m_RayLayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967291
+  m_ObservationStacks: 1
+  m_AlternatingRayOrder: 1
+  m_UseBatchedRaycasts: 0
+  rayHitColor: {r: 1, g: 0, b: 0, a: 1}
+  rayMissColor: {r: 1, g: 1, b: 1, a: 1}
+  m_StartVerticalOffset: 0
+  m_EndVerticalOffset: 10
+--- !u!114 &520016806
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 520016804}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0714697abfc554385907d6524fa93632, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SensorName: RayPerceptionSensor2
+  m_DetectableTags:
+  - block
+  - wall
+  - goal
+  - switchOff
+  - switchOn
+  - stone
+  m_RaysPerDirection: 3
+  m_MaxRayDegrees: 65
+  m_SphereCastRadius: 0.5
+  m_RayLength: 35
+  m_RayLayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967291
+  m_ObservationStacks: 1
+  m_AlternatingRayOrder: 1
+  m_UseBatchedRaycasts: 0
+  rayHitColor: {r: 1, g: 0, b: 0, a: 1}
+  rayMissColor: {r: 1, g: 1, b: 1, a: 1}
+  m_StartVerticalOffset: 0
+  m_EndVerticalOffset: 5
+--- !u!114 &520016807
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 520016804}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0714697abfc554385907d6524fa93632, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SensorName: RayPerceptionSensor
+  m_DetectableTags:
+  - block
+  - wall
+  - goal
+  - switchOff
+  - switchOn
+  - stone
+  m_RaysPerDirection: 3
+  m_MaxRayDegrees: 70
+  m_SphereCastRadius: 0.5
+  m_RayLength: 35
+  m_RayLayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967291
+  m_ObservationStacks: 1
+  m_AlternatingRayOrder: 1
+  m_UseBatchedRaycasts: 0
+  rayHitColor: {r: 1, g: 0, b: 0, a: 1}
+  rayMissColor: {r: 1, g: 1, b: 1, a: 1}
+  m_StartVerticalOffset: 0
+  m_EndVerticalOffset: 0
+--- !u!114 &520016808
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 520016804}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 864985241046f4137bafe05a3043d67c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DecisionPeriod: 5
+  DecisionStep: 0
+  TakeActionsBetweenDecisions: 1
 --- !u!1001 &931192784
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1464170487903594, guid: bd804431e808a492bb5658bcd296e58e, type: 3}
@@ -711,13 +1922,186 @@ PrefabInstance:
       propertyPath: m_LocalRotation.z
       value: -0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 8093056763217003681, guid: bd804431e808a492bb5658bcd296e58e,
+        type: 3}
+      propertyPath: m_BehaviorName
+      value: Pyramids
+      objectReference: {fileID: 0}
+    - target: {fileID: 8093056763217003681, guid: bd804431e808a492bb5658bcd296e58e,
+        type: 3}
+      propertyPath: m_InferenceDevice
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8093056763217003681, guid: bd804431e808a492bb5658bcd296e58e,
+        type: 3}
+      propertyPath: m_BrainParameters.VectorObservationSize
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8093056763217003681, guid: bd804431e808a492bb5658bcd296e58e,
+        type: 3}
+      propertyPath: 'm_BrainParameters.VectorActionSize.Array.data[0]'
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8093056763217003681, guid: bd804431e808a492bb5658bcd296e58e,
+        type: 3}
+      propertyPath: 'm_BrainParameters.m_ActionSpec.BranchSizes.Array.data[0]'
+      value: 5
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 114399412043818042, guid: bd804431e808a492bb5658bcd296e58e, type: 3}
+    - {fileID: 5820012306424387886, guid: bd804431e808a492bb5658bcd296e58e, type: 3}
+    - {fileID: 5767481171805996936, guid: bd804431e808a492bb5658bcd296e58e, type: 3}
+    - {fileID: 5712624269609438939, guid: bd804431e808a492bb5658bcd296e58e, type: 3}
+    - {fileID: 4725417187860315718, guid: bd804431e808a492bb5658bcd296e58e, type: 3}
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1131043459059966, guid: bd804431e808a492bb5658bcd296e58e,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 931192789}
+    - targetCorrespondingSourceObject: {fileID: 1131043459059966, guid: bd804431e808a492bb5658bcd296e58e,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 931192788}
+    - targetCorrespondingSourceObject: {fileID: 1131043459059966, guid: bd804431e808a492bb5658bcd296e58e,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 931192787}
+    - targetCorrespondingSourceObject: {fileID: 1131043459059966, guid: bd804431e808a492bb5658bcd296e58e,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 931192786}
   m_SourcePrefab: {fileID: 100100000, guid: bd804431e808a492bb5658bcd296e58e, type: 3}
+--- !u!1 &931192785 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1131043459059966, guid: bd804431e808a492bb5658bcd296e58e,
+    type: 3}
+  m_PrefabInstance: {fileID: 931192784}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &931192786
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 931192785}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0714697abfc554385907d6524fa93632, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SensorName: RayPerceptionSensor3
+  m_DetectableTags:
+  - block
+  - wall
+  - goal
+  - switchOff
+  - switchOn
+  - stone
+  m_RaysPerDirection: 3
+  m_MaxRayDegrees: 75
+  m_SphereCastRadius: 0.5
+  m_RayLength: 35
+  m_RayLayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967291
+  m_ObservationStacks: 1
+  m_AlternatingRayOrder: 1
+  m_UseBatchedRaycasts: 0
+  rayHitColor: {r: 1, g: 0, b: 0, a: 1}
+  rayMissColor: {r: 1, g: 1, b: 1, a: 1}
+  m_StartVerticalOffset: 0
+  m_EndVerticalOffset: 10
+--- !u!114 &931192787
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 931192785}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0714697abfc554385907d6524fa93632, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SensorName: RayPerceptionSensor2
+  m_DetectableTags:
+  - block
+  - wall
+  - goal
+  - switchOff
+  - switchOn
+  - stone
+  m_RaysPerDirection: 3
+  m_MaxRayDegrees: 65
+  m_SphereCastRadius: 0.5
+  m_RayLength: 35
+  m_RayLayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967291
+  m_ObservationStacks: 1
+  m_AlternatingRayOrder: 1
+  m_UseBatchedRaycasts: 0
+  rayHitColor: {r: 1, g: 0, b: 0, a: 1}
+  rayMissColor: {r: 1, g: 1, b: 1, a: 1}
+  m_StartVerticalOffset: 0
+  m_EndVerticalOffset: 5
+--- !u!114 &931192788
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 931192785}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0714697abfc554385907d6524fa93632, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SensorName: RayPerceptionSensor
+  m_DetectableTags:
+  - block
+  - wall
+  - goal
+  - switchOff
+  - switchOn
+  - stone
+  m_RaysPerDirection: 3
+  m_MaxRayDegrees: 70
+  m_SphereCastRadius: 0.5
+  m_RayLength: 35
+  m_RayLayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967291
+  m_ObservationStacks: 1
+  m_AlternatingRayOrder: 1
+  m_UseBatchedRaycasts: 0
+  rayHitColor: {r: 1, g: 0, b: 0, a: 1}
+  rayMissColor: {r: 1, g: 1, b: 1, a: 1}
+  m_StartVerticalOffset: 0
+  m_EndVerticalOffset: 0
+--- !u!114 &931192789
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 931192785}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 864985241046f4137bafe05a3043d67c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DecisionPeriod: 5
+  DecisionStep: 0
+  TakeActionsBetweenDecisions: 1
 --- !u!1001 &931495153
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1464170487903594, guid: bd804431e808a492bb5658bcd296e58e, type: 3}
@@ -756,8 +2140,180 @@ PrefabInstance:
       propertyPath: m_LocalRotation.z
       value: -0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 8093056763217003681, guid: bd804431e808a492bb5658bcd296e58e,
+        type: 3}
+      propertyPath: m_BehaviorName
+      value: Pyramids
+      objectReference: {fileID: 0}
+    - target: {fileID: 8093056763217003681, guid: bd804431e808a492bb5658bcd296e58e,
+        type: 3}
+      propertyPath: m_InferenceDevice
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8093056763217003681, guid: bd804431e808a492bb5658bcd296e58e,
+        type: 3}
+      propertyPath: m_BrainParameters.VectorObservationSize
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8093056763217003681, guid: bd804431e808a492bb5658bcd296e58e,
+        type: 3}
+      propertyPath: 'm_BrainParameters.VectorActionSize.Array.data[0]'
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8093056763217003681, guid: bd804431e808a492bb5658bcd296e58e,
+        type: 3}
+      propertyPath: 'm_BrainParameters.m_ActionSpec.BranchSizes.Array.data[0]'
+      value: 5
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 114399412043818042, guid: bd804431e808a492bb5658bcd296e58e, type: 3}
+    - {fileID: 5820012306424387886, guid: bd804431e808a492bb5658bcd296e58e, type: 3}
+    - {fileID: 5767481171805996936, guid: bd804431e808a492bb5658bcd296e58e, type: 3}
+    - {fileID: 5712624269609438939, guid: bd804431e808a492bb5658bcd296e58e, type: 3}
+    - {fileID: 4725417187860315718, guid: bd804431e808a492bb5658bcd296e58e, type: 3}
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1131043459059966, guid: bd804431e808a492bb5658bcd296e58e,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 931495158}
+    - targetCorrespondingSourceObject: {fileID: 1131043459059966, guid: bd804431e808a492bb5658bcd296e58e,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 931495157}
+    - targetCorrespondingSourceObject: {fileID: 1131043459059966, guid: bd804431e808a492bb5658bcd296e58e,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 931495156}
+    - targetCorrespondingSourceObject: {fileID: 1131043459059966, guid: bd804431e808a492bb5658bcd296e58e,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 931495155}
   m_SourcePrefab: {fileID: 100100000, guid: bd804431e808a492bb5658bcd296e58e, type: 3}
+--- !u!1 &931495154 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1131043459059966, guid: bd804431e808a492bb5658bcd296e58e,
+    type: 3}
+  m_PrefabInstance: {fileID: 931495153}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &931495155
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 931495154}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0714697abfc554385907d6524fa93632, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SensorName: RayPerceptionSensor3
+  m_DetectableTags:
+  - block
+  - wall
+  - goal
+  - switchOff
+  - switchOn
+  - stone
+  m_RaysPerDirection: 3
+  m_MaxRayDegrees: 75
+  m_SphereCastRadius: 0.5
+  m_RayLength: 35
+  m_RayLayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967291
+  m_ObservationStacks: 1
+  m_AlternatingRayOrder: 1
+  m_UseBatchedRaycasts: 0
+  rayHitColor: {r: 1, g: 0, b: 0, a: 1}
+  rayMissColor: {r: 1, g: 1, b: 1, a: 1}
+  m_StartVerticalOffset: 0
+  m_EndVerticalOffset: 10
+--- !u!114 &931495156
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 931495154}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0714697abfc554385907d6524fa93632, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SensorName: RayPerceptionSensor2
+  m_DetectableTags:
+  - block
+  - wall
+  - goal
+  - switchOff
+  - switchOn
+  - stone
+  m_RaysPerDirection: 3
+  m_MaxRayDegrees: 65
+  m_SphereCastRadius: 0.5
+  m_RayLength: 35
+  m_RayLayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967291
+  m_ObservationStacks: 1
+  m_AlternatingRayOrder: 1
+  m_UseBatchedRaycasts: 0
+  rayHitColor: {r: 1, g: 0, b: 0, a: 1}
+  rayMissColor: {r: 1, g: 1, b: 1, a: 1}
+  m_StartVerticalOffset: 0
+  m_EndVerticalOffset: 5
+--- !u!114 &931495157
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 931495154}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0714697abfc554385907d6524fa93632, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SensorName: RayPerceptionSensor
+  m_DetectableTags:
+  - block
+  - wall
+  - goal
+  - switchOff
+  - switchOn
+  - stone
+  m_RaysPerDirection: 3
+  m_MaxRayDegrees: 70
+  m_SphereCastRadius: 0.5
+  m_RayLength: 35
+  m_RayLayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967291
+  m_ObservationStacks: 1
+  m_AlternatingRayOrder: 1
+  m_UseBatchedRaycasts: 0
+  rayHitColor: {r: 1, g: 0, b: 0, a: 1}
+  rayMissColor: {r: 1, g: 1, b: 1, a: 1}
+  m_StartVerticalOffset: 0
+  m_EndVerticalOffset: 0
+--- !u!114 &931495158
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 931495154}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 864985241046f4137bafe05a3043d67c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DecisionPeriod: 5
+  DecisionStep: 0
+  TakeActionsBetweenDecisions: 1
 --- !u!1 &1009000883
 GameObject:
   m_ObjectHideFlags: 0
@@ -783,13 +2339,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1009000883}
+  serializedVersion: 2
   m_LocalRotation: {x: 0.3420201, y: 0, z: 0, w: 0.9396927}
   m_LocalPosition: {x: 0, y: 30, z: -30}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 40, y: 0, z: 0}
 --- !u!114 &1009000885
 MonoBehaviour:
@@ -819,9 +2375,17 @@ Camera:
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
+  m_Iso: 200
+  m_ShutterSpeed: 0.005
+  m_Aperture: 16
+  m_FocusDistance: 10
+  m_FocalLength: 50
+  m_BladeCount: 5
+  m_Curvature: {x: 2, y: 11}
+  m_BarrelClipping: 0.25
+  m_Anamorphism: 0
   m_SensorSize: {x: 36, y: 24}
   m_LensShift: {x: 0, y: 0}
-  m_FocalLength: 50
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
@@ -853,6 +2417,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1464170487903594, guid: bd804431e808a492bb5658bcd296e58e, type: 3}
@@ -891,13 +2456,186 @@ PrefabInstance:
       propertyPath: m_LocalRotation.z
       value: -0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 8093056763217003681, guid: bd804431e808a492bb5658bcd296e58e,
+        type: 3}
+      propertyPath: m_BehaviorName
+      value: Pyramids
+      objectReference: {fileID: 0}
+    - target: {fileID: 8093056763217003681, guid: bd804431e808a492bb5658bcd296e58e,
+        type: 3}
+      propertyPath: m_InferenceDevice
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8093056763217003681, guid: bd804431e808a492bb5658bcd296e58e,
+        type: 3}
+      propertyPath: m_BrainParameters.VectorObservationSize
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8093056763217003681, guid: bd804431e808a492bb5658bcd296e58e,
+        type: 3}
+      propertyPath: 'm_BrainParameters.VectorActionSize.Array.data[0]'
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8093056763217003681, guid: bd804431e808a492bb5658bcd296e58e,
+        type: 3}
+      propertyPath: 'm_BrainParameters.m_ActionSpec.BranchSizes.Array.data[0]'
+      value: 5
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 114399412043818042, guid: bd804431e808a492bb5658bcd296e58e, type: 3}
+    - {fileID: 5820012306424387886, guid: bd804431e808a492bb5658bcd296e58e, type: 3}
+    - {fileID: 5767481171805996936, guid: bd804431e808a492bb5658bcd296e58e, type: 3}
+    - {fileID: 5712624269609438939, guid: bd804431e808a492bb5658bcd296e58e, type: 3}
+    - {fileID: 4725417187860315718, guid: bd804431e808a492bb5658bcd296e58e, type: 3}
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1131043459059966, guid: bd804431e808a492bb5658bcd296e58e,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1156426728}
+    - targetCorrespondingSourceObject: {fileID: 1131043459059966, guid: bd804431e808a492bb5658bcd296e58e,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1156426727}
+    - targetCorrespondingSourceObject: {fileID: 1131043459059966, guid: bd804431e808a492bb5658bcd296e58e,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1156426726}
+    - targetCorrespondingSourceObject: {fileID: 1131043459059966, guid: bd804431e808a492bb5658bcd296e58e,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1156426725}
   m_SourcePrefab: {fileID: 100100000, guid: bd804431e808a492bb5658bcd296e58e, type: 3}
+--- !u!1 &1156426724 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1131043459059966, guid: bd804431e808a492bb5658bcd296e58e,
+    type: 3}
+  m_PrefabInstance: {fileID: 1156426723}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1156426725
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1156426724}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0714697abfc554385907d6524fa93632, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SensorName: RayPerceptionSensor3
+  m_DetectableTags:
+  - block
+  - wall
+  - goal
+  - switchOff
+  - switchOn
+  - stone
+  m_RaysPerDirection: 3
+  m_MaxRayDegrees: 75
+  m_SphereCastRadius: 0.5
+  m_RayLength: 35
+  m_RayLayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967291
+  m_ObservationStacks: 1
+  m_AlternatingRayOrder: 1
+  m_UseBatchedRaycasts: 0
+  rayHitColor: {r: 1, g: 0, b: 0, a: 1}
+  rayMissColor: {r: 1, g: 1, b: 1, a: 1}
+  m_StartVerticalOffset: 0
+  m_EndVerticalOffset: 10
+--- !u!114 &1156426726
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1156426724}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0714697abfc554385907d6524fa93632, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SensorName: RayPerceptionSensor2
+  m_DetectableTags:
+  - block
+  - wall
+  - goal
+  - switchOff
+  - switchOn
+  - stone
+  m_RaysPerDirection: 3
+  m_MaxRayDegrees: 65
+  m_SphereCastRadius: 0.5
+  m_RayLength: 35
+  m_RayLayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967291
+  m_ObservationStacks: 1
+  m_AlternatingRayOrder: 1
+  m_UseBatchedRaycasts: 0
+  rayHitColor: {r: 1, g: 0, b: 0, a: 1}
+  rayMissColor: {r: 1, g: 1, b: 1, a: 1}
+  m_StartVerticalOffset: 0
+  m_EndVerticalOffset: 5
+--- !u!114 &1156426727
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1156426724}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0714697abfc554385907d6524fa93632, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SensorName: RayPerceptionSensor
+  m_DetectableTags:
+  - block
+  - wall
+  - goal
+  - switchOff
+  - switchOn
+  - stone
+  m_RaysPerDirection: 3
+  m_MaxRayDegrees: 70
+  m_SphereCastRadius: 0.5
+  m_RayLength: 35
+  m_RayLayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967291
+  m_ObservationStacks: 1
+  m_AlternatingRayOrder: 1
+  m_UseBatchedRaycasts: 0
+  rayHitColor: {r: 1, g: 0, b: 0, a: 1}
+  rayMissColor: {r: 1, g: 1, b: 1, a: 1}
+  m_StartVerticalOffset: 0
+  m_EndVerticalOffset: 0
+--- !u!114 &1156426728
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1156426724}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 864985241046f4137bafe05a3043d67c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DecisionPeriod: 5
+  DecisionStep: 0
+  TakeActionsBetweenDecisions: 1
 --- !u!1001 &1169600160
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1464170487903594, guid: bd804431e808a492bb5658bcd296e58e, type: 3}
@@ -936,13 +2674,186 @@ PrefabInstance:
       propertyPath: m_LocalRotation.z
       value: -0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 8093056763217003681, guid: bd804431e808a492bb5658bcd296e58e,
+        type: 3}
+      propertyPath: m_BehaviorName
+      value: Pyramids
+      objectReference: {fileID: 0}
+    - target: {fileID: 8093056763217003681, guid: bd804431e808a492bb5658bcd296e58e,
+        type: 3}
+      propertyPath: m_InferenceDevice
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8093056763217003681, guid: bd804431e808a492bb5658bcd296e58e,
+        type: 3}
+      propertyPath: m_BrainParameters.VectorObservationSize
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8093056763217003681, guid: bd804431e808a492bb5658bcd296e58e,
+        type: 3}
+      propertyPath: 'm_BrainParameters.VectorActionSize.Array.data[0]'
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8093056763217003681, guid: bd804431e808a492bb5658bcd296e58e,
+        type: 3}
+      propertyPath: 'm_BrainParameters.m_ActionSpec.BranchSizes.Array.data[0]'
+      value: 5
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 114399412043818042, guid: bd804431e808a492bb5658bcd296e58e, type: 3}
+    - {fileID: 5820012306424387886, guid: bd804431e808a492bb5658bcd296e58e, type: 3}
+    - {fileID: 5767481171805996936, guid: bd804431e808a492bb5658bcd296e58e, type: 3}
+    - {fileID: 5712624269609438939, guid: bd804431e808a492bb5658bcd296e58e, type: 3}
+    - {fileID: 4725417187860315718, guid: bd804431e808a492bb5658bcd296e58e, type: 3}
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1131043459059966, guid: bd804431e808a492bb5658bcd296e58e,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1169600165}
+    - targetCorrespondingSourceObject: {fileID: 1131043459059966, guid: bd804431e808a492bb5658bcd296e58e,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1169600164}
+    - targetCorrespondingSourceObject: {fileID: 1131043459059966, guid: bd804431e808a492bb5658bcd296e58e,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1169600163}
+    - targetCorrespondingSourceObject: {fileID: 1131043459059966, guid: bd804431e808a492bb5658bcd296e58e,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1169600162}
   m_SourcePrefab: {fileID: 100100000, guid: bd804431e808a492bb5658bcd296e58e, type: 3}
+--- !u!1 &1169600161 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1131043459059966, guid: bd804431e808a492bb5658bcd296e58e,
+    type: 3}
+  m_PrefabInstance: {fileID: 1169600160}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1169600162
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1169600161}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0714697abfc554385907d6524fa93632, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SensorName: RayPerceptionSensor3
+  m_DetectableTags:
+  - block
+  - wall
+  - goal
+  - switchOff
+  - switchOn
+  - stone
+  m_RaysPerDirection: 3
+  m_MaxRayDegrees: 75
+  m_SphereCastRadius: 0.5
+  m_RayLength: 35
+  m_RayLayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967291
+  m_ObservationStacks: 1
+  m_AlternatingRayOrder: 1
+  m_UseBatchedRaycasts: 0
+  rayHitColor: {r: 1, g: 0, b: 0, a: 1}
+  rayMissColor: {r: 1, g: 1, b: 1, a: 1}
+  m_StartVerticalOffset: 0
+  m_EndVerticalOffset: 10
+--- !u!114 &1169600163
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1169600161}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0714697abfc554385907d6524fa93632, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SensorName: RayPerceptionSensor2
+  m_DetectableTags:
+  - block
+  - wall
+  - goal
+  - switchOff
+  - switchOn
+  - stone
+  m_RaysPerDirection: 3
+  m_MaxRayDegrees: 65
+  m_SphereCastRadius: 0.5
+  m_RayLength: 35
+  m_RayLayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967291
+  m_ObservationStacks: 1
+  m_AlternatingRayOrder: 1
+  m_UseBatchedRaycasts: 0
+  rayHitColor: {r: 1, g: 0, b: 0, a: 1}
+  rayMissColor: {r: 1, g: 1, b: 1, a: 1}
+  m_StartVerticalOffset: 0
+  m_EndVerticalOffset: 5
+--- !u!114 &1169600164
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1169600161}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0714697abfc554385907d6524fa93632, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SensorName: RayPerceptionSensor
+  m_DetectableTags:
+  - block
+  - wall
+  - goal
+  - switchOff
+  - switchOn
+  - stone
+  m_RaysPerDirection: 3
+  m_MaxRayDegrees: 70
+  m_SphereCastRadius: 0.5
+  m_RayLength: 35
+  m_RayLayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967291
+  m_ObservationStacks: 1
+  m_AlternatingRayOrder: 1
+  m_UseBatchedRaycasts: 0
+  rayHitColor: {r: 1, g: 0, b: 0, a: 1}
+  rayMissColor: {r: 1, g: 1, b: 1, a: 1}
+  m_StartVerticalOffset: 0
+  m_EndVerticalOffset: 0
+--- !u!114 &1169600165
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1169600161}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 864985241046f4137bafe05a3043d67c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DecisionPeriod: 5
+  DecisionStep: 0
+  TakeActionsBetweenDecisions: 1
 --- !u!1001 &1355721707
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 4943719350691982, guid: 5889392e3f05b448a8a06c5def6c2dec, type: 3}
@@ -978,12 +2889,16 @@ PrefabInstance:
       value: 0.13088542
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5889392e3f05b448a8a06c5def6c2dec, type: 3}
 --- !u!1001 &1378840242
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1464170487903594, guid: bd804431e808a492bb5658bcd296e58e, type: 3}
@@ -1022,8 +2937,180 @@ PrefabInstance:
       propertyPath: m_LocalRotation.z
       value: -0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 8093056763217003681, guid: bd804431e808a492bb5658bcd296e58e,
+        type: 3}
+      propertyPath: m_BehaviorName
+      value: Pyramids
+      objectReference: {fileID: 0}
+    - target: {fileID: 8093056763217003681, guid: bd804431e808a492bb5658bcd296e58e,
+        type: 3}
+      propertyPath: m_InferenceDevice
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8093056763217003681, guid: bd804431e808a492bb5658bcd296e58e,
+        type: 3}
+      propertyPath: m_BrainParameters.VectorObservationSize
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8093056763217003681, guid: bd804431e808a492bb5658bcd296e58e,
+        type: 3}
+      propertyPath: 'm_BrainParameters.VectorActionSize.Array.data[0]'
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8093056763217003681, guid: bd804431e808a492bb5658bcd296e58e,
+        type: 3}
+      propertyPath: 'm_BrainParameters.m_ActionSpec.BranchSizes.Array.data[0]'
+      value: 5
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 114399412043818042, guid: bd804431e808a492bb5658bcd296e58e, type: 3}
+    - {fileID: 5820012306424387886, guid: bd804431e808a492bb5658bcd296e58e, type: 3}
+    - {fileID: 5767481171805996936, guid: bd804431e808a492bb5658bcd296e58e, type: 3}
+    - {fileID: 5712624269609438939, guid: bd804431e808a492bb5658bcd296e58e, type: 3}
+    - {fileID: 4725417187860315718, guid: bd804431e808a492bb5658bcd296e58e, type: 3}
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1131043459059966, guid: bd804431e808a492bb5658bcd296e58e,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1378840247}
+    - targetCorrespondingSourceObject: {fileID: 1131043459059966, guid: bd804431e808a492bb5658bcd296e58e,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1378840246}
+    - targetCorrespondingSourceObject: {fileID: 1131043459059966, guid: bd804431e808a492bb5658bcd296e58e,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1378840245}
+    - targetCorrespondingSourceObject: {fileID: 1131043459059966, guid: bd804431e808a492bb5658bcd296e58e,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1378840244}
   m_SourcePrefab: {fileID: 100100000, guid: bd804431e808a492bb5658bcd296e58e, type: 3}
+--- !u!1 &1378840243 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1131043459059966, guid: bd804431e808a492bb5658bcd296e58e,
+    type: 3}
+  m_PrefabInstance: {fileID: 1378840242}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1378840244
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1378840243}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0714697abfc554385907d6524fa93632, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SensorName: RayPerceptionSensor3
+  m_DetectableTags:
+  - block
+  - wall
+  - goal
+  - switchOff
+  - switchOn
+  - stone
+  m_RaysPerDirection: 3
+  m_MaxRayDegrees: 75
+  m_SphereCastRadius: 0.5
+  m_RayLength: 35
+  m_RayLayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967291
+  m_ObservationStacks: 1
+  m_AlternatingRayOrder: 1
+  m_UseBatchedRaycasts: 0
+  rayHitColor: {r: 1, g: 0, b: 0, a: 1}
+  rayMissColor: {r: 1, g: 1, b: 1, a: 1}
+  m_StartVerticalOffset: 0
+  m_EndVerticalOffset: 10
+--- !u!114 &1378840245
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1378840243}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0714697abfc554385907d6524fa93632, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SensorName: RayPerceptionSensor2
+  m_DetectableTags:
+  - block
+  - wall
+  - goal
+  - switchOff
+  - switchOn
+  - stone
+  m_RaysPerDirection: 3
+  m_MaxRayDegrees: 65
+  m_SphereCastRadius: 0.5
+  m_RayLength: 35
+  m_RayLayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967291
+  m_ObservationStacks: 1
+  m_AlternatingRayOrder: 1
+  m_UseBatchedRaycasts: 0
+  rayHitColor: {r: 1, g: 0, b: 0, a: 1}
+  rayMissColor: {r: 1, g: 1, b: 1, a: 1}
+  m_StartVerticalOffset: 0
+  m_EndVerticalOffset: 5
+--- !u!114 &1378840246
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1378840243}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0714697abfc554385907d6524fa93632, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SensorName: RayPerceptionSensor
+  m_DetectableTags:
+  - block
+  - wall
+  - goal
+  - switchOff
+  - switchOn
+  - stone
+  m_RaysPerDirection: 3
+  m_MaxRayDegrees: 70
+  m_SphereCastRadius: 0.5
+  m_RayLength: 35
+  m_RayLayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967291
+  m_ObservationStacks: 1
+  m_AlternatingRayOrder: 1
+  m_UseBatchedRaycasts: 0
+  rayHitColor: {r: 1, g: 0, b: 0, a: 1}
+  rayMissColor: {r: 1, g: 1, b: 1, a: 1}
+  m_StartVerticalOffset: 0
+  m_EndVerticalOffset: 0
+--- !u!114 &1378840247
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1378840243}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 864985241046f4137bafe05a3043d67c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DecisionPeriod: 5
+  DecisionStep: 0
+  TakeActionsBetweenDecisions: 1
 --- !u!4 &1534969848 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4518417139497368, guid: bd804431e808a492bb5658bcd296e58e,
@@ -1035,6 +3122,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1464170487903594, guid: bd804431e808a492bb5658bcd296e58e, type: 3}
@@ -1073,13 +3161,186 @@ PrefabInstance:
       propertyPath: m_LocalRotation.z
       value: -0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 8093056763217003681, guid: bd804431e808a492bb5658bcd296e58e,
+        type: 3}
+      propertyPath: m_BehaviorName
+      value: Pyramids
+      objectReference: {fileID: 0}
+    - target: {fileID: 8093056763217003681, guid: bd804431e808a492bb5658bcd296e58e,
+        type: 3}
+      propertyPath: m_InferenceDevice
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8093056763217003681, guid: bd804431e808a492bb5658bcd296e58e,
+        type: 3}
+      propertyPath: m_BrainParameters.VectorObservationSize
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8093056763217003681, guid: bd804431e808a492bb5658bcd296e58e,
+        type: 3}
+      propertyPath: 'm_BrainParameters.VectorActionSize.Array.data[0]'
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8093056763217003681, guid: bd804431e808a492bb5658bcd296e58e,
+        type: 3}
+      propertyPath: 'm_BrainParameters.m_ActionSpec.BranchSizes.Array.data[0]'
+      value: 5
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 114399412043818042, guid: bd804431e808a492bb5658bcd296e58e, type: 3}
+    - {fileID: 5820012306424387886, guid: bd804431e808a492bb5658bcd296e58e, type: 3}
+    - {fileID: 5767481171805996936, guid: bd804431e808a492bb5658bcd296e58e, type: 3}
+    - {fileID: 5712624269609438939, guid: bd804431e808a492bb5658bcd296e58e, type: 3}
+    - {fileID: 4725417187860315718, guid: bd804431e808a492bb5658bcd296e58e, type: 3}
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1131043459059966, guid: bd804431e808a492bb5658bcd296e58e,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1547253611}
+    - targetCorrespondingSourceObject: {fileID: 1131043459059966, guid: bd804431e808a492bb5658bcd296e58e,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1547253610}
+    - targetCorrespondingSourceObject: {fileID: 1131043459059966, guid: bd804431e808a492bb5658bcd296e58e,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1547253609}
+    - targetCorrespondingSourceObject: {fileID: 1131043459059966, guid: bd804431e808a492bb5658bcd296e58e,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1547253608}
   m_SourcePrefab: {fileID: 100100000, guid: bd804431e808a492bb5658bcd296e58e, type: 3}
+--- !u!1 &1547253607 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1131043459059966, guid: bd804431e808a492bb5658bcd296e58e,
+    type: 3}
+  m_PrefabInstance: {fileID: 1547253606}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1547253608
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1547253607}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0714697abfc554385907d6524fa93632, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SensorName: RayPerceptionSensor3
+  m_DetectableTags:
+  - block
+  - wall
+  - goal
+  - switchOff
+  - switchOn
+  - stone
+  m_RaysPerDirection: 3
+  m_MaxRayDegrees: 75
+  m_SphereCastRadius: 0.5
+  m_RayLength: 35
+  m_RayLayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967291
+  m_ObservationStacks: 1
+  m_AlternatingRayOrder: 1
+  m_UseBatchedRaycasts: 0
+  rayHitColor: {r: 1, g: 0, b: 0, a: 1}
+  rayMissColor: {r: 1, g: 1, b: 1, a: 1}
+  m_StartVerticalOffset: 0
+  m_EndVerticalOffset: 10
+--- !u!114 &1547253609
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1547253607}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0714697abfc554385907d6524fa93632, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SensorName: RayPerceptionSensor2
+  m_DetectableTags:
+  - block
+  - wall
+  - goal
+  - switchOff
+  - switchOn
+  - stone
+  m_RaysPerDirection: 3
+  m_MaxRayDegrees: 65
+  m_SphereCastRadius: 0.5
+  m_RayLength: 35
+  m_RayLayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967291
+  m_ObservationStacks: 1
+  m_AlternatingRayOrder: 1
+  m_UseBatchedRaycasts: 0
+  rayHitColor: {r: 1, g: 0, b: 0, a: 1}
+  rayMissColor: {r: 1, g: 1, b: 1, a: 1}
+  m_StartVerticalOffset: 0
+  m_EndVerticalOffset: 5
+--- !u!114 &1547253610
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1547253607}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0714697abfc554385907d6524fa93632, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SensorName: RayPerceptionSensor
+  m_DetectableTags:
+  - block
+  - wall
+  - goal
+  - switchOff
+  - switchOn
+  - stone
+  m_RaysPerDirection: 3
+  m_MaxRayDegrees: 70
+  m_SphereCastRadius: 0.5
+  m_RayLength: 35
+  m_RayLayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967291
+  m_ObservationStacks: 1
+  m_AlternatingRayOrder: 1
+  m_UseBatchedRaycasts: 0
+  rayHitColor: {r: 1, g: 0, b: 0, a: 1}
+  rayMissColor: {r: 1, g: 1, b: 1, a: 1}
+  m_StartVerticalOffset: 0
+  m_EndVerticalOffset: 0
+--- !u!114 &1547253611
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1547253607}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 864985241046f4137bafe05a3043d67c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DecisionPeriod: 5
+  DecisionStep: 0
+  TakeActionsBetweenDecisions: 1
 --- !u!1001 &1613855850
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1464170487903594, guid: bd804431e808a492bb5658bcd296e58e, type: 3}
@@ -1118,13 +3379,186 @@ PrefabInstance:
       propertyPath: m_LocalRotation.z
       value: -0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 8093056763217003681, guid: bd804431e808a492bb5658bcd296e58e,
+        type: 3}
+      propertyPath: m_BehaviorName
+      value: Pyramids
+      objectReference: {fileID: 0}
+    - target: {fileID: 8093056763217003681, guid: bd804431e808a492bb5658bcd296e58e,
+        type: 3}
+      propertyPath: m_InferenceDevice
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8093056763217003681, guid: bd804431e808a492bb5658bcd296e58e,
+        type: 3}
+      propertyPath: m_BrainParameters.VectorObservationSize
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8093056763217003681, guid: bd804431e808a492bb5658bcd296e58e,
+        type: 3}
+      propertyPath: 'm_BrainParameters.VectorActionSize.Array.data[0]'
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8093056763217003681, guid: bd804431e808a492bb5658bcd296e58e,
+        type: 3}
+      propertyPath: 'm_BrainParameters.m_ActionSpec.BranchSizes.Array.data[0]'
+      value: 5
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 114399412043818042, guid: bd804431e808a492bb5658bcd296e58e, type: 3}
+    - {fileID: 5820012306424387886, guid: bd804431e808a492bb5658bcd296e58e, type: 3}
+    - {fileID: 5767481171805996936, guid: bd804431e808a492bb5658bcd296e58e, type: 3}
+    - {fileID: 5712624269609438939, guid: bd804431e808a492bb5658bcd296e58e, type: 3}
+    - {fileID: 4725417187860315718, guid: bd804431e808a492bb5658bcd296e58e, type: 3}
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1131043459059966, guid: bd804431e808a492bb5658bcd296e58e,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1613855855}
+    - targetCorrespondingSourceObject: {fileID: 1131043459059966, guid: bd804431e808a492bb5658bcd296e58e,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1613855854}
+    - targetCorrespondingSourceObject: {fileID: 1131043459059966, guid: bd804431e808a492bb5658bcd296e58e,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1613855853}
+    - targetCorrespondingSourceObject: {fileID: 1131043459059966, guid: bd804431e808a492bb5658bcd296e58e,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1613855852}
   m_SourcePrefab: {fileID: 100100000, guid: bd804431e808a492bb5658bcd296e58e, type: 3}
+--- !u!1 &1613855851 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1131043459059966, guid: bd804431e808a492bb5658bcd296e58e,
+    type: 3}
+  m_PrefabInstance: {fileID: 1613855850}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1613855852
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1613855851}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0714697abfc554385907d6524fa93632, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SensorName: RayPerceptionSensor3
+  m_DetectableTags:
+  - block
+  - wall
+  - goal
+  - switchOff
+  - switchOn
+  - stone
+  m_RaysPerDirection: 3
+  m_MaxRayDegrees: 75
+  m_SphereCastRadius: 0.5
+  m_RayLength: 35
+  m_RayLayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967291
+  m_ObservationStacks: 1
+  m_AlternatingRayOrder: 1
+  m_UseBatchedRaycasts: 0
+  rayHitColor: {r: 1, g: 0, b: 0, a: 1}
+  rayMissColor: {r: 1, g: 1, b: 1, a: 1}
+  m_StartVerticalOffset: 0
+  m_EndVerticalOffset: 10
+--- !u!114 &1613855853
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1613855851}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0714697abfc554385907d6524fa93632, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SensorName: RayPerceptionSensor2
+  m_DetectableTags:
+  - block
+  - wall
+  - goal
+  - switchOff
+  - switchOn
+  - stone
+  m_RaysPerDirection: 3
+  m_MaxRayDegrees: 65
+  m_SphereCastRadius: 0.5
+  m_RayLength: 35
+  m_RayLayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967291
+  m_ObservationStacks: 1
+  m_AlternatingRayOrder: 1
+  m_UseBatchedRaycasts: 0
+  rayHitColor: {r: 1, g: 0, b: 0, a: 1}
+  rayMissColor: {r: 1, g: 1, b: 1, a: 1}
+  m_StartVerticalOffset: 0
+  m_EndVerticalOffset: 5
+--- !u!114 &1613855854
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1613855851}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0714697abfc554385907d6524fa93632, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SensorName: RayPerceptionSensor
+  m_DetectableTags:
+  - block
+  - wall
+  - goal
+  - switchOff
+  - switchOn
+  - stone
+  m_RaysPerDirection: 3
+  m_MaxRayDegrees: 70
+  m_SphereCastRadius: 0.5
+  m_RayLength: 35
+  m_RayLayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967291
+  m_ObservationStacks: 1
+  m_AlternatingRayOrder: 1
+  m_UseBatchedRaycasts: 0
+  rayHitColor: {r: 1, g: 0, b: 0, a: 1}
+  rayMissColor: {r: 1, g: 1, b: 1, a: 1}
+  m_StartVerticalOffset: 0
+  m_EndVerticalOffset: 0
+--- !u!114 &1613855855
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1613855851}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 864985241046f4137bafe05a3043d67c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DecisionPeriod: 5
+  DecisionStep: 0
+  TakeActionsBetweenDecisions: 1
 --- !u!1001 &2127934646
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1464170487903594, guid: bd804431e808a492bb5658bcd296e58e, type: 3}
@@ -1163,13 +3597,186 @@ PrefabInstance:
       propertyPath: m_LocalRotation.z
       value: -0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 8093056763217003681, guid: bd804431e808a492bb5658bcd296e58e,
+        type: 3}
+      propertyPath: m_BehaviorName
+      value: Pyramids
+      objectReference: {fileID: 0}
+    - target: {fileID: 8093056763217003681, guid: bd804431e808a492bb5658bcd296e58e,
+        type: 3}
+      propertyPath: m_InferenceDevice
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8093056763217003681, guid: bd804431e808a492bb5658bcd296e58e,
+        type: 3}
+      propertyPath: m_BrainParameters.VectorObservationSize
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8093056763217003681, guid: bd804431e808a492bb5658bcd296e58e,
+        type: 3}
+      propertyPath: 'm_BrainParameters.VectorActionSize.Array.data[0]'
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8093056763217003681, guid: bd804431e808a492bb5658bcd296e58e,
+        type: 3}
+      propertyPath: 'm_BrainParameters.m_ActionSpec.BranchSizes.Array.data[0]'
+      value: 5
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 114399412043818042, guid: bd804431e808a492bb5658bcd296e58e, type: 3}
+    - {fileID: 5820012306424387886, guid: bd804431e808a492bb5658bcd296e58e, type: 3}
+    - {fileID: 5767481171805996936, guid: bd804431e808a492bb5658bcd296e58e, type: 3}
+    - {fileID: 5712624269609438939, guid: bd804431e808a492bb5658bcd296e58e, type: 3}
+    - {fileID: 4725417187860315718, guid: bd804431e808a492bb5658bcd296e58e, type: 3}
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1131043459059966, guid: bd804431e808a492bb5658bcd296e58e,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2127934651}
+    - targetCorrespondingSourceObject: {fileID: 1131043459059966, guid: bd804431e808a492bb5658bcd296e58e,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2127934650}
+    - targetCorrespondingSourceObject: {fileID: 1131043459059966, guid: bd804431e808a492bb5658bcd296e58e,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2127934649}
+    - targetCorrespondingSourceObject: {fileID: 1131043459059966, guid: bd804431e808a492bb5658bcd296e58e,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2127934648}
   m_SourcePrefab: {fileID: 100100000, guid: bd804431e808a492bb5658bcd296e58e, type: 3}
+--- !u!1 &2127934647 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1131043459059966, guid: bd804431e808a492bb5658bcd296e58e,
+    type: 3}
+  m_PrefabInstance: {fileID: 2127934646}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2127934648
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2127934647}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0714697abfc554385907d6524fa93632, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SensorName: RayPerceptionSensor3
+  m_DetectableTags:
+  - block
+  - wall
+  - goal
+  - switchOff
+  - switchOn
+  - stone
+  m_RaysPerDirection: 3
+  m_MaxRayDegrees: 75
+  m_SphereCastRadius: 0.5
+  m_RayLength: 35
+  m_RayLayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967291
+  m_ObservationStacks: 1
+  m_AlternatingRayOrder: 1
+  m_UseBatchedRaycasts: 0
+  rayHitColor: {r: 1, g: 0, b: 0, a: 1}
+  rayMissColor: {r: 1, g: 1, b: 1, a: 1}
+  m_StartVerticalOffset: 0
+  m_EndVerticalOffset: 10
+--- !u!114 &2127934649
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2127934647}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0714697abfc554385907d6524fa93632, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SensorName: RayPerceptionSensor2
+  m_DetectableTags:
+  - block
+  - wall
+  - goal
+  - switchOff
+  - switchOn
+  - stone
+  m_RaysPerDirection: 3
+  m_MaxRayDegrees: 65
+  m_SphereCastRadius: 0.5
+  m_RayLength: 35
+  m_RayLayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967291
+  m_ObservationStacks: 1
+  m_AlternatingRayOrder: 1
+  m_UseBatchedRaycasts: 0
+  rayHitColor: {r: 1, g: 0, b: 0, a: 1}
+  rayMissColor: {r: 1, g: 1, b: 1, a: 1}
+  m_StartVerticalOffset: 0
+  m_EndVerticalOffset: 5
+--- !u!114 &2127934650
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2127934647}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0714697abfc554385907d6524fa93632, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SensorName: RayPerceptionSensor
+  m_DetectableTags:
+  - block
+  - wall
+  - goal
+  - switchOff
+  - switchOn
+  - stone
+  m_RaysPerDirection: 3
+  m_MaxRayDegrees: 70
+  m_SphereCastRadius: 0.5
+  m_RayLength: 35
+  m_RayLayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967291
+  m_ObservationStacks: 1
+  m_AlternatingRayOrder: 1
+  m_UseBatchedRaycasts: 0
+  rayHitColor: {r: 1, g: 0, b: 0, a: 1}
+  rayMissColor: {r: 1, g: 1, b: 1, a: 1}
+  m_StartVerticalOffset: 0
+  m_EndVerticalOffset: 0
+--- !u!114 &2127934651
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2127934647}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 864985241046f4137bafe05a3043d67c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DecisionPeriod: 5
+  DecisionStep: 0
+  TakeActionsBetweenDecisions: 1
 --- !u!1001 &2127973662
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1464170487903594, guid: bd804431e808a492bb5658bcd296e58e, type: 3}
@@ -1220,5 +3827,201 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 8093056763217003681, guid: bd804431e808a492bb5658bcd296e58e,
+        type: 3}
+      propertyPath: m_BehaviorName
+      value: Pyramids
+      objectReference: {fileID: 0}
+    - target: {fileID: 8093056763217003681, guid: bd804431e808a492bb5658bcd296e58e,
+        type: 3}
+      propertyPath: m_InferenceDevice
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8093056763217003681, guid: bd804431e808a492bb5658bcd296e58e,
+        type: 3}
+      propertyPath: m_BrainParameters.VectorObservationSize
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8093056763217003681, guid: bd804431e808a492bb5658bcd296e58e,
+        type: 3}
+      propertyPath: 'm_BrainParameters.VectorActionSize.Array.data[0]'
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8093056763217003681, guid: bd804431e808a492bb5658bcd296e58e,
+        type: 3}
+      propertyPath: 'm_BrainParameters.m_ActionSpec.BranchSizes.Array.data[0]'
+      value: 5
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 114399412043818042, guid: bd804431e808a492bb5658bcd296e58e, type: 3}
+    - {fileID: 5820012306424387886, guid: bd804431e808a492bb5658bcd296e58e, type: 3}
+    - {fileID: 5767481171805996936, guid: bd804431e808a492bb5658bcd296e58e, type: 3}
+    - {fileID: 5712624269609438939, guid: bd804431e808a492bb5658bcd296e58e, type: 3}
+    - {fileID: 4725417187860315718, guid: bd804431e808a492bb5658bcd296e58e, type: 3}
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1131043459059966, guid: bd804431e808a492bb5658bcd296e58e,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2127973667}
+    - targetCorrespondingSourceObject: {fileID: 1131043459059966, guid: bd804431e808a492bb5658bcd296e58e,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2127973666}
+    - targetCorrespondingSourceObject: {fileID: 1131043459059966, guid: bd804431e808a492bb5658bcd296e58e,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2127973665}
+    - targetCorrespondingSourceObject: {fileID: 1131043459059966, guid: bd804431e808a492bb5658bcd296e58e,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2127973664}
   m_SourcePrefab: {fileID: 100100000, guid: bd804431e808a492bb5658bcd296e58e, type: 3}
+--- !u!1 &2127973663 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1131043459059966, guid: bd804431e808a492bb5658bcd296e58e,
+    type: 3}
+  m_PrefabInstance: {fileID: 2127973662}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2127973664
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2127973663}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0714697abfc554385907d6524fa93632, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SensorName: RayPerceptionSensor3
+  m_DetectableTags:
+  - block
+  - wall
+  - goal
+  - switchOff
+  - switchOn
+  - stone
+  m_RaysPerDirection: 3
+  m_MaxRayDegrees: 75
+  m_SphereCastRadius: 0.5
+  m_RayLength: 35
+  m_RayLayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967291
+  m_ObservationStacks: 1
+  m_AlternatingRayOrder: 1
+  m_UseBatchedRaycasts: 0
+  rayHitColor: {r: 1, g: 0, b: 0, a: 1}
+  rayMissColor: {r: 1, g: 1, b: 1, a: 1}
+  m_StartVerticalOffset: 0
+  m_EndVerticalOffset: 10
+--- !u!114 &2127973665
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2127973663}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0714697abfc554385907d6524fa93632, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SensorName: RayPerceptionSensor2
+  m_DetectableTags:
+  - block
+  - wall
+  - goal
+  - switchOff
+  - switchOn
+  - stone
+  m_RaysPerDirection: 3
+  m_MaxRayDegrees: 65
+  m_SphereCastRadius: 0.5
+  m_RayLength: 35
+  m_RayLayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967291
+  m_ObservationStacks: 1
+  m_AlternatingRayOrder: 1
+  m_UseBatchedRaycasts: 0
+  rayHitColor: {r: 1, g: 0, b: 0, a: 1}
+  rayMissColor: {r: 1, g: 1, b: 1, a: 1}
+  m_StartVerticalOffset: 0
+  m_EndVerticalOffset: 5
+--- !u!114 &2127973666
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2127973663}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0714697abfc554385907d6524fa93632, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SensorName: RayPerceptionSensor
+  m_DetectableTags:
+  - block
+  - wall
+  - goal
+  - switchOff
+  - switchOn
+  - stone
+  m_RaysPerDirection: 3
+  m_MaxRayDegrees: 70
+  m_SphereCastRadius: 0.5
+  m_RayLength: 35
+  m_RayLayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967291
+  m_ObservationStacks: 1
+  m_AlternatingRayOrder: 1
+  m_UseBatchedRaycasts: 0
+  rayHitColor: {r: 1, g: 0, b: 0, a: 1}
+  rayMissColor: {r: 1, g: 1, b: 1, a: 1}
+  m_StartVerticalOffset: 0
+  m_EndVerticalOffset: 0
+--- !u!114 &2127973667
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2127973663}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 864985241046f4137bafe05a3043d67c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DecisionPeriod: 5
+  DecisionStep: 0
+  TakeActionsBetweenDecisions: 1
+--- !u!1660057539 &9223372036854775807
+SceneRoots:
+  m_ObjectHideFlags: 0
+  m_Roots:
+  - {fileID: 1009000884}
+  - {fileID: 1355721707}
+  - {fileID: 499540687}
+  - {fileID: 2127973662}
+  - {fileID: 323110102}
+  - {fileID: 304577311}
+  - {fileID: 1156426723}
+  - {fileID: 418198956}
+  - {fileID: 1378840242}
+  - {fileID: 520016803}
+  - {fileID: 2127934646}
+  - {fileID: 931495153}
+  - {fileID: 105536951}
+  - {fileID: 1169600160}
+  - {fileID: 1547253606}
+  - {fileID: 931192784}
+  - {fileID: 14183653}
+  - {fileID: 418397397}
+  - {fileID: 1613855850}
+  - {fileID: 264688056}
