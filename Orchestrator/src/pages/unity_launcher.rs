@@ -558,7 +558,7 @@ impl UnityLauncher {
     pub fn stop_training(&mut self) {
         self.shutdown_requested.store(true, Ordering::SeqCst);
         self.tcp_server_handles.clear();
-        for (i, mut process) in self.unity_processes.drain(..) .enumerate() {
+        for (_i, mut process) in self.unity_processes.drain(..) .enumerate() {
             let _ = process.kill();
             let _ = process.wait();
         }

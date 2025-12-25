@@ -1,10 +1,12 @@
 pub mod settings;
+pub mod race; // Added
 
 use std::collections::HashMap;
 use std::time::{SystemTime, UNIX_EPOCH, Duration};
 use std::str;
 use crate::agent::{RLAgent, AgentType};
 use crate::trainer::settings::TrainerSettings;
+use crate::trainer::race::RaceController; // Added
 use crate::channel::CommunicationChannel;
 use crate::protocol::{self, AgentAction, AgentInfo};
 use crate::sac;
@@ -95,6 +97,10 @@ pub enum GuiUpdate {
         metrics: std::collections::HashMap<String, f32>,
         behavior_name: String,
     },
+    RaceConfig {
+        total_steps: usize,
+        checkpoints: Vec<f32>,
+    },
 }
 
 pub struct Trainer {
@@ -114,8 +120,10 @@ pub struct Trainer {
     pub gui_sender: Option<Sender<GuiUpdate>>,
     pub channel_ids: Vec<String>,
     pub champion_tracker: Option<Arc<ChampionTracker>>, // Added
+    pub race_controller: Option<Arc<RaceController>>, // Added
     pub shutdown_signal: Option<Arc<AtomicBool>>,
     pub last_checkpoint_step: usize,
+    pub sensor_shapes: Option<Vec<i64>>, // Added
 }
 
 impl Trainer {
@@ -124,7 +132,8 @@ impl Trainer {
         gui_sender: Option<Sender<GuiUpdate>>, 
         channel_ids: Vec<String>,
         champion_tracker: Option<Arc<ChampionTracker>>, // Added
-        shutdown_signal: Option<Arc<AtomicBool>>
+        shutdown_signal: Option<Arc<AtomicBool>>,
+        race_controller: Option<Arc<RaceController>>, // Added
     ) -> Self {
 // Trainer::new logic
         let timestamp = SystemTime::now().duration_since(UNIX_EPOCH).unwrap().as_secs();
@@ -166,6 +175,8 @@ impl Trainer {
             champion_tracker, // Added
             shutdown_signal,
             last_checkpoint_step: 0,
+            race_controller, // Added
+            sensor_shapes: None,
         };
         
         // ...
@@ -371,6 +382,16 @@ impl Trainer {
         }
         
         let mut channels = main_loop_channels; // Shadow with correct type for main loop
+
+        // Send Race Configuration to GUI if applicable
+        if let Some(rc) = &self.race_controller {
+            if let Some(tx) = &self.gui_sender {
+                let _ = tx.send(GuiUpdate::RaceConfig { 
+                    total_steps: rc.total_steps, 
+                    checkpoints: rc.checkpoints.clone() 
+                });
+            }
+        }
 
         let mut last_msg_time = SystemTime::now();
         const SILENCE_TIMEOUT: Duration = Duration::from_secs(60);
@@ -672,6 +693,55 @@ impl Trainer {
                 if should_save {
                     self.save_checkpoint();
                 }
+
+                // --- RACE LOGIC ---
+                // Clone the Arc to avoid borrowing 'self' while we might need to mutate 'self.settings' later
+                if let Some(rc) = self.race_controller.clone() {
+                    let algo_str = format!("{:?}", self.settings.algorithm).to_lowercase();
+                    let ckpt_path = format!("{}/checkpoint/{}/checkpoint.ot", self.settings.output_path, algo_str);
+                    let my_id = self.channel_ids.first().cloned().unwrap_or("unknown".to_string());
+                    
+                    let (should_continue, load_info) = rc.report_progress(
+                        &my_id, 
+                        self.total_steps, 
+                        self.last_avg_reward, 
+                        self.settings.algorithm, 
+                        &ckpt_path,
+                        &self.settings
+                    );
+                    
+                    if !should_continue {
+                        println!("🛑 Race Controller ended training for agent {}.", my_id);
+                        break Ok(()); 
+                    }
+                    
+                    if let Some((path, new_settings)) = load_info {
+                        println!("♻️ Race Controller ordered reload from: {}", path);
+                        
+                        // Check for Algorithm Swap
+                        let algo_changed = new_settings.algorithm != self.settings.algorithm;
+                        self.settings = new_settings; // Adopt winner's settings
+                        
+                        if algo_changed {
+                             println!("🔄 Swapping Algorithm to {:?}", self.settings.algorithm);
+                             if let Some(current_agent) = &self.agent {
+                                 let obs_dim = current_agent.get_obs_dim();
+                                 let act_dim = current_agent.get_act_dim();
+                                 // Re-create agent with NEW settings
+                                 self.agent = Some(self.create_agent(&self.settings, obs_dim, act_dim));
+                             }
+                        }
+
+                        if let Some(agent) = self.agent.as_mut() {
+                            if let Err(e) = agent.load(&path) {
+                                eprintln!("❌ Failed to reload champion weights: {}", e);
+                            } else {
+                                println!("✅ Champion weights loaded successfully.");
+                            }
+                        }
+                    }
+                }
+                // ------------------
             }
         }
     }
@@ -680,137 +750,10 @@ impl Trainer {
         let obs_dim = info.observations.len();
         let act_dim = 2; // Fixed for now, should be dynamic
         println!("🚀 Dynamic Init ({}): obs_dim={}, act_dim={}", behavior, obs_dim, act_dim);
+        
+        self.sensor_shapes = if info.sensor_shapes.is_empty() { None } else { Some(info.sensor_shapes.clone()) };
 
-        let mut new_agent: Box<dyn RLAgent> = match self.settings.algorithm {
-            AgentType::SAC => Box::new(sac::SAC::new(
-                obs_dim, 
-                act_dim, 
-                self.settings.hidden_units, 
-                self.settings.buffer_size, 
-                self.settings.learning_rate as f64,
-                self.settings.gamma as f64,
-                self.settings.tau.unwrap_or(0.005) as f64,
-                self.settings.entropy_coef.unwrap_or(0.2) as f64, // Alpha init
-                self.device,
-                if info.sensor_shapes.is_empty() { None } else { Some(info.sensor_shapes.clone()) },
-                self.settings.memory_size,
-                self.settings.sequence_length
-            )),
-            AgentType::PPO | AgentType::PPO_ET | AgentType::PPO_CE => {
-                let use_adaptive_entropy = matches!(self.settings.algorithm, AgentType::PPO_ET);
-                let use_curiosity = matches!(self.settings.algorithm, AgentType::PPO_CE);
-                
-                Box::new(ppo::PPO::new(
-                    obs_dim, 
-                    act_dim, 
-                    self.settings.hidden_units, 
-                    self.settings.learning_rate as f64,
-                    self.settings.gamma as f64,
-                    self.settings.lambd.unwrap_or(0.95) as f64,
-                    self.settings.epsilon.unwrap_or(0.2) as f64,
-                    self.settings.entropy_coef.unwrap_or(0.01) as f64,
-                    self.settings.num_epochs,
-                    self.settings.buffer_size, // horizon
-                    self.settings.batch_size,  // minibatch_size
-                    self.device,
-                    if info.sensor_shapes.is_empty() { None } else { Some(info.sensor_shapes.clone()) },
-                    use_adaptive_entropy,
-                    use_curiosity,
-                    self.settings.curiosity_strength.unwrap_or(0.01) as f64,
-                    self.settings.curiosity_learning_rate.unwrap_or(3e-4) as f64,
-                    self.settings.memory_size,
-                    self.settings.sequence_length
-                ))
-            },
-            AgentType::TD3 => Box::new(td3::TD3::new(
-                obs_dim, 
-                act_dim, 
-                self.settings.hidden_units, 
-                self.settings.buffer_size, 
-                self.settings.learning_rate as f64,
-                self.settings.gamma as f64,
-                self.settings.tau.unwrap_or(0.005) as f64,
-                self.settings.policy_delay.unwrap_or(2),
-                self.device,
-                if info.sensor_shapes.is_empty() { None } else { Some(info.sensor_shapes.clone()) },
-                self.settings.memory_size,
-                self.settings.sequence_length
-            )),
-            AgentType::TDSAC => Box::new(tdsac::TDSAC::new(
-                obs_dim, 
-                act_dim, 
-                self.settings.hidden_units, 
-                self.settings.buffer_size, 
-                self.settings.learning_rate as f64,
-                self.settings.gamma as f64,
-                self.settings.tau.unwrap_or(0.005) as f64,
-                self.settings.entropy_coef.unwrap_or(0.2) as f64, // Alpha
-                self.settings.policy_delay.unwrap_or(2),
-                self.device,
-                if info.sensor_shapes.is_empty() { None } else { Some(info.sensor_shapes.clone()) },
-                self.settings.memory_size,
-                self.settings.sequence_length
-            )),
-            AgentType::TQC => Box::new(tqc::TQC::new(
-                obs_dim, 
-                act_dim, 
-                self.settings.hidden_units, 
-                self.settings.buffer_size, 
-                self.settings.learning_rate as f64,
-                self.settings.gamma as f64,
-                self.settings.tau.unwrap_or(0.005) as f64,
-                self.settings.entropy_coef.unwrap_or(0.2) as f64,
-                self.settings.n_quantiles.unwrap_or(25),
-                self.settings.n_to_drop.unwrap_or(2),
-                self.device,
-                if info.sensor_shapes.is_empty() { None } else { Some(info.sensor_shapes.clone()) },
-                self.settings.memory_size,
-                self.settings.sequence_length
-            )),
-            AgentType::CrossQ => Box::new(crossq::CrossQ::new(
-                obs_dim, 
-                act_dim, 
-                self.settings.hidden_units, 
-                self.settings.buffer_size, 
-                self.settings.learning_rate as f64,
-                self.settings.gamma as f64,
-                self.settings.entropy_coef.unwrap_or(0.2) as f64, // Alpha init
-                self.device,
-                if info.sensor_shapes.is_empty() { None } else { Some(info.sensor_shapes.clone()) },
-                self.settings.memory_size,
-                self.settings.sequence_length
-            )),
-            AgentType::BC => Box::new(bc::BC::new(
-                obs_dim, 
-                act_dim, 
-                self.settings.hidden_units, 
-                self.settings.buffer_size, 
-                self.settings.batch_size,
-                self.settings.learning_rate as f64,
-                self.device,
-                if info.sensor_shapes.is_empty() { None } else { Some(info.sensor_shapes.clone()) },
-                self.settings.memory_size,
-                self.settings.sequence_length
-            )),
-            AgentType::POCA => Box::new(poca::POCA::new(
-                obs_dim, 
-                act_dim, 
-                self.settings.hidden_units, 
-                self.settings.buffer_size, 
-                self.settings.batch_size,
-                self.settings.learning_rate as f64,
-                self.settings.num_epochs,
-                self.settings.gamma as f64,
-                self.settings.lambd.unwrap_or(0.95) as f64,
-                self.settings.epsilon.unwrap_or(0.2) as f64,
-                self.settings.entropy_coef.unwrap_or(0.01) as f64,
-                0.5, // vf_coef default
-                self.device,
-                if info.sensor_shapes.is_empty() { None } else { Some(info.sensor_shapes.clone()) },
-                self.settings.memory_size,
-                self.settings.sequence_length
-            )),
-        };
+        self.agent = Some(self.create_agent(&self.settings, obs_dim, act_dim));
 
         if self.settings.resume || !self.settings.init_path.is_empty() {
             let algo_str = format!("{:?}", self.settings.algorithm).to_lowercase();
@@ -828,9 +771,11 @@ impl Trainer {
             // 2. Load Weights
             if std::path::Path::new(&ckpt_path).exists() {
                 println!("💾 Loading Weights: {}", ckpt_path);
-                match new_agent.load(&ckpt_path) {
-                    Ok(_) => println!("✅ Weights loaded successfully."),
-                    Err(e) => eprintln!("❌ Failed to load weights: {}", e),
+                if let Some(agent) = self.agent.as_mut() {
+                    match agent.load(&ckpt_path) {
+                        Ok(_) => println!("✅ Weights loaded successfully."),
+                        Err(e) => eprintln!("❌ Failed to load weights: {}", e),
+                    }
                 }
             }
 
@@ -848,7 +793,139 @@ impl Trainer {
                 }
             }
         }
-        self.agent = Some(new_agent);
+    }
+
+    fn create_agent(&self, settings: &TrainerSettings, obs_dim: usize, act_dim: usize) -> Box<dyn RLAgent> {
+        match settings.algorithm {
+            AgentType::SAC => Box::new(sac::SAC::new(
+                obs_dim, 
+                act_dim, 
+                settings.hidden_units, 
+                settings.buffer_size, 
+                settings.learning_rate as f64,
+                settings.gamma as f64,
+                settings.tau.unwrap_or(0.005) as f64,
+                settings.entropy_coef.unwrap_or(0.2) as f64, // Alpha init
+                self.device,
+                self.sensor_shapes.clone(),
+                settings.memory_size,
+                settings.sequence_length
+            )),
+            AgentType::PPO | AgentType::PPO_ET | AgentType::PPO_CE => {
+                let use_adaptive_entropy = matches!(settings.algorithm, AgentType::PPO_ET);
+                let use_curiosity = matches!(settings.algorithm, AgentType::PPO_CE);
+                
+                Box::new(ppo::PPO::new(
+                    obs_dim, 
+                    act_dim, 
+                    settings.hidden_units, 
+                    settings.learning_rate as f64,
+                    settings.gamma as f64,
+                    settings.lambd.unwrap_or(0.95) as f64,
+                    settings.epsilon.unwrap_or(0.2) as f64,
+                    settings.entropy_coef.unwrap_or(0.01) as f64,
+                    settings.num_epochs,
+                    settings.buffer_size, // horizon
+                    settings.batch_size,  // minibatch_size
+                    self.device,
+                    self.sensor_shapes.clone(),
+                    use_adaptive_entropy,
+                    use_curiosity,
+                    settings.curiosity_strength.unwrap_or(0.01) as f64,
+                    settings.curiosity_learning_rate.unwrap_or(3e-4) as f64,
+                    settings.memory_size,
+                    settings.sequence_length
+                ))
+            },
+            AgentType::TD3 => Box::new(td3::TD3::new(
+                obs_dim, 
+                act_dim, 
+                settings.hidden_units, 
+                settings.buffer_size, 
+                settings.learning_rate as f64,
+                settings.gamma as f64,
+                settings.tau.unwrap_or(0.005) as f64,
+                settings.policy_delay.unwrap_or(2),
+                self.device,
+                self.sensor_shapes.clone(),
+                settings.memory_size,
+                settings.sequence_length
+            )),
+            AgentType::TDSAC => Box::new(tdsac::TDSAC::new(
+                obs_dim, 
+                act_dim, 
+                settings.hidden_units, 
+                settings.buffer_size, 
+                settings.learning_rate as f64,
+                settings.gamma as f64,
+                settings.tau.unwrap_or(0.005) as f64,
+                settings.entropy_coef.unwrap_or(0.2) as f64, // Alpha
+                settings.policy_delay.unwrap_or(2),
+                self.device,
+                self.sensor_shapes.clone(),
+                settings.memory_size,
+                settings.sequence_length
+            )),
+            AgentType::TQC => Box::new(tqc::TQC::new(
+                obs_dim, 
+                act_dim, 
+                settings.hidden_units, 
+                settings.buffer_size, 
+                settings.learning_rate as f64,
+                settings.gamma as f64,
+                settings.tau.unwrap_or(0.005) as f64,
+                settings.entropy_coef.unwrap_or(0.2) as f64,
+                settings.n_quantiles.unwrap_or(25),
+                settings.n_to_drop.unwrap_or(2),
+                self.device,
+                self.sensor_shapes.clone(),
+                settings.memory_size,
+                settings.sequence_length
+            )),
+            AgentType::CrossQ => Box::new(crossq::CrossQ::new(
+                obs_dim, 
+                act_dim, 
+                settings.hidden_units, 
+                settings.buffer_size, 
+                settings.learning_rate as f64,
+                settings.gamma as f64,
+                settings.entropy_coef.unwrap_or(0.2) as f64, // Alpha init
+                self.device,
+                self.sensor_shapes.clone(),
+                settings.memory_size,
+                settings.sequence_length
+            )),
+            AgentType::BC => Box::new(bc::BC::new(
+                obs_dim, 
+                act_dim, 
+                settings.hidden_units, 
+                settings.buffer_size, 
+                settings.batch_size,
+                settings.learning_rate as f64,
+                self.device,
+                self.sensor_shapes.clone(),
+                settings.memory_size,
+                settings.sequence_length
+            )),
+            AgentType::POCA => Box::new(poca::POCA::new(
+                obs_dim, 
+                act_dim, 
+                settings.hidden_units, 
+                settings.buffer_size, 
+                settings.batch_size,
+                settings.learning_rate as f64,
+                settings.num_epochs,
+                settings.gamma as f64,
+                settings.lambd.unwrap_or(0.95) as f64,
+                settings.epsilon.unwrap_or(0.2) as f64,
+                settings.entropy_coef.unwrap_or(0.01) as f64,
+                0.5, // vf_coef default
+                self.device,
+                self.sensor_shapes.clone(),
+                settings.memory_size,
+                settings.sequence_length
+            )),
+        }
     }
 
     fn save_checkpoint(&mut self) { 

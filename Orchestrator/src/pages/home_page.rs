@@ -9,7 +9,10 @@ use crate::pages::algorithms;
 use crate::pages::unity_launcher::UnityLauncher;
 use crate::pages::tcp_server::TcpServerHandler;
 use crate::pages::monitor_page::MonitorPage;
-use crate::protocol::{AgentAction, AgentInfo};
+use crate::protocol::{AgentAction, AgentInfo}; // Kept for potential future use or if I misread, but actually I should remove it if unused.
+// Let's comment it out or remove.
+// I will just remove the line.
+
 
 pub struct HomePage {
     // Top-level settings
@@ -379,6 +382,7 @@ impl HomePage {
                                                 &self.init_path,
                                                 self.checkpoint_settings.mode,
                                                 &self.device,
+                                                self.checkpoint_settings.enable_race_mode, // Added
                                             );
                                             self.show_monitor = true;
                                         }

@@ -282,6 +282,10 @@ pub fn render_settings_ui(
                     ui.label("Default Keep Checkpoints:");
                     ui.add(egui::DragValue::new(keep_checkpoints).speed(1));
                     ui.end_row();
+
+                    ui.label("Race Mode (Tournament):");
+                    ui.checkbox(&mut checkpoint_settings.enable_race_mode, "Enable Survival of the Fittest");
+                    ui.end_row();
                 });
         });
     ui.add_space(10.0);

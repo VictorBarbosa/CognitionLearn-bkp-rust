@@ -1,7 +1,7 @@
 use std::sync::{Arc, atomic::AtomicBool};
 use std::thread;
 use std::collections::HashMap;
-use crate::trainer::{Trainer, settings::TrainerSettings, GuiUpdate, ChampionTracker};
+use crate::trainer::{Trainer, settings::TrainerSettings, GuiUpdate, ChampionTracker, race::RaceController};
 use crate::agent::AgentType;
 use crate::pages::config_types::{AlgoConfig, CheckpointMode};
 
@@ -46,6 +46,7 @@ impl TcpServerHandler {
         init_path: &str,
         checkpoint_mode: CheckpointMode,
         device: &str,
+        enable_race_mode: bool, // Added
     ) {
         // Reset champion tracker for a new run
         if let Ok(mut best) = self.champion_tracker.current_best.lock() {
@@ -53,22 +54,51 @@ impl TcpServerHandler {
         }
 
         // 1. Group ports by Algorithm
+        // If Race Mode is ON, we force 1 port per group (Unique groups)
         let mut algo_groups: HashMap<String, Vec<String>> = HashMap::new();
 
-        for &port in launched_ports {
+        for (i, &port) in launched_ports.iter().enumerate() {
             let algo_name = port_algorithm_map.get(&port)
                 .cloned()
                 .unwrap_or_else(|| "sac".to_string());
             
-            algo_groups.entry(algo_name)
+            let group_key = if enable_race_mode {
+                format!("{}_{}", algo_name, i) // Unique key per env for Race
+            } else {
+                algo_name.clone() // Shared key for Standard
+            };
+            
+            // Note: If race mode, we might want to preserve the 'algo_name' for config lookup later.
+            // But we store the group key. We'll handle config lookup carefully.
+            
+            algo_groups.entry(group_key)
                 .or_insert_with(Vec::new)
                 .push(port.to_string());
         }
 
+        // Initialize Race Controller if needed
+        let race_controller = if enable_race_mode {
+            let participant_ids: Vec<String> = algo_groups.values().flatten().cloned().collect();
+            println!("🏁 Initializing Race Controller for {} participants. Max Steps: {}", participant_ids.len(), max_steps);
+            Some(Arc::new(RaceController::new(max_steps as usize, participant_ids)))
+        } else {
+            None
+        };
+
         println!("🏗️ Distributed Training Grouping: {:?}", algo_groups);
 
         // 2. Spawn ONE Trainer per Algorithm Group
-        for (algo_name, channel_ids) in algo_groups {
+        for (group_key, channel_ids) in algo_groups {
+            // Extract real algo name from group key (e.g. "PPO_0" -> "PPO") if race mode
+            let algo_name = if enable_race_mode {
+                // Split by last underscore? Or assume strict format?
+                // Simpler: Use the port map again for the first channel in the group
+                let first_port = channel_ids[0].parse::<u16>().unwrap_or(0);
+                port_algorithm_map.get(&first_port).cloned().unwrap_or("sac".to_string())
+            } else {
+                group_key.clone()
+            };
+
             let is_dummy = algo_name == "DUMMY";
 
             // Get config
@@ -82,10 +112,19 @@ impl TcpServerHandler {
             };
 
             // Map AlgoConfig -> TrainerSettings
+            // CRITICAL: For Race Mode, each trainer needs a unique output path to avoid overwriting checkpoints!
+            // Standard: results/run_id/checkpoint/algo_name
+            // Race: results/run_id/checkpoint/algo_name_port
+            let effective_output_path = if enable_race_mode {
+                 format!("{}/race_{}", output_path, channel_ids[0])
+            } else {
+                 output_path.to_string()
+            };
+
             let settings = map_config(
                 &algo_name, 
                 &config, 
-                output_path, 
+                &effective_output_path, 
                 learning_rate, 
                 hidden_units, 
                 max_steps, 
@@ -101,13 +140,26 @@ impl TcpServerHandler {
             let tx_clone = self.gui_tx.clone();
             let shutdown_clone = self.shutdown_requested.clone(); 
             let tracker_clone = self.champion_tracker.clone();
+            let race_ctrl_clone = race_controller.clone();
 
-            println!("🚀 Spawning {} for: {} | Managing Envs: {:?}", if is_dummy { "VISUAL DUMMY" } else { "CENTRAL Trainer" }, algo_name, channel_ids);
+            println!("🚀 Spawning {} for: {} (Group: {}) | Managing Envs: {:?}", 
+                if is_dummy { "VISUAL DUMMY" } else { "CENTRAL Trainer" }, 
+                algo_name, 
+                group_key,
+                channel_ids
+            );
 
             // Spawn Thread
             let handle = thread::spawn(move || {
                 // Initialize Trainer with LIST of channels
-                let mut trainer = Trainer::new(settings, Some(tx_clone), channel_ids.clone(), Some(tracker_clone), Some(shutdown_clone));
+                let mut trainer = Trainer::new(
+                    settings, 
+                    Some(tx_clone), 
+                    channel_ids.clone(), 
+                    Some(tracker_clone), 
+                    Some(shutdown_clone),
+                    race_ctrl_clone // Pass controller
+                );
                 
                 // Run
                 let result = if is_dummy {
@@ -117,9 +169,9 @@ impl TcpServerHandler {
                 };
 
                 if let Err(e) = result {
-                     eprintln!("❌ Trainer [Algo:{}] crashed: {}", algo_name, e);
+                     eprintln!("❌ Trainer [Group:{}] crashed: {}", group_key, e);
                 } else {
-                     println!("✅ Trainer [Algo:{}] finished gracefully.", algo_name);
+                     println!("✅ Trainer [Group:{}] finished gracefully.", group_key);
                 }
             });
 
