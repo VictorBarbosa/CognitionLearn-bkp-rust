@@ -114,7 +114,7 @@ impl HomePage {
             // Global Hyperparameters Init
             learning_rate: 3e-4,
             learning_rate_schedule: String::from("linear"),
-            hidden_units: 256,
+            hidden_units: 512,
             num_layers: 2,
             normalize: true,
             reward_gamma: 0.99,

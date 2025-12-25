@@ -56,21 +56,22 @@ pub fn parse_step_data(data: &str) -> Result<HashMap<String, Vec<AgentInfo>>, St
                 id: 0, reward: 0.0, done: false, max_step_reached: false, observations: vec![], sensor_shapes: vec![],
             });
         } else if let Some(agent) = current_agent.as_mut() {
-            let lower_line = line.to_lowercase();
-            if let Some(val) = lower_line.strip_prefix("id:") {
+            // Optimization: removed expensive to_lowercase() allocation
+            if let Some(val) = line.strip_prefix("id:") {
                 agent.id = val.trim().parse().unwrap_or(0);
-            } else if let Some(val) = lower_line.strip_prefix("reward:") {
+            } else if let Some(val) = line.strip_prefix("reward:") {
                 agent.reward = val.trim().parse().unwrap_or(0.0);
-            } else if let Some(val) = lower_line.strip_prefix("done:") {
+            } else if let Some(val) = line.strip_prefix("done:") {
                 agent.done = val.trim().parse().unwrap_or(false);
-            } else if let Some(val) = lower_line.strip_prefix("maxstepreached:") {
+            } else if let Some(val) = line.strip_prefix("maxStepReached:") {
                 agent.max_step_reached = val.trim().parse().unwrap_or(false);
-            } else if lower_line.starts_with("obs:") || lower_line.starts_with("observations:") {
-                let s = if lower_line.starts_with("obs:") { &line["obs:".len()..] } else { &line["observations:".len()..] };
+            // Handle potentially different casings or aliases without allocation
+            } else if line.starts_with("obs:") || line.starts_with("observations:") {
+                let s = if line.starts_with("obs:") { &line["obs:".len()..] } else { &line["observations:".len()..] };
                 agent.observations = s.split(|c| c == ';' || c == ',' || c == ' ')
                     .map(|s| s.trim()).filter(|s| !s.is_empty())
                     .filter_map(|s| s.parse().ok()).collect();
-            } else if lower_line.starts_with("sensor_shapes:") {
+            } else if line.starts_with("sensor_shapes:") {
                 let s = &line["sensor_shapes:".len()..];
                 agent.sensor_shapes = s.split(|c| c == ';' || c == ',' || c == ' ')
                     .map(|s| s.trim()).filter(|s| !s.is_empty())
@@ -114,29 +115,29 @@ pub fn parse_transition_data(data: &str) -> Result<HashMap<String, Vec<Transitio
                 id: 0, reward: 0.0, done: false, observations: vec![], actions: vec![], next_observations: vec![], sensor_shapes: vec![],
             });
         } else if let Some(trans) = current_trans.as_mut() {
-            let lower_line = line.to_lowercase();
-            if let Some(val) = lower_line.strip_prefix("id:") {
+            // Optimization: Removed to_lowercase()
+            if let Some(val) = line.strip_prefix("id:") {
                 trans.id = val.trim().parse().unwrap_or(0);
-            } else if let Some(val) = lower_line.strip_prefix("reward:") {
+            } else if let Some(val) = line.strip_prefix("reward:") {
                 trans.reward = val.trim().parse().unwrap_or(0.0);
-            } else if let Some(val) = lower_line.strip_prefix("done:") {
+            } else if let Some(val) = line.strip_prefix("done:") {
                 trans.done = val.trim().parse().unwrap_or(false);
-            } else if lower_line.starts_with("obs:") || lower_line.starts_with("observations:") {
-                let s = if lower_line.starts_with("obs:") { &line["obs:".len()..] } else { &line["observations:".len()..] };
+            } else if line.starts_with("obs:") || line.starts_with("observations:") {
+                let s = if line.starts_with("obs:") { &line["obs:".len()..] } else { &line["observations:".len()..] };
                 trans.observations = s.split(|c| c == ';' || c == ',' || c == ' ')
                     .map(|s| s.trim()).filter(|s| !s.is_empty())
                     .filter_map(|s| s.parse().ok()).collect();
-            } else if lower_line.starts_with("act:") || lower_line.starts_with("actions:") {
-                let s = if lower_line.starts_with("act:") { &line["act:".len()..] } else { &line["actions:".len()..] };
+            } else if line.starts_with("act:") || line.starts_with("actions:") {
+                let s = if line.starts_with("act:") { &line["act:".len()..] } else { &line["actions:".len()..] };
                 trans.actions = s.split(|c| c == ';' || c == ',' || c == ' ')
                     .map(|s| s.trim()).filter(|s| !s.is_empty())
                     .filter_map(|s| s.parse().ok()).collect();
-            } else if lower_line.starts_with("next_obs:") || lower_line.starts_with("next_observations:") {
-                let s = if lower_line.starts_with("next_obs:") { &line["next_obs:".len()..] } else { &line["next_observations:".len()..] };
+            } else if line.starts_with("next_obs:") || line.starts_with("next_observations:") {
+                let s = if line.starts_with("next_obs:") { &line["next_obs:".len()..] } else { &line["next_observations:".len()..] };
                 trans.next_observations = s.split(|c| c == ';' || c == ',' || c == ' ')
                     .map(|s| s.trim()).filter(|s| !s.is_empty())
                     .filter_map(|s| s.parse().ok()).collect();
-            } else if lower_line.starts_with("sensor_shapes:") {
+            } else if line.starts_with("sensor_shapes:") {
                 let s = &line["sensor_shapes:".len()..];
                 trans.sensor_shapes = s.split(|c| c == ';' || c == ',' || c == ' ')
                     .map(|s| s.trim()).filter(|s| !s.is_empty())

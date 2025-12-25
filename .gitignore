@@ -27,3 +27,5 @@ Example/CognitionLearn/runs/
 Example/CognitionLearn/Assets/Trainning/checkpoint/*.json
 Example/CognitionLearn/Assets/Trainning/
 
+Logs/*.log
+*.pdb.meta
