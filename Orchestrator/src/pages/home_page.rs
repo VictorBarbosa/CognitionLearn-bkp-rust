@@ -118,12 +118,12 @@ impl HomePage {
             learning_rate: 3e-4,
             learning_rate_schedule: String::from("linear"),
             hidden_units: 512,
-            num_layers: 2,
+            num_layers: 3,
             normalize: true,
-            reward_gamma: 0.99,
+            reward_gamma: 0.995,
             reward_strength: 1.0,
-            max_steps: 5000000,
-            summary_freq: 10000,
+            max_steps: 500000000,
+            summary_freq: 5000,
             init_path: String::from(""),
 
             num_areas: 1,
@@ -162,7 +162,7 @@ impl HomePage {
             ppo_ce_env_count: 0,
             poca_env_count: 0,
             distributed_env_total: 1,
-            checkpoint_interval: 1000,  
+            checkpoint_interval: 5000,  
             keep_checkpoints: 5,       
 
             algorithm_selection_mode: AlgorithmSelectionMode::Same, 
@@ -372,17 +372,10 @@ impl HomePage {
                                                 &self.unity_launcher.port_algorithm_map,
                                                 &self.algorithm_configs,
                                                 &self.results_path,
-                                                self.learning_rate,
-                                                self.hidden_units,
-                                                self.max_steps,
-                                                self.summary_freq,
-                                                self.reward_gamma,
-                                                self.checkpoint_interval,
-                                                self.keep_checkpoints,
                                                 &self.init_path,
                                                 self.checkpoint_settings.mode,
                                                 &self.device,
-                                                self.checkpoint_settings.enable_race_mode, // Added
+                                                self.checkpoint_settings.enable_race_mode,
                                             );
                                             self.show_monitor = true;
                                         }
@@ -416,7 +409,7 @@ impl HomePage {
         }
 
         let mut found_algos = Vec::new();
-        let algo_names = vec!["ppo", "sac", "td3", "tdsac", "tqc", "crossq", "bc", "poca", "ppo_et", "ppo_ce"];
+        let algo_names = vec!["ppo", "sac", "td3", "dcac", "tqc", "crossq", "bc", "poca", "ppo_et", "ppo_ce", "drqv2"];
 
         for algo in algo_names {
             let model_path = base_path.join(algo).join("checkpoint.ot");
@@ -437,7 +430,7 @@ impl HomePage {
         
         self.ppo_env_count = 0; self.sac_env_count = 0; self.td3_env_count = 0;
         self.tdsac_env_count = 0; self.tqc_env_count = 0; self.crossq_env_count = 0;
-        self.ppo_et_env_count = 0; self.ppo_ce_env_count = 0; self.poca_env_count = 0;
+        self.drqv2_env_count = 0; self.ppo_et_env_count = 0; self.ppo_ce_env_count = 0; self.poca_env_count = 0;
 
         let count = found_algos.len() as u32;
         let envs_per_algo = (self.total_env as u32) / count;
@@ -449,12 +442,14 @@ impl HomePage {
                 "PPO" => { self.ppo_enabled = true; self.ppo_env_count = my_envs; }
                 "SAC" => { self.sac_enabled = true; self.sac_env_count = my_envs; }
                 "TD3" => { self.td3_enabled = true; self.td3_env_count = my_envs; }
+                "TDSAC" => { self.tdsac_enabled = true; self.tdsac_env_count = my_envs; }
                 "TQC" => { self.tqc_enabled = true; self.tqc_env_count = my_envs; }
                 "CROSSQ" => { self.crossq_enabled = true; self.crossq_env_count = my_envs; }
+                "DRQV2" => { self.drqv2_enabled = true; self.drqv2_env_count = my_envs; }
                 "POCA" => { self.poca_enabled = true; self.poca_env_count = my_envs; }
                 "PPO_ET" => { self.ppo_et_enabled = true; self.ppo_et_env_count = my_envs; }
                 "PPO_CE" => { self.ppo_ce_enabled = true; self.ppo_ce_env_count = my_envs; }
-                _ => {} // Ignore other algorithms like BC, DrQV2 for now
+                _ => {} 
             }
         }
 

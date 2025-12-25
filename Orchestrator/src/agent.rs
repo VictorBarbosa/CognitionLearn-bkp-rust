@@ -15,6 +15,7 @@ pub enum AgentType {
     TDSAC,
     TQC,
     CrossQ,
+    DRQV2,
 }
 
 pub trait RLAgent: Send {

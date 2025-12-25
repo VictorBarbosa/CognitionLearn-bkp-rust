@@ -861,6 +861,7 @@ impl Trainer {
                 settings.tau.unwrap_or(0.005) as f64,
                 settings.entropy_coef.unwrap_or(0.2) as f64, // Alpha
                 settings.policy_delay.unwrap_or(2),
+                settings.destructive_threshold.unwrap_or(0.0),
                 self.device,
                 self.sensor_shapes.clone(),
                 settings.memory_size,
@@ -890,6 +891,20 @@ impl Trainer {
                 settings.learning_rate as f64,
                 settings.gamma as f64,
                 settings.entropy_coef.unwrap_or(0.2) as f64, // Alpha init
+                self.device,
+                self.sensor_shapes.clone(),
+                settings.memory_size,
+                settings.sequence_length
+            )),
+            AgentType::DRQV2 => Box::new(sac::SAC::new(
+                obs_dim, 
+                act_dim, 
+                settings.hidden_units, 
+                settings.buffer_size, 
+                settings.learning_rate as f64,
+                settings.gamma as f64,
+                settings.tau.unwrap_or(0.005) as f64,
+                settings.entropy_coef.unwrap_or(0.1) as f64, // Alpha init
                 self.device,
                 self.sensor_shapes.clone(),
                 settings.memory_size,
@@ -966,7 +981,7 @@ impl Trainer {
                 }
 
                 // Try to export to ONNX (PPO/SAC/TD3/TDSAC/TQC/CrossQ/BC/POCA + PPO Variants)
-                if matches!(self.settings.algorithm, AgentType::PPO | AgentType::PPO_ET | AgentType::PPO_CE | AgentType::SAC | AgentType::TD3 | AgentType::TDSAC | AgentType::TQC | AgentType::CrossQ | AgentType::BC | AgentType::POCA) {
+                if matches!(self.settings.algorithm, AgentType::PPO | AgentType::PPO_ET | AgentType::PPO_CE | AgentType::SAC | AgentType::TD3 | AgentType::TDSAC | AgentType::TQC | AgentType::CrossQ | AgentType::BC | AgentType::POCA | AgentType::DRQV2) {
                     let onnx_path_latest = format!("{}/model.onnx", ckpt_dir);
                     let onnx_path_versioned = format!("{}/model-{}.onnx", ckpt_dir, self.total_steps);
                     

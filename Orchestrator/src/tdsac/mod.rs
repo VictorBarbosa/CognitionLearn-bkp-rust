@@ -32,6 +32,7 @@ pub struct TDSAC {
     
     // TDSAC Specific
     pub policy_freq: usize,
+    pub destructive_threshold: f32,
 }
 
 impl TDSAC {
@@ -45,6 +46,7 @@ impl TDSAC {
         tau: f64,
         alpha_coef: f64,
         policy_freq: usize,
+        destructive_threshold: f32,
         device: Device,
         sensor_sizes: Option<Vec<i64>>,
         _memory_size: Option<usize>, // Placeholder
@@ -94,6 +96,7 @@ impl TDSAC {
             train_count: 0,
             sensor_sizes,
             policy_freq,
+            destructive_threshold,
         }
     }
 
@@ -143,8 +146,9 @@ impl RLAgent for TDSAC {
         let q1 = self.critic1.forward(&batch.obs, &batch.actions);
         let q2 = self.critic2.forward(&batch.obs, &batch.actions);
         
-        let critic_loss = (q1 - &q_target).pow_tensor_scalar(2.0).mean(Kind::Float) + 
-                          (q2 - &q_target).pow_tensor_scalar(2.0).mean(Kind::Float);
+        let critic1_loss = (q1 - &q_target).pow_tensor_scalar(2.0).mean(Kind::Float);
+        let critic2_loss = (q2 - &q_target).pow_tensor_scalar(2.0).mean(Kind::Float);
+        let critic_loss = &critic1_loss + &critic2_loss;
 
         self.critic_optimizer.backward_step(&critic_loss);
         

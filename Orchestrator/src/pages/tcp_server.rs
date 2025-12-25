@@ -35,18 +35,10 @@ impl TcpServerHandler {
         port_algorithm_map: &HashMap<u16, String>,
         algo_configs: &HashMap<String, AlgoConfig>,
         output_path: &str,
-        // Global Hyperparams from HomePage
-        learning_rate: f32,
-        hidden_units: u32,
-        max_steps: u64,
-        summary_freq: u32,
-        reward_gamma: f32,
-        checkpoint_interval: u32,
-        keep_checkpoints: u32,
         init_path: &str,
         checkpoint_mode: CheckpointMode,
         device: &str,
-        enable_race_mode: bool, // Added
+        enable_race_mode: bool, 
     ) {
         // Reset champion tracker for a new run
         if let Ok(mut best) = self.champion_tracker.current_best.lock() {
@@ -68,9 +60,6 @@ impl TcpServerHandler {
                 algo_name.clone() // Shared key for Standard
             };
             
-            // Note: If race mode, we might want to preserve the 'algo_name' for config lookup later.
-            // But we store the group key. We'll handle config lookup carefully.
-            
             algo_groups.entry(group_key)
                 .or_insert_with(Vec::new)
                 .push(port.to_string());
@@ -79,7 +68,25 @@ impl TcpServerHandler {
         // Initialize Race Controller if needed
         let race_controller = if enable_race_mode {
             let participant_ids: Vec<String> = algo_groups.values().flatten().cloned().collect();
+            // Get max_steps from first config for controller (assuming consistency in race)
+            let first_algo = port_algorithm_map.get(&launched_ports[0]).cloned().unwrap_or("ppo".into());
+            let max_steps = algo_configs.get(&first_algo).map(|c| c.max_steps).unwrap_or(500000000);
+
             println!("🏁 Initializing Race Controller for {} participants. Max Steps: {}", participant_ids.len(), max_steps);
+            
+            // Send config to GUI immediately so the Race tab is populated even before handshakes
+            let mut checkpoints = Vec::new();
+            let n = participant_ids.len();
+            if n > 1 {
+                for i in 1..n {
+                    checkpoints.push(i as f32 / n as f32);
+                }
+            }
+            let _ = self.gui_tx.send(GuiUpdate::RaceConfig { 
+                total_steps: max_steps as usize, 
+                checkpoints 
+            });
+
             Some(Arc::new(RaceController::new(max_steps as usize, participant_ids)))
         } else {
             None
@@ -89,10 +96,7 @@ impl TcpServerHandler {
 
         // 2. Spawn ONE Trainer per Algorithm Group
         for (group_key, channel_ids) in algo_groups {
-            // Extract real algo name from group key (e.g. "PPO_0" -> "PPO") if race mode
             let algo_name = if enable_race_mode {
-                // Split by last underscore? Or assume strict format?
-                // Simpler: Use the port map again for the first channel in the group
                 let first_port = channel_ids[0].parse::<u16>().unwrap_or(0);
                 port_algorithm_map.get(&first_port).cloned().unwrap_or("sac".to_string())
             } else {
@@ -112,9 +116,6 @@ impl TcpServerHandler {
             };
 
             // Map AlgoConfig -> TrainerSettings
-            // CRITICAL: For Race Mode, each trainer needs a unique output path to avoid overwriting checkpoints!
-            // Standard: results/run_id/checkpoint/algo_name
-            // Race: results/run_id/checkpoint/algo_name_port
             let effective_output_path = if enable_race_mode {
                  format!("{}/race_{}", output_path, channel_ids[0])
             } else {
@@ -125,13 +126,6 @@ impl TcpServerHandler {
                 &algo_name, 
                 &config, 
                 &effective_output_path, 
-                learning_rate, 
-                hidden_units, 
-                max_steps, 
-                summary_freq, 
-                reward_gamma,
-                checkpoint_interval,
-                keep_checkpoints,
                 init_path,
                 checkpoint_mode,
                 device,
@@ -189,13 +183,6 @@ fn map_config(
     algo_name: &str, 
     cfg: &AlgoConfig, 
     output_path: &str,
-    lr: f32,
-    hu: u32,
-    ms: u64,
-    sf: u32,
-    gamma: f32,
-    ci: u32,
-    kc: u32,
     ip: &str,
     mode: CheckpointMode,
     device: &str,
@@ -218,22 +205,26 @@ fn map_config(
         algorithm,
         batch_size: cfg.batch_size as usize,
         buffer_size: cfg.buffer_size as usize,
-        learning_rate: lr,
-        hidden_units: hu as usize,
-        summary_freq: sf as usize,
-        checkpoint_interval: ci as usize,
-        keep_checkpoints: kc as usize,
-        max_steps: ms as usize,
+        learning_rate: cfg.learning_rate,
+        hidden_units: cfg.hidden_units as usize,
+        num_layers: cfg.num_layers as usize,
+        normalize: cfg.normalize,
+        summary_freq: cfg.summary_freq as usize,
+        checkpoint_interval: cfg.checkpoint_interval as usize,
+        keep_checkpoints: cfg.keep_checkpoints as usize,
+        max_steps: cfg.max_steps as usize,
         resume: mode == CheckpointMode::Resume || !ip.is_empty(), 
         epsilon: cfg.epsilon,
         tau: Some(cfg.tau),
-        gamma: gamma,
+        gamma: cfg.gamma,
         num_epochs: cfg.num_epoch.unwrap_or(3) as usize,
         lambd: cfg.lambd,
         entropy_coef: cfg.init_entcoef,
         policy_delay: cfg.policy_delay.map(|x| x as usize),
         n_quantiles: cfg.n_quantiles.map(|x| x as usize),
         n_to_drop: cfg.n_to_drop.map(|x| x as usize),
+        destructive_threshold: cfg.destructive_threshold,
+        image_pad: cfg.image_pad,
         curiosity_strength: cfg.curiosity_strength,
         curiosity_learning_rate: cfg.curiosity_learning_rate,
         show_obs: false, 

@@ -8,6 +8,8 @@ pub struct TrainerSettings {
     pub buffer_size: usize,
     pub learning_rate: f32,
     pub hidden_units: usize,
+    pub num_layers: usize,
+    pub normalize: bool,
     pub summary_freq: usize,
     pub checkpoint_interval: usize,
     pub keep_checkpoints: usize, // Added
@@ -22,6 +24,8 @@ pub struct TrainerSettings {
     pub policy_delay: Option<usize>, // TD3/TDSAC
     pub n_quantiles: Option<usize>, // TQC
     pub n_to_drop: Option<usize>, // TQC
+    pub destructive_threshold: Option<f32>, // TDSAC
+    pub image_pad: Option<u32>, // DRQV2
     
     pub curiosity_strength: Option<f32>, // PPO_CE
     pub curiosity_learning_rate: Option<f32>, // PPO_CE
@@ -43,8 +47,10 @@ impl Default for TrainerSettings {
             batch_size: 256,
             buffer_size: 1000000,
             learning_rate: 3e-4,
-            hidden_units: 256,
-            summary_freq: 1000,
+            hidden_units: 512,
+            num_layers: 3,
+            normalize: true,
+            summary_freq: 5000,
             checkpoint_interval: 5000,
             keep_checkpoints: 5, // Default
             max_steps: 1000000,
@@ -58,6 +64,8 @@ impl Default for TrainerSettings {
             policy_delay: Some(2),
             n_quantiles: Some(25),
             n_to_drop: Some(2),
+            destructive_threshold: None,
+            image_pad: None,
             curiosity_strength: None,
             curiosity_learning_rate: None,
             memory_size: None,

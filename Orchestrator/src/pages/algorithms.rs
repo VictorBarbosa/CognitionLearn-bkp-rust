@@ -204,6 +204,17 @@ pub fn render_algorithm_selection_ui(
 
                         ui_cfg.label(batch_label); ui_cfg.add(egui::DragValue::new(&mut cfg.batch_size).speed(1)); ui_cfg.end_row();
                         ui_cfg.label(buffer_label); ui_cfg.add(egui::DragValue::new(&mut cfg.buffer_size).speed(1)); ui_cfg.end_row();
+                        ui_cfg.label("Learning Rate:"); ui_cfg.add(egui::DragValue::new(&mut cfg.learning_rate).speed(0.0001).range(0.0..=1.0)); ui_cfg.end_row();
+                        ui_cfg.label("LR Schedule:"); ui_cfg.text_edit_singleline(&mut cfg.learning_rate_schedule); ui_cfg.end_row();
+                        ui_cfg.label("Hidden Units:"); ui_cfg.add(egui::DragValue::new(&mut cfg.hidden_units).speed(16).range(1..=4096)); ui_cfg.end_row();
+                        ui_cfg.label("Num Layers:"); ui_cfg.add(egui::DragValue::new(&mut cfg.num_layers).speed(1).range(1..=32)); ui_cfg.end_row();
+                        ui_cfg.label("Normalize Obs:"); ui_cfg.checkbox(&mut cfg.normalize, ""); ui_cfg.end_row();
+                        ui_cfg.label("Gamma:"); ui_cfg.add(egui::DragValue::new(&mut cfg.gamma).speed(0.001).range(0.0..=1.0)); ui_cfg.end_row();
+                        ui_cfg.label("Strength:"); ui_cfg.add(egui::DragValue::new(&mut cfg.strength).speed(0.1)); ui_cfg.end_row();
+                        ui_cfg.label("Max Steps:"); ui_cfg.add(egui::DragValue::new(&mut cfg.max_steps).speed(1000)); ui_cfg.end_row();
+                        ui_cfg.label("Summary Freq:"); ui_cfg.add(egui::DragValue::new(&mut cfg.summary_freq).speed(100)); ui_cfg.end_row();
+                        ui_cfg.label("Checkpoint Interval:"); ui_cfg.add(egui::DragValue::new(&mut cfg.checkpoint_interval).speed(100)); ui_cfg.end_row();
+                        ui_cfg.label("Keep Checkpoints:"); ui_cfg.add(egui::DragValue::new(&mut cfg.keep_checkpoints).speed(1)); ui_cfg.end_row();
                         ui_cfg.label("Buffer Init Steps:"); ui_cfg.add(egui::DragValue::new(&mut cfg.buffer_init_steps).speed(100)); ui_cfg.end_row();
                         ui_cfg.label("Tau:"); ui_cfg.add(egui::DragValue::new(&mut cfg.tau).speed(0.001)); ui_cfg.end_row();
                         ui_cfg.label("Steps/Update:"); ui_cfg.add(egui::DragValue::new(&mut cfg.steps_per_update).speed(0.1)); ui_cfg.end_row();

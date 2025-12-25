@@ -225,6 +225,7 @@ impl UnityLauncher {
                         "DrQV2" => AlgoConfig::drqv2(),
                         "PPO_ET" => AlgoConfig::ppo_et(),
                         "PPO_CE" => AlgoConfig::ppo_ce(),
+                        "POCA" => AlgoConfig::poca(),
                         _ => AlgoConfig::ppo(), // default
                     }
                 });
@@ -485,6 +486,12 @@ impl UnityLauncher {
                         "PPO" => AlgoConfig::ppo(),
                         "SAC" => AlgoConfig::sac(),
                         "TD3" => AlgoConfig::td3(),
+                        "TDSAc" => AlgoConfig::tdsac(),
+                        "TQC" => AlgoConfig::tqc(),
+                        "CrossQ" => AlgoConfig::crossq(),
+                        "DrQV2" => AlgoConfig::drqv2(),
+                        "PPO_ET" => AlgoConfig::ppo_et(),
+                        "PPO_CE" => AlgoConfig::ppo_ce(),
                         "POCA" => AlgoConfig::poca(),
                         _ => AlgoConfig::ppo(),
                     }
