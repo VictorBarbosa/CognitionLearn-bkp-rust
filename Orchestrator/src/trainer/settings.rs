@@ -37,6 +37,7 @@ pub struct TrainerSettings {
     pub show_obs: bool,
     pub output_path: String,
     pub init_path: String,
+    pub shared_memory_path: String, // Added
     pub device: String, // Added
 }
 
@@ -73,6 +74,7 @@ impl Default for TrainerSettings {
             show_obs: false,
             output_path: "".to_string(),
             init_path: "".to_string(),
+            shared_memory_path: "".to_string(),
             device: "cpu".to_string(),
         }
     }

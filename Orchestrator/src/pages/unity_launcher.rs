@@ -49,6 +49,7 @@ impl UnityLauncher {
         _checkpoint_interval: u32,
         _keep_checkpoints: u32,
         results_path: &str,
+        shared_memory_path: &str, // Added
     ) -> Result<(), String> {
         // First, terminate previous TCP servers if they exist
         let had_servers = !self.tcp_server_handles.is_empty();
@@ -165,7 +166,8 @@ impl UnityLauncher {
                                     algorithm_configs,
                                     _checkpoint_interval,
                                     _keep_checkpoints,
-                                    results_path
+                                    results_path,
+                                    shared_memory_path, // Correctly passed here
                                 )?; // Propagate error
                             } else {
                                 let msg = format!("Executable not found inside {}", macos_dir);
@@ -212,6 +214,7 @@ impl UnityLauncher {
                 // Set environment variables
                 cmd.env("UNITY_BASE_PORT", current_port.to_string());
                 cmd.env("UNITY_ALGORITHM", algorithm_name.clone());
+                cmd.env("UNITY_SHARED_MEMORY_PATH", shared_memory_path); // Added
 
                 // Get configured hyperparameters for the algorithm
                 let algo_config = algorithm_configs.get(&algorithm_name).cloned().unwrap_or_else(|| {
@@ -373,6 +376,7 @@ impl UnityLauncher {
         _checkpoint_interval: u32,
         _keep_checkpoints: u32,
         results_path: &str,
+        shared_memory_path: &str, // Signature finally updated here!
     ) -> Result<(), String> {
         use std::os::unix::fs::PermissionsExt;
 
@@ -477,6 +481,7 @@ impl UnityLauncher {
             // Set unique environment variables
             cmd.env("UNITY_BASE_PORT", current_port.to_string());
             cmd.env("UNITY_ALGORITHM", algorithm_name.clone());
+            cmd.env("UNITY_SHARED_MEMORY_PATH", shared_memory_path); // Added
 
             let algo_config = if is_dummy {
                 AlgoConfig::ppo()

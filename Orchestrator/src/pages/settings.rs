@@ -12,6 +12,7 @@ pub fn render_settings_ui(
     run_id: &mut String,
     env_path: &mut String,
     results_path: &mut String,
+    shared_memory_path: &mut String,
     base_port: &mut u16,
     learning_rate: &mut f32,
     learning_rate_schedule: &mut String,
@@ -96,6 +97,19 @@ pub fn render_settings_ui(
                     }
                 }
                 ui.label(results_path.as_str());
+            });
+            ui.end_row();
+
+            ui.label("Shared Memory Path:");
+            ui.horizontal(|ui| {
+                if ui.button("Browse").clicked() {
+                    if let Some(path) = FileDialog::new()
+                        .add_filter("Directories", &[""])
+                        .pick_folder() {
+                        *shared_memory_path = path.display().to_string();
+                    }
+                }
+                ui.label(shared_memory_path.as_str());
             });
             ui.end_row();
 

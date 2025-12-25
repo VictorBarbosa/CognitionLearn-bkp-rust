@@ -33,14 +33,14 @@ impl TcpServerHandler {
         &mut self, 
         launched_ports: &[u16], 
         port_algorithm_map: &HashMap<u16, String>,
-        algo_configs: &HashMap<String, AlgoConfig>,
-        output_path: &str,
-        init_path: &str,
-        checkpoint_mode: CheckpointMode,
-        device: &str,
-        enable_race_mode: bool, 
-    ) {
-        // Reset champion tracker for a new run
+            algo_configs: &HashMap<String, AlgoConfig>,
+            output_path: &str,
+            shared_memory_path: &str, // Added
+            init_path: &str,
+            checkpoint_mode: CheckpointMode,
+            device: &str,
+            enable_race_mode: bool, 
+        ) {        // Reset champion tracker for a new run
         if let Ok(mut best) = self.champion_tracker.current_best.lock() {
             *best = None;
         }
@@ -126,6 +126,7 @@ impl TcpServerHandler {
                 &algo_name, 
                 &config, 
                 &effective_output_path, 
+                shared_memory_path, // Added
                 init_path,
                 checkpoint_mode,
                 device,
@@ -183,6 +184,7 @@ fn map_config(
     algo_name: &str, 
     cfg: &AlgoConfig, 
     output_path: &str,
+    shared_memory_path: &str, // Added
     ip: &str,
     mode: CheckpointMode,
     device: &str,
@@ -230,6 +232,7 @@ fn map_config(
         show_obs: false, 
         output_path: output_path.to_string(),
         init_path: ip.to_string(),
+        shared_memory_path: shared_memory_path.to_string(), // Added
         memory_size: cfg.memory_size.map(|x| x as usize),
         sequence_length: cfg.memory_sequence_length.map(|x| x as usize),
         device: device.to_string(),

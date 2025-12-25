@@ -205,9 +205,17 @@ namespace Unity.CognitionLearn.Communicator
         private readonly CommunicationPipe _forwardPipe;
         private readonly CommunicationPipe _backwardPipe;
 
-        public CommunicationChannel(string channelId, long size)
+        public CommunicationChannel(string channelId, long size, string customPath = null)
         {
-            var tempPath = Path.Combine(Path.GetTempPath(), "cognition_memory");
+            string tempPath;
+            if (string.IsNullOrEmpty(customPath))
+            {
+                tempPath = Path.Combine(Path.GetTempPath(), "cognition_memory");
+            }
+            else
+            {
+                tempPath = customPath;
+            }
             
             if (!Directory.Exists(tempPath))
             {

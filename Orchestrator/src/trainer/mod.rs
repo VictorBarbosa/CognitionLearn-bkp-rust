@@ -190,7 +190,7 @@ impl Trainer {
         
         // 1. Perform Handshake for Dummy Environment
         let handshake_id = format!("{}_handshake", channel_id);
-        let mut handshake_channel = CommunicationChannel::create(&handshake_id, 4096)?;
+        let mut handshake_channel = CommunicationChannel::create(&handshake_id, 4096, &self.settings.shared_memory_path)?;
         
         println!("⏳ Waiting for DUMMY handshake on {}...", handshake_id);
         handshake_channel.listen(|_data| {
@@ -199,7 +199,7 @@ impl Trainer {
         }, 60000)?; // 60s timeout
         
         // 2. Open Main Channel
-        let mut main_channel = CommunicationChannel::create(channel_id, 10_485_760)?;
+        let mut main_channel = CommunicationChannel::create(channel_id, 10_485_760, &self.settings.shared_memory_path)?;
         println!("✅ DUMMY Handshake complete. Main channel active.");
 
         let mut current_champion_path = String::new();
@@ -316,8 +316,8 @@ impl Trainer {
             let main_id = id.clone();
             
             // Create channels immediately
-            let handshake_channel = CommunicationChannel::create(&handshake_id, 4096)?;
-            let main_channel = CommunicationChannel::create(&main_id, CHANNEL_SIZE)?;
+            let handshake_channel = CommunicationChannel::create(&handshake_id, 4096, &self.settings.shared_memory_path)?;
+            let main_channel = CommunicationChannel::create(&main_id, CHANNEL_SIZE, &self.settings.shared_memory_path)?;
             
             // Push to pending list with state
             // (id, main_channel, handshake_channel, is_ready)

@@ -23,6 +23,7 @@ pub struct HomePage {
     pub run_id: String,
     pub env_path: String, // To display the selected path
     pub results_path: String, // Path to save results (logs, models)
+    pub shared_memory_path: String, // New field
     pub base_port: u16,
 
     // Global Hyperparameters
@@ -112,6 +113,7 @@ impl HomePage {
             run_id: String::from(""),
             env_path: String::from(""),
             results_path: String::from(""), 
+            shared_memory_path: std::env::temp_dir().join("cognition_memory").to_string_lossy().to_string(),
             base_port: 5005,
 
             // Global Hyperparameters Init
@@ -254,6 +256,7 @@ impl HomePage {
                         &mut self.run_id,
                         &mut self.env_path,
                         &mut self.results_path,
+                        &mut self.shared_memory_path,
                         &mut self.base_port,
                         &mut self.learning_rate,
                         &mut self.learning_rate_schedule,
@@ -364,6 +367,7 @@ impl HomePage {
                                     self.checkpoint_interval,
                                     self.keep_checkpoints,
                                     &self.results_path,
+                                    &self.shared_memory_path, // Added
                                 ) {
                                     Ok(_) => {
                                         if !self.unity_launcher.unity_processes.is_empty() {
@@ -372,6 +376,7 @@ impl HomePage {
                                                 &self.unity_launcher.port_algorithm_map,
                                                 &self.algorithm_configs,
                                                 &self.results_path,
+                                                &self.shared_memory_path,
                                                 &self.init_path,
                                                 self.checkpoint_settings.mode,
                                                 &self.device,

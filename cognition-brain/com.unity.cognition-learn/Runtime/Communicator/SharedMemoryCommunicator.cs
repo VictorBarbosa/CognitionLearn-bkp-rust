@@ -59,6 +59,7 @@ namespace Unity.CognitionLearn
             {
                 // Retrieve the base port from Environment Variable (set by Orchestrator)
                 string port = Environment.GetEnvironmentVariable("UNITY_BASE_PORT");
+                string customPath = Environment.GetEnvironmentVariable("UNITY_SHARED_MEMORY_PATH");
                 
                 // Fallback to command line arguments if env var is missing
                 if (string.IsNullOrEmpty(port))
@@ -68,17 +69,13 @@ namespace Unity.CognitionLearn
                         if(args[i] == "--base-port" && i+1 < args.Length) {
                             port = args[i+1];
                         }
+                        if(args[i].StartsWith("--shared-memory-path=") && i < args.Length) {
+                            customPath = args[i].Split('=')[1];
+                        }
                     }
                 }
 
-                // Default to 5005 or "legacy" mode if still missing? 
-                // However, to support legacy build behavior in new code, let's default to "5005".
-                // But wait, if we want to match Rust's "5005" vs "main_comm", we should decide.
-                // Rust legacy = "handshake", "main_comm".
-                // Rust new = "5005_handshake", "5005".
-                
-                // If port is found, use new naming. If not, maybe legacy?
-                // But Orchestrator ALWAYS sets UNITY_BASE_PORT.
+                // ... (rest of the logic)
                 
                 string handshakeId, mainId;
 
@@ -95,11 +92,11 @@ namespace Unity.CognitionLearn
                     mainId = MainChannelId;           // "main_comm"
                 }
 
-                Debug.Log($"[SharedMemoryCommunicator] Opening Channels (Background)... Handshake: {handshakeId}, Main: {mainId}");
+                Debug.Log($"[SharedMemoryCommunicator] Opening Channels (Background)... Handshake: {handshakeId}, Main: {mainId}. Path: {customPath ?? "Default Temp"}");
 
                 // heavy I/O operations (File creation and checking) happen here, off the main thread.
-                _handshakeChannel = new CommunicationChannel(handshakeId, HandshakeSize);
-                _mainChannel = new CommunicationChannel(mainId, CommSize);
+                _handshakeChannel = new CommunicationChannel(handshakeId, HandshakeSize, customPath);
+                _mainChannel = new CommunicationChannel(mainId, CommSize, customPath);
 
                 Debug.Log($"[SharedMemoryCommunicator] Channels Opened. Starting Handshake...");
                 

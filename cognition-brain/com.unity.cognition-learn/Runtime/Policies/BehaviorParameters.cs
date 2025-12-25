@@ -71,8 +71,12 @@ namespace Unity.CognitionLearn.Policies
     [AddComponentMenu("Cognition Learn/Behavior Parameters", (int)MenuGroup.Default)]
     public class BehaviorParameters : MonoBehaviour
     {
-        [HideInInspector, SerializeField]
-        BrainParameters m_BrainParameters = new BrainParameters();
+        [SerializeField]
+        [Tooltip("Optional path to save shared memory files. If empty, uses the default temp directory.")]
+        public string sharedMemoryPath = "";
+
+        [SerializeField]
+        internal BrainParameters m_BrainParameters = new BrainParameters();
 
         /// <summary>
         /// Delegate for receiving events about Policy Updates.

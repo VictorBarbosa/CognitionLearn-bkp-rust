@@ -196,9 +196,8 @@ pub struct CommunicationChannel {
 }
 
 impl CommunicationChannel {
-    pub fn create(channel_id: &str, size: u64) -> Result<Self, io::Error> {
-        let mut base_path = std::env::temp_dir();
-        base_path.push("cognition_memory");
+    pub fn create(channel_id: &str, size: u64, base_path: &str) -> Result<Self, io::Error> {
+        let base_path = std::path::Path::new(base_path);
         
         // Ensure directory exists
         if !base_path.exists() {
