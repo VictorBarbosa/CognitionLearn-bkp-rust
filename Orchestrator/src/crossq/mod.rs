@@ -54,6 +54,8 @@ pub struct CrossQ {
     pub device: Device,
     pub train_count: usize,
     pub sensor_sizes: Option<Vec<i64>>,
+    pub batch_size: usize,
+    pub max_grad_norm: f64,
 }
 
 impl CrossQ {
@@ -62,9 +64,11 @@ impl CrossQ {
         act_dim: usize,
         hidden_dim: usize,
         buffer_capacity: usize,
+        batch_size: usize,
         learning_rate: f64,
         gamma: f64,
         alpha_coef: f64,
+        max_grad_norm: f64,
         device: Device,
         sensor_sizes: Option<Vec<i64>>,
         _memory_size: Option<usize>, // Placeholder
@@ -104,6 +108,8 @@ impl CrossQ {
             device,
             train_count: 0,
             sensor_sizes,
+            batch_size,
+            max_grad_norm,
         }
     }
 }
@@ -120,13 +126,12 @@ impl RLAgent for CrossQ {
     }
 
     fn train(&mut self) -> Option<HashMap<String, f32>> {
-        let batch_size = 256;
-        if self.replay_buffer.len() < batch_size {
+        if self.replay_buffer.len() < self.batch_size {
             return None;
         }
 
         self.train_count += 1;
-        let batch = self.replay_buffer.sample(batch_size);
+        let batch = self.replay_buffer.sample(self.batch_size);
         let alpha = self.log_alpha.exp();
 
         // CrossQ Core Logic:
@@ -149,12 +154,12 @@ impl RLAgent for CrossQ {
 
         // 3. Split outputs back
         // q(s, a) is the first half
-        let q1_curr = cross_q1.narrow(0, 0, batch_size as i64);
-        let q2_curr = cross_q2.narrow(0, 0, batch_size as i64);
+        let q1_curr = cross_q1.narrow(0, 0, self.batch_size as i64);
+        let q2_curr = cross_q2.narrow(0, 0, self.batch_size as i64);
         
         // q(s', a') is the second half
-        let q1_next = cross_q1.narrow(0, batch_size as i64, batch_size as i64);
-        let q2_next = cross_q2.narrow(0, batch_size as i64, batch_size as i64);
+        let q1_next = cross_q1.narrow(0, self.batch_size as i64, self.batch_size as i64);
+        let q2_next = cross_q2.narrow(0, self.batch_size as i64, self.batch_size as i64);
 
         // 4. Calculate Target
         // Note: In CrossQ, we use the *current* network outputs for the target, but we detach them.
@@ -166,7 +171,7 @@ impl RLAgent for CrossQ {
         let critic_loss = (q1_curr - &target_q).pow_tensor_scalar(2.0).mean(Kind::Float) + 
                           (q2_curr - &target_q).pow_tensor_scalar(2.0).mean(Kind::Float);
         
-        self.critic_optimizer.backward_step(&critic_loss);
+        self.critic_optimizer.backward_step_clip(&critic_loss, self.max_grad_norm);
 
         // 6. Actor Update (standard SAC style, using current Q)
         // We need to re-evaluate Q because we updated critics? 
@@ -180,12 +185,12 @@ impl RLAgent for CrossQ {
         let min_q_pi = q1_pi.min_other(&q2_pi);
         
         let actor_loss = (&alpha * &log_probs_new - min_q_pi).mean(Kind::Float);
-        self.actor_optimizer.backward_step(&actor_loss);
+        self.actor_optimizer.backward_step_clip(&actor_loss, self.max_grad_norm);
 
         // 7. Alpha Update
         let log_probs_detached = log_probs_new.detach();
         let alpha_loss = -(&self.log_alpha * (&log_probs_detached + Tensor::from(self.target_entropy).to_kind(Kind::Float).to_device(self.device))).mean(Kind::Float);
-        self.alpha_optimizer.backward_step(&alpha_loss);
+        self.alpha_optimizer.backward_step_clip(&alpha_loss, self.max_grad_norm);
 
         let c_loss = critic_loss.double_value(&[]) as f32;
         let a_loss = actor_loss.double_value(&[]) as f32;

@@ -52,6 +52,8 @@ pub struct TQC {
     pub device: Device,
     pub train_count: usize,
     pub sensor_sizes: Option<Vec<i64>>,
+    pub batch_size: usize,
+    pub max_grad_norm: f64,
 
     // TQC Specifics
     pub top_quantiles_to_drop: i64,
@@ -65,12 +67,14 @@ impl TQC {
         act_dim: usize,
         hidden_dim: usize,
         buffer_capacity: usize,
+        batch_size: usize,
         learning_rate: f64,
         gamma: f64,
         tau: f64,
         alpha_coef: f64,
         n_quantiles: usize,
         n_to_drop: usize,
+        max_grad_norm: f64,
         device: Device,
         sensor_sizes: Option<Vec<i64>>,
         _memory_size: Option<usize>, // Placeholder
@@ -130,6 +134,8 @@ impl TQC {
             device,
             train_count: 0,
             sensor_sizes,
+            batch_size,
+            max_grad_norm,
             n_quantiles,
             n_nets,
             top_quantiles_to_drop,
@@ -217,13 +223,12 @@ impl RLAgent for TQC {
     }
 
     fn train(&mut self) -> Option<HashMap<String, f32>> {
-        let batch_size = 256;
-        if self.replay_buffer.len() < batch_size {
+        if self.replay_buffer.len() < self.batch_size {
             return None;
         }
 
         self.train_count += 1;
-        let batch = self.replay_buffer.sample(batch_size);
+        let batch = self.replay_buffer.sample(self.batch_size);
         let alpha = self.log_alpha.exp();
 
         // 1. Target calculation
@@ -246,7 +251,7 @@ impl RLAgent for TQC {
             let truncated_quantiles = sorted_quantiles.narrow(1, 0, n_target_quantiles);
             
             // Apply Bellman update: r + gamma * (q - alpha * log_pi)
-            &batch.rewards + &batch.done * self.gamma * (truncated_quantiles - &alpha * next_log_probs.reshape([batch_size as i64, 1]))
+            &batch.rewards + &batch.done * self.gamma * (truncated_quantiles - &alpha * next_log_probs.reshape([self.batch_size as i64, 1]))
         });
 
         // 2. Critic Update
@@ -265,7 +270,7 @@ impl RLAgent for TQC {
         // But for efficiency, we can treat [B, n_nets*n_quantiles] vs [B, n_target_quantiles]
         let critic_loss = Self::quantile_huber_loss(&current_quantiles, &target_quantiles);
         
-        self.critic_optimizer.backward_step(&critic_loss);
+        self.critic_optimizer.backward_step_clip(&critic_loss, self.max_grad_norm);
 
         // 3. Actor Update
         let (actions_new, log_probs_new) = self.actor.sample(&batch.obs);
@@ -283,12 +288,12 @@ impl RLAgent for TQC {
         let q_mean = actor_q_truncated.mean_dim(&[1i64][..], true, Kind::Float); // [B, 1]
 
         let actor_loss = (&alpha * &log_probs_new - q_mean).mean(Kind::Float);
-        self.actor_optimizer.backward_step(&actor_loss);
+        self.actor_optimizer.backward_step_clip(&actor_loss, self.max_grad_norm);
 
         // 4. Alpha Update
         let log_probs_detached = log_probs_new.detach();
         let alpha_loss = -(&self.log_alpha * (&log_probs_detached + Tensor::from(self.target_entropy).to_kind(Kind::Float).to_device(self.device))).mean(Kind::Float);
-        self.alpha_optimizer.backward_step(&alpha_loss);
+        self.alpha_optimizer.backward_step_clip(&alpha_loss, self.max_grad_norm);
         
         // Soft Updates
         Self::soft_update(&mut self.target_vs, &self.vs, self.tau);

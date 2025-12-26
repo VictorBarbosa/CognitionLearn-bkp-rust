@@ -29,6 +29,8 @@ pub struct TDSAC {
     pub device: Device,
     pub train_count: usize,
     pub sensor_sizes: Option<Vec<i64>>,
+    pub batch_size: usize,
+    pub max_grad_norm: f64,
     
     // TDSAC Specific
     pub policy_freq: usize,
@@ -41,12 +43,14 @@ impl TDSAC {
         act_dim: usize,
         hidden_dim: usize,
         buffer_capacity: usize,
+        batch_size: usize,
         learning_rate: f64,
         gamma: f64,
         tau: f64,
         alpha_coef: f64,
         policy_freq: usize,
         destructive_threshold: f32,
+        max_grad_norm: f64,
         device: Device,
         sensor_sizes: Option<Vec<i64>>,
         _memory_size: Option<usize>, // Placeholder
@@ -95,6 +99,8 @@ impl TDSAC {
             device,
             train_count: 0,
             sensor_sizes,
+            batch_size,
+            max_grad_norm,
             policy_freq,
             destructive_threshold,
         }
@@ -124,13 +130,12 @@ impl RLAgent for TDSAC {
     }
 
     fn train(&mut self) -> Option<HashMap<String, f32>> {
-        let batch_size = 256;
-        if self.replay_buffer.len() < batch_size {
+        if self.replay_buffer.len() < self.batch_size {
             return None;
         }
 
         self.train_count += 1;
-        let batch = self.replay_buffer.sample(batch_size);
+        let batch = self.replay_buffer.sample(self.batch_size);
         let alpha = self.log_alpha.exp();
 
         // 1. Update Critics (Every step)
@@ -150,7 +155,7 @@ impl RLAgent for TDSAC {
         let critic2_loss = (q2 - &q_target).pow_tensor_scalar(2.0).mean(Kind::Float);
         let critic_loss = &critic1_loss + &critic2_loss;
 
-        self.critic_optimizer.backward_step(&critic_loss);
+        self.critic_optimizer.backward_step_clip(&critic_loss, self.max_grad_norm);
         
         let c_loss = critic_loss.double_value(&[]) as f32;
         let mut metrics = HashMap::new();
@@ -165,12 +170,12 @@ impl RLAgent for TDSAC {
             let min_q_actor = q1_actor.min_other(&q2_actor);
             
             let actor_loss = (&alpha * &log_probs_new - &min_q_actor).mean(Kind::Float);
-            self.actor_optimizer.backward_step(&actor_loss);
+            self.actor_optimizer.backward_step_clip(&actor_loss, self.max_grad_norm);
 
             // Update Alpha
             let log_probs_detached = log_probs_new.detach();
             let alpha_loss = -(&self.log_alpha * (&log_probs_detached + Tensor::from(self.target_entropy).to_kind(Kind::Float).to_device(self.device))).mean(Kind::Float);
-            self.alpha_optimizer.backward_step(&alpha_loss);
+            self.alpha_optimizer.backward_step_clip(&alpha_loss, self.max_grad_norm);
             
             // Soft update Targets
             Self::soft_update(&mut self.target_vs, &self.vs, self.tau);
