@@ -207,13 +207,21 @@ namespace Unity.CognitionLearn
                 _agentData[name] = new List<(AgentInfo, List<ISensor>)>();
                 _lastActionsReceived[name] = new Dictionary<int, ActionBuffers>();
             }
+            
+            // Log for debugging dynamic initialization
+            if (actionSpec.NumContinuousActions > 0 || actionSpec.NumDiscreteActions > 0)
+            {
+                Debug.Log($"[SharedMemoryCommunicator] Subscribing Brain: {name} with Actions: Continuous={actionSpec.NumContinuousActions}, Discrete={actionSpec.NumDiscreteActions}");
+            }
+            
             _brainActionSpecs[name] = actionSpec;
         }
 
         public void PutObservations(string brainKey, AgentInfo info, List<ISensor> sensors)
         {
-            if (!_agentData.ContainsKey(brainKey))
+            if (!_brainActionSpecs.ContainsKey(brainKey))
             {
+                // Only create default if it really doesn't exist yet
                 SubscribeBrain(brainKey, new ActionSpec());
             }
             _agentData[brainKey].Add((info, new List<ISensor>(sensors)));
@@ -302,6 +310,19 @@ namespace Unity.CognitionLearn
                     sb.AppendLine($"reward:{info.reward.ToString(CultureInfo.InvariantCulture)}");
                     sb.AppendLine($"done:{info.done.ToString().ToLower()}");
                     sb.AppendLine($"maxStepReached:{info.maxStepReached.ToString().ToLower()}");
+                    
+                    // Include Action Shapes for dynamic initialization on the Rust side
+                    if (_brainActionSpecs.TryGetValue(pair.Key, out var actionSpec))
+                    {
+                        var actionShapes = new List<int>();
+                        if (actionSpec.NumContinuousActions > 0) actionShapes.Add(actionSpec.NumContinuousActions);
+                        if (actionSpec.NumDiscreteActions > 0) actionShapes.AddRange(actionSpec.BranchSizes);
+                        
+                        if (actionShapes.Count > 0)
+                        {
+                            sb.AppendLine($"action_shapes:{string.Join(";", actionShapes)}");
+                        }
+                    }
                     
                 // Generic sensor handling matching RpcCommunicator / ML-Agents standard
                 // We want to capture ALL vector (1D) observations, including RayPerceptionSensor

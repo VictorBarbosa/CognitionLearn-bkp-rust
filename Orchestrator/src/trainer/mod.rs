@@ -231,7 +231,9 @@ impl Trainer {
                     // Use a dummy AgentInfo with the CORRECT discovered dimension
                     let dummy_info = AgentInfo { 
                         id: 0, observations: vec![0.0; local_obs_dim],
-                        reward: 0.0, done: false, max_step_reached: false, sensor_shapes: vec![]
+                        reward: 0.0, done: false, max_step_reached: false, 
+                        sensor_shapes: vec![],
+                        action_shapes: vec![], // Added
                     };
                     
                     let original_algo = self.settings.algorithm;
@@ -572,6 +574,7 @@ impl Trainer {
                                                 observations: transitions[0].observations.clone(),
                                                 reward: 0.0, done: false, max_step_reached: false,
                                                 sensor_shapes: transitions[0].sensor_shapes.clone(),
+                                                action_shapes: transitions[0].action_shapes.clone(), // Added
                                             };
                                             self.init_agent(&behavior, &dummy);
                                         }
@@ -748,7 +751,17 @@ impl Trainer {
 
     fn init_agent(&mut self, behavior: &str, info: &AgentInfo) {
         let obs_dim = info.observations.len();
-        let act_dim = 2; // Fixed for now, should be dynamic
+        
+        // Dynamically determine action dimension from action_shapes
+        // action_shapes usually contains [NumContinuousActions] or similar.
+        // We sum all shapes to get the total flat action dimension for now.
+        let act_dim: usize = if info.action_shapes.is_empty() {
+            eprintln!("⚠️ Warning: action_shapes is empty from Unity for {}. Falling back to hardcoded 2.", behavior);
+            2
+        } else {
+            info.action_shapes.iter().sum::<i64>() as usize
+        };
+
         println!("🚀 Dynamic Init ({}): obs_dim={}, act_dim={}", behavior, obs_dim, act_dim);
         
         self.sensor_shapes = if info.sensor_shapes.is_empty() { None } else { Some(info.sensor_shapes.clone()) };
