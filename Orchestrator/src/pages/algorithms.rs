@@ -224,6 +224,7 @@ pub fn render_algorithm_selection_ui(
                         if let Some(v)=cfg.num_epoch.as_mut(){ ui_cfg.label("Num Epochs:"); ui_cfg.add(egui::DragValue::new(v).speed(1)); ui_cfg.end_row(); }
                         if let Some(v)=cfg.beta.as_mut(){ ui_cfg.label("Beta:"); ui_cfg.add(egui::DragValue::new(v).speed(0.001)); ui_cfg.end_row(); }
                         if let Some(v)=cfg.epsilon.as_mut(){ ui_cfg.label("Epsilon:"); ui_cfg.add(egui::DragValue::new(v).speed(0.01)); ui_cfg.end_row(); }
+                        if let Some(v)=cfg.max_grad_norm.as_mut(){ ui_cfg.label("Max Grad Norm:"); ui_cfg.add(egui::DragValue::new(v).speed(0.1)); ui_cfg.end_row(); }
                         if let Some(v)=cfg.policy_delay.as_mut(){ ui_cfg.label("Policy Delay:"); ui_cfg.add(egui::DragValue::new(v).speed(1)); ui_cfg.end_row(); }
                         if let Some(v)=cfg.n_quantiles.as_mut(){ ui_cfg.label("N Quantiles:"); ui_cfg.add(egui::DragValue::new(v).speed(1)); ui_cfg.end_row(); }
                         if let Some(v)=cfg.n_to_drop.as_mut(){ ui_cfg.label("N To Drop:"); ui_cfg.add(egui::DragValue::new(v).speed(1)); ui_cfg.end_row(); }

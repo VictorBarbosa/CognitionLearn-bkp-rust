@@ -222,6 +222,7 @@ fn map_config(
         num_epochs: cfg.num_epoch.unwrap_or(3) as usize,
         lambd: cfg.lambd,
         entropy_coef: cfg.init_entcoef,
+        max_grad_norm: cfg.max_grad_norm,
         policy_delay: cfg.policy_delay.map(|x| x as usize),
         n_quantiles: cfg.n_quantiles.map(|x| x as usize),
         n_to_drop: cfg.n_to_drop.map(|x| x as usize),

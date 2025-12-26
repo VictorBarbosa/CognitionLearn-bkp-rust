@@ -26,6 +26,7 @@ pub struct PPO {
     pub act_dim: usize,
     pub train_count: usize,
     pub sensor_sizes: Option<Vec<i64>>,
+    pub max_grad_norm: f64,
     
     // Adaptive Entropy (PPO_ET)
     pub use_adaptive_entropy: bool,
@@ -50,6 +51,7 @@ impl PPO {
         num_epochs: usize,
         horizon: usize,
         minibatch_size: usize,
+        max_grad_norm: f64,
         device: Device,
         sensor_sizes: Option<Vec<i64>>,
         // New flags
@@ -109,6 +111,7 @@ impl PPO {
             act_dim,
             train_count: 0,
             sensor_sizes,
+            max_grad_norm,
             use_adaptive_entropy,
             log_alpha,
             alpha_optimizer,
@@ -151,28 +154,58 @@ impl RLAgent for PPO {
             return None;
         }
 
-        // --- Correct Multi-Agent GAE Calculation ---
+        // --- 1. Bootstrapping Phase (Pre-GAE) ---
+        let mut bootstrap_map: HashMap<i32, f32> = HashMap::new();
+        {
+            let mut obs_to_bootstrap = Vec::new();
+            let mut ids_to_bootstrap = Vec::new();
+
+            for (agent_id, transitions) in &self.rollout.agent_transitions {
+                if let Some(last_t) = transitions.last() {
+                    if !last_t.done {
+                         obs_to_bootstrap.extend_from_slice(&last_t.next_observation);
+                         ids_to_bootstrap.push(*agent_id);
+                    }
+                }
+            }
+
+            if !ids_to_bootstrap.is_empty() {
+                let n_boot = ids_to_bootstrap.len() as i64;
+                let obs_tensor = Tensor::from_slice(&obs_to_bootstrap).to(self.device).reshape(&[n_boot, self.obs_dim as i64]);
+                let (_, _, values) = tch::no_grad(|| self.model.forward(&obs_tensor));
+                let values_vec: Vec<f32> = values.flatten(0, -1).try_into().unwrap();
+
+                for (i, &agent_id) in ids_to_bootstrap.iter().enumerate() {
+                    bootstrap_map.insert(agent_id, values_vec[i]);
+                }
+            }
+        }
+
+        // --- 2. GAE Calculation ---
         let mut all_obs = Vec::new();
         let mut all_acts = Vec::new();
         let mut all_log_probs = Vec::new();
         let mut all_advantages = Vec::new();
         let mut all_returns = Vec::new();
-        let mut all_next_obs = Vec::new(); // For ICM if needed
+        let mut all_values = Vec::new(); 
+        let mut all_next_obs = Vec::new(); 
 
-        for (_agent_id, transitions) in &self.rollout.agent_transitions {
+        for (agent_id, transitions) in &self.rollout.agent_transitions {
             let n = transitions.len();
             let mut advantages = vec![0.0; n];
             let mut returns = vec![0.0; n];
             
-            // Bootstrap value for the last state if not done
-            // In ML-Agents, we often lack the last value, so we use 0 or re-calculate.
-            // For now, assume episode boundary or handle via dones[i].
-            
             let mut gae = 0.0;
             for i in (0..n).rev() {
                 let t = &transitions[i];
-                let next_val = if i + 1 < n { transitions[i+1].value } else { 0.0 }; // Simple bootstrap
                 
+                // Get Next Value (Bootstrap or stored)
+                let next_val = if i + 1 < n {
+                    transitions[i+1].value
+                } else {
+                    *bootstrap_map.get(agent_id).unwrap_or(&0.0)
+                };
+
                 let delta = t.reward as f64 + self.gamma * next_val as f64 * (if t.done { 0.0 } else { 1.0 }) - t.value as f64;
                 gae = delta + self.gamma * self.lambda * (if t.done { 0.0 } else { 1.0 }) * gae;
                 
@@ -180,13 +213,13 @@ impl RLAgent for PPO {
                 returns[i] = (advantages[i] + t.value) as f32;
             }
 
-            // Pool data
             for (i, t) in transitions.iter().enumerate() {
                 all_obs.extend_from_slice(&t.observation);
                 all_acts.extend_from_slice(&t.action);
                 all_log_probs.push(t.log_prob);
                 all_advantages.push(advantages[i]);
                 all_returns.push(returns[i]);
+                all_values.push(t.value);
                 all_next_obs.extend_from_slice(&t.next_observation);
             }
         }
@@ -197,9 +230,9 @@ impl RLAgent for PPO {
         let log_probs_full = Tensor::from_slice(&all_log_probs).to(self.device).reshape(&[n_total as i64, 1]);
         let adv_full = Tensor::from_slice(&all_advantages).to(self.device).reshape(&[n_total as i64, 1]);
         let ret_full = Tensor::from_slice(&all_returns).to(self.device).reshape(&[n_total as i64, 1]);
+        let old_values_full = Tensor::from_slice(&all_values).to(self.device).reshape(&[n_total as i64, 1]);
         let next_obs_full = Tensor::from_slice(&all_next_obs).to(self.device).reshape(&[n_total as i64, self.obs_dim as i64]);
 
-        // Normalize advantages
         let adv_mean = adv_full.mean(Kind::Float);
         let adv_std = adv_full.std(true);
         let adv_normalized = (adv_full - adv_mean) / (adv_std + 1e-8);
@@ -213,7 +246,6 @@ impl RLAgent for PPO {
         let num_samples = n_total as i64;
         let batch_size = self.minibatch_size;
 
-        // PPO Epochs
         for _ in 0..self.num_epochs {
             let indices = Tensor::randperm(num_samples, (Kind::Int64, self.device));
             
@@ -226,6 +258,7 @@ impl RLAgent for PPO {
                 let ret_mini = ret_full.index_select(0, &idx);
                 let adv_mini = adv_normalized.index_select(0, &idx);
                 let old_log_probs_mini = log_probs_full.index_select(0, &idx);
+                let old_values_mini = old_values_full.index_select(0, &idx);
                 let next_obs_mini = next_obs_full.index_select(0, &idx);
 
                 let (mean, std, values) = self.model.forward(&obs_mini);
@@ -244,7 +277,12 @@ impl RLAgent for PPO {
                 let surr2 = ratio.clamp(1.0 - self.eps_clip, 1.0 + self.eps_clip) * &adv_mini;
                 
                 let policy_loss = -surr1.min_other(&surr2).mean(Kind::Float);
-                let value_loss = (values - &ret_mini).pow_tensor_scalar(2.0).mean(Kind::Float);
+                
+                // --- Value Clipping ---
+                let v_clipped = &old_values_mini + (&values - &old_values_mini).clamp(-self.eps_clip, self.eps_clip);
+                let v_loss1 = (&values - &ret_mini).pow_tensor_scalar(2.0);
+                let v_loss2 = (v_clipped - &ret_mini).pow_tensor_scalar(2.0);
+                let value_loss = v_loss1.max_other(&v_loss2).mean(Kind::Float);
                 
                 let current_alpha = if self.use_adaptive_entropy {
                     if let (Some(log_alpha), Some(opt)) = (&self.log_alpha, &mut self.alpha_optimizer) {
@@ -255,7 +293,9 @@ impl RLAgent for PPO {
                 } else { self.entropy_coef };
                 
                 let loss = &policy_loss + &value_loss * 0.5 - &entropy * current_alpha;
-                self.optimizer.backward_step(&loss);
+                
+                // --- Gradient Clipping ---
+                self.optimizer.backward_step_clip(&loss, self.max_grad_norm);
                 
                 if let Some(icm) = &mut self.icm {
                     last_icm_loss = icm.update(&obs_mini, &next_obs_mini, &act_mini);

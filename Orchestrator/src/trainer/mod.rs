@@ -851,6 +851,7 @@ impl Trainer {
                     settings.num_epochs,
                     settings.buffer_size, // horizon
                     settings.batch_size,  // minibatch_size
+                    settings.max_grad_norm.unwrap_or(0.5) as f64,
                     self.device,
                     self.sensor_shapes.clone(),
                     use_adaptive_entropy,

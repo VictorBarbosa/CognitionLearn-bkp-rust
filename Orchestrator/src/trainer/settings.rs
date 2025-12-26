@@ -21,6 +21,7 @@ pub struct TrainerSettings {
     pub num_epochs: usize,    // PPO/POCA epochs
     pub lambd: Option<f32>,   // GAE Lambda (PPO/POCA)
     pub entropy_coef: Option<f32>, // Entropy Coefficient (PPO/POCA/SAC init)
+    pub max_grad_norm: Option<f32>, // Added
     pub policy_delay: Option<usize>, // TD3/TDSAC
     pub n_quantiles: Option<usize>, // TQC
     pub n_to_drop: Option<usize>, // TQC
@@ -62,6 +63,7 @@ impl Default for TrainerSettings {
             num_epochs: 3,
             lambd: Some(0.95),
             entropy_coef: Some(0.01),
+            max_grad_norm: Some(0.5),
             policy_delay: Some(2),
             n_quantiles: Some(25),
             n_to_drop: Some(2),
