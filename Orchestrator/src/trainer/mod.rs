@@ -204,6 +204,7 @@ impl Trainer {
 
         let mut current_champion_path = String::new();
         let mut local_obs_dim = 0;
+        let mut local_action_shapes: Vec<i64> = Vec::new();
 
         loop {
             // Check shutdown signal
@@ -233,7 +234,7 @@ impl Trainer {
                         id: 0, observations: vec![0.0; local_obs_dim],
                         reward: 0.0, done: false, max_step_reached: false, 
                         sensor_shapes: vec![],
-                        action_shapes: vec![], // Added
+                        action_shapes: local_action_shapes.clone(), // Corrected: Use captured shapes
                     };
                     
                     let original_algo = self.settings.algorithm;
@@ -257,7 +258,10 @@ impl Trainer {
                                 // Discover observation dimension from the first message
                                 if local_obs_dim == 0 && !infos.is_empty() {
                                     local_obs_dim = infos[0].observations.len();
-                                    println!("📡 DUMMY discovered obs_dim: {}", local_obs_dim);
+                                    if !infos[0].action_shapes.is_empty() {
+                                        local_action_shapes = infos[0].action_shapes.clone();
+                                    }
+                                    println!("📡 DUMMY discovered obs_dim: {}, action_shapes: {:?}", local_obs_dim, local_action_shapes);
                                 }
 
                                 let mut actions = Vec::new();
@@ -268,7 +272,14 @@ impl Trainer {
                                     }
                                 } else {
                                     // No model yet, send zero actions (acts as 'waiting' state)
-                                    for _ in infos { actions.push(AgentAction { continuous_actions: vec![0.0; 2] }); }
+                                    for info in infos {
+                                        let act_dim = if !info.action_shapes.is_empty() {
+                                            info.action_shapes.iter().sum::<i64>() as usize
+                                        } else {
+                                            2 // Fallback
+                                        };
+                                        actions.push(AgentAction { continuous_actions: vec![0.0; act_dim] });
+                                    }
                                 }
                                 all_actions.insert(behavior, actions);
                             }
@@ -762,7 +773,7 @@ impl Trainer {
             info.action_shapes.iter().sum::<i64>() as usize
         };
 
-        println!("🚀 Dynamic Init ({}): obs_dim={}, act_dim={}", behavior, obs_dim, act_dim);
+        println!("🚀 Dynamic Init ({}): obs_dim={}, act_dim={} (Shapes: {:?})", behavior, obs_dim, act_dim, info.action_shapes);
         
         self.sensor_shapes = if info.sensor_shapes.is_empty() { None } else { Some(info.sensor_shapes.clone()) };
 
