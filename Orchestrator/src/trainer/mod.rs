@@ -16,7 +16,6 @@ use crate::tdsac;
 use crate::tqc;
 use crate::crossq;
 use crate::bc;
-use crate::poca;
 
 
 use tensorboard_rs::summary_writer::SummaryWriter;
@@ -869,10 +868,12 @@ impl Trainer {
                 act_dim, 
                 settings.hidden_units, 
                 settings.buffer_size, 
+                settings.batch_size,
                 settings.learning_rate as f64,
                 settings.gamma as f64,
                 settings.tau.unwrap_or(0.005) as f64,
                 settings.policy_delay.unwrap_or(2),
+                settings.max_grad_norm.unwrap_or(0.5) as f64,
                 self.device,
                 self.sensor_shapes.clone(),
                 settings.memory_size,
@@ -957,24 +958,6 @@ impl Trainer {
                 settings.memory_size,
                 settings.sequence_length
             )),
-            AgentType::POCA => Box::new(poca::POCA::new(
-                obs_dim, 
-                act_dim, 
-                settings.hidden_units, 
-                settings.buffer_size, 
-                settings.batch_size,
-                settings.learning_rate as f64,
-                settings.num_epochs,
-                settings.gamma as f64,
-                settings.lambd.unwrap_or(0.95) as f64,
-                settings.epsilon.unwrap_or(0.2) as f64,
-                settings.entropy_coef.unwrap_or(0.01) as f64,
-                0.5, // vf_coef default
-                self.device,
-                self.sensor_shapes.clone(),
-                settings.memory_size,
-                settings.sequence_length
-            )),
         }
     }
 
@@ -1015,8 +998,8 @@ impl Trainer {
                     tracker.report_performance(milestone, self.last_avg_reward, &ckpt_path, self.settings.algorithm, &source_port);
                 }
 
-                // Try to export to ONNX (PPO/SAC/TD3/TDSAC/TQC/CrossQ/BC/POCA + PPO Variants)
-                if matches!(self.settings.algorithm, AgentType::PPO | AgentType::PPO_ET | AgentType::PPO_CE | AgentType::SAC | AgentType::TD3 | AgentType::TDSAC | AgentType::TQC | AgentType::CrossQ | AgentType::BC | AgentType::POCA | AgentType::DRQV2) {
+                // Try to export to ONNX (PPO/SAC/TD3/TDSAC/TQC/CrossQ/BC + PPO Variants)
+                if matches!(self.settings.algorithm, AgentType::PPO | AgentType::PPO_ET | AgentType::PPO_CE | AgentType::SAC | AgentType::TD3 | AgentType::TDSAC | AgentType::TQC | AgentType::CrossQ | AgentType::BC | AgentType::DRQV2) {
                     let onnx_path_latest = format!("{}/model.onnx", ckpt_dir);
                     let onnx_path_versioned = format!("{}/model-{}.onnx", ckpt_dir, self.total_steps);
                     

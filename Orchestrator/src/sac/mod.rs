@@ -5,7 +5,7 @@ pub mod replay_buffer;
 use tch::{nn, nn::OptimizerConfig, Device, Tensor, Kind};
 use crate::sac::actor::Actor;
 use crate::sac::critic::Critic;
-use crate::sac::replay_buffer::{ReplayBuffer, Transition};
+use crate::sac::replay_buffer::ReplayBuffer;
 use crate::agent::RLAgent;
 use std::collections::HashMap;
 
@@ -117,13 +117,7 @@ impl SAC {
 
 impl RLAgent for SAC {
     fn record_transition(&mut self, _agent_id: i32, obs: Vec<f32>, act: Vec<f32>, reward: f32, next_obs: Vec<f32>, done: bool) {
-        self.replay_buffer.push(Transition {
-            obs,
-            actions: act,
-            reward,
-            next_obs,
-            done,
-        });
+        self.replay_buffer.push(&obs, &act, reward, &next_obs, done);
     }
 
     fn train(&mut self) -> Option<HashMap<String, f32>> {

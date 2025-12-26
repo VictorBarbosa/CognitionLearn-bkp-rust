@@ -1,15 +1,4 @@
-
-use rand::prelude::IndexedRandom;
-use std::collections::VecDeque;
-use tch::{Tensor, Device};
-
-pub struct Transition {
-    pub obs: Vec<f32>,
-    pub actions: Vec<f32>,
-    pub reward: f32,
-    pub next_obs: Vec<f32>,
-    pub done: bool,
-}
+use tch::{Tensor, Device, Kind};
 
 pub struct Batch {
     pub obs: Tensor,
@@ -21,66 +10,82 @@ pub struct Batch {
 
 pub struct ReplayBuffer {
     capacity: usize,
-    pub buffer: VecDeque<Transition>,
+    device: Device,
     obs_dim: usize,
     act_dim: usize,
-    device: Device,
+    
+    // Contiguous memory on GPU
+    obs_buf: Tensor,
+    action_buf: Tensor,
+    reward_buf: Tensor,
+    next_obs_buf: Tensor,
+    done_buf: Tensor,
+    
+    ptr: usize,
+    size: usize,
 }
 
 impl ReplayBuffer {
     pub fn new(capacity: usize, obs_dim: usize, act_dim: usize, device: Device) -> Self {
+        // Pre-allocate tensors on the target device (GPU/MPS/CPU)
+        let obs_buf = Tensor::zeros(&[capacity as i64, obs_dim as i64], (Kind::Float, device));
+        let action_buf = Tensor::zeros(&[capacity as i64, act_dim as i64], (Kind::Float, device));
+        let reward_buf = Tensor::zeros(&[capacity as i64, 1], (Kind::Float, device));
+        let next_obs_buf = Tensor::zeros(&[capacity as i64, obs_dim as i64], (Kind::Float, device));
+        let done_buf = Tensor::zeros(&[capacity as i64, 1], (Kind::Float, device));
+
         Self {
             capacity,
-            buffer: VecDeque::with_capacity(capacity),
+            device,
             obs_dim,
             act_dim,
-            device,
+            obs_buf,
+            action_buf,
+            reward_buf,
+            next_obs_buf,
+            done_buf,
+            ptr: 0,
+            size: 0,
         }
     }
 
-    pub fn push(&mut self, transition: Transition) {
-        if self.buffer.len() >= self.capacity {
-            self.buffer.pop_front();
-        }
-        self.buffer.push_back(transition);
+    pub fn push(
+        &mut self, 
+        obs: &[f32], 
+        actions: &[f32], 
+        reward: f32, 
+        next_obs: &[f32], 
+        done: bool
+    ) {
+        let idx = self.ptr as i64;
+        
+        // Non-blocking copies to device
+        tch::no_grad(|| {
+            self.obs_buf.narrow(0, idx, 1).copy_(&Tensor::from_slice(obs).to_device(self.device).reshape(&[1, self.obs_dim as i64]));
+            self.action_buf.narrow(0, idx, 1).copy_(&Tensor::from_slice(actions).to_device(self.device).reshape(&[1, self.act_dim as i64]));
+            self.reward_buf.narrow(0, idx, 1).fill_(reward as f64);
+            self.next_obs_buf.narrow(0, idx, 1).copy_(&Tensor::from_slice(next_obs).to_device(self.device).reshape(&[1, self.obs_dim as i64]));
+            self.done_buf.narrow(0, idx, 1).fill_(if done { 0.0 } else { 1.0 }); // SAC uses (1-done) in formula
+        });
+
+        self.ptr = (self.ptr + 1) % self.capacity;
+        self.size = std::cmp::min(self.size + 1, self.capacity);
     }
 
     pub fn sample(&self, batch_size: usize) -> Batch {
-        let mut rng = rand::rng();
-        let indices: Vec<usize> = (0..self.buffer.len()).collect();
-        let sampled_indices = indices.choose_multiple(&mut rng, batch_size);
-        
-        let mut obs_vec = Vec::with_capacity(batch_size * self.obs_dim);
-        let mut acts_vec = Vec::with_capacity(batch_size * self.act_dim);
-        let mut rews_vec = Vec::with_capacity(batch_size);
-        let mut next_obs_vec = Vec::with_capacity(batch_size * self.obs_dim);
-        let mut done_vec = Vec::with_capacity(batch_size);
-
-        for &i in sampled_indices {
-            let t = &self.buffer[i];
-            obs_vec.extend_from_slice(&t.obs);
-            acts_vec.extend_from_slice(&t.actions);
-            rews_vec.push(t.reward);
-            next_obs_vec.extend_from_slice(&t.next_obs);
-            done_vec.push(if t.done { 0.0f32 } else { 1.0f32 });
-        }
-
-        let obs = Tensor::from_slice(&obs_vec).to(self.device).reshape(&[batch_size as i64, self.obs_dim as i64]);
-        let actions = Tensor::from_slice(&acts_vec).to(self.device).reshape(&[batch_size as i64, self.act_dim as i64]);
-        let rewards = Tensor::from_slice(&rews_vec).to(self.device).reshape(&[batch_size as i64, 1]);
-        let next_obs = Tensor::from_slice(&next_obs_vec).to(self.device).reshape(&[batch_size as i64, self.obs_dim as i64]);
-        let done = Tensor::from_slice(&done_vec).to(self.device).reshape(&[batch_size as i64, 1]);
+        // Random indices generated on GPU
+        let indices = Tensor::randint(self.size as i64, &[batch_size as i64], (Kind::Int64, self.device));
 
         Batch {
-            obs,
-            actions,
-            rewards,
-            next_obs,
-            done,
+            obs: self.obs_buf.index_select(0, &indices),
+            actions: self.action_buf.index_select(0, &indices),
+            rewards: self.reward_buf.index_select(0, &indices),
+            next_obs: self.next_obs_buf.index_select(0, &indices),
+            done: self.done_buf.index_select(0, &indices),
         }
     }
 
     pub fn len(&self) -> usize {
-        self.buffer.len()
+        self.size
     }
 }

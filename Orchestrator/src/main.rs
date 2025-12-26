@@ -4,7 +4,6 @@ mod ppo;
 mod onnx_utils;
 mod td3;
 mod bc;
-mod poca;
 mod tdsac;
 mod tqc;
 mod crossq;

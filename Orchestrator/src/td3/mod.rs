@@ -4,7 +4,7 @@ pub mod critic;
 use tch::{nn, nn::OptimizerConfig, Device, Tensor, Kind};
 use crate::td3::actor::Actor;
 use crate::td3::critic::Critic;
-use crate::sac::replay_buffer::{ReplayBuffer, Transition};
+use crate::sac::replay_buffer::ReplayBuffer;
 use crate::agent::RLAgent;
 use std::collections::HashMap;
 
@@ -33,6 +33,8 @@ pub struct TD3 {
     pub device: Device,
     pub train_count: usize,
     pub sensor_sizes: Option<Vec<i64>>,
+    pub batch_size: usize,
+    pub max_grad_norm: f64,
 }
 
 impl TD3 {
@@ -41,10 +43,12 @@ impl TD3 {
         act_dim: usize,
         hidden_dim: usize,
         buffer_capacity: usize,
+        batch_size: usize,
         learning_rate: f64,
         gamma: f64,
         tau: f64,
         policy_freq: usize,
+        max_grad_norm: f64,
         device: Device,
         sensor_sizes: Option<Vec<i64>>,
         _memory_size: Option<usize>, // Placeholder
@@ -93,6 +97,8 @@ impl TD3 {
             device,
             train_count: 0,
             sensor_sizes,
+            batch_size,
+            max_grad_norm,
         }
     }
 
@@ -110,23 +116,16 @@ impl TD3 {
 
 impl RLAgent for TD3 {
     fn record_transition(&mut self, _agent_id: i32, obs: Vec<f32>, act: Vec<f32>, reward: f32, next_obs: Vec<f32>, done: bool) {
-        self.replay_buffer.push(Transition {
-            obs,
-            actions: act,
-            reward,
-            next_obs,
-            done,
-        });
+        self.replay_buffer.push(&obs, &act, reward, &next_obs, done);
     }
 
     fn train(&mut self) -> Option<HashMap<String, f32>> {
-        let batch_size = 256;
-        if self.replay_buffer.len() < batch_size {
+        if self.replay_buffer.len() < self.batch_size {
             return None;
         }
 
         self.train_count += 1;
-        let batch = self.replay_buffer.sample(batch_size);
+        let batch = self.replay_buffer.sample(self.batch_size);
 
         // 1. Update Critics
         let q_target = tch::no_grad(|| {
@@ -149,7 +148,7 @@ impl RLAgent for TD3 {
         let critic_loss = (q1 - &q_target).pow_tensor_scalar(2.0).mean(Kind::Float) + 
                           (q2 - &q_target).pow_tensor_scalar(2.0).mean(Kind::Float);
 
-        self.critic_optimizer.backward_step(&critic_loss);
+        self.critic_optimizer.backward_step_clip(&critic_loss, self.max_grad_norm);
 
         let c_loss = critic_loss.double_value(&[]) as f32;
         let mut metrics = HashMap::new();
@@ -160,7 +159,7 @@ impl RLAgent for TD3 {
             let actions_new = self.actor.forward(&batch.obs);
             let actor_loss = -self.critic1.forward(&batch.obs, &actions_new).mean(Kind::Float);
             
-            self.actor_optimizer.backward_step(&actor_loss);
+            self.actor_optimizer.backward_step_clip(&actor_loss, self.max_grad_norm);
 
             // Soft Update
             Self::soft_update(&mut self.target_vs, &self.vs, self.tau);

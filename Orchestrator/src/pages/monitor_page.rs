@@ -118,7 +118,15 @@ impl MonitorPage {
 
         // Main Content
         egui::CentralPanel::default().show_inside(ui, |ui| {
-            ui.heading("Training Dashboard");
+            ui.horizontal(|ui_head| {
+                ui_head.heading("Training Dashboard");
+                ui_head.with_layout(egui::Layout::right_to_left(egui::Align::Center), |ui_btn| {
+                    if ui_btn.button(egui::RichText::new("🗑 Clear Charts").color(egui::Color32::LIGHT_RED)).clicked() {
+                        self.metrics_history.clear();
+                        self.add_log("🧹 Charts cleared by user.".to_string());
+                    }
+                });
+            });
             ui.separator();
             
             // Collect all available categories + "Overview"

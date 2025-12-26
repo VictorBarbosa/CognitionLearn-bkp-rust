@@ -61,7 +61,6 @@ pub struct HomePage {
     pub drqv2_enabled: bool,
     pub ppo_et_enabled: bool,
     pub ppo_ce_enabled: bool,
-    pub poca_enabled: bool,
 
     pub ppo_env_count: u32,
     pub sac_env_count: u32,
@@ -72,7 +71,6 @@ pub struct HomePage {
     pub drqv2_env_count: u32,
     pub ppo_et_env_count: u32,
     pub ppo_ce_env_count: u32,
-    pub poca_env_count: u32,
     pub distributed_env_total: u32,
 
     pub checkpoint_interval: u32,  // Intervalo global de checkpoint
@@ -151,7 +149,6 @@ impl HomePage {
             drqv2_enabled: false,
             ppo_et_enabled: false,
             ppo_ce_enabled: false,
-            poca_enabled: false,
 
             ppo_env_count: 0,
             sac_env_count: 0,
@@ -162,7 +159,6 @@ impl HomePage {
             drqv2_env_count: 0,
             ppo_et_env_count: 0,
             ppo_ce_env_count: 0,
-            poca_env_count: 0,
             distributed_env_total: 1,
             checkpoint_interval: 5000,  
             keep_checkpoints: 5,       
@@ -189,7 +185,6 @@ impl HomePage {
                 m.insert("DrQV2".into(), AlgoConfig::drqv2());
                 m.insert("PPO_ET".into(), AlgoConfig::ppo_et());
                 m.insert("PPO_CE".into(), AlgoConfig::ppo_ce());
-                m.insert("POCA".into(), AlgoConfig::poca());
                 m
             },
         }
@@ -313,7 +308,6 @@ impl HomePage {
                         &mut self.drqv2_enabled,
                         &mut self.ppo_et_enabled,
                         &mut self.ppo_ce_enabled,
-                        &mut self.poca_enabled,
                         &mut self.ppo_env_count,
                         &mut self.sac_env_count,
                         &mut self.td3_env_count,
@@ -323,7 +317,6 @@ impl HomePage {
                         &mut self.drqv2_env_count,
                         &mut self.ppo_et_env_count,
                         &mut self.ppo_ce_env_count,
-                        &mut self.poca_env_count,
                         &mut self.distributed_env_total,
                         &mut self.algorithm_config_step,
                         &mut self.current_config_section,
@@ -414,7 +407,7 @@ impl HomePage {
         }
 
         let mut found_algos = Vec::new();
-        let algo_names = vec!["ppo", "sac", "td3", "dcac", "tqc", "crossq", "bc", "poca", "ppo_et", "ppo_ce", "drqv2"];
+        let algo_names = vec!["ppo", "sac", "td3", "dcac", "tqc", "crossq", "bc", "ppo_et", "ppo_ce", "drqv2"];
 
         for algo in algo_names {
             let model_path = base_path.join(algo).join("checkpoint.ot");
@@ -431,11 +424,10 @@ impl HomePage {
         self.ppo_enabled = false; self.sac_enabled = false; self.td3_enabled = false;
         self.tdsac_enabled = false; self.tqc_enabled = false; self.crossq_enabled = false;
         self.drqv2_enabled = false; self.ppo_et_enabled = false; self.ppo_ce_enabled = false;
-        self.poca_enabled = false;
         
         self.ppo_env_count = 0; self.sac_env_count = 0; self.td3_env_count = 0;
         self.tdsac_env_count = 0; self.tqc_env_count = 0; self.crossq_env_count = 0;
-        self.drqv2_env_count = 0; self.ppo_et_env_count = 0; self.ppo_ce_env_count = 0; self.poca_env_count = 0;
+        self.drqv2_env_count = 0; self.ppo_et_env_count = 0; self.ppo_ce_env_count = 0;
 
         let count = found_algos.len() as u32;
         let envs_per_algo = (self.total_env as u32) / count;
@@ -451,7 +443,6 @@ impl HomePage {
                 "TQC" => { self.tqc_enabled = true; self.tqc_env_count = my_envs; }
                 "CROSSQ" => { self.crossq_enabled = true; self.crossq_env_count = my_envs; }
                 "DRQV2" => { self.drqv2_enabled = true; self.drqv2_env_count = my_envs; }
-                "POCA" => { self.poca_enabled = true; self.poca_env_count = my_envs; }
                 "PPO_ET" => { self.ppo_et_enabled = true; self.ppo_et_env_count = my_envs; }
                 "PPO_CE" => { self.ppo_ce_enabled = true; self.ppo_ce_env_count = my_envs; }
                 _ => {} 

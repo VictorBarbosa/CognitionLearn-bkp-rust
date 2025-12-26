@@ -11,7 +11,6 @@ pub enum AgentType {
     PPO_CE, // Added
     TD3,
     BC,
-    POCA,
     TDSAC,
     TQC,
     CrossQ,

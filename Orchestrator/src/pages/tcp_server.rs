@@ -197,7 +197,6 @@ fn map_config(
         "tqc" => AgentType::TQC,
         "crossq" => AgentType::CrossQ,
         "bc" => AgentType::BC,
-        "poca" | "mappo" => AgentType::POCA,
         "tdsac" => AgentType::TDSAC,
         "td3" => AgentType::TD3,
         _ => AgentType::SAC,

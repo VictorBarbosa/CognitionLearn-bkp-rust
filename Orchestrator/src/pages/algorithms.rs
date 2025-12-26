@@ -16,7 +16,6 @@ pub fn render_algorithm_selection_ui(
     drqv2_enabled: &mut bool,
     ppo_et_enabled: &mut bool,
     ppo_ce_enabled: &mut bool,
-    poca_enabled: &mut bool,
     ppo_env_count: &mut u32,
     sac_env_count: &mut u32,
     td3_env_count: &mut u32,
@@ -26,7 +25,6 @@ pub fn render_algorithm_selection_ui(
     drqv2_env_count: &mut u32,
     ppo_et_env_count: &mut u32,
     ppo_ce_env_count: &mut u32,
-    poca_env_count: &mut u32,
     distributed_env_total: &mut u32,
     algorithm_config_step: &mut AlgorithmConfigStep,
     current_config_section: &mut ConfigSection,
@@ -70,7 +68,7 @@ pub fn render_algorithm_selection_ui(
             let selected_algorithms_count = [
                 *ppo_enabled, *sac_enabled, *td3_enabled, *tdsac_enabled,
                 *tqc_enabled, *crossq_enabled, *drqv2_enabled,
-                *ppo_et_enabled, *ppo_ce_enabled, *poca_enabled,
+                *ppo_et_enabled, *ppo_ce_enabled,
             ].iter().filter(|&&x| x).count();
 
             let can_proceed = if *algorithm_selection_mode == AlgorithmSelectionMode::Same {
@@ -118,14 +116,13 @@ pub fn render_algorithm_selection_ui(
                                 render_algorithm_row(ui_dist, "DrQV2:", drqv2_enabled, drqv2_env_count);
                                 render_algorithm_row(ui_dist, "PPO_ET:", ppo_et_enabled, ppo_et_env_count);
                                 render_algorithm_row(ui_dist, "PPO_CE:", ppo_ce_enabled, ppo_ce_env_count);
-                                render_algorithm_row(ui_dist, "POCA:", poca_enabled, poca_env_count);
                             });
                     } else { // Same or Single Env
                         // ... (identical radio button logic)
                         let mut selected_alg = "";
-                        if *ppo_enabled { selected_alg = "PPO"; } else if *sac_enabled { selected_alg = "SAC"; } else if *td3_enabled { selected_alg = "TD3"; } else if *tdsac_enabled { selected_alg = "TDSAc"; } else if *tqc_enabled { selected_alg = "TQC"; } else if *crossq_enabled { selected_alg = "CrossQ"; } else if *drqv2_enabled { selected_alg = "DrQV2"; } else if *ppo_et_enabled { selected_alg = "PPO_ET"; } else if *ppo_ce_enabled { selected_alg = "PPO_CE"; } else if *poca_enabled { selected_alg = "POCA"; }
-                        let mut alg_changed = |name: &str, ui: &mut egui::Ui| { if ui.radio(selected_alg == name, "").clicked() { *ppo_enabled = name == "PPO"; *sac_enabled = name == "SAC"; *td3_enabled = name == "TD3"; *tdsac_enabled = name == "TDSAc"; *tqc_enabled = name == "TQC"; *crossq_enabled = name == "CrossQ"; *drqv2_enabled = name == "DrQV2"; *ppo_et_enabled = name == "PPO_ET"; *ppo_ce_enabled = name == "PPO_CE"; *poca_enabled = name == "POCA"; } };
-                        ui.label("PPO:"); alg_changed("PPO", ui); ui.end_row(); ui.label("SAC:"); alg_changed("SAC", ui); ui.end_row(); ui.label("TD3:"); alg_changed("TD3", ui); ui.end_row(); ui.label("TDSAc:"); alg_changed("TDSAc", ui); ui.end_row(); ui.label("TQC:"); alg_changed("TQC", ui); ui.end_row(); ui.label("CrossQ:"); alg_changed("CrossQ", ui); ui.end_row(); ui.label("DrQV2:"); alg_changed("DrQV2", ui); ui.end_row(); ui.label("PPO_ET:"); alg_changed("PPO_ET", ui); ui.end_row(); ui.label("PPO_CE:"); alg_changed("PPO_CE", ui); ui.end_row(); ui.label("POCA:"); alg_changed("POCA", ui); ui.end_row();
+                        if *ppo_enabled { selected_alg = "PPO"; } else if *sac_enabled { selected_alg = "SAC"; } else if *td3_enabled { selected_alg = "TD3"; } else if *tdsac_enabled { selected_alg = "TDSAc"; } else if *tqc_enabled { selected_alg = "TQC"; } else if *crossq_enabled { selected_alg = "CrossQ"; } else if *drqv2_enabled { selected_alg = "DrQV2"; } else if *ppo_et_enabled { selected_alg = "PPO_ET"; } else if *ppo_ce_enabled { selected_alg = "PPO_CE"; }
+                        let mut alg_changed = |name: &str, ui: &mut egui::Ui| { if ui.radio(selected_alg == name, "").clicked() { *ppo_enabled = name == "PPO"; *sac_enabled = name == "SAC"; *td3_enabled = name == "TD3"; *tdsac_enabled = name == "TDSAc"; *tqc_enabled = name == "TQC"; *crossq_enabled = name == "CrossQ"; *drqv2_enabled = name == "DrQV2"; *ppo_et_enabled = name == "PPO_ET"; *ppo_ce_enabled = name == "PPO_CE"; } };
+                        ui.label("PPO:"); alg_changed("PPO", ui); ui.end_row(); ui.label("SAC:"); alg_changed("SAC", ui); ui.end_row(); ui.label("TD3:"); alg_changed("TD3", ui); ui.end_row(); ui.label("TDSAc:"); alg_changed("TDSAc", ui); ui.end_row(); ui.label("TQC:"); alg_changed("TQC", ui); ui.end_row(); ui.label("CrossQ:"); alg_changed("CrossQ", ui); ui.end_row(); ui.label("DrQV2:"); alg_changed("DrQV2", ui); ui.end_row(); ui.label("PPO_ET:"); alg_changed("PPO_ET", ui); ui.end_row(); ui.label("PPO_CE:"); alg_changed("PPO_CE", ui); ui.end_row();
                     }
                 });
 
@@ -143,7 +140,6 @@ pub fn render_algorithm_selection_ui(
                     if *drqv2_enabled { selected_algorithms_for_config.push("DrQV2".to_string()); }
                     if *ppo_et_enabled { selected_algorithms_for_config.push("PPO_ET".to_string()); }
                     if *ppo_ce_enabled { selected_algorithms_for_config.push("PPO_CE".to_string()); }
-                    if *poca_enabled { selected_algorithms_for_config.push("POCA".to_string()); }
 
                     *current_config_algorithm_index = 0;
                     *algorithm_config_step = AlgorithmConfigStep::Configuration;
@@ -181,7 +177,6 @@ pub fn render_algorithm_selection_ui(
             "DrQV2" => (*drqv2_env_count, "DrQV2"),
             "PPO_ET" => (*ppo_et_env_count, "PPO_ET"),
             "PPO_CE" => (*ppo_ce_env_count, "PPO_CE"),
-            "POCA" => (*poca_env_count, "POCA"),
             _ => (0, "Unknown"),
         };
 
@@ -202,48 +197,142 @@ pub fn render_algorithm_selection_ui(
                         let batch_label = if is_on_policy { "Minibatch Size:" } else { "Batch Size:" };
                         let ent_coef_label = if is_on_policy { "Entropy Coef:" } else { "Alpha / Ent Coef:" };
 
-                        ui_cfg.label(batch_label); ui_cfg.add(egui::DragValue::new(&mut cfg.batch_size).speed(1)); ui_cfg.end_row();
-                        ui_cfg.label(buffer_label); ui_cfg.add(egui::DragValue::new(&mut cfg.buffer_size).speed(1)); ui_cfg.end_row();
-                        ui_cfg.label("Learning Rate:"); ui_cfg.add(egui::DragValue::new(&mut cfg.learning_rate).speed(0.0001).range(0.0..=1.0)); ui_cfg.end_row();
-                        ui_cfg.label("LR Schedule:"); ui_cfg.text_edit_singleline(&mut cfg.learning_rate_schedule); ui_cfg.end_row();
-                        ui_cfg.label("Hidden Units:"); ui_cfg.add(egui::DragValue::new(&mut cfg.hidden_units).speed(16).range(1..=4096)); ui_cfg.end_row();
-                        ui_cfg.label("Num Layers:"); ui_cfg.add(egui::DragValue::new(&mut cfg.num_layers).speed(1).range(1..=32)); ui_cfg.end_row();
-                        ui_cfg.label("Normalize Obs:"); ui_cfg.checkbox(&mut cfg.normalize, ""); ui_cfg.end_row();
-                        ui_cfg.label("Gamma:"); ui_cfg.add(egui::DragValue::new(&mut cfg.gamma).speed(0.001).range(0.0..=1.0)); ui_cfg.end_row();
-                        ui_cfg.label("Strength:"); ui_cfg.add(egui::DragValue::new(&mut cfg.strength).speed(0.1)); ui_cfg.end_row();
-                        ui_cfg.label("Max Steps:"); ui_cfg.add(egui::DragValue::new(&mut cfg.max_steps).speed(1000)); ui_cfg.end_row();
-                        ui_cfg.label("Summary Freq:"); ui_cfg.add(egui::DragValue::new(&mut cfg.summary_freq).speed(100)); ui_cfg.end_row();
-                        ui_cfg.label("Checkpoint Interval:"); ui_cfg.add(egui::DragValue::new(&mut cfg.checkpoint_interval).speed(100)); ui_cfg.end_row();
-                        ui_cfg.label("Keep Checkpoints:"); ui_cfg.add(egui::DragValue::new(&mut cfg.keep_checkpoints).speed(1)); ui_cfg.end_row();
-                        ui_cfg.label("Buffer Init Steps:"); ui_cfg.add(egui::DragValue::new(&mut cfg.buffer_init_steps).speed(100)); ui_cfg.end_row();
-                        ui_cfg.label("Tau:"); ui_cfg.add(egui::DragValue::new(&mut cfg.tau).speed(0.001)); ui_cfg.end_row();
-                        ui_cfg.label("Steps/Update:"); ui_cfg.add(egui::DragValue::new(&mut cfg.steps_per_update).speed(0.1)); ui_cfg.end_row();
-                        ui_cfg.label("Save Replay:"); ui_cfg.checkbox(&mut cfg.save_replay_buffer, ""); ui_cfg.end_row();
-                        if let Some(v)=cfg.init_entcoef.as_mut(){ ui_cfg.label(ent_coef_label); ui_cfg.add(egui::DragValue::new(v).speed(0.01)); ui_cfg.end_row(); }
-                        if let Some(v)=cfg.lambd.as_mut(){ ui_cfg.label("GAE Lambda:"); ui_cfg.add(egui::DragValue::new(v).speed(0.01)); ui_cfg.end_row(); }
-                        if let Some(v)=cfg.num_epoch.as_mut(){ ui_cfg.label("Num Epochs:"); ui_cfg.add(egui::DragValue::new(v).speed(1)); ui_cfg.end_row(); }
-                        if let Some(v)=cfg.beta.as_mut(){ ui_cfg.label("Beta:"); ui_cfg.add(egui::DragValue::new(v).speed(0.001)); ui_cfg.end_row(); }
-                        if let Some(v)=cfg.epsilon.as_mut(){ ui_cfg.label("Epsilon:"); ui_cfg.add(egui::DragValue::new(v).speed(0.01)); ui_cfg.end_row(); }
-                        if let Some(v)=cfg.max_grad_norm.as_mut(){ ui_cfg.label("Max Grad Norm:"); ui_cfg.add(egui::DragValue::new(v).speed(0.1)); ui_cfg.end_row(); }
-                        if let Some(v)=cfg.policy_delay.as_mut(){ ui_cfg.label("Policy Delay:"); ui_cfg.add(egui::DragValue::new(v).speed(1)); ui_cfg.end_row(); }
-                        if let Some(v)=cfg.n_quantiles.as_mut(){ ui_cfg.label("N Quantiles:"); ui_cfg.add(egui::DragValue::new(v).speed(1)); ui_cfg.end_row(); }
-                        if let Some(v)=cfg.n_to_drop.as_mut(){ ui_cfg.label("N To Drop:"); ui_cfg.add(egui::DragValue::new(v).speed(1)); ui_cfg.end_row(); }
+                        ui_cfg.label(batch_label).on_hover_text("Number of experiences used in one gradient update. Larger batches provide more stable gradients but require more memory."); 
+                        ui_cfg.add(egui::DragValue::new(&mut cfg.batch_size).speed(1)); ui_cfg.end_row();
+
+                        ui_cfg.label(buffer_label).on_hover_text(if is_on_policy { "Number of steps collected before updating the policy." } else { "Total number of experiences stored in the replay buffer." }); 
+                        ui_cfg.add(egui::DragValue::new(&mut cfg.buffer_size).speed(1)); ui_cfg.end_row();
+
+                        ui_cfg.label("Learning Rate:").on_hover_text("Step size for optimizer updates. Too high might cause instability; too low might slow down training."); 
+                        ui_cfg.add(egui::DragValue::new(&mut cfg.learning_rate).speed(0.0001).range(0.0..=1.0)); ui_cfg.end_row();
+
+                        ui_cfg.label("LR Schedule:").on_hover_text("How the learning rate changes over time. 'linear' decays it to zero at max steps."); 
+                        ui_cfg.text_edit_singleline(&mut cfg.learning_rate_schedule); ui_cfg.end_row();
+
+                        ui_cfg.label("Hidden Units:").on_hover_text("Number of neurons per hidden layer in the neural network."); 
+                        ui_cfg.add(egui::DragValue::new(&mut cfg.hidden_units).speed(16).range(1..=4096)); ui_cfg.end_row();
+
+                        ui_cfg.label("Num Layers:").on_hover_text("Number of hidden layers in the network architecture."); 
+                        ui_cfg.add(egui::DragValue::new(&mut cfg.num_layers).speed(1).range(1..=32)); ui_cfg.end_row();
+
+                        ui_cfg.label("Normalize Obs:").on_hover_text("Automatically scales input observations to a mean of 0 and standard deviation of 1. Recommended for most environments."); 
+                        ui_cfg.checkbox(&mut cfg.normalize, ""); ui_cfg.end_row();
+
+                        ui_cfg.label("Gamma:").on_hover_text("Discount factor for future rewards. 0.99 means the agent cares about long-term rewards; 0.1 means only immediate ones."); 
+                        ui_cfg.add(egui::DragValue::new(&mut cfg.gamma).speed(0.001).range(0.0..=1.0)); ui_cfg.end_row();
+
+                        ui_cfg.label("Strength:").on_hover_text("Multiplier for the extrinsic reward signal."); 
+                        ui_cfg.add(egui::DragValue::new(&mut cfg.strength).speed(0.1)); ui_cfg.end_row();
+
+                        ui_cfg.label("Max Steps:").on_hover_text("Total number of environment steps to run before terminating the training process."); 
+                        ui_cfg.add(egui::DragValue::new(&mut cfg.max_steps).speed(1000)); ui_cfg.end_row();
+
+                        ui_cfg.label("Summary Freq:").on_hover_text("Frequency (in steps) to send metrics to Tensorboard logs."); 
+                        ui_cfg.add(egui::DragValue::new(&mut cfg.summary_freq).speed(100)); ui_cfg.end_row();
+
+                        ui_cfg.label("Checkpoint Interval:").on_hover_text("Frequency (in steps) to save model weights to disk."); 
+                        ui_cfg.add(egui::DragValue::new(&mut cfg.checkpoint_interval).speed(100)); ui_cfg.end_row();
+
+                        ui_cfg.label("Keep Checkpoints:").on_hover_text("Maximum number of recent model files to keep on disk."); 
+                        ui_cfg.add(egui::DragValue::new(&mut cfg.keep_checkpoints).speed(1)); ui_cfg.end_row();
+
+                        ui_cfg.label("Buffer Init Steps:").on_hover_text("Steps collected with random actions before training starts to populate the buffer (Off-policy only)."); 
+                        ui_cfg.add(egui::DragValue::new(&mut cfg.buffer_init_steps).speed(100)); ui_cfg.end_row();
+
+                        ui_cfg.label("Tau:").on_hover_text("Soft update coefficient for target networks. Usually 0.005. Controls how fast target networks follow the main ones."); 
+                        ui_cfg.add(egui::DragValue::new(&mut cfg.tau).speed(0.001)); ui_cfg.end_row();
+
+                        ui_cfg.label("Steps/Update:").on_hover_text("Ratio between environment steps and gradient updates. 1.0 means one update per step."); 
+                        ui_cfg.add(egui::DragValue::new(&mut cfg.steps_per_update).speed(0.1)); ui_cfg.end_row();
+
+                        ui_cfg.label("Save Replay:").on_hover_text("Whether to save the Replay Buffer state to disk when closing."); 
+                        ui_cfg.checkbox(&mut cfg.save_replay_buffer, ""); ui_cfg.end_row();
+
+                        if let Some(v)=cfg.init_entcoef.as_mut(){ 
+                            ui_cfg.label(ent_coef_label).on_hover_text("Initial weight of the entropy bonus. Higher values encourage more exploration."); 
+                            ui_cfg.add(egui::DragValue::new(v).speed(0.01)); ui_cfg.end_row(); 
+                        }
+                        if let Some(v)=cfg.lambd.as_mut(){ 
+                            ui_cfg.label("GAE Lambda:").on_hover_text("Smoothing factor for Generalized Advantage Estimation. Lower values reduce variance but increase bias."); 
+                            ui_cfg.add(egui::DragValue::new(v).speed(0.01)); ui_cfg.end_row(); 
+                        }
+                        if let Some(v)=cfg.num_epoch.as_mut(){ 
+                            ui_cfg.label("Num Epochs:").on_hover_text("Number of times to iterate over the data during a single update (PPO)."); 
+                            ui_cfg.add(egui::DragValue::new(v).speed(1)); ui_cfg.end_row(); 
+                        }
+                        if let Some(v)=cfg.beta.as_mut(){ 
+                            ui_cfg.label("Beta:").on_hover_text("Strength of entropy regularization. Helps prevent premature convergence to local optima."); 
+                            ui_cfg.add(egui::DragValue::new(v).speed(0.001)); ui_cfg.end_row(); 
+                        }
+                        if let Some(v)=cfg.epsilon.as_mut(){ 
+                            ui_cfg.label("Epsilon:").on_hover_text("Clipping range for policy updates. Prevents the policy from changing too much in one step."); 
+                            ui_cfg.add(egui::DragValue::new(v).speed(0.01)); ui_cfg.end_row(); 
+                        }
+                        if let Some(v)=cfg.max_grad_norm.as_mut(){ 
+                            ui_cfg.label("Max Grad Norm:").on_hover_text("Limits the magnitude of gradient updates to prevent 'exploding gradients' and training collapse."); 
+                            ui_cfg.add(egui::DragValue::new(v).speed(0.1)); ui_cfg.end_row(); 
+                        }
+                        if let Some(v)=cfg.policy_delay.as_mut(){ 
+                            ui_cfg.label("Policy Delay:").on_hover_text("How many critic updates occur before a single actor update (TD3). Helps stabilize training."); 
+                            ui_cfg.add(egui::DragValue::new(v).speed(1)); ui_cfg.end_row(); 
+                        }
+                        if let Some(v)=cfg.n_quantiles.as_mut(){ 
+                            ui_cfg.label("N Quantiles:").on_hover_text("Number of atoms used for Distributional RL. Higher means more precise value estimation."); 
+                            ui_cfg.add(egui::DragValue::new(v).speed(1)); ui_cfg.end_row(); 
+                        }
+                        if let Some(v)=cfg.n_to_drop.as_mut(){ 
+                            ui_cfg.label("N To Drop:").on_hover_text("Number of top quantiles to discard to prevent overestimation of values (TQC)."); 
+                            ui_cfg.add(egui::DragValue::new(v).speed(1)); ui_cfg.end_row(); 
+                        }
                         
                         // Remaining optional/specific fields
-                        if let Some(v)=cfg.destructive_threshold.as_mut(){ ui_cfg.label("Destructive Threshold:"); ui_cfg.add(egui::DragValue::new(v).speed(0.01)); ui_cfg.end_row(); }
-                        if let Some(v)=cfg.image_pad.as_mut(){ ui_cfg.label("Image Pad:"); ui_cfg.add(egui::DragValue::new(v).speed(1)); ui_cfg.end_row(); }
-                        if let Some(v)=cfg.entropy_temperature.as_mut(){ ui_cfg.label("Entropy Temp:"); ui_cfg.add(egui::DragValue::new(v).speed(0.01)); ui_cfg.end_row(); }
-                        if let Some(v)=cfg.adaptive_entropy_temperature.as_mut(){ ui_cfg.label("Adaptive Entropy:"); ui_cfg.checkbox(v, ""); ui_cfg.end_row(); }
-                        if let Some(v)=cfg.curiosity_strength.as_mut(){ ui_cfg.label("Curiosity Strength:"); ui_cfg.add(egui::DragValue::new(v).speed(0.001)); ui_cfg.end_row(); }
-                        if let Some(v)=cfg.curiosity_gamma.as_mut(){ ui_cfg.label("Curiosity Gamma:"); ui_cfg.add(egui::DragValue::new(v).speed(0.001)); ui_cfg.end_row(); }
-                        if let Some(v)=cfg.curiosity_learning_rate.as_mut(){ ui_cfg.label("Curiosity LR:"); ui_cfg.add(egui::DragValue::new(v).speed(0.0001)); ui_cfg.end_row(); }
-                        if let Some(v)=cfg.curiosity_hidden_units.as_mut(){ ui_cfg.label("Curiosity Hidden:"); ui_cfg.add(egui::DragValue::new(v).speed(1)); ui_cfg.end_row(); }
-                        if let Some(v)=cfg.curiosity_num_layers.as_mut(){ ui_cfg.label("Curiosity Layers:"); ui_cfg.add(egui::DragValue::new(v).speed(1)); ui_cfg.end_row(); }
-                        if let Some(v)=cfg.imagination_horizon.as_mut(){ ui_cfg.label("Imagination Horizon:"); ui_cfg.add(egui::DragValue::new(v).speed(1)); ui_cfg.end_row(); }
-                        if let Some(v)=cfg.use_imagination_augmented.as_mut(){ ui_cfg.label("Use Imagination Aug:"); ui_cfg.checkbox(v, ""); ui_cfg.end_row(); }
+                        if let Some(v)=cfg.destructive_threshold.as_mut(){ 
+                            ui_cfg.label("Destructive Threshold:").on_hover_text("Level of model divergence allowed before discarding a run."); 
+                            ui_cfg.add(egui::DragValue::new(v).speed(0.01)); ui_cfg.end_row(); 
+                        }
+                        if let Some(v)=cfg.image_pad.as_mut(){ 
+                            ui_cfg.label("Image Pad:").on_hover_text("Pixel padding for visual observations. Acts as data augmentation."); 
+                            ui_cfg.add(egui::DragValue::new(v).speed(1)); ui_cfg.end_row(); 
+                        }
+                        if let Some(v)=cfg.entropy_temperature.as_mut(){ 
+                            ui_cfg.label("Entropy Temp:").on_hover_text("Initial temperature for SAC entropy adjustment."); 
+                            ui_cfg.add(egui::DragValue::new(v).speed(0.01)); ui_cfg.end_row(); 
+                        }
+                        if let Some(v)=cfg.adaptive_entropy_temperature.as_mut(){ 
+                            ui_cfg.label("Adaptive Entropy:").on_hover_text("Automatically adjust entropy weight to meet a target entropy value."); 
+                            ui_cfg.checkbox(v, ""); ui_cfg.end_row(); 
+                        }
+                        if let Some(v)=cfg.curiosity_strength.as_mut(){ 
+                            ui_cfg.label("Curiosity Strength:").on_hover_text("Weight of the intrinsic reward for exploring novel states."); 
+                            ui_cfg.add(egui::DragValue::new(v).speed(0.001)); ui_cfg.end_row(); 
+                        }
+                        if let Some(v)=cfg.curiosity_gamma.as_mut(){ 
+                            ui_cfg.label("Curiosity Gamma:").on_hover_text("Discount factor for curiosity rewards."); 
+                            ui_cfg.add(egui::DragValue::new(v).speed(0.001)); ui_cfg.end_row(); 
+                        }
+                        if let Some(v)=cfg.curiosity_learning_rate.as_mut(){ 
+                            ui_cfg.label("Curiosity LR:").on_hover_text("Learning rate for the Intrinsic Curiosity Module (ICM)."); 
+                            ui_cfg.add(egui::DragValue::new(v).speed(0.0001)); ui_cfg.end_row(); 
+                        }
+                        if let Some(v)=cfg.curiosity_hidden_units.as_mut(){ 
+                            ui_cfg.label("Curiosity Hidden:").on_hover_text("Hidden units in the ICM neural networks."); 
+                            ui_cfg.add(egui::DragValue::new(v).speed(1)); ui_cfg.end_row(); 
+                        }
+                        if let Some(v)=cfg.curiosity_num_layers.as_mut(){ 
+                            ui_cfg.label("Curiosity Layers:").on_hover_text("Number of layers in the ICM neural networks."); 
+                            ui_cfg.add(egui::DragValue::new(v).speed(1)); ui_cfg.end_row(); 
+                        }
+                        if let Some(v)=cfg.imagination_horizon.as_mut(){ 
+                            ui_cfg.label("Imagination Horizon:").on_hover_text("How many steps ahead to simulate internal models for imagination."); 
+                            ui_cfg.add(egui::DragValue::new(v).speed(1)); ui_cfg.end_row(); 
+                        }
+                        if let Some(v)=cfg.use_imagination_augmented.as_mut(){ 
+                            ui_cfg.label("Use Imagination Aug:").on_hover_text("Enables augmented training using imagined experiences."); 
+                            ui_cfg.checkbox(v, ""); ui_cfg.end_row(); 
+                        }
                         
                         // Memory Section
-                        ui_cfg.label("Use Memory (LSTM):");
+                        ui_cfg.label("Use Memory (LSTM):").on_hover_text("Enables Long Short-Term Memory. Allows the agent to remember past states, essential for partially observable tasks.");
                         if ui_cfg.checkbox(&mut cfg.use_memory, "").changed() {
                             if cfg.use_memory {
                                 // Set defaults if newly enabled
@@ -255,19 +344,20 @@ pub fn render_algorithm_selection_ui(
 
                         if cfg.use_memory {
                             if let Some(v) = cfg.memory_sequence_length.as_mut() {
-                                ui_cfg.label("Sequence Length:");
+                                ui_cfg.label("Sequence Length:").on_hover_text("Number of past steps the agent considers in its memory.");
                                 ui_cfg.add(egui::DragValue::new(v).speed(1));
                                 ui_cfg.end_row();
                             }
                             if let Some(v) = cfg.memory_size.as_mut() {
-                                ui_cfg.label("Memory Size:");
+                                ui_cfg.label("Memory Size:").on_hover_text("Number of hidden units in the LSTM memory module.");
                                 ui_cfg.add(egui::DragValue::new(v).speed(1));
                                 ui_cfg.end_row();
                             }
                         }
 
-                        // Time Horizon is specific enough (steps per episode limit vs global max steps)
-                        ui_cfg.label("Time Horizon:"); ui_cfg.add(egui::DragValue::new(&mut cfg.time_horizon).speed(10)); ui_cfg.end_row();
+                        // Time Horizon
+                        ui_cfg.label("Time Horizon:").on_hover_text("Maximum steps per episode before the environment is reset or truncated."); 
+                        ui_cfg.add(egui::DragValue::new(&mut cfg.time_horizon).speed(10)); ui_cfg.end_row();
                     });
                 } else { ui.label("Config not found"); }
             });
