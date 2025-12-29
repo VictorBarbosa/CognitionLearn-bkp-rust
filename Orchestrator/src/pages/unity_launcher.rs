@@ -118,89 +118,14 @@ impl UnityLauncher {
                 Err(e) => return Err(e.to_string()),
             }
 
-            for i in 0..total_env {
-                let current_port = base_port + (i as u16);
-                let algorithm_name = if !selected_algorithms_for_config.is_empty() {
-                    let algo_index = (i as usize) % selected_algorithms_for_config.len();
-                    selected_algorithms_for_config[algo_index].clone()
-                } else {
-                    String::from("PPO")
-                };
-
-                let mut cmd = std::process::Command::new(env_path);
-                cmd.env("UNITY_BASE_PORT", current_port.to_string());
-                cmd.env("UNITY_ALGORITHM", algorithm_name.clone());
-                cmd.env("UNITY_SHARED_MEMORY_PATH", shared_memory_path);
-
-                let algo_config = algorithm_configs.get(&algorithm_name).cloned().unwrap_or_else(|| {
-                    match algorithm_name.as_str() {
-                        "PPO" => AlgoConfig::ppo(),
-                        "SAC" => AlgoConfig::sac(),
-                        "TD3" => AlgoConfig::td3(),
-                        "TDSAc" => AlgoConfig::tdsac(),
-                        "TQC" => AlgoConfig::tqc(),
-                        "CrossQ" => AlgoConfig::crossq(),
-                        "DrQV2" => AlgoConfig::drqv2(),
-                        "PPO_ET" => AlgoConfig::ppo_et(),
-                        _ => AlgoConfig::ppo(), 
-                    }
-                });
-
-                cmd.env("UNITY_ALGORITHM_CONFIG", format!("{:?}", algo_config));
-                cmd.arg(format!("--base-port={}", current_port))
-                   .arg(format!("--algorithm={}", algorithm_name))
-                   .arg(format!("--num-areas={}", num_areas))
-                   .arg(format!("--timeout-wait={}", timeout_wait))
-                   .arg(format!("--seed={}", seed))
-                   .arg(format!("--max-lifetime-restarts={}", max_lifetime_restarts))
-                   .arg(format!("--restarts-rate-limit-n={}", restarts_rate_limit_n))
-                   .arg(format!("--restarts-rate-limit-period-s={}", restarts_rate_limit_period_s));
-
-                if !headless && !engine_settings.no_graphics {
-                    cmd.arg("-screen-width").arg(format!("{}", engine_settings.width))
-                       .arg("-screen-height").arg(format!("{}", engine_settings.height))
-                       .arg("-screen-fullscreen").arg("0");
-                } else {
-                    cmd.arg(format!("--width={}", engine_settings.width))
-                       .arg(format!("--height={}", engine_settings.height));
-                }
-
-                cmd.arg(format!("--quality-level={}", engine_settings.quality_level))
-                   .arg(format!("--time-scale={}", engine_settings.time_scale))
-                   .arg(format!("--target-framerate={}", engine_settings.target_frame_rate))
-                   .arg(format!("--capture-frame-rate={}", engine_settings.capture_frame_rate));
-
-                if headless { cmd.arg("--headless"); }
-                if visual_progress { cmd.arg("--visual-progress"); }
-                if engine_settings.no_graphics { cmd.arg("--no-graphics"); }
-                if !run_id.is_empty() { cmd.arg(format!("--run-id={}", run_id)); }
-
-                let log_file_path = std::path::Path::new(results_path).join("logs").join(format!("player-{}.log", i + 1));
-                cmd.arg("-logFile").arg(log_file_path).arg(format!("--device={}", device));
-
-                cmd.stdout(Stdio::piped()).stderr(Stdio::piped());
-
-                match cmd.spawn() {
-                    Ok(mut child) => {
-                        if let Some(stdout) = child.stdout.take() {
-                            thread::spawn(move || {
-                                let reader = BufReader::new(stdout);
-                                for _ in reader.lines() {}
-                            });
-                        }
-                        if let Some(stderr) = child.stderr.take() {
-                            thread::spawn(move || {
-                                let reader = BufReader::new(stderr);
-                                for _ in reader.lines() {}
-                            });
-                        }
-                        self.unity_processes.push(child);
-                        self.launched_ports.push(current_port);
-                        self.port_algorithm_map.insert(current_port, algorithm_name.clone());
-                    }
-                    Err(_) => {}
-                }
-            }
+            return self.execute_unity_executable(
+                env_path, total_env, base_port, selected_algorithms_for_config,
+                num_areas, timeout_wait, seed, max_lifetime_restarts,
+                restarts_rate_limit_n, restarts_rate_limit_period_s,
+                headless, visual_progress, engine_settings, run_id, device,
+                algorithm_configs, _checkpoint_interval, _keep_checkpoints,
+                results_path, shared_memory_path,
+            );
         }
         Ok(())
     }

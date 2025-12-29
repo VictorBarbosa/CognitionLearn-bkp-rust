@@ -34,8 +34,8 @@ orchestrator_core = { path = "core" }
 # libc = "0.2.155" # Optional, usually implied
 
 # Deep Learning Framework: Tch-rs (LibTorch)
-tch = "0.19.0" # Mac
-#tch = "0.17.0" # linux
+#tch = "0.19.0" # Mac
+tch = "0.17.0" # linux
 
 [build-dependencies]
 prost-build = "0.13"
