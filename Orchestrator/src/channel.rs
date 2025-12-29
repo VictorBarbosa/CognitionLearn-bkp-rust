@@ -1,9 +1,9 @@
 use memmap2::MmapMut;
 use std::fmt;
-use std::fs::{File, OpenOptions};
-use std::io::{self}; // Removed Read
-use std::time::Duration;
-use std::{fs, thread};
+use std::fs::OpenOptions;
+use std::io::{self};
+use std::time::{Duration, Instant};
+use std::{thread, fs};
 
 // --- Error Type ---
 #[derive(Debug)]
@@ -47,7 +47,10 @@ impl std::error::Error for ChannelError {
     }
 }
 
-// --- 2.1. SharedMemoryBuffer ---
+// --- SharedMemoryBuffer with Status Flag ---
+// Protocol:
+// Byte 0: Status Flag (0 = Empty/Read, 1 = Ready/Written)
+// Byte 1..N: Data payload
 #[derive(Debug)]
 struct SharedMemoryBuffer {
     name: String,
@@ -63,130 +66,113 @@ impl SharedMemoryBuffer {
             .create(true)
             .open(&name)?;
         file.set_len(size)?;
-        let mmap = unsafe { MmapMut::map_mut(&file)? };
+        let mut mmap = unsafe { MmapMut::map_mut(&file)? };
+        
+        // Initialize flag to 0 (Empty)
+        mmap[0] = 0;
+        
         Ok(SharedMemoryBuffer { name, size, mmap })
     }
 
-    fn write(&mut self, data: &[u8]) -> Result<(), String> {
-        if data.len() as u64 >= self.size {
+    // Write data and set flag to 1
+    fn write_with_signal(&mut self, data: &[u8]) -> Result<(), String> {
+        // Offset 1 for data, leaving byte 0 for flag
+        if (data.len() + 1) as u64 > self.size {
             return Err(format!(
                 "Data size ({} bytes) is too large for the buffer ({} bytes).",
                 data.len(),
                 self.size
             ));
         }
-        self.mmap[..data.len()].copy_from_slice(data);
-        self.mmap[data.len()] = 0; // Null terminator for string compatibility
+        
+        // Wait if buffer is not empty (Backpressure/Safety)
+        // In a strict Request-Reply loop, this shouldn't block long, but good for safety.
+        // For simple Producer-Consumer, we might overwrite, but let's be safe.
+        // NOTE: For this specific high-perf implementation, we assume caller controls flow.
+        
+        // 1. Write Data at Offset 1
+        self.mmap[1..1 + data.len()].copy_from_slice(data);
+        self.mmap[1 + data.len()] = 0; // Null terminator for safety
+        
+        // 2. Set Flag to 1 (Signal Ready)
+        // Using volatile write to ensure ordering if compiler tries to be smart, 
+        // though standard write is usually fine on x86. Rust's volatile is for MMIO mostly.
+        // Simple assignment is sufficient here as mmap is volatile storage.
+        self.mmap[0] = 1;
+        self.mmap.flush().map_err(|e| e.to_string())?; // Ensure flush
+        
         Ok(())
     }
 
-    fn read(&self) -> Result<Vec<u8>, String> {
-        let end = self
-            .mmap
-            .iter()
-            .position(|&b| b == 0)
-            .unwrap_or(self.mmap.len());
-        Ok(self.mmap[..end].to_vec())
-    }
-}
+    // Wait for flag == 1, Read data, then set flag = 0
+    fn read_with_wait(&mut self, timeout_ms: u64) -> Result<Vec<u8>, String> {
+        let start = Instant::now();
+        let timeout = Duration::from_millis(timeout_ms);
+        let mut sleep_duration = Duration::from_micros(50); // Start fast
 
-// Drop implementation removed to prevent premature deletion of memory files.
-// Files should be managed by higher-level logic (e.g., overwritten or explicitly cleaned).
-// impl Drop for SharedMemoryBuffer {
-//     fn drop(&mut self) {
-//         let _ = fs::remove_file(&self.name);
-//     }
-// }
-
-
-// --- 2.2. SyncPrimitive ---
-#[derive(Debug)]
-struct SyncPrimitive {
-    name: String,
-}
-
-impl SyncPrimitive {
-    fn create(name: String) -> Self {
-        // Ensure file doesn't exist initially
-        let _ = fs::remove_file(&name);
-        SyncPrimitive { name }
-    }
-
-    fn signal(&self) -> Result<(), io::Error> {
-        File::create(&self.name)?;
-        Ok(())
-    }
-
-    fn wait(&self, timeout_ms: u64) -> Result<(), String> {
-        let sleep_duration = Duration::from_micros(10);
-        let mut total_elapsed = 0;
-
-        while fs::metadata(&self.name).is_err() {
+        // Spin-wait loop (Polite)
+        while self.mmap[0] == 0 {
+            if start.elapsed() > timeout {
+                return Err(format!("Timeout waiting for data in: {}", self.name));
+            }
             thread::sleep(sleep_duration);
-            // We are checking every 10us approx.
-            // total_elapsed is roughly in "units of loops".
-            // To respect timeout_ms, we need to convert logic.
-            // 1ms = 1000us. 100 loops of 10us = 1ms.
-            total_elapsed += 1;
-            if total_elapsed * 10 > timeout_ms * 1000 {
-                return Err(format!("Timeout waiting for signal: {}", self.name));
+            // Exponential backoff up to 1ms
+            if sleep_duration < Duration::from_millis(1) {
+                sleep_duration = sleep_duration.mul_f32(1.5);
             }
         }
-        fs::remove_file(&self.name).map_err(|e| e.to_string())?;
-        Ok(())
-    }
 
-    fn check(&self) -> bool {
-        fs::metadata(&self.name).is_ok()
+        // Data is ready (Flag == 1)
+        // Find end of data (null terminator) starting from offset 1
+        let end = self.mmap[1..]
+            .iter()
+            .position(|&b| b == 0)
+            .map(|pos| pos + 1) // Adjust for slice offset
+            .unwrap_or(self.mmap.len());
+        
+        let data = self.mmap[1..end].to_vec();
+
+        // Reset Flag to 0 (Ack)
+        self.mmap[0] = 0;
+        // self.mmap.flush().ok(); // Optional flush, OS handles coherence usually
+
+        Ok(data)
+    }
+    
+    // Check if data is ready without blocking
+    fn has_data(&self) -> bool {
+        self.mmap[0] == 1
     }
 }
 
-// Drop implementation removed to prevent premature deletion of signal files.
-// Files should be consumed/deleted by the Reader (`wait` method).
-// impl Drop for SyncPrimitive {
-//     fn drop(&mut self) {
-//         let _ = fs::remove_file(&self.name);
-//     }
-// }
-
-
-// --- 2.3. CommunicationPipe ---
+// --- CommunicationPipe (Wrapper) ---
 #[derive(Debug)]
 struct CommunicationPipe {
     buffer: SharedMemoryBuffer,
-    signal: SyncPrimitive,
 }
 
 impl CommunicationPipe {
     fn create(base_name: String, size: u64) -> Result<Self, io::Error> {
         let buffer_name = format!("{}.mem", base_name);
-        let signal_name = format!("{}.sig", base_name);
-
         Ok(CommunicationPipe {
             buffer: SharedMemoryBuffer::create(buffer_name, size)?,
-            signal: SyncPrimitive::create(signal_name),
         })
     }
 
     fn send(&mut self, data: &[u8]) -> Result<(), ChannelError> {
-        self.buffer
-            .write(data)
-            .map_err(ChannelError::SendError)?;
-        self.signal.signal()?;
-        Ok(())
+        self.buffer.write_with_signal(data).map_err(ChannelError::SendError)
     }
 
-    fn receive(&self, timeout_ms: u64) -> Result<Vec<u8>, ChannelError> {
-        self.signal.wait(timeout_ms).map_err(ChannelError::ReceiveError)?;
-        self.buffer.read().map_err(ChannelError::ReceiveError)
+    fn receive(&mut self, timeout_ms: u64) -> Result<Vec<u8>, ChannelError> {
+        self.buffer.read_with_wait(timeout_ms).map_err(ChannelError::ReceiveError)
     }
 
     fn has_msg(&self) -> bool {
-        self.signal.check()
+        self.buffer.has_data()
     }
 }
 
-// --- 2.4. CommunicationChannel ---
+// --- CommunicationChannel ---
 #[derive(Debug)]
 #[allow(dead_code)]
 pub struct CommunicationChannel {
@@ -199,7 +185,6 @@ impl CommunicationChannel {
     pub fn create(channel_id: &str, size: u64, base_path: &str) -> Result<Self, io::Error> {
         let base_path = std::path::Path::new(base_path);
         
-        // Ensure directory exists
         if !base_path.exists() {
             let _ = std::fs::create_dir_all(&base_path);
         }

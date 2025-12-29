@@ -125,10 +125,10 @@ impl RLAgent for PPO {
     fn record_transition(&mut self, agent_id: i32, obs: Vec<f32>, act: Vec<f32>, reward: f32, next_obs: Vec<f32>, done: bool) {
         let obs_tensor = Tensor::from_slice(&obs).to(self.device).reshape(&[1, self.obs_dim as i64]);
         
-        // Value and log_prob for the transition
-        let (_, _, value) = tch::no_grad(|| self.model.forward(&obs_tensor));
+        // OPTIMIZATION: Single forward pass to get both Value and Action Distribution parameters
+        let (mean, std, value) = tch::no_grad(|| self.model.forward(&obs_tensor));
+        
         let act_tensor = Tensor::from_slice(&act).to(self.device).reshape(&[1, self.act_dim as i64]);
-        let (mean, std, _) = tch::no_grad(|| self.model.forward(&obs_tensor));
         
         let var = std.pow_tensor_scalar(2.0);
         let log_prob: Tensor = -0.5 * (act_tensor - &mean).pow_tensor_scalar(2.0) / &var

@@ -110,30 +110,47 @@ pub fn parse_step_data(data: &str) -> Result<HashMap<String, Vec<AgentInfo>>, St
             });
 
         } else if let Some(agent) = current_agent.as_mut() {
-            let lower_line = line.to_lowercase();
-            if let Some(val) = lower_line.strip_prefix("id:") {
-                agent.id = val.trim().parse().unwrap_or(0);
-            } else if let Some(val) = lower_line.strip_prefix("reward:") {
-                agent.reward = val.trim().parse().unwrap_or(0.0);
-            } else if let Some(val) = lower_line.strip_prefix("done:") {
-                agent.done = val.trim().parse().unwrap_or(false);
-            } else if let Some(val) = lower_line.strip_prefix("maxstepreached:") {
-                agent.max_step_reached = val.trim().parse().unwrap_or(false);
-            } else if lower_line.starts_with("obs:") || lower_line.starts_with("observations:") {
-                let s = if lower_line.starts_with("obs:") { &line["obs:".len()..] } else { &line["observations:".len()..] };
-                agent.observations = s.split(|c| c == ';' || c == ',' || c == ' ')
-                    .map(|s| s.trim()).filter(|s| !s.is_empty())
-                    .filter_map(|s| s.parse().ok()).collect();
-            } else if lower_line.starts_with("sensor_shapes:") {
-                let s = &line["sensor_shapes:".len()..];
-                agent.sensor_shapes = s.split(|c| c == ';' || c == ',' || c == ' ')
-                    .map(|s| s.trim()).filter(|s| !s.is_empty())
-                    .filter_map(|s| s.parse().ok()).collect();
-            } else if lower_line.starts_with("action_shapes:") {
-                let s = &line["action_shapes:".len()..];
-                agent.action_shapes = s.split(|c| c == ';' || c == ',' || c == ' ')
-                    .map(|s| s.trim()).filter(|s| !s.is_empty())
-                    .filter_map(|s| s.parse().ok()).collect();
+            if line.len() < 3 { continue; }
+            
+            // Optimization: Use match on first chars to avoid string allocations and multiple starts_with
+            let first_char = line.chars().next().unwrap().to_ascii_lowercase();
+            match first_char {
+                'i' => if line.get(..3).map(|s| s.eq_ignore_ascii_case("id:")).unwrap_or(false) {
+                    agent.id = line[3..].trim().parse().unwrap_or(0);
+                },
+                'r' => if line.get(..7).map(|s| s.eq_ignore_ascii_case("reward:")).unwrap_or(false) {
+                    agent.reward = line[7..].trim().parse().unwrap_or(0.0);
+                },
+                'd' => if line.get(..5).map(|s| s.eq_ignore_ascii_case("done:")).unwrap_or(false) {
+                    agent.done = line[5..].trim().parse().unwrap_or(false);
+                },
+                'm' => if line.get(..15).map(|s| s.eq_ignore_ascii_case("maxstepreached:")).unwrap_or(false) {
+                    agent.max_step_reached = line[15..].trim().parse().unwrap_or(false);
+                },
+                'o' => {
+                    let s = if line.starts_with("obs:") { &line[4..] } 
+                            else if line.starts_with("observations:") { &line[13..] }
+                            else { "" };
+                    if !s.is_empty() {
+                        agent.observations = s.split(|c| c == ';' || c == ',' || c == ' ')
+                            .filter(|part| !part.is_empty())
+                            .map(|part| part.parse::<f32>().unwrap_or(0.0))
+                            .collect();
+                    }
+                },
+                's' => if line.starts_with("sensor_shapes:") {
+                    agent.sensor_shapes = line[14..].split(|c| c == ';' || c == ',' || c == ' ')
+                        .filter(|part| !part.is_empty())
+                        .map(|part| part.parse::<i64>().unwrap_or(0))
+                        .collect();
+                },
+                'a' => if line.starts_with("action_shapes:") {
+                    agent.action_shapes = line[14..].split(|c| c == ';' || c == ',' || c == ' ')
+                        .filter(|part| !part.is_empty())
+                        .map(|part| part.parse::<i64>().unwrap_or(0))
+                        .collect();
+                },
+                _ => {}
             }
         }
 
@@ -210,38 +227,57 @@ pub fn parse_transition_data(data: &str) -> Result<HashMap<String, Vec<Transitio
             });
 
         } else if let Some(trans) = current_trans.as_mut() {
-            let lower_line = line.to_lowercase();
-            if let Some(val) = lower_line.strip_prefix("id:") {
-                trans.id = val.trim().parse().unwrap_or(0);
-            } else if let Some(val) = lower_line.strip_prefix("reward:") {
-                trans.reward = val.trim().parse().unwrap_or(0.0);
-            } else if let Some(val) = lower_line.strip_prefix("done:") {
-                trans.done = val.trim().parse().unwrap_or(false);
-            } else if lower_line.starts_with("obs:") || lower_line.starts_with("observations:") {
-                let s = if lower_line.starts_with("obs:") { &line["obs:".len()..] } else { &line["observations:".len()..] };
-                trans.observations = s.split(|c| c == ';' || c == ',' || c == ' ')
-                    .map(|s| s.trim()).filter(|s| !s.is_empty())
-                    .filter_map(|s| s.parse().ok()).collect();
-            } else if lower_line.starts_with("act:") || lower_line.starts_with("actions:") {
-                let s = if lower_line.starts_with("act:") { &line["act:".len()..] } else { &line["actions:".len()..] };
-                trans.actions = s.split(|c| c == ';' || c == ',' || c == ' ')
-                    .map(|s| s.trim()).filter(|s| !s.is_empty())
-                    .filter_map(|s| s.parse().ok()).collect();
-            } else if lower_line.starts_with("next_obs:") || lower_line.starts_with("next_observations:") {
-                let s = if lower_line.starts_with("next_obs:") { &line["next_obs:".len()..] } else { &line["next_observations:".len()..] };
-                trans.next_observations = s.split(|c| c == ';' || c == ',' || c == ' ')
-                    .map(|s| s.trim()).filter(|s| !s.is_empty())
-                    .filter_map(|s| s.parse().ok()).collect();
-            } else if lower_line.starts_with("sensor_shapes:") {
-                let s = &line["sensor_shapes:".len()..];
-                trans.sensor_shapes = s.split(|c| c == ';' || c == ',' || c == ' ')
-                    .map(|s| s.trim()).filter(|s| !s.is_empty())
-                    .filter_map(|s| s.parse().ok()).collect();
-            } else if lower_line.starts_with("action_shapes:") {
-                let s = &line["action_shapes:".len()..];
-                trans.action_shapes = s.split(|c| c == ';' || c == ',' || c == ' ')
-                    .map(|s| s.trim()).filter(|s| !s.is_empty())
-                    .filter_map(|s| s.parse().ok()).collect();
+            if line.len() < 3 { continue; }
+            let first_char = line.chars().next().unwrap().to_ascii_lowercase();
+            match first_char {
+                'i' => if line.get(..3).map(|s| s.eq_ignore_ascii_case("id:")).unwrap_or(false) {
+                    trans.id = line[3..].trim().parse().unwrap_or(0);
+                },
+                'r' => if line.get(..7).map(|s| s.eq_ignore_ascii_case("reward:")).unwrap_or(false) {
+                    trans.reward = line[7..].trim().parse().unwrap_or(0.0);
+                },
+                'd' => if line.get(..5).map(|s| s.eq_ignore_ascii_case("done:")).unwrap_or(false) {
+                    trans.done = line[5..].trim().parse().unwrap_or(false);
+                },
+                'o' => {
+                    let s = if line.starts_with("obs:") { &line[4..] } 
+                            else if line.starts_with("observations:") { &line[13..] }
+                            else { "" };
+                    if !s.is_empty() {
+                        trans.observations = s.split(|c| c == ';' || c == ',' || c == ' ')
+                            .filter(|part| !part.is_empty())
+                            .map(|part| part.parse::<f32>().unwrap_or(0.0))
+                            .collect();
+                    }
+                },
+                'a' => {
+                    if line.starts_with("act:") || line.starts_with("actions:") {
+                        let s = if line.starts_with("act:") { &line[4..] } else { &line[8..] };
+                        trans.actions = s.split(|c| c == ';' || c == ',' || c == ' ')
+                            .filter(|part| !part.is_empty())
+                            .map(|part| part.parse::<f32>().unwrap_or(0.0))
+                            .collect();
+                    } else if line.starts_with("action_shapes:") {
+                        trans.action_shapes = line[14..].split(|c| c == ';' || c == ',' || c == ' ')
+                            .filter(|part| !part.is_empty())
+                            .map(|part| part.parse::<i64>().unwrap_or(0))
+                            .collect();
+                    }
+                },
+                'n' => if line.starts_with("next_obs:") || line.starts_with("next_observations:") {
+                    let s = if line.starts_with("next_obs:") { &line[9..] } else { &line[18..] };
+                    trans.next_observations = s.split(|c| c == ';' || c == ',' || c == ' ')
+                        .filter(|part| !part.is_empty())
+                        .map(|part| part.parse::<f32>().unwrap_or(0.0))
+                        .collect();
+                },
+                's' => if line.starts_with("sensor_shapes:") {
+                    trans.sensor_shapes = line[14..].split(|c| c == ';' || c == ',' || c == ' ')
+                        .filter(|part| !part.is_empty())
+                        .map(|part| part.parse::<i64>().unwrap_or(0))
+                        .collect();
+                },
+                _ => {}
             }
         }
 
