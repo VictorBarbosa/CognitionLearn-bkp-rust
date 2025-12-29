@@ -179,7 +179,7 @@ impl HomePage {
                 m.insert("PPO".into(), AlgoConfig::ppo());
                 m.insert("SAC".into(), AlgoConfig::sac());
                 m.insert("TD3".into(), AlgoConfig::td3());
-                m.insert("TDSAc".into(), AlgoConfig::tdsac());
+                m.insert("TDSAC".into(), AlgoConfig::tdsac());
                 m.insert("TQC".into(), AlgoConfig::tqc());
                 m.insert("CrossQ".into(), AlgoConfig::crossq());
                 m.insert("DrQV2".into(), AlgoConfig::drqv2());

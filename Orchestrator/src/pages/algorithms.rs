@@ -110,7 +110,7 @@ pub fn render_algorithm_selection_ui(
                                 render_algorithm_row(ui_dist, "PPO:", ppo_enabled, ppo_env_count);
                                 render_algorithm_row(ui_dist, "SAC:", sac_enabled, sac_env_count);
                                 render_algorithm_row(ui_dist, "TD3:", td3_enabled, td3_env_count);
-                                render_algorithm_row(ui_dist, "TDSAc:", tdsac_enabled, tdsac_env_count);
+                                render_algorithm_row(ui_dist, "TDSAC:", tdsac_enabled, tdsac_env_count);
                                 render_algorithm_row(ui_dist, "TQC:", tqc_enabled, tqc_env_count);
                                 render_algorithm_row(ui_dist, "CrossQ:", crossq_enabled, crossq_env_count);
                                 render_algorithm_row(ui_dist, "DrQV2:", drqv2_enabled, drqv2_env_count);
@@ -120,9 +120,9 @@ pub fn render_algorithm_selection_ui(
                     } else { // Same or Single Env
                         // ... (identical radio button logic)
                         let mut selected_alg = "";
-                        if *ppo_enabled { selected_alg = "PPO"; } else if *sac_enabled { selected_alg = "SAC"; } else if *td3_enabled { selected_alg = "TD3"; } else if *tdsac_enabled { selected_alg = "TDSAc"; } else if *tqc_enabled { selected_alg = "TQC"; } else if *crossq_enabled { selected_alg = "CrossQ"; } else if *drqv2_enabled { selected_alg = "DrQV2"; } else if *ppo_et_enabled { selected_alg = "PPO_ET"; } else if *ppo_ce_enabled { selected_alg = "PPO_CE"; }
-                        let mut alg_changed = |name: &str, ui: &mut egui::Ui| { if ui.radio(selected_alg == name, "").clicked() { *ppo_enabled = name == "PPO"; *sac_enabled = name == "SAC"; *td3_enabled = name == "TD3"; *tdsac_enabled = name == "TDSAc"; *tqc_enabled = name == "TQC"; *crossq_enabled = name == "CrossQ"; *drqv2_enabled = name == "DrQV2"; *ppo_et_enabled = name == "PPO_ET"; *ppo_ce_enabled = name == "PPO_CE"; } };
-                        ui.label("PPO:"); alg_changed("PPO", ui); ui.end_row(); ui.label("SAC:"); alg_changed("SAC", ui); ui.end_row(); ui.label("TD3:"); alg_changed("TD3", ui); ui.end_row(); ui.label("TDSAc:"); alg_changed("TDSAc", ui); ui.end_row(); ui.label("TQC:"); alg_changed("TQC", ui); ui.end_row(); ui.label("CrossQ:"); alg_changed("CrossQ", ui); ui.end_row(); ui.label("DrQV2:"); alg_changed("DrQV2", ui); ui.end_row(); ui.label("PPO_ET:"); alg_changed("PPO_ET", ui); ui.end_row(); ui.label("PPO_CE:"); alg_changed("PPO_CE", ui); ui.end_row();
+                        if *ppo_enabled { selected_alg = "PPO"; } else if *sac_enabled { selected_alg = "SAC"; } else if *td3_enabled { selected_alg = "TD3"; } else if *tdsac_enabled { selected_alg = "TDSAC"; } else if *tqc_enabled { selected_alg = "TQC"; } else if *crossq_enabled { selected_alg = "CrossQ"; } else if *drqv2_enabled { selected_alg = "DrQV2"; } else if *ppo_et_enabled { selected_alg = "PPO_ET"; } else if *ppo_ce_enabled { selected_alg = "PPO_CE"; }
+                        let mut alg_changed = |name: &str, ui: &mut egui::Ui| { if ui.radio(selected_alg == name, "").clicked() { *ppo_enabled = name == "PPO"; *sac_enabled = name == "SAC"; *td3_enabled = name == "TD3"; *tdsac_enabled = name == "TDSAC"; *tqc_enabled = name == "TQC"; *crossq_enabled = name == "CrossQ"; *drqv2_enabled = name == "DrQV2"; *ppo_et_enabled = name == "PPO_ET"; *ppo_ce_enabled = name == "PPO_CE"; } };
+                        ui.label("PPO:"); alg_changed("PPO", ui); ui.end_row(); ui.label("SAC:"); alg_changed("SAC", ui); ui.end_row(); ui.label("TD3:"); alg_changed("TD3", ui); ui.end_row(); ui.label("TDSAC:"); alg_changed("TDSAC", ui); ui.end_row(); ui.label("TQC:"); alg_changed("TQC", ui); ui.end_row(); ui.label("CrossQ:"); alg_changed("CrossQ", ui); ui.end_row(); ui.label("DrQV2:"); alg_changed("DrQV2", ui); ui.end_row(); ui.label("PPO_ET:"); alg_changed("PPO_ET", ui); ui.end_row(); ui.label("PPO_CE:"); alg_changed("PPO_CE", ui); ui.end_row();
                     }
                 });
 
@@ -134,7 +134,7 @@ pub fn render_algorithm_selection_ui(
                     if *ppo_enabled { selected_algorithms_for_config.push("PPO".to_string()); }
                     if *sac_enabled { selected_algorithms_for_config.push("SAC".to_string()); }
                     if *td3_enabled { selected_algorithms_for_config.push("TD3".to_string()); }
-                    if *tdsac_enabled { selected_algorithms_for_config.push("TDSAc".to_string()); }
+                    if *tdsac_enabled { selected_algorithms_for_config.push("TDSAC".to_string()); }
                     if *tqc_enabled { selected_algorithms_for_config.push("TQC".to_string()); }
                     if *crossq_enabled { selected_algorithms_for_config.push("CrossQ".to_string()); }
                     if *drqv2_enabled { selected_algorithms_for_config.push("DrQV2".to_string()); }
@@ -171,7 +171,7 @@ pub fn render_algorithm_selection_ui(
             "PPO" => (*ppo_env_count, "PPO"),
             "SAC" => (*sac_env_count, "SAC"),
             "TD3" => (*td3_env_count, "TD3"),
-            "TDSAc" => (*tdsac_env_count, "TDSAc"),
+            "TDSAC" => (*tdsac_env_count, "TDSAC"),
             "TQC" => (*tqc_env_count, "TQC"),
             "CrossQ" => (*crossq_env_count, "CrossQ"),
             "DrQV2" => (*drqv2_env_count, "DrQV2"),

@@ -201,7 +201,7 @@ impl UnityLauncher {
                         "PPO" => AlgoConfig::ppo(),
                         "SAC" => AlgoConfig::sac(),
                         "TD3" => AlgoConfig::td3(),
-                        "TDSAc" => AlgoConfig::tdsac(),
+                        "TDSAC" => AlgoConfig::tdsac(),
                         "TQC" => AlgoConfig::tqc(),
                         "CrossQ" => AlgoConfig::crossq(),
                         "DrQV2" => AlgoConfig::drqv2(),
