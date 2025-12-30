@@ -4,6 +4,15 @@ use std::sync::mpsc::Receiver;
 use crate::trainer::GuiUpdate;
 use std::collections::{VecDeque, HashMap, BTreeMap};
 
+struct RaceMilestoneRow {
+    index: usize,
+    target_step: usize,
+    percentage: f32,
+    eliminated: String,
+    winner: String,
+    completed: bool,
+}
+
 pub struct MonitorPage {
     // Data stores for plotting
     // Category -> Metric Name -> Behavior Name -> Points [step, value]
@@ -18,6 +27,7 @@ pub struct MonitorPage {
     
     // Race Info
     race_config: Option<(usize, Vec<f32>)>,
+    race_milestones: Vec<RaceMilestoneRow>,
 }
 
 impl MonitorPage {
@@ -28,7 +38,32 @@ impl MonitorPage {
             max_log_lines: 1000,
             selected_tab: "Overview".to_string(),
             race_config: None,
+            race_milestones: Vec::new(),
         }
+    }
+
+    pub fn set_race_config(&mut self, total_steps: usize, num_participants: usize) {
+        if num_participants < 2 { return; }
+        
+        let mut checkpoints = Vec::new();
+        for i in 1..num_participants {
+            checkpoints.push(i as f32 / num_participants as f32);
+        }
+        
+        self.race_config = Some((total_steps, checkpoints.clone()));
+        self.race_milestones.clear();
+        
+        for (i, &pct) in checkpoints.iter().enumerate() {
+            self.race_milestones.push(RaceMilestoneRow {
+                index: i,
+                target_step: (pct as f64 * total_steps as f64) as usize,
+                percentage: pct,
+                eliminated: "Pending".to_string(),
+                winner: "-".to_string(),
+                completed: false,
+            });
+        }
+        self.add_log(format!("🏁 Race Schedule Pre-calculated: {} participants, {} steps.", num_participants, total_steps));
     }
 
     pub fn update(&mut self, ui: &mut egui::Ui, receiver: &Receiver<GuiUpdate>) {
@@ -89,7 +124,29 @@ impl MonitorPage {
                 }
                 GuiUpdate::RaceConfig { total_steps, checkpoints } => {
                     self.race_config = Some((total_steps, checkpoints.clone()));
+                    
+                    // Initialize milestones table
+                    self.race_milestones.clear();
+                    for (i, &pct) in checkpoints.iter().enumerate() {
+                        self.race_milestones.push(RaceMilestoneRow {
+                            index: i,
+                            target_step: (pct as f64 * total_steps as f64) as usize,
+                            percentage: pct,
+                            eliminated: "Pending".to_string(),
+                            winner: "-".to_string(),
+                            completed: false,
+                        });
+                    }
+                    
                     self.add_log(format!("🏁 Race Configured: {} steps, Checkpoints: {:?}", total_steps, checkpoints));
+                }
+                GuiUpdate::RaceRound { milestone_idx, start_step: _, end_step: _, eliminated_id, winner_id } => {
+                    if let Some(row) = self.race_milestones.get_mut(milestone_idx) {
+                        row.eliminated = eliminated_id.clone();
+                        row.winner = winner_id.clone();
+                        row.completed = true;
+                    }
+                    self.add_log(format!("🏁 Round {} Finished. Eliminated: {}, Winner: {}", milestone_idx, eliminated_id, winner_id));
                 }
             }
         }
@@ -184,48 +241,45 @@ impl MonitorPage {
                             .text(format!("Race Progress: {:.1}% (Step {:.0}/{})", progress * 100.0, max_current_step, total_steps))
                             .animate(true)
                          );
-                         ui.add_space(10.0);
+                         ui.add_space(20.0);
                      }
 
-                     // 2. Race Chart with Milestones
-                     if let Some(overview_map) = self.metrics_history.get("Overview") {
-                         if let Some(reward_data) = overview_map.get("Average Reward") {
-                             ui.label(egui::RichText::new("🏆 Race Progress (Average Reward)").strong().size(20.0));
-                             
-                             Plot::new("plot_race_reward")
-                                .height(500.0)
-                                .legend(Legend::default().position(Corner::LeftTop))
-                                .show(ui, |plot_ui| {
-                                    // Plot Agent Lines
-                                    for (behavior, points) in reward_data {
-                                        plot_ui.line(Line::new(PlotPoints::new(points.clone())).name(behavior).width(2.0));
-                                    }
-                                    
-                                    // Plot Milestones
-                                    if let Some((total_steps, checkpoints)) = &self.race_config {
-                                        for (i, &pct) in checkpoints.iter().enumerate() {
-                                            let step_x = *total_steps as f64 * pct as f64;
-                                            plot_ui.vline(VLine::new(step_x).color(egui::Color32::YELLOW).style(egui_plot::LineStyle::Dashed { length: 10.0 }));
-                                            
-                                            // Add label slightly offset
-                                            plot_ui.text(Text::new(
-                                                egui_plot::PlotPoint::new(step_x, 0.0), // Y=0 anchor
-                                                format!("Phase {} ({:.0}%)", i + 1, pct * 100.0)
-                                            ).color(egui::Color32::YELLOW).anchor(egui::Align2::LEFT_BOTTOM));
-                                        }
-                                        
-                                        // Finish Line
-                                        plot_ui.vline(VLine::new(*total_steps as f64).color(egui::Color32::GREEN).width(2.0));
-                                        plot_ui.text(Text::new(
-                                            egui_plot::PlotPoint::new(*total_steps as f64, 0.0),
-                                            "FINISH"
-                                        ).color(egui::Color32::GREEN).anchor(egui::Align2::RIGHT_BOTTOM));
-                                    }
-                                });
-                         } else {
-                             ui.label("Waiting for reward data to start the race visualization...");
-                         }
+                     // 2. Race Grid (Table)
+                     ui.label(egui::RichText::new("🏆 Race Schedule & Results").strong().size(20.0));
+                     ui.add_space(10.0);
+                     
+                     egui::Grid::new("race_milestones_grid")
+                        .striped(true)
+                        .spacing([40.0, 10.0])
+                        .min_col_width(100.0)
+                        .show(ui, |ui| {
+                            // Headers
+                            ui.label(egui::RichText::new("Phase").strong().size(14.0));
+                            ui.label(egui::RichText::new("Target Step").strong().size(14.0));
+                            ui.label(egui::RichText::new("Eliminated").strong().color(egui::Color32::LIGHT_RED).size(14.0));
+                            ui.label(egui::RichText::new("Best Current").strong().color(egui::Color32::GREEN).size(14.0));
+                            ui.end_row();
+                            
+                            // Data
+                            for item in &self.race_milestones {
+                                ui.label(format!("Phase {} ({:.0}%)", item.index + 1, item.percentage * 100.0));
+                                ui.label(format!("{}", item.target_step));
+                                
+                                if item.completed {
+                                    ui.label(egui::RichText::new(&item.eliminated).color(egui::Color32::LIGHT_RED));
+                                    ui.label(egui::RichText::new(&item.winner).color(egui::Color32::GREEN));
+                                } else {
+                                    ui.label(egui::RichText::new("Pending").italics().color(egui::Color32::GRAY));
+                                    ui.label(egui::RichText::new("-").color(egui::Color32::GRAY));
+                                }
+                                ui.end_row();
+                            }
+                        });
+                     
+                     if self.race_milestones.is_empty() {
+                         ui.label("Waiting for configuration...");
                      }
+
                 } else if let Some(metrics_map) = self.metrics_history.get(&self.selected_tab) {
                     for (metric_name, behaviors) in metrics_map {
                         ui.label(egui::RichText::new(metric_name).strong().size(16.0));

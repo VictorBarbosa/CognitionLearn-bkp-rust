@@ -100,6 +100,13 @@ pub enum GuiUpdate {
         total_steps: usize,
         checkpoints: Vec<f32>,
     },
+    RaceRound {
+        milestone_idx: usize,
+        start_step: usize,
+        end_step: usize,
+        eliminated_id: String,
+        winner_id: String,
+    },
 }
 
 pub struct Trainer {
@@ -409,6 +416,27 @@ impl Trainer {
         const SILENCE_TIMEOUT: Duration = Duration::from_secs(60);
 
         loop {
+            // Check for adoption (Race Mode Consolidation)
+            if let Some(rc) = &self.race_controller {
+                if !self.channel_ids.is_empty() {
+                    let my_original_id = self.channel_ids[0].clone();
+                    if let Some(adopted_ids) = rc.get_adopted_channels(&my_original_id) {
+                        println!("🚀 Race Victory! Adopting {} orphaned environments: {:?}", adopted_ids.len(), adopted_ids);
+                        for adopted_id in adopted_ids {
+                             match CommunicationChannel::create(&adopted_id, CHANNEL_SIZE, &self.settings.shared_memory_path) {
+                                Ok(chan) => {
+                                    println!("✅ Adopted channel: {}", adopted_id);
+                                    channels.push((adopted_id, chan));
+                                },
+                                Err(e) => {
+                                    eprintln!("❌ Failed to adopt channel {}: {}", adopted_id, e);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
             // Check shutdown signal
             if let Some(signal) = &self.shutdown_signal {
                 if signal.load(Ordering::Relaxed) {
@@ -714,7 +742,7 @@ impl Trainer {
                     let ckpt_path = format!("{}/checkpoint/{}/checkpoint.ot", self.settings.output_path, algo_str);
                     let my_id = self.channel_ids.first().cloned().unwrap_or("unknown".to_string());
                     
-                    let (should_continue, load_info) = rc.report_progress(
+                    let (should_continue, load_info, round_result) = rc.report_progress(
                         &my_id, 
                         self.total_steps, 
                         self.last_avg_reward, 
@@ -726,6 +754,18 @@ impl Trainer {
                     if !should_continue {
                         println!("🛑 Race Controller ended training for agent {}.", my_id);
                         break Ok(()); 
+                    }
+
+                    if let Some(rr) = round_result {
+                        if let Some(ref tx) = self.gui_sender {
+                            let _ = tx.send(GuiUpdate::RaceRound {
+                                milestone_idx: rr.milestone_idx,
+                                start_step: rr.start_step,
+                                end_step: rr.end_step,
+                                eliminated_id: rr.eliminated_id,
+                                winner_id: rr.winner_id,
+                            });
+                        }
                     }
                     
                     if let Some((path, new_settings)) = load_info {

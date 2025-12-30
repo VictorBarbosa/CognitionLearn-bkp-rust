@@ -20,6 +20,15 @@ pub struct RaceParticipant {
     pub algorithm: AgentType,
 }
 
+#[derive(Debug, Clone)]
+pub struct RaceRoundResult {
+    pub milestone_idx: usize,
+    pub start_step: usize,
+    pub end_step: usize,
+    pub eliminated_id: String,
+    pub winner_id: String,
+}
+
 pub struct RaceController {
     pub total_steps: usize,
     pub participants: Mutex<HashMap<String, RaceParticipant>>,
@@ -27,8 +36,10 @@ pub struct RaceController {
     pub active_participants: Mutex<Vec<String>>, 
     pub checkpoints: Vec<f32>, 
     pub next_checkpoint_idx: Mutex<usize>,
+    pub prev_checkpoint_step: Mutex<usize>, // Added
     pub best_model_path: Mutex<Option<String>>,
     pub best_model_settings: Mutex<Option<TrainerSettings>>,
+    pub adoption_assignments: Mutex<HashMap<String, Vec<String>>>, // Winner -> [Adopted IDs]
 }
 
 impl RaceController {
@@ -64,9 +75,16 @@ impl RaceController {
             active_participants: Mutex::new(participant_ids),
             checkpoints,
             next_checkpoint_idx: Mutex::new(0),
+            prev_checkpoint_step: Mutex::new(0),
             best_model_path: Mutex::new(None),
             best_model_settings: Mutex::new(None),
+            adoption_assignments: Mutex::new(HashMap::new()),
         }
+    }
+
+    pub fn get_adopted_channels(&self, winner_id: &str) -> Option<Vec<String>> {
+        let mut assignments = self.adoption_assignments.lock().unwrap();
+        assignments.remove(winner_id)
     }
 
     pub fn report_progress(
@@ -75,9 +93,9 @@ impl RaceController {
         step: usize, 
         reward: f32, 
         algo: AgentType, 
-        model_path: &str,
+        model_path: &str, 
         settings: &TrainerSettings
-    ) -> (bool, Option<(String, TrainerSettings)>) {
+    ) -> (bool, Option<(String, TrainerSettings)>, Option<RaceRoundResult>) {
         let mut parts = self.participants.lock().unwrap();
         let mut next_ckpt_idx = self.next_checkpoint_idx.lock().unwrap();
         
@@ -101,7 +119,7 @@ impl RaceController {
         }
 
         if *next_ckpt_idx >= self.checkpoints.len() {
-            return (true, None); 
+            return (true, None, None); 
         }
 
         let threshold_step = (self.total_steps as f32 * self.checkpoints[*next_ckpt_idx]) as usize;
@@ -128,12 +146,25 @@ impl RaceController {
                     .collect();
                 
                 ranked.sort_by(|a, b| b.1.partial_cmp(&a.1).unwrap_or(std::cmp::Ordering::Equal));
+                
+                let mut round_result = None;
 
                 if ranked.len() > 1 {
                     let (loser_id, loser_reward) = ranked.last().unwrap().clone();
                     let (winner_id, winner_reward) = ranked.first().unwrap().clone();
                     
                     println!("❌ Eliminating {} (Reward: {:.2}). Leader is {} (Reward: {:.2})", loser_id, loser_reward, winner_id, winner_reward);
+                    
+                    // Create Result
+                    let mut prev_step_guard = self.prev_checkpoint_step.lock().unwrap();
+                    round_result = Some(RaceRoundResult {
+                        milestone_idx: *next_ckpt_idx,
+                        start_step: *prev_step_guard,
+                        end_step: threshold_step,
+                        eliminated_id: loser_id.clone(),
+                        winner_id: winner_id.clone(),
+                    });
+                    *prev_step_guard = threshold_step;
 
                     if let Some(p) = parts.get_mut(&loser_id) {
                         p.status = RaceStatus::Eliminated;
@@ -142,28 +173,24 @@ impl RaceController {
                     let active_count_after = ranked.len() - 1;
                     
                     if active_count_after == 1 {
-                        println!("🏆 Finalist determined: {}! Respawning everyone as clones for the Victory Lap!", winner_id);
+                        println!("🏆 Finalist determined: {}! Consolidating environments for Victory Lap!", winner_id);
                         
-                        let winner_path = self.best_model_path.lock().unwrap().clone();
-                        let winner_settings = self.best_model_settings.lock().unwrap().clone();
-                        
-                        // Respawn Phase: Reactivate everyone
-                        let mut active_guard = self.active_participants.lock().unwrap();
-                        let mut all_ids = Vec::new();
-                        for (pid, p) in parts.iter_mut() {
-                            p.status = RaceStatus::Running; 
-                            all_ids.push(pid.clone());
+                        // Set winner status
+                        if let Some(p) = parts.get_mut(&winner_id) {
+                            p.status = RaceStatus::Winner;
                         }
-                        *active_guard = all_ids; 
                         
+                        // Consolidation Phase: Winner adopts everyone else
+                        let all_ids: Vec<String> = parts.keys().cloned().collect();
+                        let adopted: Vec<String> = all_ids.into_iter().filter(|x| x != &winner_id).collect();
+                        
+                        let mut assignments = self.adoption_assignments.lock().unwrap();
+                        assignments.insert(winner_id.clone(), adopted);
+
                         *next_ckpt_idx += 1;
                         self.barrier.notify_all();
                         
-                        if let (Some(path), Some(set)) = (winner_path, winner_settings) {
-                            return (true, Some((path, set)));
-                        } else {
-                            return (true, None);
-                        }
+                        return (true, None, round_result);
                     } else {
                         // Eliminate loser from active set
                         let mut active_guard = self.active_participants.lock().unwrap();
@@ -173,108 +200,52 @@ impl RaceController {
 
                 *next_ckpt_idx += 1;
                 self.barrier.notify_all();
+                
+                // If round_result was created (elimination happened), pass it.
+                // We must return here to avoid falling into wait() logic below.
+                return (true, None, round_result); 
             } else {
-                let _unused = self.barrier.wait(parts).unwrap();
+                // Wait and re-acquire lock
+                parts = self.barrier.wait(parts).unwrap();
             }
         }
         
-        let parts = self.participants.lock().unwrap();
+        // At this point, we hold the lock 'parts'.
         if let Some(p) = parts.get(id) {
             match p.status {
                 RaceStatus::Eliminated => {
-                    // Enter a wait loop until status changes (Respawn) or race ends
-                    // We need to release the lock 'parts' to wait on condvar, but wait takes the lock.
-                    // However, we are ALREADY holding 'parts' (MutexGuard).
-                    // We need to enter a wait loop using the same barrier?
-                    // Barrier notifies on Checkpoint.
-                    // If we are eliminated, we wait for next checkpoint.
-                    
-                    // Actually, if we return false, the trainer exits.
-                    // If we want to support "Respawn", we must NOT exit. We must wait.
-                    // Let's force a wait here.
-                    
                     println!("💤 Agent {} sleeping (Eliminated)...", id);
                     
-                    // Problem: barrier.wait consumes the guard and returns it.
-                    // We need to loop.
-                    let mut current_parts = parts;
                     loop {
-                        current_parts = self.barrier.wait(current_parts).unwrap();
+                        parts = self.barrier.wait(parts).unwrap();
                         
-                        // Check if status changed to Running
-                        if let Some(me) = current_parts.get(id) {
+                        // Check if status changed to Running (Respawn - for previous phases)
+                        if let Some(me) = parts.get(id) {
                             if me.status == RaceStatus::Running {
                                 println!("⚡ Agent {} Respawned!", id);
-                                // Check for pending reload data?
-                                // Simplified: If we just woke up and are running, grab the winner data.
                                 let winner_path = self.best_model_path.lock().unwrap().clone();
                                 let winner_settings = self.best_model_settings.lock().unwrap().clone();
                                 
                                 if let (Some(path), Some(set)) = (winner_path, winner_settings) {
-                                    return (true, Some((path, set)));
+                                    return (true, Some((path, set)), None);
                                 }
-                                return (true, None);
+                                return (true, None, None);
                             }
                         }
                         
-                        // Check if race ended (no more checkpoints)
+                        // Check if race entered Final Phase (Consolidation) - Losers should die
                         let idx = self.next_checkpoint_idx.lock().unwrap();
                         if *idx >= self.checkpoints.len() {
-                             return (false, None); // Race over
+                             println!("💀 Agent {} terminating (Final Consolidation).", id);
+                             return (false, None, None); // Die
                         }
                     }
                 },
-                RaceStatus::Winner => (true, None),
-                RaceStatus::Running | RaceStatus::WaitingForOthers => {
-                    // If we just passed the final checkpoint (Respawn event), we might have data to load.
-                    // But usually, only the one who triggered the checkpoint gets the immediate return.
-                    // Others wake up from 'wait' above.
-                    // If we fall through here, we are just running normal.
-                    
-                    // Check if we are in the "Respawn" moment?
-                    // We can check if 'best_model_path' is set AND we haven't loaded it?
-                    // To avoid infinite reloading, we rely on the fact that only the checkpoint event returns Some.
-                    // Wait, the checkpoint event (all_arrived block) returns Some only for the caller.
-                    // The others are waiting in `barrier.wait`.
-                    // They wake up and go to this block.
-                    // They return (true, None).
-                    // THIS IS A BUG. They miss the reload!
-                    
-                    // Fix: We need to return the reload data for everyone at that specific moment.
-                    // But how to synchronize?
-                    // Maybe store "reload_command" in RaceParticipant?
-                    
-                    // Let's implement pending_reload in RaceParticipant.
-                    // Or simpler:
-                    // If active_count_after == 1 logic runs, it sets a global "broadcast_reload" flag?
-                    
-                    // Let's fix the logic for those waking up from wait.
-                    // They are inside `else { barrier.wait }`.
-                    // When they wake up, they continue to `match p.status`.
-                    
-                    // If we are in the Respawn phase, EVERYONE (Winner + Losers) continues.
-                    // Losers are handled in the Eliminated block above (they wait until Running).
-                    // Running agents (Winner or survivors of intermediate rounds) wake up here.
-                    // If it was the final round, they might need reload? 
-                    // Winner doesn't need to reload himself (optional).
-                    
-                    // So only the "Eliminated -> Running" path needs reload. I handled that in the loop above.
-                    // Intermediate survivors?
-                    // In the 25%->50% phase, survivors just continue. No reload.
-                    // Only at 75%->100%, survivors (only 1 winner) continue.
-                    // Wait, if N=4.
-                    // 25%: 1 Eliminated. 3 Survivors. No reload.
-                    // 50%: 1 Eliminated. 2 Survivors. No reload.
-                    // 75%: 1 Eliminated. 1 Survivor (Winner). Winner continues. 
-                    //      AND 3 Eliminated get respawned.
-                    // So the Winner falls here. Returns (true, None). Correct.
-                    // The Eliminated fall in the loop above. When status becomes Running, they return (true, Some(...)). Correct.
-                    
-                    (true, None)
-                }
+                RaceStatus::Winner => (true, None, None),
+                RaceStatus::Running | RaceStatus::WaitingForOthers => (true, None, None),
             }
         } else {
-            (false, None)
+            (false, None, None)
         }
     }
 }

@@ -340,6 +340,11 @@ impl HomePage {
                                 self.unity_launcher.is_training_started = true;
                                 self.tcp_server_handler.shutdown_requested.store(false, Ordering::SeqCst);
                                 
+                                // Pre-initialize Race Monitor if Race Mode is enabled
+                                if self.checkpoint_settings.enable_race_mode {
+                                    self.monitor_page.set_race_config(self.max_steps as usize, self.total_env as usize);
+                                }
+
                                 match self.unity_launcher.launch_unity_environment(
                                     &self.env_path,
                                     self.total_env,
