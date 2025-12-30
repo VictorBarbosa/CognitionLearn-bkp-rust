@@ -414,6 +414,14 @@ impl Trainer {
 
         let mut last_msg_time = SystemTime::now();
         const SILENCE_TIMEOUT: Duration = Duration::from_secs(60);
+        
+        // Race State
+        let mut next_race_milestone_idx = 0;
+        let race_milestones_steps: Vec<usize> = if let Some(rc) = &self.race_controller {
+            rc.checkpoints.iter().map(|pct| (pct * self.settings.max_steps as f32) as usize).collect()
+        } else {
+            Vec::new()
+        };
 
         loop {
             // Check for adoption (Race Mode Consolidation)
@@ -702,13 +710,21 @@ impl Trainer {
                                     entry.0 += value;
                                     entry.1 += 1;
                                 }
+                            }
+                        }
 
-                                // Check for checkpoint based on ENVIRONMENT steps (total_steps or total_transitions)
-                                // We use total_steps for consistency across algorithms
-                                if self.total_steps >= self.last_checkpoint_step + self.settings.checkpoint_interval {
-                                    should_save = true;
-                                    self.last_checkpoint_step = self.total_steps;
-                                }
+                        // Check for checkpoint based on ENVIRONMENT steps (Interval)
+                        if self.total_steps >= self.last_checkpoint_step + self.settings.checkpoint_interval {
+                            should_save = true;
+                            self.last_checkpoint_step = self.total_steps;
+                        }
+                        
+                        // Check for Race Milestone Force Save
+                        if next_race_milestone_idx < race_milestones_steps.len() {
+                            if self.total_steps >= race_milestones_steps[next_race_milestone_idx] {
+                                println!("🏁 [Trainer] Reached Race Milestone {} (Step {}). Forcing Save.", next_race_milestone_idx + 1, self.total_steps);
+                                should_save = true;
+                                next_race_milestone_idx += 1;
                             }
                         }
 
@@ -1002,6 +1018,8 @@ impl Trainer {
     }
 
     fn save_checkpoint(&mut self) { 
+        println!("💾 [Trainer] Attempting to save checkpoint...");
+        
         if let Some(cur_agent) = self.agent.as_ref() {
             let algo_str = format!("{:?}", self.settings.algorithm).to_lowercase();
             // Use output_path for checkpoints
@@ -1009,15 +1027,18 @@ impl Trainer {
             let ckpt_path = format!("{}/checkpoint.ot", ckpt_dir);
             let meta_path = format!("{}/metadata.json", ckpt_dir);
             
+            println!("📂 [Trainer] Checkpoint Directory: {}", ckpt_dir);
+            
             if let Err(e) = std::fs::create_dir_all(&ckpt_dir) {
-                eprintln!("❌ Error creating checkpoint directory: {}", e);
+                eprintln!("❌ [Trainer] Error creating checkpoint directory: {}", e);
+                return;
             }
 
             // Save Weights
             if let Err(e) = cur_agent.save(&ckpt_path) {
-                eprintln!("❌ Error saving weights: {}", e);
+                eprintln!("❌ [Trainer] Error saving weights: {}", e);
             } else {
-                println!("💾 Checkpoint saved: {} (#{})", ckpt_path, self.total_train_steps);
+                println!("✅ [Trainer] Checkpoint saved: {} (#{})", ckpt_path, self.total_train_steps);
                 
                 // Save Metadata
                 let meta = TrainerMetadata {
@@ -1043,15 +1064,15 @@ impl Trainer {
                     let onnx_path_latest = format!("{}/model.onnx", ckpt_dir);
                     let onnx_path_versioned = format!("{}/model-{}.onnx", ckpt_dir, self.total_steps);
                     
-                    println!("🔄 Exporting to ONNX (Native Rust)...");
+                    println!("🔄 [Trainer] Exporting to ONNX (Native Rust): {}", onnx_path_versioned);
                     match cur_agent.export_onnx(&onnx_path_versioned) {
                         Ok(_) => {
-                            println!("✅ ONNX Exported: {}", onnx_path_versioned);
+                            println!("✅ [Trainer] ONNX Exported: {}", onnx_path_versioned);
                             // Also copy to latest for convenience
                             if let Err(e) = std::fs::copy(&onnx_path_versioned, &onnx_path_latest) {
-                                eprintln!("⚠️ Failed to update latest model.onnx: {}", e);
+                                eprintln!("⚠️ [Trainer] Failed to update latest model.onnx: {}", e);
                             } else {
-                                println!("✅ Updated latest: {}", onnx_path_latest);
+                                println!("✅ [Trainer] Updated latest: {}", onnx_path_latest);
                             }
 
                             // --- FILE ROTATION LOGIC ---
@@ -1077,18 +1098,22 @@ impl Trainer {
                                     for i in 0..num_to_delete {
                                         let path_to_delete = &versioned_models[i].1;
                                         if let Err(e) = std::fs::remove_file(path_to_delete) {
-                                            eprintln!("⚠️ Failed to rotate old model: {}", e);
+                                            eprintln!("⚠️ [Trainer] Failed to rotate old model: {}", e);
                                         } else {
-                                            println!("🧹 Rotated (deleted) old model: {:?}", path_to_delete.file_name());
+                                            println!("🧹 [Trainer] Rotated (deleted) old model: {:?}", path_to_delete.file_name());
                                         }
                                     }
                                 }
                             }
                         },
-                        Err(e) => eprintln!("⚠️ ONNX Export failed: {}", e),
+                        Err(e) => eprintln!("❌ [Trainer] ONNX Export failed: {}", e),
                     }
+                } else {
+                    println!("ℹ️ [Trainer] Algorithm {:?} does not support ONNX export.", self.settings.algorithm);
                 }
             }
+        } else {
+            println!("⚠️ [Trainer] Cannot save checkpoint: Agent not initialized.");
         }
     }
 }

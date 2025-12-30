@@ -403,29 +403,21 @@ impl HomePage {
     }
 
     fn perform_auto_resume_discovery(&mut self) {
-        let base_path = std::path::Path::new(&self.results_path).join(&self.run_id).join("checkpoint");
-        println!("🔍 Scanning for checkpoints in: {:?}", base_path);
+        let root = std::path::Path::new(&self.results_path);
+        let run_path = if self.run_id.is_empty() {
+            root.to_path_buf()
+        } else {
+            root.join(&self.run_id)
+        };
 
-        if !base_path.exists() {
-            rfd::MessageDialog::new().set_title("Error").set_description("Checkpoint folder not found").show();
+        println!("🔍 Scanning for race checkpoints in: {:?}", run_path);
+
+        if !run_path.exists() {
+            rfd::MessageDialog::new().set_title("Error").set_description("Results/Run path not found").show();
             return;
         }
 
-        let mut found_algos = Vec::new();
-        let algo_names = vec!["ppo", "sac", "td3", "dcac", "tqc", "crossq", "bc", "ppo_et", "ppo_ce", "drqv2"];
-
-        for algo in algo_names {
-            let model_path = base_path.join(algo).join("checkpoint.ot");
-            if model_path.exists() {
-                found_algos.push(algo.to_uppercase());
-            }
-        }
-
-        if found_algos.is_empty() {
-            rfd::MessageDialog::new().set_title("Error").set_description("No checkpoints found").show();
-            return;
-        }
-
+        // Reset counts
         self.ppo_enabled = false; self.sac_enabled = false; self.td3_enabled = false;
         self.tdsac_enabled = false; self.tqc_enabled = false; self.crossq_enabled = false;
         self.drqv2_enabled = false; self.ppo_et_enabled = false; self.ppo_ce_enabled = false;
@@ -434,34 +426,62 @@ impl HomePage {
         self.tdsac_env_count = 0; self.tqc_env_count = 0; self.crossq_env_count = 0;
         self.drqv2_env_count = 0; self.ppo_et_env_count = 0; self.ppo_ce_env_count = 0;
 
-        let count = found_algos.len() as u32;
-        let envs_per_algo = (self.total_env as u32) / count;
-        let mut extra = (self.total_env as u32) % count;
+        let mut total_found = 0;
 
-        for algo in &found_algos {
-            let my_envs = envs_per_algo + if extra > 0 { extra -= 1; 1 } else { 0 };
-            match algo.as_str() {
-                "PPO" => { self.ppo_enabled = true; self.ppo_env_count = my_envs; }
-                "SAC" => { self.sac_enabled = true; self.sac_env_count = my_envs; }
-                "TD3" => { self.td3_enabled = true; self.td3_env_count = my_envs; }
-                "TDSAC" => { self.tdsac_enabled = true; self.tdsac_env_count = my_envs; }
-                "TQC" => { self.tqc_enabled = true; self.tqc_env_count = my_envs; }
-                "CROSSQ" => { self.crossq_enabled = true; self.crossq_env_count = my_envs; }
-                "DRQV2" => { self.drqv2_enabled = true; self.drqv2_env_count = my_envs; }
-                "PPO_ET" => { self.ppo_et_enabled = true; self.ppo_et_env_count = my_envs; }
-                "PPO_CE" => { self.ppo_ce_enabled = true; self.ppo_ce_env_count = my_envs; }
-                _ => {} 
+        if let Ok(entries) = std::fs::read_dir(&run_path) {
+            for entry in entries.flatten() {
+                let path = entry.path();
+                if path.is_dir() {
+                    if let Some(name) = path.file_name().and_then(|n| n.to_str()) {
+                        if name.starts_with("race_") {
+                            // Check checkpoint subfolder
+                            let ckpt_root = path.join("checkpoint");
+                            if let Ok(algo_entries) = std::fs::read_dir(ckpt_root) {
+                                for algo_entry in algo_entries.flatten() {
+                                    if algo_entry.path().is_dir() {
+                                        if let Some(algo_name) = algo_entry.file_name().to_str() {
+                                            // Check if checkpoint.ot exists
+                                            if algo_entry.path().join("checkpoint.ot").exists() {
+                                                total_found += 1;
+                                                match algo_name.to_lowercase().as_str() {
+                                                    "ppo" => { self.ppo_enabled = true; self.ppo_env_count += 1; },
+                                                    "sac" => { self.sac_enabled = true; self.sac_env_count += 1; },
+                                                    "td3" => { self.td3_enabled = true; self.td3_env_count += 1; },
+                                                    "tdsac" => { self.tdsac_enabled = true; self.tdsac_env_count += 1; },
+                                                    "tqc" => { self.tqc_enabled = true; self.tqc_env_count += 1; },
+                                                    "crossq" => { self.crossq_enabled = true; self.crossq_env_count += 1; },
+                                                    "drqv2" => { self.drqv2_enabled = true; self.drqv2_env_count += 1; },
+                                                    "ppo_et" => { self.ppo_et_enabled = true; self.ppo_et_env_count += 1; },
+                                                    "ppo_ce" => { self.ppo_ce_enabled = true; self.ppo_ce_env_count += 1; },
+                                                    _ => println!("⚠️ Unknown algo in checkpoint: {}", algo_name),
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
             }
         }
 
-        self.distributed_env_total = self.total_env as u32;
-        self.algorithm_selection_mode = AlgorithmSelectionMode::Different;
+        if total_found == 0 {
+            rfd::MessageDialog::new().set_title("Result").set_description("No valid race checkpoints found.").show();
+            return;
+        }
+
+        self.total_env = total_found as u16;
+        self.distributed_env_total = total_found;
+        self.algorithm_selection_mode = crate::pages::config_types::AlgorithmSelectionMode::Different;
+        
+        // Transition UI
         self.current_config_section = ConfigSection::Algorithms;
         self.settings_open = false;
         self.algorithms_open = true;
         self.algorithm_config_step = AlgorithmConfigStep::Selection;
 
-        rfd::MessageDialog::new().set_title("Success").set_description("Algorithms configured").show();
+        rfd::MessageDialog::new().set_title("Success").set_description(&format!("Found {} environments. Configured.", total_found)).show();
     }
 }
 
