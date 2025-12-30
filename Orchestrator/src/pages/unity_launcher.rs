@@ -14,6 +14,7 @@ pub struct UnityLauncher {
     pub tcp_server_handles: Vec<thread::JoinHandle<()>>,
     pub is_training_started: bool,
     pub shutdown_requested: Arc<AtomicBool>,
+    pub dummy_launch_info: Option<(String, Vec<String>, HashMap<String, String>)>, // Path, Args, Envs
 }
 
 impl UnityLauncher {
@@ -25,6 +26,7 @@ impl UnityLauncher {
             tcp_server_handles: Vec::new(),
             is_training_started: false,
             shutdown_requested: Arc::new(AtomicBool::new(false)),
+            dummy_launch_info: None,
         }
     }
 
@@ -61,6 +63,7 @@ impl UnityLauncher {
         }
 
         self.launched_ports.clear();
+        self.dummy_launch_info = None; // Reset dummy info
 
         for mut process in self.unity_processes.drain(..) {
             let _ = process.kill();
@@ -189,9 +192,12 @@ impl UnityLauncher {
             };
 
             let mut cmd = std::process::Command::new(exec_cmd_path);
-            cmd.env("UNITY_BASE_PORT", current_port.to_string());
-            cmd.env("UNITY_ALGORITHM", algorithm_name.clone());
-            cmd.env("UNITY_SHARED_MEMORY_PATH", shared_memory_path);
+            let mut envs = HashMap::new();
+            
+            // Collect Envs
+            envs.insert("UNITY_BASE_PORT".to_string(), current_port.to_string());
+            envs.insert("UNITY_ALGORITHM".to_string(), algorithm_name.clone());
+            envs.insert("UNITY_SHARED_MEMORY_PATH".to_string(), shared_memory_path.to_string());
 
             let algo_config = if is_dummy {
                 AlgoConfig::ppo()
@@ -210,36 +216,59 @@ impl UnityLauncher {
                     }
                 })
             };
+            
+            envs.insert("UNITY_ALGORITHM_CONFIG".to_string(), format!("{:?}", algo_config));
 
-            cmd.env("UNITY_ALGORITHM_CONFIG", format!("{:?}", algo_config));
-            cmd.arg(format!("--base-port={}", current_port))
-               .arg(format!("--algorithm={}", algorithm_name))
-               .arg(format!("--num-areas={}", num_areas))
-               .arg(format!("--timeout-wait={}", timeout_wait))
-               .arg(format!("--seed={}", seed))
-               .arg(format!("--max-lifetime-restarts={}", max_lifetime_restarts))
-               .arg(format!("--restarts-rate-limit-n={}", restarts_rate_limit_n))
-               .arg(format!("--restarts-rate-limit-period-s={}", restarts_rate_limit_period_s));
-
-            if is_dummy {
-                cmd.arg("-screen-width").arg("800").arg("-screen-height").arg("600").arg("-screen-fullscreen").arg("0");
-            } else {
-                if headless { cmd.arg("--headless"); }
-                if engine_settings.no_graphics { cmd.arg("--no-graphics"); }
-                cmd.arg(format!("--width={}", engine_settings.width)).arg(format!("--height={}", engine_settings.height));
+            // Apply Envs
+            for (k, v) in &envs {
+                cmd.env(k, v);
             }
 
-            cmd.arg(format!("--quality-level={}", engine_settings.quality_level))
-               .arg(format!("-speed={}", if is_dummy { 1.0 } else { engine_settings.time_scale }))
-               .arg(format!("--time-scale={}", if is_dummy { 1.0 } else { engine_settings.time_scale }))
-               .arg(format!("--target-framerate={}", engine_settings.target_frame_rate))
-               .arg(format!("--capture-frame-rate={}", engine_settings.capture_frame_rate));
+            // Collect Args
+            let mut args = Vec::new();
+            args.push(format!("--base-port={}", current_port));
+            args.push(format!("--algorithm={}", algorithm_name));
+            args.push(format!("--num-areas={}", num_areas));
+            args.push(format!("--timeout-wait={}", timeout_wait));
+            args.push(format!("--seed={}", seed));
+            args.push(format!("--max-lifetime-restarts={}", max_lifetime_restarts));
+            args.push(format!("--restarts-rate-limit-n={}", restarts_rate_limit_n));
+            args.push(format!("--restarts-rate-limit-period-s={}", restarts_rate_limit_period_s));
 
-            if !run_id.is_empty() { cmd.arg(format!("--run-id={}", run_id)); }
+            if is_dummy {
+                args.push("-screen-width".to_string()); args.push("800".to_string());
+                args.push("-screen-height".to_string()); args.push("600".to_string());
+                args.push("-screen-fullscreen".to_string()); args.push("0".to_string());
+            } else {
+                if headless { args.push("--headless".to_string()); }
+                if engine_settings.no_graphics { args.push("--no-graphics".to_string()); }
+                args.push(format!("--width={}", engine_settings.width));
+                args.push(format!("--height={}", engine_settings.height));
+            }
+
+            args.push(format!("--quality-level={}", engine_settings.quality_level));
+            args.push(format!("-speed={}", if is_dummy { 1.0 } else { engine_settings.time_scale }));
+            args.push(format!("--time-scale={}", if is_dummy { 1.0 } else { engine_settings.time_scale }));
+            args.push(format!("--target-framerate={}", engine_settings.target_frame_rate));
+            args.push(format!("--capture-frame-rate={}", engine_settings.capture_frame_rate));
+
+            if !run_id.is_empty() { args.push(format!("--run-id={}", run_id)); }
 
             let log_file_name = if is_dummy { "player-dummy.log".to_string() } else { format!("player-{}.log", i + 1) };
             let log_file_path = std::path::Path::new(results_path).join("logs").join(log_file_name);
-            cmd.arg("-logFile").arg(log_file_path).arg(format!("--device={}", device));
+            args.push("-logFile".to_string()); 
+            args.push(log_file_path.to_string_lossy().to_string());
+            args.push(format!("--device={}", device));
+
+            // Apply Args
+            for arg in &args {
+                cmd.arg(arg);
+            }
+
+            // Save dummy info
+            if is_dummy {
+                self.dummy_launch_info = Some((exec_cmd_path.to_string(), args.clone(), envs.clone()));
+            }
 
             cmd.stdout(Stdio::piped()).stderr(Stdio::piped());
 
@@ -261,6 +290,39 @@ impl UnityLauncher {
         Ok(())
     }
 
+    pub fn relaunch_dummy(&mut self) -> Result<(), String> {
+        if let Some((path, args, envs)) = &self.dummy_launch_info {
+            println!("🔄 Relaunching Dummy Instance...");
+            let mut cmd = std::process::Command::new(path);
+            
+            for (k, v) in envs {
+                cmd.env(k, v);
+            }
+            for arg in args {
+                cmd.arg(arg);
+            }
+            
+            cmd.stdout(Stdio::piped()).stderr(Stdio::piped());
+
+            match cmd.spawn() {
+                Ok(mut child) => {
+                    if let Some(stdout) = child.stdout.take() {
+                        thread::spawn(move || { let reader = BufReader::new(stdout); for _ in reader.lines() {} });
+                    }
+                    if let Some(stderr) = child.stderr.take() {
+                        thread::spawn(move || { let reader = BufReader::new(stderr); for _ in reader.lines() {} });
+                    }
+                    self.unity_processes.push(child);
+                    // Note: We don't add to launched_ports or map again as it should be the same port/config
+                    Ok(())
+                }
+                Err(e) => Err(format!("Failed to relaunch dummy: {}", e))
+            }
+        } else {
+            Err("No dummy launch info available.".to_string())
+        }
+    }
+
     pub fn stop_training(&mut self) {
         self.shutdown_requested.store(true, Ordering::SeqCst);
         self.tcp_server_handles.clear();
@@ -271,5 +333,6 @@ impl UnityLauncher {
         self.launched_ports.clear();
         self.port_algorithm_map.clear();
         self.is_training_started = false;
+        self.dummy_launch_info = None;
     }
 }

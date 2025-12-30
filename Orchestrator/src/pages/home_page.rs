@@ -214,7 +214,12 @@ impl HomePage {
                  ctx.request_repaint();
 
                  if let Some(rx) = &self.tcp_server_handler.gui_rx {
-                     self.monitor_page.update(ui, rx);
+                     let action = self.monitor_page.update(ui, rx, self.visual_progress);
+                     if action == crate::pages::monitor_page::MonitorAction::RerunDummy {
+                         if let Err(e) = self.unity_launcher.relaunch_dummy() {
+                             rfd::MessageDialog::new().set_title("Error").set_description(&e).show();
+                         }
+                     }
                  } else {
                      ui.centered_and_justified(|ui| {
                          ui.label("Waiting for training backend to initialize...");

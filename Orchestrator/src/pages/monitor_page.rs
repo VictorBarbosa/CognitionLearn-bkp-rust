@@ -4,6 +4,12 @@ use std::sync::mpsc::Receiver;
 use crate::trainer::GuiUpdate;
 use std::collections::{VecDeque, HashMap, BTreeMap};
 
+#[derive(PartialEq)]
+pub enum MonitorAction {
+    None,
+    RerunDummy,
+}
+
 struct RaceMilestoneRow {
     index: usize,
     target_step: usize,
@@ -66,7 +72,7 @@ impl MonitorPage {
         self.add_log(format!("🏁 Race Schedule Pre-calculated: {} participants, {} steps.", num_participants, total_steps));
     }
 
-    pub fn update(&mut self, ui: &mut egui::Ui, receiver: &Receiver<GuiUpdate>) {
+    pub fn update(&mut self, ui: &mut egui::Ui, receiver: &Receiver<GuiUpdate>, visual_progress_enabled: bool) -> MonitorAction {
         // Poll all available updates non-blocking
         let mut received_any = false;
         while let Ok(msg) = receiver.try_recv() {
@@ -155,6 +161,8 @@ impl MonitorPage {
             ui.ctx().request_repaint();
         }
 
+        let mut action = MonitorAction::None;
+
         // Render UI
         // Logs Panel
         egui::SidePanel::right("monitor_logs_panel")
@@ -181,6 +189,14 @@ impl MonitorPage {
                     if ui_btn.button(egui::RichText::new("🗑 Clear Charts").color(egui::Color32::LIGHT_RED)).clicked() {
                         self.metrics_history.clear();
                         self.add_log("🧹 Charts cleared by user.".to_string());
+                    }
+                    
+                    // RERUN DUMMY BUTTON
+                    if visual_progress_enabled {
+                        ui_btn.add_space(10.0);
+                        if ui_btn.button(egui::RichText::new("📺 Rerun Dummy").color(egui::Color32::LIGHT_BLUE)).clicked() {
+                            action = MonitorAction::RerunDummy;
+                        }
                     }
                 });
             });
@@ -300,6 +316,8 @@ impl MonitorPage {
                 }
             });
         });
+        
+        action
     }
 
     fn add_log(&mut self, msg: String) {
