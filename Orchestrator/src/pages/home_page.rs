@@ -379,6 +379,10 @@ impl HomePage {
                                                 self.checkpoint_settings.mode,
                                                 &self.device,
                                                 self.checkpoint_settings.enable_race_mode,
+                                                self.max_steps,
+                                                self.summary_freq,
+                                                self.checkpoint_interval,
+                                                self.keep_checkpoints,
                                             );
                                             self.show_monitor = true;
                                         }

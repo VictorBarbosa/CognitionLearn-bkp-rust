@@ -6,7 +6,7 @@ use tch::{nn, nn::OptimizerConfig, Device, Tensor, Kind};
 use crate::ppo::actor_critic::PPOSharedActorCritic;
 use crate::ppo::rollout_buffer::{Rollout, PPOTransition};
 use crate::ppo::icm::ICM;
-use crate::agent::RLAgent;
+use crate::agent::{RLAgent, ActionOutput};
 use std::collections::HashMap;
 
 pub struct PPO {
@@ -122,13 +122,14 @@ impl PPO {
 }
 
 impl RLAgent for PPO {
-    fn record_transition(&mut self, agent_id: i32, obs: Vec<f32>, act: Vec<f32>, reward: f32, next_obs: Vec<f32>, done: bool) {
+    fn record_transition(&mut self, agent_id: i32, obs: Vec<f32>, act: ActionOutput, reward: f32, next_obs: Vec<f32>, done: bool) {
         let obs_tensor = Tensor::from_slice(&obs).to(self.device).reshape(&[1, self.obs_dim as i64]);
         
         // OPTIMIZATION: Single forward pass to get both Value and Action Distribution parameters
         let (mean, std, value) = tch::no_grad(|| self.model.forward(&obs_tensor));
         
-        let act_tensor = Tensor::from_slice(&act).to(self.device).reshape(&[1, self.act_dim as i64]);
+        // Using Continuous Actions
+        let act_tensor = Tensor::from_slice(&act.continuous).to(self.device).reshape(&[1, self.act_dim as i64]);
         
         let var = std.pow_tensor_scalar(2.0);
         let log_prob: Tensor = -0.5 * (act_tensor - &mean).pow_tensor_scalar(2.0) / &var
@@ -140,7 +141,7 @@ impl RLAgent for PPO {
         self.rollout.add(PPOTransition {
             agent_id, // Pass correct ID
             observation: obs,
-            action: act,
+            action: act.continuous,
             reward,
             next_observation: next_obs,
             log_prob: log_prob_val,
@@ -320,7 +321,7 @@ impl RLAgent for PPO {
         Some(metrics)
     }
 
-    fn select_action(&self, obs: &[f32], deterministic: bool) -> Vec<f32> {
+    fn select_action(&self, obs: &[f32], deterministic: bool) -> ActionOutput {
         let obs_tensor = Tensor::from_slice(obs).to(self.device).reshape(&[1, self.obs_dim as i64]);
         
         let action = if deterministic {
@@ -331,8 +332,11 @@ impl RLAgent for PPO {
             action // sample already applies Tanh
         };
         
-        let action_flat = action.flatten(0, -1);
-        action_flat.try_into().unwrap()
+        let action_flat: Vec<f32> = action.flatten(0, -1).try_into().unwrap();
+        ActionOutput {
+            continuous: action_flat,
+            discrete: vec![]
+        }
     }
 
     fn get_obs_dim(&self) -> usize { self.obs_dim }

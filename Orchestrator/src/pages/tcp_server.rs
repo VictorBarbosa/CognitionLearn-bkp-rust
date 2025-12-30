@@ -39,7 +39,11 @@ impl TcpServerHandler {
             init_path: &str,
             checkpoint_mode: CheckpointMode,
             device: &str,
-            enable_race_mode: bool, 
+            enable_race_mode: bool,
+            max_steps: u64,
+            summary_freq: u32,
+            checkpoint_interval: u32,
+            keep_checkpoints: u32, 
         ) {        // Reset champion tracker for a new run
         if let Ok(mut best) = self.champion_tracker.current_best.lock() {
             *best = None;
@@ -68,10 +72,7 @@ impl TcpServerHandler {
         // Initialize Race Controller if needed
         let race_controller = if enable_race_mode {
             let participant_ids: Vec<String> = algo_groups.values().flatten().cloned().collect();
-            // Get max_steps from first config for controller (assuming consistency in race)
-            let first_algo = port_algorithm_map.get(&launched_ports[0]).cloned().unwrap_or("ppo".into());
-            let max_steps = algo_configs.get(&first_algo).map(|c| c.max_steps).unwrap_or(500000000);
-
+            // Get max_steps from GLOBAL settings
             println!("🏁 Initializing Race Controller for {} participants. Max Steps: {}", participant_ids.len(), max_steps);
             
             // Send config to GUI immediately so the Race tab is populated even before handshakes
@@ -130,6 +131,10 @@ impl TcpServerHandler {
                 init_path,
                 checkpoint_mode,
                 device,
+                max_steps,
+                summary_freq,
+                checkpoint_interval,
+                keep_checkpoints,
             );
             
             let tx_clone = self.gui_tx.clone();
@@ -188,6 +193,10 @@ fn map_config(
     ip: &str,
     mode: CheckpointMode,
     device: &str,
+    max_steps: u64,
+    summary_freq: u32,
+    checkpoint_interval: u32,
+    keep_checkpoints: u32,
 ) -> TrainerSettings {
     let algorithm = match algo_name.to_lowercase().as_str() {
         "ppo" => AgentType::PPO,
@@ -210,10 +219,10 @@ fn map_config(
         hidden_units: cfg.hidden_units as usize,
         num_layers: cfg.num_layers as usize,
         normalize: cfg.normalize,
-        summary_freq: cfg.summary_freq as usize,
-        checkpoint_interval: cfg.checkpoint_interval as usize,
-        keep_checkpoints: cfg.keep_checkpoints as usize,
-        max_steps: cfg.max_steps as usize,
+        summary_freq: summary_freq as usize,
+        checkpoint_interval: checkpoint_interval as usize,
+        keep_checkpoints: keep_checkpoints as usize,
+        max_steps: max_steps as usize,
         resume: mode == CheckpointMode::Resume || !ip.is_empty(), 
         epsilon: cfg.epsilon,
         tau: Some(cfg.tau),

@@ -4,7 +4,7 @@ pub mod race; // Added
 use std::collections::HashMap;
 use std::time::{SystemTime, UNIX_EPOCH, Duration};
 use std::str;
-use crate::agent::{RLAgent, AgentType};
+use crate::agent::{RLAgent, AgentType, ActionOutput};
 use crate::trainer::settings::TrainerSettings;
 use crate::trainer::race::RaceController; // Added
 use crate::channel::CommunicationChannel;
@@ -121,7 +121,7 @@ pub struct Trainer {
     pub agent_episode_lengths: HashMap<(String, i32), usize>,
     pub last_avg_reward: f32,
     pub agent_last_obs: HashMap<(String, i32), Vec<f32>>,
-    pub agent_last_action: HashMap<(String, i32), Vec<f32>>,
+    pub agent_last_action: HashMap<(String, i32), ActionOutput>, // Changed to ActionOutput
     pub device: Device,
     pub gui_sender: Option<Sender<GuiUpdate>>,
     pub channel_ids: Vec<String>,
@@ -202,7 +202,7 @@ impl Trainer {
         handshake_channel.listen(|_data| {
             println!("🤝 DUMMY Handshake Received.");
             Ok("seed:12345\ncommunicationVersion:1.5.0\n".as_bytes().to_vec())
-        }, 60000)?; // 60s timeout
+        }, 60000)?;
         
         // 2. Open Main Channel
         let mut main_channel = CommunicationChannel::create(channel_id, 10_485_760, &self.settings.shared_memory_path)?;
@@ -241,6 +241,7 @@ impl Trainer {
                         reward: 0.0, done: false, max_step_reached: false, 
                         sensor_shapes: vec![],
                         action_shapes: local_action_shapes.clone(), // Corrected: Use captured shapes
+                        stored_discrete_actions: vec![], // Added
                     };
                     
                     let original_algo = self.settings.algorithm;
@@ -274,7 +275,10 @@ impl Trainer {
                                 if let Some(agent) = self.agent.as_ref() {
                                     for info in infos {
                                         let act = agent.select_action(&info.observations, true);
-                                        actions.push(AgentAction { continuous_actions: act });
+                                        actions.push(AgentAction { 
+                                            continuous_actions: act.continuous,
+                                            discrete_actions: act.discrete
+                                        });
                                     }
                                 } else {
                                     // No model yet, send zero actions (acts as 'waiting' state)
@@ -284,7 +288,10 @@ impl Trainer {
                                         } else {
                                             2 // Fallback
                                         };
-                                        actions.push(AgentAction { continuous_actions: vec![0.0; act_dim] });
+                                        actions.push(AgentAction { 
+                                            continuous_actions: vec![0.0; act_dim],
+                                            discrete_actions: vec![]
+                                        });
                                     }
                                 }
                                 all_actions.insert(behavior, actions);
@@ -373,7 +380,7 @@ impl Trainer {
                             println!("🤝 Received Handshake from {}.", id);
                             // TODO: In the future, parse _data for env capabilities
                             Ok("seed:12345\ncommunicationVersion:1.5.0\n".as_bytes().to_vec())
-                        }, 1000)?; // Short timeout for read/write since we know msg exists
+                        }, 1000)?;
                         
                         // Mark as ready and drop handshake channel logic if needed (or keep it open? logic says drop/replace)
                         // Actually we need to keep Main Channel. Handshake channel can be dropped or ignored.
@@ -557,9 +564,15 @@ impl Trainer {
                                                     if obs_len > 0 {
                                                         eprintln!("⚠️ Warning: Observation dim mismatch! Expected {}, got {}. Sending zero action.", expected_dim, obs_len);
                                                     }
-                                                    vec![0.0; cur_agent.get_act_dim()]
+                                                    ActionOutput {
+                                                        continuous: vec![0.0; cur_agent.get_act_dim()],
+                                                        discrete: vec![]
+                                                    }
                                                 };
-                                                agent_actions.push(AgentAction { continuous_actions: action });
+                                                agent_actions.push(AgentAction { 
+                                                    continuous_actions: action.continuous,
+                                                    discrete_actions: action.discrete
+                                                });
                                             }
                                         }
                                         all_actions.insert(behavior_name, agent_actions);
@@ -621,6 +634,7 @@ impl Trainer {
                                                 reward: 0.0, done: false, max_step_reached: false,
                                                 sensor_shapes: transitions[0].sensor_shapes.clone(),
                                                 action_shapes: transitions[0].action_shapes.clone(), // Added
+                                                stored_discrete_actions: vec![], // Added
                                             };
                                             self.init_agent(&behavior, &dummy);
                                         }
@@ -629,8 +643,13 @@ impl Trainer {
                                             for t in transitions {
                                                 let state_key = (channel_id.clone(), t.id);
                                                 
+                                                let act_output = ActionOutput {
+                                                    continuous: t.actions,
+                                                    discrete: t.discrete_actions,
+                                                };
+
                                                 cur_agent.record_transition(
-                                                    t.id + env_id_offset, t.observations, t.actions, t.reward, t.next_observations, t.done,
+                                                    t.id + env_id_offset, t.observations, act_output, t.reward, t.next_observations, t.done,
                                                 );
                                                 added_this_batch += 1;
                                                 self.total_transitions += 1;
@@ -713,22 +732,6 @@ impl Trainer {
                             }
                         }
 
-                        // Check for checkpoint based on ENVIRONMENT steps (Interval)
-                        if self.total_steps >= self.last_checkpoint_step + self.settings.checkpoint_interval {
-                            should_save = true;
-                            self.last_checkpoint_step = self.total_steps;
-                        }
-                        
-                        // Check for Race Milestone Force Save
-                        if next_race_milestone_idx < race_milestones_steps.len() {
-                            if self.total_steps >= race_milestones_steps[next_race_milestone_idx] {
-                                println!("🏁 [Trainer] Reached Race Milestone {} (Step {}). Forcing Save.", next_race_milestone_idx + 1, self.total_steps);
-                                should_save = true;
-                                next_race_milestone_idx += 1;
-                            }
-                        }
-
-                        // Summary
                         // Summary
                         let mut averaged_metrics = std::collections::HashMap::new();
                         for (name, (sum, count)) in accumulated_metrics {
@@ -744,6 +747,21 @@ impl Trainer {
                                 behavior_name: format!("{:?}", self.settings.algorithm),
                             });
                         }
+                    }
+                }
+
+                // Check for checkpoint based on ENVIRONMENT steps (Interval)
+                if self.total_steps >= self.last_checkpoint_step + self.settings.checkpoint_interval {
+                    should_save = true;
+                    self.last_checkpoint_step = self.total_steps;
+                }
+                
+                // Check for Race Milestone Force Save
+                if next_race_milestone_idx < race_milestones_steps.len() {
+                    if self.total_steps >= race_milestones_steps[next_race_milestone_idx] {
+                        println!("🏁 [Trainer] Reached Race Milestone {} (Step {}). Forcing Save.", next_race_milestone_idx + 1, self.total_steps);
+                        should_save = true;
+                        next_race_milestone_idx += 1;
                     }
                 }
 
@@ -1038,7 +1056,7 @@ impl Trainer {
             if let Err(e) = cur_agent.save(&ckpt_path) {
                 eprintln!("❌ [Trainer] Error saving weights: {}", e);
             } else {
-                println!("✅ [Trainer] Checkpoint saved: {} (#{})", ckpt_path, self.total_train_steps);
+                println!("✅ [Trainer] Checkpoint saved: {} (# L{})", ckpt_path, self.total_train_steps);
                 
                 // Save Metadata
                 let meta = TrainerMetadata {

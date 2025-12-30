@@ -1,7 +1,7 @@
 use tch::{nn, nn::OptimizerConfig, nn::ModuleT, Device, Tensor, Kind};
 use crate::sac::actor::Actor;
 use crate::sac::replay_buffer::ReplayBuffer;
-use crate::agent::RLAgent;
+use crate::agent::{RLAgent, ActionOutput};
 use std::collections::HashMap;
 
 pub struct CrossQCritic {
@@ -115,8 +115,8 @@ impl CrossQ {
 }
 
 impl RLAgent for CrossQ {
-    fn record_transition(&mut self, _agent_id: i32, obs: Vec<f32>, act: Vec<f32>, reward: f32, next_obs: Vec<f32>, done: bool) {
-        self.replay_buffer.push(&obs, &act, reward, &next_obs, done);
+    fn record_transition(&mut self, _agent_id: i32, obs: Vec<f32>, act: ActionOutput, reward: f32, next_obs: Vec<f32>, done: bool) {
+        self.replay_buffer.push(&obs, &act.continuous, reward, &next_obs, done);
     }
 
     fn train(&mut self) -> Option<HashMap<String, f32>> {
@@ -200,7 +200,7 @@ impl RLAgent for CrossQ {
         Some(metrics)
     }
 
-    fn select_action(&self, obs: &[f32], deterministic: bool) -> Vec<f32> {
+    fn select_action(&self, obs: &[f32], deterministic: bool) -> ActionOutput {
         let obs_tensor = Tensor::from_slice(obs).to(self.device).reshape(&[1, self.obs_dim as i64]);
         
         let action = if deterministic {
@@ -211,8 +211,11 @@ impl RLAgent for CrossQ {
             action
         };
         
-        let action_flat = action.flatten(0, -1);
-        action_flat.try_into().unwrap()
+        let action_flat: Vec<f32> = action.flatten(0, -1).try_into().unwrap();
+        ActionOutput {
+            continuous: action_flat,
+            discrete: vec![]
+        }
     }
 
     fn get_obs_dim(&self) -> usize { self.obs_dim }

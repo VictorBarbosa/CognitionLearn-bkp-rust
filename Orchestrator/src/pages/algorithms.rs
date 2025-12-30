@@ -224,18 +224,6 @@ pub fn render_algorithm_selection_ui(
                         ui_cfg.label("Strength:").on_hover_text("Multiplier for the extrinsic reward signal."); 
                         ui_cfg.add(egui::DragValue::new(&mut cfg.strength).speed(0.1)); ui_cfg.end_row();
 
-                        ui_cfg.label("Max Steps:").on_hover_text("Total number of environment steps to run before terminating the training process."); 
-                        ui_cfg.add(egui::DragValue::new(&mut cfg.max_steps).speed(1000)); ui_cfg.end_row();
-
-                        ui_cfg.label("Summary Freq:").on_hover_text("Frequency (in steps) to send metrics to Tensorboard logs."); 
-                        ui_cfg.add(egui::DragValue::new(&mut cfg.summary_freq).speed(100)); ui_cfg.end_row();
-
-                        ui_cfg.label("Checkpoint Interval:").on_hover_text("Frequency (in steps) to save model weights to disk."); 
-                        ui_cfg.add(egui::DragValue::new(&mut cfg.checkpoint_interval).speed(100)); ui_cfg.end_row();
-
-                        ui_cfg.label("Keep Checkpoints:").on_hover_text("Maximum number of recent model files to keep on disk."); 
-                        ui_cfg.add(egui::DragValue::new(&mut cfg.keep_checkpoints).speed(1)); ui_cfg.end_row();
-
                         ui_cfg.label("Buffer Init Steps:").on_hover_text("Steps collected with random actions before training starts to populate the buffer (Off-policy only)."); 
                         ui_cfg.add(egui::DragValue::new(&mut cfg.buffer_init_steps).speed(100)); ui_cfg.end_row();
 
